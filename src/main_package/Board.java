@@ -14,10 +14,10 @@ import java.awt.*;
  */
 public class Board extends JPanel{
     
-    public Image grass_ground;
+    private Image grass_ground;
      
     public Board() {
-        initBoard();
+       initBoard();
     }
     
     private void initBoard(){
@@ -36,7 +36,8 @@ public class Board extends JPanel{
     
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(grass_ground, 0, 0, null);
+        
+        g.drawImage(grass_ground, 0, (int) (UserInterface.height*0.8), null);
     }
 }
 
