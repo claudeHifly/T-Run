@@ -68,6 +68,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="startButton">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/image/Footprint xs.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Start"/>
           </Properties>
           <Events>
@@ -78,6 +81,9 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Perpetua Titling MT" size="48" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/image/Title xs.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="      T-Run"/>
           </Properties>
