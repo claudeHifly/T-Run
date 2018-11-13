@@ -28,7 +28,7 @@ public class ScoreBoard extends javax.swing.JFrame {
     }
     
     private LinkedList<String> readScoreFile(){
-        File file = new File("src/file/score.txt");
+        File file = new File("score.txt");
         Scanner sc;
         String[] words = new String[2];
         LinkedList<String> list = new LinkedList();

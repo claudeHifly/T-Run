@@ -35,6 +35,7 @@ public class HomePage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Footprint xs.png"))); // NOI18N
         startButton.setText("Start");
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,6 +44,7 @@ public class HomePage extends javax.swing.JFrame {
         });
 
         trunLabel.setFont(new java.awt.Font("Perpetua Titling MT", 1, 48)); // NOI18N
+        trunLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Title xs.png"))); // NOI18N
         trunLabel.setText("      T-Run");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
