@@ -5,19 +5,57 @@
  */
 package main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
+import java.util.Scanner;
+
 /**
  *
  * @author User
  */
 public class ScoreBoard extends javax.swing.JFrame {
-
+        
     /**
      * Creates new form ScoreBoard
      */
     public ScoreBoard() {
         initComponents();
+        LinkedList<String> text = this.readScoreFile();
+        this.fillTable(text);
         setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
         setResizable(false);
+    }
+    
+    private LinkedList<String> readScoreFile(){
+        File file = new File("score.txt");
+        Scanner sc;
+        String[] words = new String[2];
+        LinkedList<String> list = new LinkedList();
+        
+        try {
+            sc = new Scanner(file);
+            while (sc.hasNextLine()){
+                words = sc.nextLine().split(",");
+                list.add(words[0]);
+                list.add(words[1]);
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+    
+    private void fillTable(LinkedList<String> text){
+        int position = 1;
+        int k = 0;
+        int numLine = text.size()/2;
+        for(int i=0; i<numLine && i<10; i++){
+            scoreboardTable.setValueAt(position++, i, 0);
+            for(int j=1; j<3; j++){
+                scoreboardTable.setValueAt(text.get(k++), i, j);
+            }
+        }
     }
 
     /**
@@ -31,12 +69,12 @@ public class ScoreBoard extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        scoreboardTable = new javax.swing.JTable();
+        scoreboardLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        scoreboardTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -56,48 +94,59 @@ public class ScoreBoard extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Long.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("Scoreboard");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(scoreboardTable);
+        if (scoreboardTable.getColumnModel().getColumnCount() > 0) {
+            scoreboardTable.getColumnModel().getColumn(0).setResizable(false);
+            scoreboardTable.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        scoreboardLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        scoreboardLabel.setText(" Scoreboard");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel1)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(scoreboardLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1)
-                .addGap(79, 79, 79)
+                .addGap(67, 67, 67)
+                .addComponent(scoreboardLabel)
+                .addGap(49, 49, 49)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -137,11 +186,10 @@ public class ScoreBoard extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel scoreboardLabel;
+    private javax.swing.JTable scoreboardTable;
     // End of variables declaration//GEN-END:variables
 }
