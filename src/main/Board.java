@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main_package;
+package main;
 
 import javax.swing.*;
 import java.awt.*;
-
 /**
  *
  * @author Gennaro
@@ -15,7 +14,7 @@ import java.awt.*;
 public class Board extends JPanel{
     
     private Image grass_ground;
-     
+   
     public Board() {
        initBoard();
     }
@@ -26,7 +25,7 @@ public class Board extends JPanel{
         
         int w = grass_ground.getWidth(this);
         int h = grass_ground.getHeight(this);
-        setPreferredSize(new Dimension(w, h)); 
+        setPreferredSize(new Dimension(w, h));         
     }
     
     private void loadImage() {
@@ -37,7 +36,7 @@ public class Board extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         
-        g.drawImage(grass_ground, 0, (int) (UserInterface.height*0.8), null);
+        g.drawImage(grass_ground, 0, (int) (UserInterface.height*0.8), null); 
     }
 }
 
