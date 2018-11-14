@@ -18,7 +18,6 @@ public class HomePage extends javax.swing.JFrame {
      */
     public HomePage() {
         initComponents();
-        new Utility().createAndDraw("src/image/TRex-stand.png", 50, 20, jPanel1.getGraphics());
         setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
         setResizable(false);
     }

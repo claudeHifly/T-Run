@@ -18,6 +18,7 @@ public class Board extends JPanel{
     
     private TRex TRex;
     private Ground grass_ground;
+    private Cactus cactus;
    
     //INIZIALIZZO BOARD
     public Board() {
@@ -28,7 +29,7 @@ public class Board extends JPanel{
         
         //TREX
         TRex = new TRex();
-   
+        cactus = new Cactus(9,9);
         
         //GROUND
         grass_ground = new Ground();
@@ -38,7 +39,10 @@ public class Board extends JPanel{
         super.paint(g);
         TRex.create(g);
         grass_ground.create(g);
-        
+        cactus.create(g);
+        System.out.println(cactus.getImage().getRGB(0, 0));
+        System.out.println(cactus.getImage().getRGB(1, 0));
+        System.out.println(cactus.getImage().getRGB(11, 14));
     }
     
     /*
