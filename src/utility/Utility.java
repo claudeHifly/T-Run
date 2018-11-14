@@ -7,6 +7,7 @@ package utility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
@@ -19,7 +20,7 @@ public class Utility {
     public void createAndDraw(String path, int x, int y, Graphics g){
         BufferedImage bi = null;
         try {
-            bi = ImageIO.read(getClass().getResource(path));
+            bi = ImageIO.read(new File((path)));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
