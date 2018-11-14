@@ -20,6 +20,7 @@ public class Cactus extends Obstacle{
     
     public Cactus(int x, int y) {
         super(new Utility().create("src/image/Cactus-1.png"), x, y);
+        collider = new Area();
         collider.add(new Area(new Rectangle(super.getX(), super.getY(), super.getImage().getWidth(), super.getImage().getHeight())));
     }
     
