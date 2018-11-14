@@ -41,7 +41,6 @@ public class TRex{
                         NO_FOOT = 3;
 
     public TRex(){
-        y = (int)(UserInterface.height*0.75-hTRex);
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");

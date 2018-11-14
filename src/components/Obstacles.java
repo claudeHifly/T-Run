@@ -18,10 +18,10 @@ public class Obstacles {
 
     public Obstacles() {
         obArray = new ArrayList<Obstacle>();
-        Obstacle ob = new Cactus(TRex.X+100,Ground.yPosition);
+        Obstacle ob = new Cactus(TRex.X+200, (int)(Ground.yPosition)+ (int)(Ground.yPosition *0.025));
         obArray.add(ob);
         for (int i=1; i<10; i++){
-            ob = new Cactus(obArray.get(i-1).getX()+50,Ground.yPosition);
+            ob = new Cactus(obArray.get(i-1).getX()+50,(int)(Ground.yPosition)+ (int)(Ground.yPosition *0.025));
             obArray.add(ob);
         }
         System.out.println(obArray);
