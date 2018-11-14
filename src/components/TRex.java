@@ -11,6 +11,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import main.UserInterface;
+import utility.Utility;
 
 /**
  *
@@ -29,11 +30,14 @@ public class TRex {
     private void initTRex(){
         //loadImage();
         
+        this.imageTRex = new Utility().create("src/image/old/Dino-stand.png");
+  
+        /*
         try {
             this.imageTRex = ImageIO.read(new File("src/image/old/Dino-stand.png"));
         } catch (IOException e) {
             System.out.println("Error! TRex not found!");
-        }
+        }*/
         
         this.wTRex = imageTRex.getWidth(null);
         this.hTRex = imageTRex.getHeight(null);

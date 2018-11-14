@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import main.UserInterface;
+import utility.Utility;
 
 /**
  *
@@ -32,21 +33,13 @@ public class Ground {
         this.x_position = 0;
         this.y_position = (int)(UserInterface.height*0.75);
         
-        try {
-            this.grass_ground = ImageIO.read(new File("src/image/old/Ground.png"));
-        } catch (IOException e) {
-            System.out.println("Error! Ground not found!");
-        }
-        //loadImage();//ho lasciato load image perchè potremmo aver bisogno 
-                    //di questo metodo per cambiare il ground
+        //OLD
+        this.grass_ground = new Utility().create("src/image/coloured/T-Run_ground_grass2.png");
         
-        //????????????????????????????????????????????????????????
-        /*
-        int w = grass_ground.getWidth((ImageObserver)this);
-        int h = grass_ground.getHeight((ImageObserver)this);
-        setPreferredSize(new Dimension(w, h));
-        */
-        //???????????????????????????????????????????????????????????
+        //COLOURED
+        //this.grass_ground = new Utility().create("src/image/COLOURED/T-Run_ground_grass2.png");
+
+    
     }
     
     /*
