@@ -23,7 +23,6 @@ import utility.Utility;
 public class Ground {
     
     public BufferedImage grass_ground;//immagine suolo
-    private int x_position;
     public final static int yPosition = (int)(UserInterface.height*0.75);
     private class GroundImage {
         BufferedImage image;

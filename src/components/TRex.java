@@ -30,12 +30,14 @@ public class TRex {
     private Area collider;
 
     public TRex(){
-        y = (int)(UserInterface.height*0.75-hTRex);
         image = new Utility().create("src/image/old/Dino-stand.png");
-        wTRex = image.getWidth(null);
-        hTRex = image.getHeight(null);
+        wTRex = image.getWidth();
+        hTRex = image.getHeight();
+        y = (int)(Ground.yPosition) + (int)(Ground.yPosition *0.025) - (int) image.getHeight();
         System.out.println("TRex width: " + wTRex);
         System.out.println("TRex height: " + hTRex);
+        System.out.println("height UI: " + UserInterface.height);
+        System.out.println("y T-rex: " + y);
         collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
     }
     

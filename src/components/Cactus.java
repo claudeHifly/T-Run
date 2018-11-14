@@ -23,6 +23,7 @@ public class Cactus extends Obstacle{
         int random = (int) (Math.random() * 4 + 1);
         String path = "src/image/Cactus-"+random+".png";
         this.setImage(new Utility().create(path));
+        System.out.println("height UI: " + y);
         this.setY(y-this.getImage().getHeight());
         collider = new Area();
         collider.add(new Area(new Rectangle(super.getX(), super.getY(), super.getImage().getWidth(), super.getImage().getHeight())));
