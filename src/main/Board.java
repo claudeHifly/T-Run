@@ -8,6 +8,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
+import java.awt.image.BufferedImage;
 import utility.Utility;
 
 /**
@@ -38,7 +39,6 @@ public class Board extends JPanel{
         super.paint(g);
         TRex.create(g);
         grass_ground.create(g);
-        
     }
     
     /*
