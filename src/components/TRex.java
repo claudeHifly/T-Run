@@ -30,7 +30,7 @@ public class TRex {
     private Area collider;
 
     public TRex(){
-        y = (int)(UserInterface.height*0.8-hTRex);
+        y = (int)(UserInterface.height*0.75-hTRex);
         image = new Utility().create("src/image/old/Dino-stand.png");
         wTRex = image.getWidth(null);
         hTRex = image.getHeight(null);
