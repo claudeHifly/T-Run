@@ -19,11 +19,17 @@ public class Cactus extends Obstacle{
     private Area collider;
     
     public Cactus(int x, int y) {
-        super(new Utility().create("src/image/Cactus-1.png"), x, y);
+        super(x,y);
+        int random = (int) (Math.random() * 4 + 1);
+        String path = "src/image/Cactus-"+random+".png";
+        this.setImage(new Utility().create(path));
+        this.setY(y-this.getImage().getHeight());
+        collider = new Area();
         collider.add(new Area(new Rectangle(super.getX(), super.getY(), super.getImage().getWidth(), super.getImage().getHeight())));
     }
-    
 
-
-        
+    public Area getCollider() {
+        return collider;
+    }
+            
 }

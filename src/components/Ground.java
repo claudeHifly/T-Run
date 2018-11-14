@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import main.UserInterface;
@@ -22,58 +24,54 @@ public class Ground {
     
     public BufferedImage grass_ground;//immagine suolo
     private int x_position;
-    private int y_position;
+    public final static int yPosition = (int)(UserInterface.height*0.75);
+    private class GroundImage {
+        BufferedImage image;
+        int x;
+    }
+    
+    private BufferedImage grassGround;//immagine suolo
+    private ArrayList<GroundImage> grassGroundSet;
     
     public Ground(){
-        this(0,0);
-    }
-    
-    public Ground(int x, int y){
         //GROUND
-        this.x_position = 0;
-        this.y_position = (int)(UserInterface.height*0.75);
+        //this.yPosition = (int)(UserInterface.height*0.75);
         
-        //OLD
-        this.grass_ground = new Utility().create("src/image/coloured/T-Run_ground_grass2.png");
+        this.grassGround = new Utility().create("src/image/old/Ground.png"); 
+        grassGroundSet = new ArrayList<GroundImage>();
         
-        //COLOURED
-        //this.grass_ground = new Utility().create("src/image/COLOURED/T-Run_ground_grass2.png");
-
-    
-    }
-    
-    /*
-    private void loadImage() {
-        ImageIcon iconGround = new ImageIcon("src/image/coloured/T-Run_ground_grass2.png");
-        grass_ground = iconGround.getImage();        
-    }*/
-    
-    public void create(Graphics g) {
-        g.drawImage(grass_ground, this.x_position, this.y_position, null);
-        
-        //Move the x_position left for next time
-        this.x_position -= 5;
-        
-        //Quando il ground è scomparso completamente andando a sinistra
-        if (this.x_position <= -1 * grass_ground.getWidth()) {
- 
-            // If it has, line it back up so that its left edge is
-            // lined up to the right side of the other background image
-            this.x_position = this.x_position + grass_ground.getWidth() * 2;
+        for(int i=0; i<4; i++){
+            GroundImage tmp = new GroundImage();
+            tmp.image = grassGround;
+            tmp.x = 0;
+            grassGroundSet.add(tmp);
         }
     }
     
-    public void setX(int x) {
-        this.x_position = x;
+    public void create(Graphics g) {
+        for(GroundImage img: grassGroundSet)
+            g.drawImage(grassGround, (int) img.x, this.yPosition, null);
     }
-    public int getX() {
-        return this.x_position;
-    }
-    public int getY() {
-        return this.y_position;
-    }
-    public int getImageWidth() {
-        return grass_ground.getWidth();
+    
+    public void update() {
+        Iterator<GroundImage> looper = grassGroundSet.iterator();
+        GroundImage first = looper.next();
+
+        first.x -= 10;
+
+        int previousX = first.x;
+        while (looper.hasNext()) {
+            GroundImage next = looper.next();
+            next.x = previousX + grassGround.getWidth();
+            previousX = next.x;
+        }
+
+        if (first.x < -grassGround.getWidth()) {
+            grassGroundSet.remove(first);
+            first.x = previousX + grassGround.getWidth();
+            grassGroundSet.add(first);
+        }
+
     }
  
 }

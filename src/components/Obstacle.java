@@ -5,21 +5,22 @@
  */
 package components;
 
+import java.awt.Graphics;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
+import main.UserInterface;
 
 /**
  *
  * @author claud
  */
-public class Obstacle {
+public abstract class Obstacle {
    
     private BufferedImage image;
     private int x;
     private int y;
 
-    public Obstacle(BufferedImage image, int x, int y) {
-        this.image = image;
+    public Obstacle(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -48,7 +49,9 @@ public class Obstacle {
         this.y = y;
     }
     
-    
+    public void create(Graphics g) {
+        g.drawImage(image, x, y, null);
+    }    
     
     
 }
