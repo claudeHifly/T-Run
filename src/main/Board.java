@@ -39,6 +39,7 @@ public class Board extends JPanel{
         super.paint(g);
         TRex.create(g);
         grass_ground.create(g);
+        g.dispose();
     }
     
     /*

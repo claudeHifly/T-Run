@@ -20,15 +20,20 @@ import main.UserInterface;
 public class Ground {
     
     public BufferedImage grass_ground;//immagine suolo
+    private int x_position;
+    private int y_position;
     
     public Ground(){
-        initGround();
+        this(0,0);
     }
     
-    private void initGround(){
+    public Ground(int x, int y){
         //GROUND
+        this.x_position = 0;
+        this.y_position = (int)(UserInterface.height*0.75);
+        
         try {
-            this.grass_ground = ImageIO.read(new File("src/image/coloured/T-Run_ground_grass2.png"));
+            this.grass_ground = ImageIO.read(new File("src/image/old/Ground.png"));
         } catch (IOException e) {
             System.out.println("Error! Ground not found!");
         }
@@ -51,6 +56,31 @@ public class Ground {
     }*/
     
     public void create(Graphics g) {
-        g.drawImage(grass_ground, 0, (int)(UserInterface.height*0.75), null);
+        g.drawImage(grass_ground, this.x_position, this.y_position, null);
+        
+        //Move the x_position left for next time
+        this.x_position -= 5;
+        
+        //Quando il ground è scomparso completamente andando a sinistra
+        if (this.x_position <= -1 * grass_ground.getWidth()) {
+ 
+            // If it has, line it back up so that its left edge is
+            // lined up to the right side of the other background image
+            this.x_position = this.x_position + grass_ground.getWidth() * 2;
+        }
     }
+    
+    public void setX(int x) {
+        this.x_position = x;
+    }
+    public int getX() {
+        return this.x_position;
+    }
+    public int getY() {
+        return this.y_position;
+    }
+    public int getImageWidth() {
+        return grass_ground.getWidth();
+    }
+ 
 }

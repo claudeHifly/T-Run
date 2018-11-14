@@ -52,7 +52,7 @@ public class TRex {
     
     
     public void create(Graphics g) {
-        g.drawImage(imageTRex, 50, (int)(UserInterface.height*0.8-hTRex), null);
+        g.drawImage(imageTRex, 50, (int)(UserInterface.height*0.75-hTRex+5), null);
     }
     
 }
