@@ -36,11 +36,11 @@ public class Ground {
     }
     
     private void loadImage() {
-        ImageIcon iconGround = new ImageIcon("src/image/T-Run_ground_grass.png");
+        ImageIcon iconGround = new ImageIcon("src/image/old/Ground.png");
         grass_ground = iconGround.getImage();        
     }
     
     public void create(Graphics g) {
-        g.drawImage(grass_ground, 0, (int)(UserInterface.height*0.8), null);
+        g.drawImage(grass_ground, 0, (int)(UserInterface.height*0.75), null);
     }
 }
