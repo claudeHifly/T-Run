@@ -20,11 +20,10 @@ public class Utility {
     public BufferedImage create(String path){
         BufferedImage bi = null;
         try {
-            bi = ImageIO.read(new File((path)));
+            bi = ImageIO.read(new File(path));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
         return bi;
     }
-
 }

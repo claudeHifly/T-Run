@@ -29,6 +29,7 @@ public class UserInterface extends JFrame {
         setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
         setResizable(false);//dimensioni JFrame non modificabili
     }
+    
 
     public static void main(String[] args) {
     

@@ -8,6 +8,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
+import java.awt.image.BufferedImage;
 import utility.Utility;
 
 /**
@@ -43,6 +44,7 @@ public class Board extends JPanel{
         System.out.println(cactus.getImage().getRGB(0, 0));
         System.out.println(cactus.getImage().getRGB(1, 0));
         System.out.println(cactus.getImage().getRGB(11, 14));
+        g.dispose();
     }
     
     /*
