@@ -8,61 +8,63 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
-import java.awt.image.BufferedImage;
-import utility.Utility;
 
 /**
  *
  * @author Gennaro
  */
-public class Board extends JPanel{
+public class Board extends JPanel implements Runnable{
     
     private TRex TRex;
     private Ground grass_ground;
+    private int distance;
+    private int score;
+    private Thread animator;
    
     //INIZIALIZZO BOARD
     public Board() {
-       initBoard();
-    }
-    
-    private void initBoard(){
-        
-        //TREX
+       //TREX
         TRex = new TRex();
-   
-        
         //GROUND
         grass_ground = new Ground();
+        //DISTANZA PERCORSA
+        distance = 0;
+        //SCORE
+        score = 0;
+        
+        //ATTENZIONE: questo deve essere fatto nella classe Partita
+        grass_ground.update();
+        animator = new Thread(this);
+        animator.start();
     }
     
+    public void updateGame(){
+        distance +=1;
+        grass_ground.update();
+    }
+    
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
         TRex.create(g);
         grass_ground.create(g);
+        g.setFont(new Font("Courier New", Font.BOLD, 25));
+        g.drawString("MT: "+Integer.toString(distance), getWidth() / 4 - 100, 100);
+        g.drawString("SCORE: "+Integer.toString(score), getWidth() - getWidth()/4, 100);
         g.dispose();
     }
-    
-    /*
+
     @Override
-    public void paintComponent(Graphics g) {
-        
-        super.paintComponent(g);
-
-        doDrawing(g);
-        
-        Toolkit.getDefaultToolkit().sync();
-        
-        //posizione ground al 20% dell'altezza del JFrame
-        g.drawImage(grass_ground, 0, (int)(UserInterface.height*0.8), null); 
-    } 
-    
- 
-    private void doDrawing(Graphics g) {
-        
-        Graphics2D g2d = (Graphics2D) g;
-
-        g2d.drawImage(TRex.getImage(), TRex.getX(), 
-            TRex.getY(), this);
-    }*/
+    public void run() {
+        while(true){
+            this.updateGame();
+            this.repaint();
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 }
 
