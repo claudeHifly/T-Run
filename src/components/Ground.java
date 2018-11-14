@@ -6,6 +6,10 @@
 package components;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import main.UserInterface;
 
@@ -15,7 +19,7 @@ import main.UserInterface;
  */
 public class Ground {
     
-    public Image grass_ground;//immagine suolo
+    public BufferedImage grass_ground;//immagine suolo
     
     public Ground(){
         initGround();
@@ -23,7 +27,12 @@ public class Ground {
     
     private void initGround(){
         //GROUND
-        loadImage();//ho lasciato load image perchè potremmo aver bisogno 
+        try {
+            this.grass_ground = ImageIO.read(new File("src/image/coloured/T-Run_ground_grass2.png"));
+        } catch (IOException e) {
+            System.out.println("Error! Ground not found!");
+        }
+        //loadImage();//ho lasciato load image perchè potremmo aver bisogno 
                     //di questo metodo per cambiare il ground
         
         //????????????????????????????????????????????????????????
@@ -35,10 +44,11 @@ public class Ground {
         //???????????????????????????????????????????????????????????
     }
     
+    /*
     private void loadImage() {
-        ImageIcon iconGround = new ImageIcon("src/image/old/Ground.png");
+        ImageIcon iconGround = new ImageIcon("src/image/coloured/T-Run_ground_grass2.png");
         grass_ground = iconGround.getImage();        
-    }
+    }*/
     
     public void create(Graphics g) {
         g.drawImage(grass_ground, 0, (int)(UserInterface.height*0.75), null);

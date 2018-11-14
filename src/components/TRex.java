@@ -6,6 +6,9 @@
 package components;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import main.UserInterface;
 
@@ -15,16 +18,22 @@ import main.UserInterface;
  */
 public class TRex {
     
-    private Image imageTRex;//immagine TRex
+    private BufferedImage imageTRex; //immagine TRex
     private int wTRex;
     private int hTRex;
 
-    public TRex(){
+    public TRex() {
         initTRex();
     }
     
     private void initTRex(){
-        loadImage();
+        //loadImage();
+        
+        try {
+            this.imageTRex = ImageIO.read(new File("src/image/old/Dino-stand.png"));
+        } catch (IOException e) {
+            System.out.println("Error! TRex not found!");
+        }
         
         this.wTRex = imageTRex.getWidth(null);
         this.hTRex = imageTRex.getHeight(null);
@@ -33,10 +42,13 @@ public class TRex {
          
     }
     
+    
+    //SEVIVA PER IconImage, ho convertito a BufferedImage come stabilito
+    /*
     private void loadImage(){
         ImageIcon iconTRex = new ImageIcon("src/image/old/Dino-stand.png");
         imageTRex = iconTRex.getImage();
-    }
+    }*/
     
     
     public void create(Graphics g) {
