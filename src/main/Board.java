@@ -8,6 +8,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
+import utility.Utility;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Board extends JPanel{
         
         //TREX
         TRex = new TRex();
+   
         
         //GROUND
         grass_ground = new Ground();
@@ -34,7 +36,6 @@ public class Board extends JPanel{
     
     public void paint(Graphics g) {
         super.paint(g);
-        
         TRex.create(g);
         grass_ground.create(g);
         

@@ -16,13 +16,17 @@ import javax.imageio.ImageIO;
  */
 public class Utility {
     
-    public void createAndDraw(String path, int x, int y, Graphics g){
+    public BufferedImage create(String path){
         BufferedImage bi = null;
         try {
             bi = ImageIO.read(getClass().getResource(path));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        g.drawImage(bi, x, y - bi.getHeight(), null);
+        return bi;
+    }
+    
+    public void draw(BufferedImage im, int x, int y, Graphics g){
+        g.drawImage(im, x, y - im.getHeight(), null);
     }
 }
