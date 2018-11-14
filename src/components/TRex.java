@@ -16,6 +16,8 @@ import main.UserInterface;
 public class TRex {
     
     private Image imageTRex;//immagine TRex
+    private int wTRex;
+    private int hTRex;
 
     public TRex(){
         initTRex();
@@ -23,19 +25,22 @@ public class TRex {
     
     private void initTRex(){
         loadImage();
+        
+        this.wTRex = imageTRex.getWidth(null);
+        this.hTRex = imageTRex.getHeight(null);
+        System.out.println("TRex width: " + wTRex);
+        System.out.println("TRex height: " + hTRex);
          
     }
     
     private void loadImage(){
-        ImageIcon iconTRex = new ImageIcon("src/image/TRex-stand.png");
+        ImageIcon iconTRex = new ImageIcon("src/image/old/Dino-stand.png");
         imageTRex = iconTRex.getImage();
     }
     
     
     public void create(Graphics g) {
-        g.drawImage(imageTRex, 50, (int)(UserInterface.height*0.8-55), null);
-        //ATTENZIONE! IL -55 VA ASSOLUTAMENTE SOSTITUITO CON LA HEIGHT DELLO
-        //DEL TREX
+        g.drawImage(imageTRex, 50, (int)(UserInterface.height*0.8-hTRex), null);
     }
     
 }
