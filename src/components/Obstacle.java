@@ -14,14 +14,13 @@ import main.UserInterface;
  *
  * @author claud
  */
-public class Obstacle {
+public abstract class Obstacle {
    
     private BufferedImage image;
     private int x;
     private int y;
 
-    public Obstacle(BufferedImage image, int x, int y) {
-        this.image = image;
+    public Obstacle(int x, int y) {
         this.x = x;
         this.y = y;
     }

@@ -19,7 +19,8 @@ public class Board extends JPanel{
     
     private TRex TRex;
     private Ground grass_ground;
-    private Cactus cactus;
+    private Obstacles obstacles;
+    
    
     //INIZIALIZZO BOARD
     public Board() {
@@ -30,20 +31,20 @@ public class Board extends JPanel{
         
         //TREX
         TRex = new TRex();
-        cactus = new Cactus(9,9);
         
         //GROUND
         grass_ground = new Ground();
+        
+        //OSTACOLI
+        obstacles = new Obstacles();
+        
     }
     
     public void paint(Graphics g) {
         super.paint(g);
         TRex.create(g);
         grass_ground.create(g);
-        cactus.create(g);
-        System.out.println(cactus.getImage().getRGB(0, 0));
-        System.out.println(cactus.getImage().getRGB(1, 0));
-        System.out.println(cactus.getImage().getRGB(11, 14));
+        obstacles.create(g);
         g.dispose();
     }
     

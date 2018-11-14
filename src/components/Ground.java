@@ -21,7 +21,7 @@ public class Ground {
     
     public BufferedImage grass_ground;//immagine suolo
     private int x_position;
-    private int y_position;
+    public final static int y_position = (int)(UserInterface.height*0.75);
     
     public Ground(){
         this(0,0);
@@ -30,7 +30,7 @@ public class Ground {
     public Ground(int x, int y){
         //GROUND
         this.x_position = 0;
-        this.y_position = (int)(UserInterface.height*0.75);
+        //this.y_position = (int)(UserInterface.height*0.75);
         
         try {
             this.grass_ground = ImageIO.read(new File("src/image/old/Ground.png"));

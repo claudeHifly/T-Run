@@ -14,6 +14,8 @@ import javax.swing.*;
 import main.UserInterface;
 import utility.Utility;
 
+
+
 /**
  *
  * @author Gennaro
@@ -21,21 +23,24 @@ import utility.Utility;
 public class TRex {
     
     private BufferedImage image; //immagine TRex
+    public final static int X = 50;
+    private int y;
     private int wTRex;
     private int hTRex;
     private Area collider;
 
     public TRex(){
+        y = (int)(UserInterface.height*0.8-hTRex);
         image = new Utility().create("src/image/old/Dino-stand.png");
         wTRex = image.getWidth(null);
         hTRex = image.getHeight(null);
         System.out.println("TRex width: " + wTRex);
         System.out.println("TRex height: " + hTRex);
-        collider = new Area(new Rectangle());
+        collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
     }
     
     public void create(Graphics g) {
-        g.drawImage(image, 50, (int)(UserInterface.height*0.8-hTRex), null);
+        g.drawImage(image, X, y, null);
     }
     
 }
