@@ -7,7 +7,7 @@ package components;
 
 import java.awt.geom.Area;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
+import utility.*;
 
 
 /**
@@ -18,10 +18,9 @@ public class Cactus extends Obstacle{
     
     private Area collider;
     
-    public Cactus(BufferedImage image, int x, int y) {
-        super(image, x, y);
+    public Cactus(int x, int y) {
+        super(new Utility().create("src/image/Cactus-1.png"), x, y);
         collider.add(new Area(new Rectangle(super.getX(), super.getY(), super.getImage().getWidth(), super.getImage().getHeight())));
-        
     }
     
 
