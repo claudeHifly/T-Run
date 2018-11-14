@@ -6,15 +6,20 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import utility.Utility;
 
 /**
  *
- * @author User
+ * @author Angela
  */
 public class HomePage{
     
@@ -22,7 +27,7 @@ public class HomePage{
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(680, 680);
+        frame.setSize(680, 500);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
@@ -31,17 +36,27 @@ public class HomePage{
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 BufferedImage image = new Utility().create("src/image/Title small.png");
-                
-                g.drawImage(image, 0, 0, this);
-                //g.setColor(Color.BLUE);
-                //g.fillRect(0, 0, 100, 100);
+                Image scaledImage = image.getScaledInstance(670, 250, 100);
+                g.drawImage(scaledImage, 0, 0, this);
             }
         };
+        
+        JButton startButton = new JButton("START");
+        startButton.setFont(new Font("Courier New", Font.BOLD, 30));
+        startButton.setBounds(265, 365, 150, 50);
+        panel.add(startButton);
+        panel.setBackground(new Color(137,223,51));
+        panel.setLayout(null);
         frame.add(panel);
+        
+        startButton.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            frame.setVisible(false);
+            new UserInterface().setVisible(true);
+            }
+        });
 
-        // Graphics g = panel.getGraphics();
-        // g.setColor(Color.BLUE);
-        // g.fillRect(0, 0, 100, 100);
 
         frame.validate(); // because you added panel after setVisible was called
         frame.repaint(); // because you added panel after setVisible was called

@@ -18,7 +18,7 @@ public class Board extends JPanel implements Runnable{
     private TRex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
-    private TRexJump TRexJump;
+    //private TRexJump TRexJump;
     
 
     private int distance;
@@ -71,7 +71,7 @@ public class Board extends JPanel implements Runnable{
     @Override
     public void run() {
         
-        TRexJump = new TRexJump();
+        //TRexJump = new TRexJump();
         
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
