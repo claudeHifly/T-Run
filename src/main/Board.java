@@ -17,14 +17,22 @@ public class Board extends JPanel implements Runnable{
     
     private TRex TRex;
     private Ground grass_ground;
+
     private int distance;
     private int score;
     private Thread animator;
+
+    private Cactus cactus;
+
    
     //INIZIALIZZO BOARD
     public Board() {
        //TREX
         TRex = new TRex();
+
+        cactus = new Cactus(9,9);
+        
+
         //GROUND
         grass_ground = new Ground();
         //DISTANZA PERCORSA
@@ -51,6 +59,12 @@ public class Board extends JPanel implements Runnable{
         g.setFont(new Font("Courier New", Font.BOLD, 25));
         g.drawString("MT: "+Integer.toString(distance), getWidth() / 4 - 100, 100);
         g.drawString("SCORE: "+Integer.toString(score), getWidth() - getWidth()/4, 100);
+
+        cactus.create(g);
+        System.out.println(cactus.getImage().getRGB(0, 0));
+        System.out.println(cactus.getImage().getRGB(1, 0));
+        System.out.println(cactus.getImage().getRGB(11, 14));
+
         g.dispose();
     }
 
