@@ -46,6 +46,7 @@ public class TRex{
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
         wTRex = image.getWidth(null);
         hTRex = image.getHeight(null);
+        y = (int)(Ground.yPosition)+ (int)(Ground.yPosition *0.025) - hTRex;
         System.out.println("TRex width: " + wTRex);
         System.out.println("TRex height: " + hTRex);
         foot = NO_FOOT;//inizializzo
