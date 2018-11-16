@@ -8,6 +8,7 @@ package components;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
@@ -22,29 +23,46 @@ import utility.Utility;
  *
  * @author Gennaro
  */
-public class TRex {
-
+public class TRex extends KeyAdapter{
+    
     private BufferedImage image;//immagine TRex stand
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
-    public final static int X = 50;
+    
+    public final static int groundLevel = (int)(UserInterface.height*0.75);
+    
+    public final static int x = 50;
     private int y;
-    public int wTRex;
-    public int hTRex;
+    private static int wTRex;
+    private static int hTRex;
     private Area collider;
     private int foot;
+    
+    private final int   LEFT_FOOT = 1,
+                        RIGHT_FOOT = 2,
+                        NO_FOOT = 3;
+    
+    
+    //stato T-Rex
+    private static int state;
+    public static final int STAND_STILL = 1,
+                            RUNNING = 2,
+                            JUMPING = 3,
+                            DIE = 4;
+    
+       
     private ImageOutline outline;
-
-    private final int LEFT_FOOT = 1,
-            RIGHT_FOOT = 2,
-            NO_FOOT = 3;
 
     public TRex() {
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
+        
+        state = RUNNING;
+        
         wTRex = image.getWidth(null);
         hTRex = image.getHeight(null);
+        y = (int)(Ground.yPosition)+ (int)(Ground.yPosition *0.025) - hTRex;
         System.out.println("TRex width: " + wTRex);
         System.out.println("TRex height: " + hTRex);
         foot = NO_FOOT;//inizializzo
@@ -52,22 +70,49 @@ public class TRex {
         outline = new ImageOutline(leftFootDino);
         collider = new Area(outline.getOutline(leftFootDino));
     }
+    
+    
+    public void keyPressed(KeyEvent e){
+        int keys = e.getKeyCode();
+        
+        if (keys == KeyEvent.VK_SPACE){
+            //state = JUMPING;
+            System.out.println("Space pressed");
 
+        }
+    }
+    
+    
+    //create viene invocato ogni ms
     public void create(Graphics g) {
         //g.drawImage(image, X, y, null);
-
-        if (foot == NO_FOOT) {
-            foot = LEFT_FOOT;
-            g.drawImage(leftFootDino, X, y, null);
-        } else if (foot == LEFT_FOOT) {
-            foot = RIGHT_FOOT;
-            g.drawImage(rightFootDino, X, y, null);
-        } else {
-            foot = LEFT_FOOT;
-            g.drawImage(leftFootDino, X, y, null);
+        switch(state) {
+            
+            case RUNNING:
+                
+                if(y <= groundLevel-hTRex){
+                    y++;
+                }
+                
+                if (foot == NO_FOOT) {
+                    foot = LEFT_FOOT;
+                    g.drawImage(leftFootDino, x, y, null);
+                } else if (foot == LEFT_FOOT) {
+                    foot = RIGHT_FOOT;
+                    g.drawImage(rightFootDino, x, y, null);
+                } else {
+                    foot = LEFT_FOOT;
+                    g.drawImage(leftFootDino, x, y, null);
+                }
+                break;
+                
+            case JUMPING:
+                break;
+        
         }
     }
 
+    
     public int getwTRex() {
         return wTRex;
     }
@@ -83,11 +128,9 @@ public class TRex {
     public void sethTRex(int hTRex) {
         this.hTRex = hTRex;
     }
-
-    //SEVIVA PER IconImage, ho convertito a BufferedImage come stabilito
-    /*
-    private void loadImage(){
-        ImageIcon iconTRex = new ImageIcon("src/image/old/Dino-stand.png");
-        imageTRex = iconTRex.getImage();
-    }*/
+    
+    
+    
+    
+    
 }
