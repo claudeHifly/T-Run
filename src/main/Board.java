@@ -13,47 +13,44 @@ import components.*;
  *
  * @author Gennaro
  */
-public class Board extends JPanel implements Runnable{
-    
+public class Board extends JPanel implements Runnable {
+
     private TRex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
-    private TRexJump TRexJump;
-    
+    //private TRexJump TRexJump;
 
     private int distance;
     private int score;
     private Thread animator;
 
-   
     //INIZIALIZZO BOARD
     public Board() {
-       //TREX
+        //TREX
         TRex = new TRex();
-        
 
         //GROUND
         grass_ground = new Ground();
-        
+
         //OSTACOLI
         obstacles = new Obstacles();
-        
+
         //DISTANZA PERCORSA
         distance = 0;
         //SCORE
         score = 0;
-        
+
         //ATTENZIONE: questo deve essere fatto nella classe Partita
         grass_ground.update();
         animator = new Thread(this);
         animator.start();
     }
-    
-    public void updateGame(){
-        distance +=1;
+
+    public void updateGame() {
+        distance += 1;
         grass_ground.update();
     }
-    
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -61,24 +58,22 @@ public class Board extends JPanel implements Runnable{
         grass_ground.create(g);
         obstacles.create(g);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
-        g.drawString("MT: "+Integer.toString(distance), getWidth() / 4 - 100, 100);
-        g.drawString("SCORE: "+Integer.toString(score), getWidth() - getWidth()/4, 100);
-
+        g.drawString("MT: " + Integer.toString(distance), getWidth() / 4 - 100, 100);
+        g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
 
         g.dispose();
     }
 
     @Override
     public void run() {
-        
-        TRexJump = new TRexJump();
-        
+
+        //TRexJump = new TRexJump();
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
         }
-        
-        while(true){
+
+        while (true) {
             this.updateGame();
             this.repaint();
             try {
@@ -89,4 +84,3 @@ public class Board extends JPanel implements Runnable{
         }
     }
 }
-

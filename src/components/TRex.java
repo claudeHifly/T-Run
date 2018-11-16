@@ -18,14 +18,12 @@ import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 import main.UserInterface;
 import utility.Utility;
 
-
-
 /**
  *
  * @author Gennaro
  */
-public class TRex{
-    
+public class TRex {
+
     private BufferedImage image;//immagine TRex stand
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
@@ -35,12 +33,13 @@ public class TRex{
     public int hTRex;
     private Area collider;
     private int foot;
-    
-    private final int   LEFT_FOOT = 1,
-                        RIGHT_FOOT = 2,
-                        NO_FOOT = 3;
+    private ImageOutline outline;
 
-    public TRex(){
+    private final int LEFT_FOOT = 1,
+            RIGHT_FOOT = 2,
+            NO_FOOT = 3;
+
+    public TRex() {
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
@@ -49,21 +48,23 @@ public class TRex{
         System.out.println("TRex width: " + wTRex);
         System.out.println("TRex height: " + hTRex);
         foot = NO_FOOT;//inizializzo
-        collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
+        //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
+        outline = new ImageOutline(leftFootDino);
+        collider = new Area(outline.getOutline(leftFootDino));
     }
-    
+
     public void create(Graphics g) {
         //g.drawImage(image, X, y, null);
-        
-        if(foot == NO_FOOT) {
-          foot = LEFT_FOOT;
-          g.drawImage(leftFootDino, X, y, null);
-        } else if(foot == LEFT_FOOT) {
-          foot = RIGHT_FOOT;
-          g.drawImage(rightFootDino, X, y, null);
+
+        if (foot == NO_FOOT) {
+            foot = LEFT_FOOT;
+            g.drawImage(leftFootDino, X, y, null);
+        } else if (foot == LEFT_FOOT) {
+            foot = RIGHT_FOOT;
+            g.drawImage(rightFootDino, X, y, null);
         } else {
-          foot = LEFT_FOOT;
-          g.drawImage(leftFootDino, X, y, null);
+            foot = LEFT_FOOT;
+            g.drawImage(leftFootDino, X, y, null);
         }
     }
 
@@ -82,10 +83,7 @@ public class TRex{
     public void sethTRex(int hTRex) {
         this.hTRex = hTRex;
     }
-    
-    
-    
-    
+
     //SEVIVA PER IconImage, ho convertito a BufferedImage come stabilito
     /*
     private void loadImage(){
@@ -93,4 +91,3 @@ public class TRex{
         imageTRex = iconTRex.getImage();
     }*/
 }
-

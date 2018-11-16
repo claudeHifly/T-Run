@@ -28,9 +28,8 @@ public class Cactus extends Obstacle{
         this.setY(y-this.getImage().getHeight());
         
         outline = new ImageOutline(super.getImage());
-        collider = new Area();
+        collider = new Area(outline.getOutline(super.getImage()));
         //collider.add(new Area(new Rectangle(super.getX(), super.getY(), super.getImage().getWidth(), super.getImage().getHeight())));
-        collider.add(new Area(outline.getOutline(super.getImage())));
     }
 
     public Area getCollider() {
