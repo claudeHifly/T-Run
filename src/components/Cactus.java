@@ -24,7 +24,6 @@ public class Cactus extends Obstacle{
         int random = (int) (Math.random() * 4 + 1);
         String path = "src/image/Cactus-"+random+".png";
         this.setImage(new Utility().create(path));
-        //System.out.println("height UI: " + y);
         this.setY(y-this.getImage().getHeight());
         
         outline = new ImageOutline(super.getImage());

@@ -102,3 +102,19 @@ public class Board extends JPanel implements Runnable, ActionListener{
     }
     
 }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //
+    }
+    
+    
+    private class TRexAdapter extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            TRex.keyPressed(e);
+        }
+    }
+    
+}
