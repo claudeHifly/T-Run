@@ -56,7 +56,7 @@ public class Board extends JPanel implements Runnable, ActionListener{
     public void updateGame() {
         distance += 1;
         grass_ground.update();
-        
+        obstacles.update();
     }
 
     @Override
@@ -86,22 +86,6 @@ public class Board extends JPanel implements Runnable, ActionListener{
             }
         }
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //
-    }
-    
-    
-    private class TRexAdapter extends KeyAdapter {
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            TRex.keyPressed(e);
-        }
-    }
-    
-}
 
     @Override
     public void actionPerformed(ActionEvent e) {
