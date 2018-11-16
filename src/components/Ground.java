@@ -20,6 +20,7 @@ public class Ground {
     
     public BufferedImage grass_ground;//immagine suolo
     public final static int yPosition = (int)(UserInterface.height*0.75);
+    
     private class GroundImage {
         BufferedImage image;
         int x;
@@ -32,7 +33,13 @@ public class Ground {
         //GROUND
         //this.yPosition = (int)(UserInterface.height*0.75);
         
+        
+        //OLD
         this.grassGround = new Utility().create("src/image/old/Ground.png"); 
+        
+        //COLOURED
+        this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass2.png"); 
+
         grassGroundSet = new ArrayList<GroundImage>();
         
         for(int i=0; i<4; i++){
