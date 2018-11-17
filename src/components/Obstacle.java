@@ -19,6 +19,7 @@ public abstract class Obstacle {
     private BufferedImage image;
     private int x;
     private int y;
+    private Area collider;
 
     public Obstacle(int x, int y) {
         this.x = x;
@@ -52,6 +53,13 @@ public abstract class Obstacle {
     public void create(Graphics g) {
         g.drawImage(image, x, y, null);
     }    
-    
-    
+
+    public Area getCollider() {
+        return collider;
+    }
+
+    public void setCollider(Area collider) {
+        this.collider = collider;
+    }
+
 }

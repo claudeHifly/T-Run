@@ -16,7 +16,6 @@ import utility.*;
  */
 public class Cactus extends Obstacle{
     
-    private Area collider;
     private ImageOutline outline;
     
     public Cactus(int x, int y) {
@@ -27,12 +26,8 @@ public class Cactus extends Obstacle{
         this.setY(y-this.getImage().getHeight());
         
         outline = new ImageOutline(super.getImage());
-        collider = new Area(outline.getOutline(super.getImage()));
+        this.setCollider(new Area(outline.getOutline(super.getImage())));
         //collider.add(new Area(new Rectangle(super.getX(), super.getY(), super.getImage().getWidth(), super.getImage().getHeight())));
-    }
-
-    public Area getCollider() {
-        return collider;
     }
             
     

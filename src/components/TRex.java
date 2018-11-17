@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -54,6 +55,7 @@ public class TRex extends KeyAdapter{
     private ImageOutline outline;
 
     public TRex() {
+        AffineTransform at = new AffineTransform();
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
@@ -69,6 +71,10 @@ public class TRex extends KeyAdapter{
         //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
         outline = new ImageOutline(leftFootDino);
         collider = new Area(outline.getOutline(leftFootDino));
+        at.translate(x, y);
+        collider.transform(at);
+        System.out.println("TRex X: " + collider.getBounds().getX());
+        System.out.println("TRex Y: " + collider.getBounds().getY());
     }
     
     
@@ -128,9 +134,8 @@ public class TRex extends KeyAdapter{
     public void sethTRex(int hTRex) {
         this.hTRex = hTRex;
     }
-    
-    
-    
-    
-    
+
+    public Area getCollider() {
+        return collider;
+    }
 }
