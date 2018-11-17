@@ -69,15 +69,18 @@ public class Obstacles {
 
         firstOb.setX(firstOb.getX() - movementSpeed);
         //at.translate(firstOb.getX() - movementSpeed, 0);
+        System.out.println("0^ Cactus before:\t" + firstOb.getCollider().getBounds().getX() + ", " + firstOb.getCollider().getBounds().getY());
         at = new AffineTransform();
         at.translate(- movementSpeed, 0);
         firstOb.getCollider().transform(at);
         System.out.println("0^ Cactus:\t" + firstOb.getCollider().getBounds().getX() + ", " + firstOb.getCollider().getBounds().getY());
 
         while (looper.hasNext()) {
+            //System.out.println("I'm in looper while");
             Obstacle ob = looper.next();
             ob.setX(ob.getX() - movementSpeed);
             //at.translate(ob.getX() - movementSpeed, 0);
+            System.out.println("Cactus before:\t\t" + ob.getCollider().getBounds().getX() + ", " + ob.getCollider().getBounds().getY());
             at = new AffineTransform();
             at.translate(- movementSpeed, 0);
             ob.getCollider().transform(at);
@@ -86,6 +89,7 @@ public class Obstacles {
         }
 
         if (firstOb.getX() < -firstOb.getImage().getWidth()) { //image is completely out of the screen: remove and move it to the end of the array
+            //System.out.println("I'm in if");
             int rd = randomDistance();
             
             obArray.remove(firstOb);

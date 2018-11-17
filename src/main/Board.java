@@ -49,6 +49,7 @@ public class Board extends JPanel implements Runnable, ActionListener{
 
         //ATTENZIONE: questo deve essere fatto nella classe Partita
         grass_ground.update();
+        obstacles.update();
         animator = new Thread(this);
         animator.start();
     }
@@ -67,7 +68,6 @@ public class Board extends JPanel implements Runnable, ActionListener{
     public void paint(Graphics g) {
         super.paint(g);
         grass_ground.create(g);//creare sempre prima il ground
-        
         obstacles.create(g);
         TRex.create(g);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
