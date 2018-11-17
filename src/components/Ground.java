@@ -37,10 +37,10 @@ public class Ground {
         
         
         //OLD
-        this.grassGround = new Utility().create("src/image/old/Ground.png"); 
+        //this.grassGround = new Utility().create("src/image/old/Ground.png"); 
         
         //COLOURED
-        //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
+        this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
 
         grassGroundSet = new ArrayList<GroundImage>();
         
