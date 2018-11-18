@@ -5,7 +5,9 @@
  */
 package components;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import main.UserInterface;
@@ -52,8 +54,12 @@ public abstract class Obstacle {
 
     public void create(Graphics g) {
         g.drawImage(image, x, y, null);
-        g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
-                (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
+//        g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+//                (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
     }
 
     public Area getCollider() {
