@@ -15,7 +15,7 @@ import main.UserInterface;
  * @author claud
  */
 public abstract class Obstacle {
-   
+
     private BufferedImage image;
     private int x;
     private int y;
@@ -49,10 +49,12 @@ public abstract class Obstacle {
     public void setY(int y) {
         this.y = y;
     }
-    
+
     public void create(Graphics g) {
         g.drawImage(image, x, y, null);
-    }    
+        g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+                (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
+    }
 
     public Area getCollider() {
         return collider;

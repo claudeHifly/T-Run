@@ -24,34 +24,32 @@ import utility.Utility;
  *
  * @author Gennaro
  */
-public class TRex extends KeyAdapter{
-    
+public class TRex extends KeyAdapter {
+
     private BufferedImage image;//immagine TRex stand
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
-    
-    public final static int groundLevel = (int)(UserInterface.height*0.75);
-    
+
+    public final static int groundLevel = (int) (UserInterface.height * 0.75);
+
     public final static int x = 50;
     private int y;
     private static int wTRex;
     private static int hTRex;
     private Area collider;
     private int foot;
-    
-    private final int   LEFT_FOOT = 1,
-                        RIGHT_FOOT = 2,
-                        NO_FOOT = 3;
-    
-    
+
+    private final int LEFT_FOOT = 1,
+            RIGHT_FOOT = 2,
+            NO_FOOT = 3;
+
     //stato T-Rex
     private static int state;
     public static final int STAND_STILL = 1,
-                            RUNNING = 2,
-                            JUMPING = 3,
-                            DIE = 4;
-    
-       
+            RUNNING = 2,
+            JUMPING = 3,
+            DIE = 4;
+
     private ImageOutline outline;
 
     public TRex() {
@@ -59,12 +57,12 @@ public class TRex extends KeyAdapter{
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
-        
+
         state = RUNNING;
-        
+
         wTRex = image.getWidth(null);
         hTRex = image.getHeight(null);
-        y = (int)(Ground.yPosition)+ (int)(Ground.yPosition *0.025) - hTRex;
+        y = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
         System.out.println("TRex width: " + wTRex);
         System.out.println("TRex height: " + hTRex);
         foot = NO_FOOT;//inizializzo
@@ -73,52 +71,53 @@ public class TRex extends KeyAdapter{
         collider = new Area(outline.getOutline(leftFootDino));
         at.translate(x, y);
         collider.transform(at);
-        System.out.println("TRex X: " + collider.getBounds().getX());
-        System.out.println("TRex Y: " + collider.getBounds().getY());
     }
-    
-    
-    public void keyPressed(KeyEvent e){
+
+    public void keyPressed(KeyEvent e) {
         int keys = e.getKeyCode();
-        
-        if (keys == KeyEvent.VK_SPACE){
+
+        if (keys == KeyEvent.VK_SPACE) {
             //state = JUMPING;
             System.out.println("Space pressed");
 
         }
     }
-    
-    
+
     //create viene invocato ogni ms
     public void create(Graphics g) {
         //g.drawImage(image, X, y, null);
-        switch(state) {
-            
+        switch (state) {
+
             case RUNNING:
-                
-                if(y <= groundLevel-hTRex){
+
+                if (y <= groundLevel - hTRex) {
                     y++;
                 }
-                
+
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
+                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 } else if (foot == LEFT_FOOT) {
                     foot = RIGHT_FOOT;
                     g.drawImage(rightFootDino, x, y, null);
+                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 } else {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
+                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 }
                 break;
-                
+
             case JUMPING:
                 break;
-        
+
         }
     }
 
-    
     public int getwTRex() {
         return wTRex;
     }

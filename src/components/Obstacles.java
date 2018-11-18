@@ -27,7 +27,7 @@ public class Obstacles {
     public Obstacles() {
         obArray = new ArrayList<Obstacle>();
         Obstacle ob = new Cactus(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
-        at.translate(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
+        at.translate(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
         System.out.println("0^ Cactus:\t\t" + ob.getCollider().getBounds().getX() + ", " + ob.getCollider().getBounds().getY());
         obArray.add(ob);
@@ -35,7 +35,7 @@ public class Obstacles {
             int rd = randomDistance();
             ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
             at = new AffineTransform();
-            at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
+            at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
             System.out.println(i + "^ Cactus:\t\t" + ob.getCollider().getBounds().getX() + ", " + ob.getCollider().getBounds().getY());
             obArray.add(ob);
@@ -52,7 +52,7 @@ public class Obstacles {
 
     public boolean hasCollided(Area TRexArea) {
         for (Obstacle ob : obArray) {
-            Area inter = ob.getCollider();
+            Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
                 return true;
@@ -69,35 +69,29 @@ public class Obstacles {
 
         firstOb.setX(firstOb.getX() - movementSpeed);
         //at.translate(firstOb.getX() - movementSpeed, 0);
-        System.out.println("0^ Cactus before:\t" + firstOb.getCollider().getBounds().getX() + ", " + firstOb.getCollider().getBounds().getY());
         at = new AffineTransform();
-        at.translate(- movementSpeed, 0);
+        at.translate(-movementSpeed, 0);
         firstOb.getCollider().transform(at);
-        System.out.println("0^ Cactus:\t" + firstOb.getCollider().getBounds().getX() + ", " + firstOb.getCollider().getBounds().getY());
 
         while (looper.hasNext()) {
             //System.out.println("I'm in looper while");
             Obstacle ob = looper.next();
             ob.setX(ob.getX() - movementSpeed);
             //at.translate(ob.getX() - movementSpeed, 0);
-            System.out.println("Cactus before:\t\t" + ob.getCollider().getBounds().getX() + ", " + ob.getCollider().getBounds().getY());
             at = new AffineTransform();
-            at.translate(- movementSpeed, 0);
+            at.translate(-movementSpeed, 0);
             ob.getCollider().transform(at);
-            
-            System.out.println("Cactus:\t\t" + ob.getCollider().getBounds().getX() + ", " + ob.getCollider().getBounds().getY());
         }
 
         if (firstOb.getX() < -firstOb.getImage().getWidth()) { //image is completely out of the screen: remove and move it to the end of the array
-            //System.out.println("I'm in if");
+            System.out.println("I'm in if");
             int rd = randomDistance();
-            
+
             obArray.remove(firstOb);
             firstOb.setX(rd);
             at = new AffineTransform();
-            at.translate(rd, 0);
+            at.translate(rd + firstOb.getImage().getWidth(), 0);
             firstOb.getCollider().transform(at);
-            System.out.println("Cactus:\t\t" + firstOb.getCollider().getBounds().getX() + ", " + firstOb.getCollider().getBounds().getY());
             obArray.add(firstOb);
         }
 
@@ -107,4 +101,7 @@ public class Obstacles {
         return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 200);
     }
 
+    public ArrayList<Obstacle> getObArray() {
+        return obArray;
+    }
 }
