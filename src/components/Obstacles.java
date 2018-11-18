@@ -29,7 +29,6 @@ public class Obstacles {
         Obstacle ob = new Cactus(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
         at.translate(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
-        System.out.println("0^ Cactus:\t\t" + ob.getCollider().getBounds().getX() + ", " + ob.getCollider().getBounds().getY());
         obArray.add(ob);
         for (int i = 1; i < cactusOnScreen; i++) {
             int rd = randomDistance();
@@ -37,7 +36,6 @@ public class Obstacles {
             at = new AffineTransform();
             at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
-            System.out.println(i + "^ Cactus:\t\t" + ob.getCollider().getBounds().getX() + ", " + ob.getCollider().getBounds().getY());
             obArray.add(ob);
         }
         //System.out.println(obArray);
@@ -88,11 +86,16 @@ public class Obstacles {
             int rd = randomDistance();
 
             obArray.remove(firstOb);
-            firstOb.setX(rd);
+            Obstacle ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
             at = new AffineTransform();
-            at.translate(rd + firstOb.getImage().getWidth(), 0);
-            firstOb.getCollider().transform(at);
-            obArray.add(firstOb);
+            at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
+            ob.getCollider().transform(at);
+            obArray.add(ob);
+//            firstOb.setX(rd);
+//            at = new AffineTransform();
+//            at.translate(rd + firstOb.getImage().getWidth(), 0);
+//            firstOb.getCollider().transform(at);
+//            obArray.add(firstOb);
         }
 
     }
