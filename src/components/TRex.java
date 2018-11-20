@@ -85,7 +85,11 @@ public class TRex extends KeyAdapter {
 
     //create viene invocato ogni ms
     public void create(Graphics g) {
-        //g.drawImage(image, X, y, null);
+        //g.drawImage(image, X, y, null);                    
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.red);
+        g2d.draw(collider);        
+        g2d.setColor(Color.BLACK); 
         switch (state) {
 
             case RUNNING:
@@ -97,18 +101,12 @@ public class TRex extends KeyAdapter {
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
-                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
-                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 } else if (foot == LEFT_FOOT) {
                     foot = RIGHT_FOOT;
                     g.drawImage(rightFootDino, x, y, null);
-                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
-                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 } else {
                     foot = LEFT_FOOT;
-                    g.drawImage(leftFootDino, x, y, null);
-                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
-                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
+                    g.drawImage(leftFootDino, x, y, null);                
                 }
                 break;
 
