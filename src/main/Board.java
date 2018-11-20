@@ -21,9 +21,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private Ground grass_ground;
     private Obstacles obstacles;
 
-    private int distance;
+    public static int distance;
     private int score;
     private Thread animator;
+    
+  
 
     //INIZIALIZZO BOARD
     public Board() {
@@ -52,6 +54,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         animator = new Thread(this);
         animator.start();
     }
+    
+    
 
     public void updateGame() {
         distance += 1;

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import main.UserInterface;
 import utility.Utility;
+import main.Board;
+import static main.Board.distance;
 
 /**
  *
@@ -18,9 +20,10 @@ import utility.Utility;
  */
 public class Ground {
     
-    public BufferedImage grass_ground;//immagine suolo
     public final static int yPosition = (int)(UserInterface.height*0.75);
     public final static int movementSpeed = 10;
+    
+    
     
     private class GroundImage {
         BufferedImage image;
@@ -30,6 +33,10 @@ public class Ground {
     private BufferedImage grassGround;//immagine suolo
     private ArrayList<GroundImage> grassGroundSet;
     
+    /*
+    private BufferedImage grassGroundColoured;//immagine suolo
+    private ArrayList<GroundImage> grassGroundColouredSet;*/
+    
     
     public Ground(){
         //GROUND
@@ -37,12 +44,13 @@ public class Ground {
         
         
         //OLD
-        this.grassGround = new Utility().create("src/image/old/Ground.png"); 
+        this.grassGround = new Utility().create("src/image/old/Ground.png");
         
         //COLOURED
         //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
 
         grassGroundSet = new ArrayList<GroundImage>();
+        //grassGroundColouredSet = new ArrayList<GroundImage>();
         
         for(int i=0; i<4; i++){
             GroundImage tmp = new GroundImage();
@@ -50,11 +58,18 @@ public class Ground {
             tmp.x = 0;
             grassGroundSet.add(tmp);
         }
+        
     }
     
     public void create(Graphics g) {
+        
+        if(distance >= 100){
+            this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png");
+        }
+        
         for(GroundImage img: grassGroundSet)
             g.drawImage(grassGround, (int) img.x, this.yPosition, null);
+        
     }
     
     public void update() {
