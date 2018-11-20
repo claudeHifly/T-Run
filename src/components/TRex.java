@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -24,15 +25,15 @@ import utility.Utility;
  *
  * @author Gennaro
  */
-public class TRex extends KeyAdapter{
-    
+public class TRex extends KeyAdapter {
+
     private BufferedImage image;//immagine TRex stand
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
     
     public final static int groundLevel = (int)(UserInterface.height*0.75);
-    private final static int maxHeight = (int)(UserInterface.height - UserInterface.height*0.50);
-    private static int jumpFactor = 20;
+    private final static int maxHeight = (int)(UserInterface.height - UserInterface.height*0.55);
+    private static int jumpFactor = 25;
     public final static int x = 50;
     private int y;
     private static boolean topReached;
@@ -52,18 +53,18 @@ public class TRex extends KeyAdapter{
     //stato T-Rex
     private static int state;
     public static final int STAND_STILL = 1,
-                            RUNNING = 2,
-                            JUMPING = 3,
-                            DIE = 4;
-    
-       
+            RUNNING = 2,
+            JUMPING = 3,
+            DIE = 4;
+
     private ImageOutline outline;
 
     public TRex() {
+        AffineTransform at = new AffineTransform();
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
-        
+
         state = RUNNING;
         topReached = false;
         
@@ -83,6 +84,8 @@ public class TRex extends KeyAdapter{
         //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
         outline = new ImageOutline(leftFootDino);
         collider = new Area(outline.getOutline(leftFootDino));
+        at.translate(x, y);
+        collider.transform(at);
     }
     
     
@@ -96,60 +99,65 @@ public class TRex extends KeyAdapter{
             System.out.println("Space pressed");
         }
     }
-    
-    
+
     //create viene invocato ogni ms
     public void create(Graphics g) {
         //g.drawImage(image, X, y, null);
-        switch(state) {
-            
+        switch (state) {
+
             case RUNNING:
                 
                 if(y <= groundLevel-hTRex){
                     y+=2;
                 }
-                
+
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
+                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 } else if (foot == LEFT_FOOT) {
                     foot = RIGHT_FOOT;
                     g.drawImage(rightFootDino, x, y, null);
+                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 } else {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
+                    g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
+                            (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
                 }
                 break;
-                
+
             case JUMPING:
                 
                 
                 if (bottomTRex > maxHeight && topReached == false){
                     g.drawImage(image, x, bottomTRex -= jumpFactor, null);
                     System.out.println("bottomTRex height: " + bottomTRex);
-                }else if(bottomTRex <= maxHeight-5){
-                    topReached = true;
-                    System.out.println("SALTOOOOOOOOOOOOOOO" + bottomTRex);
-                } 
-                
-                /*
-                if (bottomTRex < y && topReached == true){
-                    g.drawImage(image, x, bottomTRex += jumpFactor, null);
-                    System.out.println("MARMITTA");
                     break;
-                }
-                
-                 if (topTRex >= y){
+                } else if(bottomTRex <= maxHeight && topReached == false){
+                    topReached = true;
+                    for(int i = 0; i <= 7; i++){
+                    g.drawImage(image, x, bottomTRex, null);
+                    }
+                    //System.out.println("SALTOOOOOOOOOOOOOOO " + bottomTRex);
+                    break;
+                } else if (bottomTRex < y && topReached == true){
+                    g.drawImage(image, x, bottomTRex += jumpFactor, null);
+                    break;
+                } else if (topTRex >= y && topReached == true){
+                    g.drawImage(image, x, bottomTRex, null);
                     topReached = false;
                     state = RUNNING;
                     break;
-                 }*/
+                 }
                     
                 
                 
                 
                 break;
-        
+
         }
     }
     
@@ -168,9 +176,8 @@ public class TRex extends KeyAdapter{
     public void sethTRex(int hTRex) {
         this.hTRex = hTRex;
     }
-    
-    
-    
-    
-    
+
+    public Area getCollider() {
+        return collider;
+    }
 }
