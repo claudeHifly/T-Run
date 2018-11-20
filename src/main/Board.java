@@ -75,6 +75,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
         g.dispose();
     }
+    
+    public void repaintJump(){
+        super.repaint();
+    }
 
     @Override
     public void run() {

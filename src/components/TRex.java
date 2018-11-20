@@ -17,6 +17,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
+import main.Board;
 import main.UserInterface;
 import utility.Utility;
 
@@ -29,20 +30,26 @@ public class TRex extends KeyAdapter {
     private BufferedImage image;//immagine TRex stand
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
-
-    public final static int groundLevel = (int) (UserInterface.height * 0.75);
-
+    
+    public final static int groundLevel = (int)(UserInterface.height*0.75);
+    private final static int maxHeight = (int)(UserInterface.height - UserInterface.height*0.55);
+    private static int jumpFactor = 25;
     public final static int x = 50;
     private int y;
+    private static boolean topReached;
     private static int wTRex;
     private static int hTRex;
     private Area collider;
     private int foot;
-
-    private final int LEFT_FOOT = 1,
-            RIGHT_FOOT = 2,
-            NO_FOOT = 3;
-
+    
+    private int topTRex;
+    private int bottomTRex;
+    
+    private final int   LEFT_FOOT = 1,
+                        RIGHT_FOOT = 2,
+                        NO_FOOT = 3;
+    
+    
     //stato T-Rex
     private static int state;
     public static final int STAND_STILL = 1,
@@ -59,12 +66,20 @@ public class TRex extends KeyAdapter {
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
 
         state = RUNNING;
-
+        topReached = false;
+        
         wTRex = image.getWidth(null);
         hTRex = image.getHeight(null);
-        y = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
+        topTRex = (int)(Ground.yPosition) + (int)(Ground.yPosition *0.025);        
+        bottomTRex = (int)(Ground.yPosition) + (int)(Ground.yPosition *0.025) - hTRex;
+
+        y = (int)(Ground.yPosition) + (int)(Ground.yPosition *0.025) - hTRex;
         System.out.println("TRex width: " + wTRex);
         System.out.println("TRex height: " + hTRex);
+        System.out.println("Ground height: " + y);
+        System.out.println("topTRex height: " + topTRex);
+        System.out.println("bottomTRex height: " + bottomTRex);
+        System.out.println("maxHeight: " + maxHeight);
         foot = NO_FOOT;//inizializzo
         //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
         outline = new ImageOutline(leftFootDino);
@@ -72,14 +87,16 @@ public class TRex extends KeyAdapter {
         at.translate(x, y);
         collider.transform(at);
     }
-
-    public void keyPressed(KeyEvent e) {
+    
+    
+    
+    
+    public void keyPressed(KeyEvent e){
         int keys = e.getKeyCode();
-
-        if (keys == KeyEvent.VK_SPACE) {
-            //state = JUMPING;
+        
+        if (keys == KeyEvent.VK_SPACE){
+            state = JUMPING;
             System.out.println("Space pressed");
-
         }
     }
 
@@ -93,9 +110,9 @@ public class TRex extends KeyAdapter {
         switch (state) {
 
             case RUNNING:
-
-                if (y <= groundLevel - hTRex) {
-                    y++;
+                
+                if(y <= groundLevel-hTRex){
+                    y+=2;
                 }
 
                 if (foot == NO_FOOT) {
@@ -111,11 +128,37 @@ public class TRex extends KeyAdapter {
                 break;
 
             case JUMPING:
+                
+                
+                if (bottomTRex > maxHeight && topReached == false){
+                    g.drawImage(image, x, bottomTRex -= jumpFactor, null);
+                    System.out.println("bottomTRex height: " + bottomTRex);
+                    break;
+                } else if(bottomTRex <= maxHeight && topReached == false){
+                    topReached = true;
+                    for(int i = 0; i <= 7; i++){
+                    g.drawImage(image, x, bottomTRex, null);
+                    }
+                    //System.out.println("SALTOOOOOOOOOOOOOOO " + bottomTRex);
+                    break;
+                } else if (bottomTRex < y && topReached == true){
+                    g.drawImage(image, x, bottomTRex += jumpFactor, null);
+                    break;
+                } else if (topTRex >= y && topReached == true){
+                    g.drawImage(image, x, bottomTRex, null);
+                    topReached = false;
+                    state = RUNNING;
+                    break;
+                 }
+                    
+                
+                
+                
                 break;
 
         }
     }
-
+    
     public int getwTRex() {
         return wTRex;
     }

@@ -61,7 +61,7 @@ public class Obstacles {
     }
 
     public void update() {
-        System.out.println("I'm in Obstacles update");
+        //System.out.println("I'm in Obstacles update");
         Iterator<Obstacle> looper = obArray.iterator();
         Obstacle firstOb = looper.next();
 
@@ -82,7 +82,7 @@ public class Obstacles {
         }
 
         if (firstOb.getX() < -firstOb.getImage().getWidth()) { //image is completely out of the screen: remove and move it to the end of the array
-            System.out.println("I'm in if");
+            //System.out.println("I'm in if");
             int rd = randomDistance();
 
             obArray.remove(firstOb);

@@ -58,7 +58,7 @@ public class Ground {
     }
     
     public void update() {
-        System.out.println("I'm in Ground update");
+        //System.out.println("I'm in Ground update");
         Iterator<GroundImage> looper = grassGroundSet.iterator();
         GroundImage first = looper.next();
 
