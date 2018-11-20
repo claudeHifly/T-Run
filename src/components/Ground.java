@@ -63,7 +63,7 @@ public class Ground {
     
     public void create(Graphics g) {
         
-        if(distance >= 100){
+        if(distance >= 300){
             this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png");
         }
         

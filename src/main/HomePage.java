@@ -36,16 +36,21 @@ public class HomePage{
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 BufferedImage image = new Utility().create("src/image/Title small.png");
+                BufferedImage backImage = new Utility().create("src/image/coloured/background_jungle.jpg");
                 Image scaledImage = image.getScaledInstance(670, 250, 100);
+                Image scaledBackImage = backImage.getScaledInstance(1000, 625, 100);
+                g.drawImage(scaledBackImage, 0, 0, this);
                 g.drawImage(scaledImage, 0, 0, this);
+                
             }
         };
         
         JButton startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
         startButton.setBounds(265, 365, 150, 50);
-        panel.add(startButton);
-        panel.setBackground(new Color(137,223,51));
+        panel.add(startButton);        
+        
+        //panel.setBackground(new Color(137,223,51));
         panel.setLayout(null);
         frame.add(panel);
         
