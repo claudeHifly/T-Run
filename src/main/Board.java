@@ -91,7 +91,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             this.updateGame();
             this.repaint();
             try {
-                Thread.sleep(50);
+                Thread.sleep(35);
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -108,6 +108,16 @@ public class Board extends JPanel implements Runnable, ActionListener {
         @Override
         public void keyPressed(KeyEvent e) {
             TRex.keyPressed(e);
+        }
+        
+        @Override
+        public void keyTyped(KeyEvent e){
+            TRex.keyTyped(e);
+        }
+        
+        @Override
+        public void keyReleased(KeyEvent e){
+            TRex.keyReleased(e);
         }
     }
 

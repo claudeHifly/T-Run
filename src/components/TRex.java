@@ -31,31 +31,41 @@ public class TRex extends KeyAdapter {
     private BufferedImage image;//immagine TRex stand
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
+    private BufferedImage lowerHeadDinoLeft;
+    private BufferedImage lowerHeadDinoRight;
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
-    private final static int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.5);
-    private static int jumpFactor = movementSpeed * 2;
+    private final static int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.52);
+    private static int jumpFactor = (int) (movementSpeed * 1.3);
     public final static int x = 50;
     private int y;
     private static boolean topReached;
     private static int wTRex;
     private static int hTRex;
+    
+    private static int wTRexLower;
+    private static int hTRexLower;
+    
     private Area collider;
     private int foot;
 
     private int topTRex;
     private int bottomTRex;
 
-    private final int LEFT_FOOT = 1,
-            RIGHT_FOOT = 2,
-            NO_FOOT = 3;
+    private final int   LEFT_FOOT = 1,
+                        RIGHT_FOOT = 2,
+                        NO_FOOT = 3,
+                        LEFT_FOOT_LOWER = 4,
+                        RIGHT_FOOT_RIGHT = 5;
+                                
 
     //stato T-Rex
     private static int state;
     public static final int STAND_STILL = 1,
-            RUNNING = 2,
-            JUMPING = 3,
-            DIE = 4;
+                            RUNNING = 2,
+                            JUMPING = 3,
+                            DIE = 4,
+                            LOWER_HEAD = 5;
 
     private ImageOutline outline;
 
@@ -64,12 +74,16 @@ public class TRex extends KeyAdapter {
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
+        lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up.png");
+        lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up.png");
 
         state = RUNNING;
         topReached = false;
 
         wTRex = image.getWidth(null);
         hTRex = image.getHeight(null);
+        wTRexLower = lowerHeadDinoLeft.getWidth(null);
+        hTRexLower = lowerHeadDinoLeft.getHeight(null);
         topTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025);
         bottomTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
 
@@ -88,21 +102,46 @@ public class TRex extends KeyAdapter {
         collider.transform(at);
     }
 
+    @Override
     public void keyPressed(KeyEvent e) {
-        int keys = e.getKeyCode();
-        if (keys == KeyEvent.VK_SPACE) {
+                
+        int keyPressed = e.getKeyCode();
+     
+        if ( (keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && state != (LOWER_HEAD) ) {
             state = JUMPING;
-            System.out.println("Space pressed");
+            //System.out.println("Space pressed");
         }
-    }
+             
+        if (keyPressed == KeyEvent.VK_DOWN && state!=(JUMPING)) {
+            state = LOWER_HEAD;
+        }
 
-    //create viene invocato ogni ms
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent e){
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent e){
+           
+        int keyTyped = e.getKeyCode();
+             
+        if (keyTyped == KeyEvent.VK_DOWN) {
+            state = RUNNING;
+        }
+                
+    }
+    
+  
+
+    //create viene invocato
     public void create(Graphics g) {
         //g.drawImage(image, X, y, null); 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.BLACK);
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
@@ -152,6 +191,21 @@ public class TRex extends KeyAdapter {
                     break;
                 }
                 break;
+                
+            case LOWER_HEAD:
+                
+                if (foot == NO_FOOT) {
+                    foot = LEFT_FOOT_LOWER;
+                    g.drawImage(lowerHeadDinoLeft, x, y, null);
+                } else if (foot == LEFT_FOOT_LOWER) {
+                    foot = RIGHT_FOOT_RIGHT;
+                    g.drawImage(lowerHeadDinoRight, x, y, null);
+                } else {
+                    foot = LEFT_FOOT_LOWER;
+                    g.drawImage(lowerHeadDinoLeft, x, y, null);
+                }
+                break;
+                
 
         }
     }

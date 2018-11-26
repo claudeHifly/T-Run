@@ -21,7 +21,7 @@ import static main.Board.distance;
 public class Ground {
     
     public final static int yPosition = (int)(UserInterface.height*0.75);
-    public final static int movementSpeed = 10;
+    public final static int movementSpeed = 6;
     
     
     
@@ -52,7 +52,7 @@ public class Ground {
         grassGroundSet = new ArrayList<GroundImage>();
         //grassGroundColouredSet = new ArrayList<GroundImage>();
         
-        for(int i=0; i<4; i++){
+        for(int i=0; i<2; i++){
             GroundImage tmp = new GroundImage();
             tmp.image = grassGround;
             tmp.x = 0;
@@ -63,9 +63,10 @@ public class Ground {
     
     public void create(Graphics g) {
         
+        /*
         if(distance >= 300){
-            this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png");
-        }
+            //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png");
+        }*/
         
         for(GroundImage img: grassGroundSet)
             g.drawImage(grassGround, (int) img.x, this.yPosition, null);

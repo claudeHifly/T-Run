@@ -21,7 +21,7 @@ import static main.UserInterface.width;
 public class Obstacles {
 
     private ArrayList<Obstacle> obArray;
-    private final int cactusOnScreen = 7;
+    private final int cactusOnScreen = 6;
     AffineTransform at = new AffineTransform();
 
     public Obstacles() {
