@@ -52,7 +52,7 @@ public class Ground {
         grassGroundSet = new ArrayList<GroundImage>();
         //grassGroundColouredSet = new ArrayList<GroundImage>();
         
-        for(int i=0; i<2; i++){
+        for(int i=0; i<3; i++){
             GroundImage tmp = new GroundImage();
             tmp.image = grassGround;
             tmp.x = 0;

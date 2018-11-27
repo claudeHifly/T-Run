@@ -33,6 +33,7 @@ public class TRex extends KeyAdapter {
     private BufferedImage rightFootDino;//immagine TRex rightFoot
     private BufferedImage lowerHeadDinoLeft;
     private BufferedImage lowerHeadDinoRight;
+    private BufferedImage dust00, dust01, dust02, dust03;
     private float deltaT;
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
@@ -46,6 +47,7 @@ public class TRex extends KeyAdapter {
     private static boolean topReached;
     private static int wTRex;
     private static int hTRex;
+    private boolean jumpDisabled;
     
     private static int wTRexLower;
     private static int hTRexLower;
@@ -84,6 +86,10 @@ public class TRex extends KeyAdapter {
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
         lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up.png");
         lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up.png");
+        dust00 = new Utility().create("src/image/old/dust00.png");
+        dust01 = new Utility().create("src/image/old/dust01.png");
+        dust02 = new Utility().create("src/image/old/dust02.png");
+        dust03 = new Utility().create("src/image/old/dust03.png");
 
         state = RUNNING;
         topReached = false;
@@ -117,8 +123,9 @@ public class TRex extends KeyAdapter {
                 
         int keyPressed = e.getKeyCode();
      
-        if ( (keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && state != (LOWER_HEAD) ) {
+        if ( (keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && state != (LOWER_HEAD) && !(jumpDisabled)) {
             state = JUMPING;
+            jumpDisabled = true;
             //System.out.println("Space pressed");
         }
              
@@ -140,6 +147,11 @@ public class TRex extends KeyAdapter {
         if (keyTyped == KeyEvent.VK_DOWN) {
             state = RUNNING;
         }
+        
+        if ( (keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
+            jumpDisabled = false;
+            //System.out.println("Space pressed");
+        }
                 
     }
     
@@ -147,11 +159,11 @@ public class TRex extends KeyAdapter {
 
     //create viene invocato
     public void create(Graphics g) {
-        //g.drawImage(image, X, y, null); 
+        ////////////////////g.drawImage(image, X, y, null); 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.BLACK);
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
@@ -216,6 +228,7 @@ public class TRex extends KeyAdapter {
                 if (TRexPositionY >= y-20 && topReached == true) {
                     //System.out.println("ground " + bottomTRex);
                     g.drawImage(image, x, TRexPositionY, null);
+                    
                     topReached = false;
                     gravity = (float) 0.981;
                     speedForJumping = (float) (movementSpeed * 2.2);
@@ -242,6 +255,7 @@ public class TRex extends KeyAdapter {
 
         }
     }
+    
 
     public int getwTRex() {
         return wTRex;
