@@ -33,12 +33,16 @@ public class TRex extends KeyAdapter {
     private BufferedImage rightFootDino;//immagine TRex rightFoot
     private BufferedImage lowerHeadDinoLeft;
     private BufferedImage lowerHeadDinoRight;
+    private float deltaT;
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
     private final static int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.52);
     private static int jumpFactor = (int) (movementSpeed * 1.3);
     public final static int x = 50;
     private int y;
+    private int TRexPositionY;
+    private float gravity;
+    private float speedForJumping;
     private static boolean topReached;
     private static int wTRex;
     private static int hTRex;
@@ -71,6 +75,10 @@ public class TRex extends KeyAdapter {
 
     public TRex() {
         AffineTransform at = new AffineTransform();
+        deltaT = (float) 1.25;
+        gravity = (float) 0.981;
+        speedForJumping = (float) (movementSpeed * 2.2);
+        
         image = new Utility().create("src/image/old/Dino-stand.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up.png");
@@ -86,6 +94,8 @@ public class TRex extends KeyAdapter {
         hTRexLower = lowerHeadDinoLeft.getHeight(null);
         topTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025);
         bottomTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
+        
+        TRexPositionY = bottomTRex;
 
         y = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
         System.out.println("TRex width: " + wTRex);
@@ -139,9 +149,9 @@ public class TRex extends KeyAdapter {
     public void create(Graphics g) {
         //g.drawImage(image, X, y, null); 
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setColor(Color.red);
-        //g2d.draw(collider);
-        //g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
@@ -165,34 +175,57 @@ public class TRex extends KeyAdapter {
             case JUMPING:
                 AffineTransform at = new AffineTransform();
 
-                if (bottomTRex > maxHeight && topReached == false) {
+                if ( speedForJumping > 0 /*TRexPositionY > maxHeight*/ && topReached == false) {
+                    
+                    //jumping sprite
+                    TRexPositionY -= deltaT * speedForJumping;
+                    speedForJumping -= (deltaT * gravity);
+                    g.drawImage(image, x, TRexPositionY, null);
+                    //collider
                     at.translate(0, -jumpFactor);
                     collider.transform(at);
-                    g.drawImage(image, x, bottomTRex -= jumpFactor, null);
                     
                     //System.out.println("bottomTRex height: " + bottomTRex);
-                    break;
-                } else if (bottomTRex <= maxHeight && topReached == false) {
+                    //break;
+                } else if (speedForJumping <= 0 && topReached == false) {
                     topReached = true;
-                    g.drawImage(image, x, bottomTRex, null);
+                    g.drawImage(image, x, TRexPositionY, null);
 
                     //System.out.println("SALTOOOOOOOOOOOOOOO " + bottomTRex);
-                    break;
-                } else if (bottomTRex < y && topReached == true) {
+                } else if (topReached == true) {
+                    
+                    if (speedForJumping < 0)
+                        speedForJumping = 0;
+                    
+                    //System.out.println("TRex position y iniziale = " + TRexPositionY);
+                    //System.out.println("detlaT iniziale = " + deltaT);
+                    //System.out.println("speedForJumping iniziale = " + speedForJumping);
+                    
+                    TRexPositionY += deltaT * speedForJumping;
+                    speedForJumping += (deltaT * gravity);
+                    //System.out.println("TRex position y finale = " + TRexPositionY);
+                    //System.out.println("detlaT finale = " + deltaT);
+                    //System.out.println("speedForJumping finale = " + speedForJumping);
+                    
+                    g.drawImage(image, x, TRexPositionY, null);
                     at.translate(0, jumpFactor);
                     collider.transform(at);
-                    g.drawImage(image, x, bottomTRex += jumpFactor, null);
-                    
-                    break;
-                } else if (topTRex >= y && topReached == true) {
-                    g.drawImage(image, x, bottomTRex, null);
+                   
+                } 
+                
+                if (TRexPositionY >= y-20 && topReached == true) {
+                    //System.out.println("ground " + bottomTRex);
+                    g.drawImage(image, x, TRexPositionY, null);
                     topReached = false;
+                    gravity = (float) 0.981;
+                    speedForJumping = (float) (movementSpeed * 2.2);
                     state = RUNNING;
                     break;
                 }
                 break;
                 
             case LOWER_HEAD:
+                int lowerCount = 0;
                 
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT_LOWER;
