@@ -18,7 +18,7 @@ import static main.Board.distance;
  *
  * @author Gennaro
  */
-public class Ground {
+public class Background {
     
     public final static int yPosition = (int)(UserInterface.height*0.75);
     public final static int movementSpeed = 6;
@@ -30,85 +30,42 @@ public class Ground {
         int x;
     }
     
-    private BufferedImage grassGround;//immagine suolo
-    //private BufferedImage backGround;//immagine suolo
-    private ArrayList<GroundImage> grassGroundSet;
-    //private ArrayList<GroundImage> backGroundSet;
-    
-    /*
-    private BufferedImage grassGroundColoured;//immagine suolo
-    private ArrayList<GroundImage> grassGroundColouredSet;*/
+    private BufferedImage backGround;//immagine suolo
+    private ArrayList<GroundImage> backGroundSet;
     
     
-    public Ground(){
+    public Background(){
         //GROUND
         //this.yPosition = (int)(UserInterface.height*0.75);
         
         
         //OLD
-        this.grassGround = new Utility().create("src/image/old/Ground-colorato.png");
-        //this.backGround = new Utility().create("src/image/old/background.png");
+        this.backGround = new Utility().create("src/image/old/background2.png");
         
         //COLOURED
         //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
 
-        grassGroundSet = new ArrayList<GroundImage>();
-        //backGroundSet = new ArrayList<GroundImage>();
+        backGroundSet = new ArrayList<GroundImage>();
         
-        for(int i=0; i<3; i++){
-            GroundImage tmp = new GroundImage();
-            tmp.image = grassGround;
-            tmp.x = 0;
-            grassGroundSet.add(tmp);
-        }
         
-        /*
         for(int i=0; i<3; i++){
             GroundImage tmp = new GroundImage();
             tmp.image = backGround;
             tmp.x = 0;
             backGroundSet.add(tmp);
-        }*/
+        }
         
     }
     
     public void create(Graphics g) {
         
-        /*
-        if(distance >= 300){
-            //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png");
-        }*/
-        
-        for(GroundImage img: grassGroundSet)
-            g.drawImage(grassGround, (int) img.x, this.yPosition, null);
-        
-        /*
         for(GroundImage img: backGroundSet)
             g.drawImage(backGround, (int) img.x, 0, null);
-        */
+        
     }
     
     public void update() {
-        //System.out.println("I'm in Ground update");
-        Iterator<GroundImage> looper = grassGroundSet.iterator();
-        GroundImage first = looper.next();
-
-        first.x -= movementSpeed;
-
-        int previousX = first.x;
-        while (looper.hasNext()) {
-            GroundImage next = looper.next();
-            next.x = previousX + grassGround.getWidth();
-            previousX = next.x;
-        }
-
-        if (first.x < -grassGround.getWidth()) {
-            grassGroundSet.remove(first);
-            first.x = previousX + grassGround.getWidth();
-            grassGroundSet.add(first);
-        }
         
-        /*
         Iterator<GroundImage> looper2 = backGroundSet.iterator();
         GroundImage first2 = looper2.next();
 
@@ -126,7 +83,7 @@ public class Ground {
             first2.x = previousX2 + backGround.getWidth();
             backGroundSet.add(first2);
         }
-        */
+        
       
 
     }

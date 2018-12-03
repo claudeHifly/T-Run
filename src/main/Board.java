@@ -10,6 +10,7 @@ import java.awt.*;
 import components.*;
 import java.awt.event.*;
 import static java.lang.System.gc;
+import sun.swing.BakedArrayList;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private TRex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
+    private Background background;
 
     public static int distance;
     private int score;
@@ -36,6 +38,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
         //TREX
         TRex = new TRex();
+        
+        background = new Background();
 
         //GROUND
         grass_ground = new Ground();
@@ -49,6 +53,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         score = 0;
 
         //ATTENZIONE: questo deve essere fatto nella classe Partita
+        background.update();
         grass_ground.update();
         obstacles.update();
         animator = new Thread(this);
@@ -59,6 +64,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
     public void updateGame() {
         distance += 1;
+        background.update();
         grass_ground.update();
         obstacles.update();
 
@@ -70,6 +76,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
         obstacles.create(g);
         TRex.create(g);

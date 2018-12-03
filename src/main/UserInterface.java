@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class UserInterface extends JFrame {
 
-    public static int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.9);
+    public static int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);
     public static int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
     
     public UserInterface() {
