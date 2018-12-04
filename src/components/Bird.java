@@ -9,10 +9,11 @@ package components;
  *
  * @author claud
  */
-public class Cactus extends Obstacle{
+public class Bird extends Obstacle{
     
-
-    public Cactus(int x, int y) {
+    private ImageOutline outline;
+    
+    public Bird(int x, int y) {
         super(x, y, "src/image/Cactus-" + (int) (Math.random() * 4 + 1) + ".png");
 
         //this.setImage(new Utility().create(path));

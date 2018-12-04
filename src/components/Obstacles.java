@@ -23,6 +23,7 @@ public class Obstacles {
     private ArrayList<Obstacle> obArray;
     private final int cactusOnScreen = 6;
     AffineTransform at = new AffineTransform();
+    
 
     public Obstacles() {
         obArray = new ArrayList<Obstacle>();
@@ -53,10 +54,11 @@ public class Obstacles {
             Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
+                System.out.println("Collisione con " + ob.getClass().getSimpleName());
                 return true;
             }
         }
-
+        
         return false;
     }
 
