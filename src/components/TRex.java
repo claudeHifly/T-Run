@@ -71,25 +71,23 @@ public class TRex extends KeyAdapter {
                             RUNNING = 2,
                             JUMPING = 3,
                             DIE = 4,
-                            LOWER_HEAD = 5;
+                            LOWER_HEAD = 5,
+                            DEAD = 6;
 
     private ImageOutline outline;
 
     public TRex() {
         AffineTransform at = new AffineTransform();
         deltaT = (float) 1.25;
+        System.out.println("DELTAAAAAAAAA" + deltaT);
         gravity = (float) 0.981;
-        speedForJumping = (float) (movementSpeed * 2.2);
+        speedForJumping = (float) (Ground.movementSpeed * 2.2);
         
         image = new Utility().create("src/image/old/Dino-stand-colorato.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up-colorato.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up-colorato.png");
         lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up-colorato.png");
         lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up-colorato.png");
-        dust00 = new Utility().create("src/image/old/dust00.png");
-        dust01 = new Utility().create("src/image/old/dust01.png");
-        dust02 = new Utility().create("src/image/old/dust02.png");
-        dust03 = new Utility().create("src/image/old/dust03.png");
 
         state = RUNNING;
         topReached = false;
@@ -190,7 +188,7 @@ public class TRex extends KeyAdapter {
                 if ( speedForJumping > 0 /*TRexPositionY > maxHeight*/ && topReached == false) {
                     
                     //jumping sprite
-                    TRexPositionY -= deltaT * speedForJumping;
+                    TRexPositionY -= deltaT * speedForJumping ;
                     speedForJumping -= (deltaT * gravity);
                     g.drawImage(image, x, TRexPositionY, null);
                     //collider
@@ -231,7 +229,7 @@ public class TRex extends KeyAdapter {
                     
                     topReached = false;
                     gravity = (float) 0.981;
-                    speedForJumping = (float) (movementSpeed * 2.2);
+                    speedForJumping = (float) (Ground.movementSpeed * 2.2);
                     state = RUNNING;
                     break;
                 }

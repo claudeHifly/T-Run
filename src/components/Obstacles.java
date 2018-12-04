@@ -65,19 +65,19 @@ public class Obstacles {
         Iterator<Obstacle> looper = obArray.iterator();
         Obstacle firstOb = looper.next();
 
-        firstOb.setX(firstOb.getX() - movementSpeed);
+        firstOb.setX(firstOb.getX() - Ground.speedForCactus);
         //at.translate(firstOb.getX() - movementSpeed, 0);
         at = new AffineTransform();
-        at.translate(-movementSpeed, 0);
+        at.translate(-Ground.speedForCactus, 0);
         firstOb.getCollider().transform(at);
 
         while (looper.hasNext()) {
             //System.out.println("I'm in looper while");
             Obstacle ob = looper.next();
-            ob.setX(ob.getX() - movementSpeed);
+            ob.setX(ob.getX() - Ground.speedForCactus);
             //at.translate(ob.getX() - movementSpeed, 0);
             at = new AffineTransform();
-            at.translate(-movementSpeed, 0);
+            at.translate(-Ground.speedForCactus, 0);
             ob.getCollider().transform(at);
         }
 
@@ -101,7 +101,7 @@ public class Obstacles {
     }
 
     private int randomDistance() {
-        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 200);
+        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
     }
 
     public ArrayList<Obstacle> getObArray() {
