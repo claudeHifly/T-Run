@@ -40,7 +40,7 @@ public class Background {
         
         
         //OLD
-        this.backGround = new Utility().create("src/image/old/background3.png");
+        this.backGround = new Utility().create("src/image/old/background2.png");
         
         //COLOURED
         //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
@@ -86,6 +86,8 @@ public class Background {
         
       
 
+        
+        
     }
  
 }

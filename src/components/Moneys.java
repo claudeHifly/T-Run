@@ -18,34 +18,27 @@ import static main.UserInterface.width;
  *
  * @author claud
  */
-public class Obstacles {
+public class Moneys {
 
     private ArrayList<Obstacle> obArray;
     private final int cactusOnScreen = 6;
-    
+    AffineTransform at = new AffineTransform();
     
 
-    public Obstacles() {
+    public Moneys() {
         obArray = new ArrayList<Obstacle>();
-        Obstacle ob = new Cactus(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
-        AffineTransform at = new AffineTransform();
-        at.translate(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
+        Obstacle ob = new Money(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
+        at.translate(width*2, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
         obArray.add(ob);
         for (int i = 1; i < cactusOnScreen; i++) {
             int rd = randomDistance();
-            ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
+            ob = new Money(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
             at = new AffineTransform();
             at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
             obArray.add(ob);
         }
-        int rd = randomDistance();
-        Obstacle ob1 = new Bird(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.05));
-        at = new AffineTransform();
-        at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.05) - ob1.getImage().getHeight());
-        ob1.getCollider().transform(at);
-        obArray.add(ob1);
         //System.out.println(obArray);
     }
 
@@ -74,19 +67,19 @@ public class Obstacles {
         Iterator<Obstacle> looper = obArray.iterator();
         Obstacle firstOb = looper.next();
 
-        firstOb.setX(firstOb.getX() - Ground.speedForCactus);
+        firstOb.setX(firstOb.getX() - movementSpeed);
         //at.translate(firstOb.getX() - movementSpeed, 0);
-        AffineTransform at = new AffineTransform();
-        at.translate(-Ground.speedForCactus, 0);
+        at = new AffineTransform();
+        at.translate(-movementSpeed, 0);
         firstOb.getCollider().transform(at);
 
         while (looper.hasNext()) {
             //System.out.println("I'm in looper while");
             Obstacle ob = looper.next();
-            ob.setX(ob.getX() - Ground.speedForCactus);
+            ob.setX(ob.getX() - movementSpeed);
             //at.translate(ob.getX() - movementSpeed, 0);
             at = new AffineTransform();
-            at.translate(-Ground.speedForCactus, 0);
+            at.translate(-movementSpeed, 0);
             ob.getCollider().transform(at);
         }
 
@@ -95,7 +88,7 @@ public class Obstacles {
             int rd = randomDistance();
 
             obArray.remove(firstOb);
-            Obstacle ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
+            Obstacle ob = new Money(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
             at = new AffineTransform();
             at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
@@ -110,7 +103,7 @@ public class Obstacles {
     }
 
     private int randomDistance() {
-        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
+        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 200);
     }
 
     public ArrayList<Obstacle> getObArray() {

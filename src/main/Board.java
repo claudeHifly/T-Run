@@ -21,6 +21,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private TRex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
+    private Moneys moneys;
     private Background background;
 
     public static int distance;
@@ -46,7 +47,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
         //OSTACOLI
         obstacles = new Obstacles();
-
+        
+        //MONETINE
+        moneys = new Moneys();
+        
         //DISTANZA PERCORSA
         distance = 0;
         //SCORE
@@ -55,7 +59,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         //ATTENZIONE: questo deve essere fatto nella classe Partita
         background.update();
         grass_ground.update();
+        moneys.update();
         obstacles.update();
+        
         animator = new Thread(this);
         animator.start();
     }
@@ -66,10 +72,15 @@ public class Board extends JPanel implements Runnable, ActionListener {
         distance += 1;
         background.update();
         grass_ground.update();
+        moneys.update();
         obstacles.update();
+        
 
         if (obstacles.hasCollided(TRex.getCollider())) {
             System.out.println("Morto shobalola");
+        }
+        if (moneys.hasCollided(TRex.getCollider())) {
+            System.out.println("Ho preso una monetina shobalola");
         }
     }
 
@@ -78,7 +89,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         super.paint(g);
         background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
+        moneys.create(g);
         obstacles.create(g);
+        
         TRex.create(g);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
         g.drawString("MT: " + Integer.toString(distance), getWidth() / 4 - 100, 100);
