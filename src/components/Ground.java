@@ -65,14 +65,6 @@ public class Ground {
             grassGroundSet.add(tmp);
         }
         
-        /*
-        for(int i=0; i<3; i++){
-            GroundImage tmp = new GroundImage();
-            tmp.image = backGround;
-            tmp.x = 0;
-            backGroundSet.add(tmp);
-        }*/
-        
     }
     
     public void create(Graphics g) {
@@ -85,10 +77,6 @@ public class Ground {
         for(GroundImage img: grassGroundSet)
             g.drawImage(grassGround, (int) img.x, this.yPosition, null);
         
-        /*
-        for(GroundImage img: backGroundSet)
-            g.drawImage(backGround, (int) img.x, 0, null);
-        */
     }
     
     public void update() {
@@ -97,7 +85,6 @@ public class Ground {
         
         movementSpeed = 6 + distance / 250;
         speedForCactus = movementSpeed;
-        System.out.println(movementSpeed);
         first.x -= movementSpeed;
         
         /*
@@ -128,27 +115,6 @@ public class Ground {
             grassGroundSet.add(first);
         }
         
-        /*
-        Iterator<GroundImage> looper2 = backGroundSet.iterator();
-        GroundImage first2 = looper2.next();
-
-        first2.x -= movementSpeed - (2 * movementSpeed / 3);
-
-        int previousX2 = first2.x;
-        while (looper2.hasNext()) {
-            GroundImage next = looper2.next();
-            next.x = previousX2 + backGround.getWidth();
-            previousX2 = next.x;
-        }
-
-        if (first2.x < -backGround.getWidth()) {
-            backGroundSet.remove(first2);
-            first2.x = previousX2 + backGround.getWidth();
-            backGroundSet.add(first2);
-        }
-        */
-      
-
     }
  
 }
