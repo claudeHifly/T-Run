@@ -84,8 +84,8 @@ public class TRex extends KeyAdapter {
         image = new Utility().create("src/image/old/Dino-stand-colorato.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up-colorato.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up-colorato.png");
-        lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up.png");
-        lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up.png");
+        lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up-colorato.png");
+        lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up-colorato.png");
         dust00 = new Utility().create("src/image/old/dust00.png");
         dust01 = new Utility().create("src/image/old/dust01.png");
         dust02 = new Utility().create("src/image/old/dust02.png");
