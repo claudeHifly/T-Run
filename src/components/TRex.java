@@ -160,10 +160,10 @@ public class TRex extends KeyAdapter {
     //create viene invocato
     public void create(Graphics g) {
         ////////////////////g.drawImage(image, X, y, null); 
-//        Graphics2D g2d = (Graphics2D) g;
-//        g2d.setColor(Color.red);
-//        g2d.draw(collider);
-//        g2d.setColor(Color.BLACK);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
