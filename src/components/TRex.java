@@ -29,11 +29,12 @@ import utility.Utility;
 public class TRex extends KeyAdapter {
 
     private BufferedImage image;//immagine TRex stand
+    private BufferedImage deadTRex;//immagine TRex morto
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
     private BufferedImage lowerHeadDinoLeft;
     private BufferedImage lowerHeadDinoRight;
-    private BufferedImage dust00, dust01, dust02, dust03;
+    private BufferedImage gameOverImage;
     private float deltaT;
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
@@ -49,7 +50,6 @@ public class TRex extends KeyAdapter {
     private static int wTRex;
     private static int hTRex;
     private boolean jumpDisabled;
-
     private static int wTRexLower;
     private static int hTRexLower;
 
@@ -86,10 +86,12 @@ public class TRex extends KeyAdapter {
                                             //in base alla velocità del personaggio.
         
         image = new Utility().create("src/image/old/Dino-stand-colorato.png");
+        deadTRex = new Utility().create("src/image/old/Dino-big-eyes-colorato.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up-colorato.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up-colorato.png");
         lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up-colorato.png");
         lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up-colorato.png");
+        gameOverImage = new Utility().create("src/image/old/GameOver.png");
 
         state = RUNNING;
         topReached = false;
@@ -151,7 +153,6 @@ public class TRex extends KeyAdapter {
 
         if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
             jumpDisabled = false;
-            //System.out.println("Space pressed");
         }
 
     }
@@ -250,9 +251,19 @@ public class TRex extends KeyAdapter {
                 }
                 break;
 
+            case DEAD:
+                g.drawImage(deadTRex, x, y, null);
+                //g.drawImage(gameOverImage, 0, 0, null);
+                g.drawString("GAME OVER", UserInterface.width / 2 - 100, UserInterface.height / 2);
+                g.drawString("Press ENTER to restart", UserInterface.width / 2 - 100, UserInterface.height / 2 + 30);
+                break;
        }
     }
 
+    public void die(){
+        state = DEAD;
+    }
+    
     public int getwTRex() {
         return wTRex;
     }
