@@ -224,8 +224,7 @@ public class TRex extends KeyAdapter {
                     collider.transform(at);
 
                     topReached = false;
-                    gravity = (float) 0.981;
-                    speedForJumping = (float) (Ground.movementSpeed * 2.2);
+                    speedForJumping = (float) (movementSpeed * 2.2);
                     state = RUNNING;
                     break;
                 }
@@ -245,11 +244,9 @@ public class TRex extends KeyAdapter {
                     g.drawImage(lowerHeadDinoLeft, x, y, null);
                 }
                 break;
-                
 
        }
     }
-    
 
     public int getwTRex() {
         return wTRex;
