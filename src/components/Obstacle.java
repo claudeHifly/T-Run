@@ -23,13 +23,13 @@ public abstract class Obstacle {
     private int x;
     private int y;
     private Area collider;
-    private ImageOutline outline;
+    //private ImageOutline outline;
 
     public Obstacle(int x, int y, String path) {
         this.x = x;
         this.image = new Utility().create(path);
         this.y = y - image.getHeight();
-        outline = new ImageOutline(image);
+        ImageOutline outline = new ImageOutline(image);
         this.collider = new Area(outline.getOutline(image));
     }
 
