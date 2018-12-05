@@ -36,7 +36,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private int score;
     private int coin;
     private Thread animator;
-    private Thread blink;
     
     
   
@@ -81,9 +80,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
         animator = new Thread(this);
         animator.start();
         
-        
-        
-            
     }
     
     
@@ -112,38 +108,14 @@ public class Board extends JPanel implements Runnable, ActionListener {
             score += 1;
         }
         
-      
+        
         
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        
-        /*
-        if(distanceForScore >= 30){
-            running = false;
-            blinking = true;
-            System.out.println("blinking");
-            
-            blink = new Thread(this){
-            
-                @Override
-                public void run(){
-            
-                TRex.create(g);
-                try {
-                    Thread.sleep(35);
-                } catch (InterruptedException ex) {
-                    System.out.println(ex.getMessage());
-                }
-                }
-            };
-            
-            blink.start();      //faccio partire il thread del blink per il cambio grafica
-        }*/
-        
-        
+                
         background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
         moneys.create(g);
@@ -157,16 +129,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
 
         g.dispose();
-        
-        
-        
-        
+  
     }
     
-    /*
-    public void repaintJump(){
-        super.repaint();
-    }*/
+
 
     @Override
     public void run() {

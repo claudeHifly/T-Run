@@ -58,6 +58,8 @@ public class TRex extends KeyAdapter {
     //del TRex altrimenti cambierebbe sprite ogni 25ms
     private int leftCounter;        //contatore per l'animazione del piede sinistro
     private int rightCounter;       //contatore per l'animazione del piede destro
+    
+    private int blinkCounter;       //contatore per il numero di blink;
 
     private Area collider;
     private int foot;
@@ -171,7 +173,7 @@ public class TRex extends KeyAdapter {
         switch (state) {
 
             case RUNNING:
-                
+                Board.blinking = false;
 
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
@@ -204,12 +206,8 @@ public class TRex extends KeyAdapter {
 
                 if ( ((y > maxHeight) || (speedForJumping <= 0)) && topReached == false) {
 
-                    //jumping sprite
-                    System.out.println("SALTO FASE 1");
-                    System.out.println("y: " + y);
-                    System.out.println("maxHeight: " + maxHeight);
                     y -= deltaT * speedForJumping;
-                    g.drawImage(image, x, y, null);
+                    g.drawImage(imageColorato, x, y, null);
                     at.translate(0, -deltaT * speedForJumping);
                     collider.transform(at);
                     speedForJumping -= (deltaT * gravity);
@@ -219,14 +217,14 @@ public class TRex extends KeyAdapter {
                 }
                 
                 if ((y <= maxHeight || speedForJumping <= 0) && topReached == false) {
-                    System.out.println("SALTO FASE 2");
+                    
                     topReached = true;
-                    g.drawImage(image, x, y, null);
+                    g.drawImage(imageColorato, x, y, null);
                     
                 }
                 
                 if (topReached == true) {
-                    System.out.println("SALTO FASE 3");
+                    
                     //Potrebbe verificarsi il caso in cui, a seguito dei numerosi decrementi effettuati sulla velocità 
                     //del TRex in salita, quest'ultima diventi negativa.
                     if (speedForJumping < 0) {
@@ -234,7 +232,7 @@ public class TRex extends KeyAdapter {
                     }
 
                     y += deltaT * speedForJumping;
-                    g.drawImage(image, x, y, null);
+                    g.drawImage(imageColorato, x, y, null);
                     at.translate(0, deltaT * speedForJumping);
                     collider.transform(at);
                     speedForJumping += (deltaT * gravity);
@@ -242,10 +240,8 @@ public class TRex extends KeyAdapter {
                 }
                 
                 if (y >= TRexOnGround - 20 && topReached == true) {
-                    //System.out.println("ground " + bottomTRex);
-                    System.out.println("SALTO FASE 4");
                     
-                    g.drawImage(image, x, y, null); //deve sempre essere fatto prima g.drawImage
+                    g.drawImage(imageColorato, x, y, null); //deve sempre essere fatto prima g.drawImage
                                                     //altrimenti abbiamo dei frame in cui scatta
                     y = TRexOnGround;
                     
@@ -295,16 +291,35 @@ public class TRex extends KeyAdapter {
                 g.drawString("GAME OVER", UserInterface.width / 2 - 100, UserInterface.height / 2);
                 g.drawString("Press ENTER to restart", UserInterface.width / 2 - 100, UserInterface.height / 2 + 30);
                 break;
-                
+            
+            /*
             case BLINK:
-                g.drawImage(image, x, y, null);
-                break;
+                System.out.println("blinkCounter: " + blinkCounter);
+                state = RUNNING;
+                Board.blinking = false;
+                
+                
+                /*if(blinkCounter == 0 || blinkCounter == 2 || blinkCounter == 4 || blinkCounter == 8){
+                    g.drawImage(imageColorato, x, y, null);
+                    blinkCounter++;
+                } else {
+                    g.drawImage(image, x, y, null);
+                    blinkCounter++;
+                }
+                //System.out.println("NEXTblinkCounter");
+                if(blinkCounter >= 10){
+                    System.out.println("FINE");
+                    Board.blinking = false;
+                    state = RUNNING;
+                    blinkCounter = 0;
+                }
+                break;*/
                 
             
        }
     }
     
-    
+    /*
     public void updateTRexSprite(Graphics g){
         
         System.out.println("updateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -317,13 +332,13 @@ public class TRex extends KeyAdapter {
             g.drawImage(imageColorato, x, y, null);
             g.drawImage(imageColorato, x, y, null);
             g.drawImage(imageColorato, x, y, null);
-        }*/
+        }
         g.dispose();
         g.drawImage(gameOverImage, x, y, null);
         
         //Board.running = true;
         
-    }
+    }*/
 
     public void die(){
         state = DEAD;
