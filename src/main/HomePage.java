@@ -46,7 +46,7 @@ public class HomePage{
         
         JButton startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
-        startButton.setBounds(265, 365, 150, 50);
+        startButton.setBounds((int) ((frame.getWidth() - 150)/2), (int) (frame.getHeight() * 0.8), 150, 50);
         panel.add(startButton);        
         
         //panel.setBackground(new Color(137,223,51));
