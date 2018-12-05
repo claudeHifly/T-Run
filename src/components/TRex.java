@@ -197,8 +197,9 @@ public class TRex extends KeyAdapter {
                     }
                 }
                 break;
-
+               
             case JUMPING:
+                /*
                 AffineTransform at = new AffineTransform();
 
                 if ((y > maxHeight) && topReached == false) {
@@ -248,6 +249,7 @@ public class TRex extends KeyAdapter {
                     state = RUNNING;
                 }
                 break;
+                */
 
             case LOWER_HEAD:
 
