@@ -21,7 +21,7 @@ import static main.UserInterface.width;
 public class Moneys {
 
     private ArrayList<Obstacle> obArray;
-    private final int moneyOnScreen = 6;
+    private final int moneyOnScreen = 15;
     AffineTransform at = new AffineTransform();
     
 
@@ -31,11 +31,14 @@ public class Moneys {
         at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
         obArray.add(ob);
+        int fd=0;
         for (int i = 1; i < moneyOnScreen; i++) {
-            int rd = obArray.get(obArray.size() - 1).getX()+ 50;
-            ob = new Money(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+            fd = obArray.get(obArray.size() - 1).getX()+ 50;
+            if (i==5||i==10)
+                fd = obArray.get(obArray.size() - 1).getX()+ 200 + (int)(Math.random()*500);
+            ob = new Money(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
             at = new AffineTransform();
-            at.translate(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
+            at.translate(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
             obArray.add(ob);
         }
@@ -101,16 +104,19 @@ public class Moneys {
         }
         else{
             if (obArray.size()==1){
-                Obstacle ob = new Money(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+                Obstacle ob = new Money(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
                 at = new AffineTransform();
-                at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
+                at.translate(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
                 ob.getCollider().transform(at);
                 obArray.add(ob);
+                int fd=0;
                 for (int i = 1; i < moneyOnScreen; i++) {
-                    int rd = obArray.get(obArray.size() - 1).getX()+ 50;
-                    ob = new Money(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+                    fd = obArray.get(obArray.size() - 1).getX()+ 50;
+                    if (i==5||i==10)
+                        fd = obArray.get(obArray.size() - 1).getX()+ 200 + (int)(Math.random()*500);
+                    ob = new Money(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
                     at = new AffineTransform();
-                    at.translate(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
+                    at.translate(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
                     ob.getCollider().transform(at);
                     obArray.add(ob);
                 }
