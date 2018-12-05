@@ -93,7 +93,8 @@ public class Obstacles {
         if (firstOb.getX() < -firstOb.getImage().getWidth()) { //image is completely out of the screen: remove and move it to the end of the array
             //System.out.println("I'm in if");
             int rd = randomDistance();
-            if (firstOb.getClass().getSimpleName().equals("Bird")){
+            String type = firstOb.getClass().getSimpleName();
+            if (type.equals("Bird")){
                 obArray.remove(firstOb);
                 Obstacle ob = new Bird(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageBirdOnGround));
                 at = new AffineTransform();

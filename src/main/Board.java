@@ -106,10 +106,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        
- 
-        
-        
+               
         background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
         moneys.create(g);
