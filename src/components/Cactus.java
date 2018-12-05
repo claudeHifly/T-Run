@@ -13,7 +13,7 @@ public class Cactus extends Obstacle{
     
 
     public Cactus(int x, int y) {
-        super(x, y, "src/image/Cactus-" + (int) (Math.random() * 4 + 1) + ".png");
+        super(x, y, "src/image/old/Cactus-" + (int) (Math.random() * 4 + 1) + "-colorato.png");
 
         //this.setImage(new Utility().create(path));
         //this.setY(y-this.getImage().getHeight());

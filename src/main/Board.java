@@ -54,9 +54,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
         TRex = new TRex();
         background = new Background();
         grass_ground = new Ground();
-        
-        
-
         //OSTACOLI
         obstacles = new Obstacles();
         
@@ -77,7 +74,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
         animator = new Thread(this);
         animator.start();
-        
+
     }
     
     
@@ -85,14 +82,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public void updateGame() {
         
         distance += 1;
-        
         distanceForScore += 0.1;
         score += 1;
         background.update();
         grass_ground.update();
         moneys.update();
         obstacles.update();
-        
 
         if (obstacles.hasCollided(TRex.getCollider())) {
             running = false;
@@ -101,11 +96,13 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
         Obstacle collidedMoney = moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
-            System.out.println("Ho preso una monetina shobalola");
+            //System.out.println("Ho preso una monetina shobalola");
             moneys.getObArray().remove(collidedMoney);
             coin += 1;
             score += 1;
         }
+        
+        
 
         
     }
@@ -113,7 +110,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-                
+         
         background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
         moneys.create(g);
@@ -145,6 +142,17 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 System.out.println(ex.getMessage());
             }
         }//while running
+        
+        
+        while (blinking) {
+            this.updateGame();
+            this.repaint();
+            try {
+                Thread.sleep(35);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }//while blinking
     }
 
     @Override
