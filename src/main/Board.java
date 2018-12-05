@@ -13,7 +13,7 @@ import static components.TRex.LOWER_HEAD;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import static java.lang.System.gc;
-import sun.swing.BakedArrayList;
+//import sun.swing.BakedArrayList;
 import utility.Utility;
 
 /**
@@ -31,7 +31,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private Background background;
 
     public static int distance;
+    public static float distanceForScore;
     private int score;
+    private int coin;
     private Thread animator;
     
     
@@ -66,6 +68,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         distance = 0;
         //SCORE
         score = 0;
+        coin = 0;
 
         //ATTENZIONE: questo deve essere fatto nella classe Partita
         background.update();
@@ -82,6 +85,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public void updateGame() {
         
         distance += 1;
+        
+        distanceForScore += 0.1;
+        score += 1;
         background.update();
         grass_ground.update();
         moneys.update();
@@ -96,6 +102,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
         if (moneys.hasCollided(TRex.getCollider())) {
             System.out.println("Ho preso una monetina shobalola");
+            
+            coin += 1;
+            score += 1;
         }
         
     }
@@ -114,8 +123,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
         TRex.create(g);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
-        g.drawString("MT: " + Integer.toString(distance), getWidth() / 4 - 100, 100);
+        g.drawString("MT: " + Integer.toString((int)distanceForScore), getWidth() / 4 - 180, 100);
         g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
+        g.drawString("COIN: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
+
 
         g.dispose();
         

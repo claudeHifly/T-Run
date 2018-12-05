@@ -52,6 +52,11 @@ public class TRex extends KeyAdapter {
     private boolean jumpDisabled;
     private static int wTRexLower;
     private static int hTRexLower;
+    
+    //questi due contatori mi servono per rallentare l'animazione dei piedi
+    //del TRex altrimenti cambierebbe sprite ogni 25ms
+    private int leftCounter;        //contatore per l'animazione del piede sinistro
+    private int rightCounter;       //contatore per l'animazione del piede destro
 
     private Area collider;
     private int foot;
@@ -63,7 +68,7 @@ public class TRex extends KeyAdapter {
             RIGHT_FOOT = 2,
             NO_FOOT = 3,
             LEFT_FOOT_LOWER = 4,
-            RIGHT_FOOT_RIGHT = 5;
+            RIGHT_FOOT_LOWER = 5;
 
 
     //stato T-Rex
@@ -169,16 +174,30 @@ public class TRex extends KeyAdapter {
         switch (state) {
 
             case RUNNING:
+                
 
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
                 } else if (foot == LEFT_FOOT) {
+                    
+                    if (leftCounter < 5){
+                        g.drawImage(leftFootDino, x, y, null);
+                        leftCounter++;
+                    } else {
                     foot = RIGHT_FOOT;
                     g.drawImage(rightFootDino, x, y, null);
+                    leftCounter = 0;    //resetto il contatore e cambio stato
+                    }
                 } else {
+                    if (rightCounter < 5){
+                        g.drawImage(rightFootDino, x, y, null);
+                        rightCounter++;
+                    } else {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
+                    rightCounter = 0;   //resetto il contatore e cambio stato
+                    }
                 }
                 break;
 
@@ -238,17 +257,31 @@ public class TRex extends KeyAdapter {
                 break;
 
             case LOWER_HEAD:
-                int lowerCount = 0;
 
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT_LOWER;
                     g.drawImage(lowerHeadDinoLeft, x, y, null);
                 } else if (foot == LEFT_FOOT_LOWER) {
-                    foot = RIGHT_FOOT_RIGHT;
+                    
+                    if (leftCounter < 5){
+                        g.drawImage(lowerHeadDinoLeft, x, y, null);
+                        leftCounter++;
+                    } else {
+                    foot = RIGHT_FOOT_LOWER;
                     g.drawImage(lowerHeadDinoRight, x, y, null);
+                    leftCounter = 0;    //resetto il contatore e cambio stato
+                    }
+                    
                 } else {
-                    foot = LEFT_FOOT_LOWER;
-                    g.drawImage(lowerHeadDinoLeft, x, y, null);
+                    
+                    if (rightCounter < 5){
+                        g.drawImage(lowerHeadDinoRight, x, y, null);
+                        rightCounter++;
+                    } else {
+                        foot = LEFT_FOOT_LOWER;
+                        g.drawImage(lowerHeadDinoLeft, x, y, null);
+                        rightCounter = 0;   //resetto il contatore e cambio stato
+                    }
                 }
                 break;
 
