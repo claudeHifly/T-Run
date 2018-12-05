@@ -5,13 +5,11 @@
  */
 package components;
 
-import static components.Ground.movementSpeed;
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Iterator;
-import main.UserInterface;
 import static main.UserInterface.width;
 
 /**

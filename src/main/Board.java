@@ -8,13 +8,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
-import static components.TRex.JUMPING;
-import static components.TRex.LOWER_HEAD;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import static java.lang.System.gc;
-//import sun.swing.BakedArrayList;
-import utility.Utility;
 
 /**
  *
@@ -120,6 +114,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         obstacles.create(g);
         
         TRex.create(g);
+        
         g.setFont(new Font("Courier New", Font.BOLD, 25));
         g.drawString("MT: " + Integer.toString((int)distanceForScore), getWidth() / 4 - 180, 100);
         g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);

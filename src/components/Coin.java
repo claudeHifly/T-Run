@@ -5,9 +5,6 @@
  */
 package components;
 
-import java.awt.geom.Area;
-import javax.swing.JFrame;
-import utility.*;
 
 /**
  *

@@ -7,8 +7,6 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
-import javafx.animation.FadeTransition;
-import javafx.util.Duration;
 
 /**
  *
