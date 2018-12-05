@@ -11,7 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Iterator;
-import static main.UserInterface.width;
+import static general.UserInterface.width;
 
 /**
  *

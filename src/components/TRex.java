@@ -13,8 +13,8 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import main.Board;
-import main.UserInterface;
+import general.Board;
+import general.UserInterface;
 import utility.Utility;
 
 /**
