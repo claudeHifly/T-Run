@@ -5,13 +5,6 @@
  */
 package components;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.image.BufferedImage;
-import main.UserInterface;
-
 /**
  *
  * @author claud
@@ -19,7 +12,7 @@ import main.UserInterface;
 public class Money extends Obstacle{
     
      public Money(int x, int y) {
-        super(x, y, "src/image/old/Sun.png");
+        super(x, y, "src/image/bone_small.png");
      }
 
 //    private BufferedImage image;
