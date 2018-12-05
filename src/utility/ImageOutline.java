@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package components;
+package utility;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.awt.image.*;
 import java.awt.geom.*;
 
 /* Gain the outline of an image for further processing. */
-class ImageOutline {
+public class ImageOutline {
 
     private final BufferedImage image;
 

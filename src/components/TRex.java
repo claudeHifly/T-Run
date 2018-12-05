@@ -5,6 +5,7 @@
  */
 package components;
 
+import utility.ImageOutline;
 import static components.Ground.movementSpeed;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
