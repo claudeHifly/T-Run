@@ -29,11 +29,12 @@ import utility.Utility;
 public class TRex extends KeyAdapter {
 
     private BufferedImage image;//immagine TRex stand
+    private BufferedImage deadTRex;//immagine TRex morto
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
     private BufferedImage lowerHeadDinoLeft;
     private BufferedImage lowerHeadDinoRight;
-    private BufferedImage dust00, dust01, dust02, dust03;
+    private BufferedImage gameOverImage;
     private float deltaT;
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
@@ -49,7 +50,6 @@ public class TRex extends KeyAdapter {
     private static int wTRex;
     private static int hTRex;
     private boolean jumpDisabled;
-
     private static int wTRexLower;
     private static int hTRexLower;
 
@@ -82,13 +82,16 @@ public class TRex extends KeyAdapter {
         deltaT = (float) 1.25;
         System.out.println("DELTAAAAAAAAA" + deltaT);
         gravity = (float) 0.981;
-        speedForJumping = (float) (Ground.movementSpeed * 2.2);
+        speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
+                                            //in base alla velocità del personaggio.
         
         image = new Utility().create("src/image/old/Dino-stand-colorato.png");
+        deadTRex = new Utility().create("src/image/old/Dino-big-eyes-colorato.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up-colorato.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up-colorato.png");
         lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up-colorato.png");
         lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up-colorato.png");
+        gameOverImage = new Utility().create("src/image/old/GameOver.png");
 
         state = RUNNING;
         topReached = false;
@@ -97,10 +100,10 @@ public class TRex extends KeyAdapter {
         hTRex = image.getHeight(null);
         wTRexLower = lowerHeadDinoLeft.getWidth(null);
         hTRexLower = lowerHeadDinoLeft.getHeight(null);
-        topTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025);
-        bottomTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
+        //topTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025);
+        //bottomTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
 
-        TRexPositionY = bottomTRex;
+        //TRexPositionY = bottomTRex;
 
         TRexOnGround = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
 
@@ -110,7 +113,6 @@ public class TRex extends KeyAdapter {
         System.out.println("Ground height: " + y);
         System.out.println("topTRex height: " + topTRex);
         System.out.println("bottomTRex height: " + bottomTRex);
-        System.out.println("maxHeight: " + maxHeight);
         foot = NO_FOOT;//inizializzo
         //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
         outline = new ImageOutline(leftFootDino);
@@ -151,7 +153,6 @@ public class TRex extends KeyAdapter {
 
         if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
             jumpDisabled = false;
-            //System.out.println("Space pressed");
         }
 
     }
@@ -184,7 +185,7 @@ public class TRex extends KeyAdapter {
             case JUMPING:
                 AffineTransform at = new AffineTransform();
 
-                if (speedForJumping > 0 /*TRexPositionY > maxHeight*/ && topReached == false) {
+                if ((speedForJumping > 0) && topReached == false) {
 
                     //jumping sprite
 
@@ -196,13 +197,18 @@ public class TRex extends KeyAdapter {
 
                     //System.out.println("bottomTRex height: " + bottomTRex);
                     //break;
-                } else if (speedForJumping <= 0 && topReached == false) {
+                }
+                
+                if ((speedForJumping <= 0) && topReached == false) {
                     topReached = true;
                     g.drawImage(image, x, y, null);
+                    
+                }
+                
+                if (topReached == true) {
 
-                    //System.out.println("SALTOOOOOOOOOOOOOOO " + bottomTRex);
-                } else if (topReached == true) {
-
+                    //Potrebbe verificarsi il caso in cui, a seguito dei numerosi decrementi effettuati sulla velocità 
+                    //del TRex in salita, quest'ultima diventi negativa.
                     if (speedForJumping < 0) {
                         speedForJumping = 0;
                     }
@@ -224,7 +230,7 @@ public class TRex extends KeyAdapter {
                     collider.transform(at);
 
                     topReached = false;
-                    speedForJumping = (float) (movementSpeed * 2.2);
+                    speedForJumping = (float) (6 * 2.2);
                     state = RUNNING;
                     break;
                 }
@@ -245,9 +251,19 @@ public class TRex extends KeyAdapter {
                 }
                 break;
 
+            case DEAD:
+                g.drawImage(deadTRex, x, y, null);
+                //g.drawImage(gameOverImage, 0, 0, null);
+                g.drawString("GAME OVER", UserInterface.width / 2 - 100, UserInterface.height / 2);
+                g.drawString("Press ENTER to restart", UserInterface.width / 2 - 100, UserInterface.height / 2 + 30);
+                break;
        }
     }
 
+    public void die(){
+        state = DEAD;
+    }
+    
     public int getwTRex() {
         return wTRex;
     }
