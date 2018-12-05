@@ -73,13 +73,14 @@ public class TRex extends KeyAdapter {
 
 
     //stato T-Rex
-    private static int state;
+    public static int state;
     public static final int STAND_STILL = 1,
                             RUNNING = 2,
                             JUMPING = 3,
                             DIE = 4,
                             LOWER_HEAD = 5,
-                            DEAD = 6;
+                            DEAD = 6,
+                            BLINK = 7;
 
     private ImageOutline outline;
 
@@ -90,7 +91,7 @@ public class TRex extends KeyAdapter {
         speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
                                             //in base alla velocità del personaggio.
         
-        image = new Utility().create("src/image/old/Dino-stand-colorato.png");
+        image = new Utility().create("src/image/old/Dino-stand.png");
         imageColorato = new Utility().create("src/image/old/Dino-stand-colorato.png");
         deadTRex = new Utility().create("src/image/old/Dino-big-eyes-colorato.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up-colorato.png");
@@ -159,6 +160,10 @@ public class TRex extends KeyAdapter {
     //create viene invocato
     public void create(Graphics g) {
          
+        if(Board.blinking){
+            state = BLINK;
+        }
+        
         //Graphics2D g2d = (Graphics2D) g;
         //g2d.setColor(Color.red);
         //g2d.draw(collider);
@@ -208,15 +213,11 @@ public class TRex extends KeyAdapter {
 
                     //System.out.println("bottomTRex height: " + bottomTRex);
                     //break;
-                }
-                
-                if ((y <= maxHeight) && topReached == false) {
+                }   else if ((y <= maxHeight) && topReached == false) {
                     topReached = true;
                     g.drawImage(image, x, y, null);
                     
-                }
-                
-                if (topReached == true) {
+                }   else if (topReached == true) {
 
                     //Potrebbe verificarsi il caso in cui, a seguito dei numerosi decrementi effettuati sulla velocità 
                     //del TRex in salita, quest'ultima diventi negativa.
@@ -283,6 +284,11 @@ public class TRex extends KeyAdapter {
                 g.drawString("GAME OVER", UserInterface.width / 2 - 100, UserInterface.height / 2);
                 g.drawString("Press ENTER to restart", UserInterface.width / 2 - 100, UserInterface.height / 2 + 30);
                 break;
+                
+            case BLINK:
+                g.drawImage(image, x, y, null);
+                break;
+                
             
        }
     }
@@ -290,10 +296,10 @@ public class TRex extends KeyAdapter {
     
     public void updateTRexSprite(Graphics g){
         
-        /*System.out.println("updateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-        Board.running = false;
+        System.out.println("updateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        /*Board.running = false;
         for (int i = 0; i < 10; i++) {
-            g.
+            
             g.drawImage(image, x, y, null);
             g.drawImage(image, x, y, null);
             g.drawImage(image, x, y, null);
@@ -301,6 +307,8 @@ public class TRex extends KeyAdapter {
             g.drawImage(imageColorato, x, y, null);
             g.drawImage(imageColorato, x, y, null);
         }*/
+        g.dispose();
+        g.drawImage(gameOverImage, x, y, null);
         
         //Board.running = true;
         

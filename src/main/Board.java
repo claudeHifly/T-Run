@@ -24,7 +24,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
     public static boolean running = true;
     private boolean gameOver = false;
-    private boolean blinking = false;
+    public static boolean blinking = false;
     private TRex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
@@ -121,7 +121,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         super.paint(g);
         
         /*
-        if(distanceForScore >= 3){
+        if(distanceForScore >= 30){
             running = false;
             blinking = true;
             System.out.println("blinking");
@@ -130,9 +130,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
             
                 @Override
                 public void run(){
-                System.out.println("Thread Running");
             
-                TRex.updateTRexSprite(g);
+                TRex.create(g);
                 try {
                     Thread.sleep(35);
                 } catch (InterruptedException ex) {
@@ -142,8 +141,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
             };
             
             blink.start();      //faccio partire il thread del blink per il cambio grafica
-            
-            //TRex.updateTRexSprite(g);
         }*/
         
         
