@@ -16,7 +16,7 @@ import static main.UserInterface.width;
  *
  * @author claud
  */
-public class Obstacles {
+public class Obstacles implements Items{
 
     private ArrayList<Item> obArray;
     private final int cactusOnScreen = 6;
@@ -54,17 +54,17 @@ public class Obstacles {
 
     }
 
-    public boolean hasCollided(Area TRexArea) {
+    public Item hasCollided(Area TRexArea) {
         for (Item ob : obArray) {
             Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
                 System.out.println("Collisione con " + ob.getClass().getSimpleName());
-                return true;
+                return ob;
             }
         }
         
-        return false;
+        return null;
     }
 
     public void update() {

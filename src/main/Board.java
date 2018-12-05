@@ -88,7 +88,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         obstacles.update();
         
 
-        if (obstacles.hasCollided(TRex.getCollider())) {
+        if (obstacles.hasCollided(TRex.getCollider()) != null) {
             running = false;
             gameOver = true;
             TRex.die();
