@@ -80,22 +80,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
         animator = new Thread(this);
         animator.start();
-        /*
-        blink = new Thread(this){
-            
-            @Override
-            public void run(){
-            System.out.println("Thread Running");
-            
-            this.repaint();
-            try {
-                Thread.sleep(35);
-            } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
-            }
-            }
-        };
-        */
+        
+        
         
             
     }
@@ -139,8 +125,25 @@ public class Board extends JPanel implements Runnable, ActionListener {
             running = false;
             blinking = true;
             System.out.println("blinking");
+            
+            blink = new Thread(this){
+            
+                @Override
+                public void run(){
+                System.out.println("Thread Running");
+            
+                TRex.updateTRexSprite(g);
+                try {
+                    Thread.sleep(35);
+                } catch (InterruptedException ex) {
+                    System.out.println(ex.getMessage());
+                }
+                }
+            };
+            
             blink.start();      //faccio partire il thread del blink per il cambio grafica
-            TRex.updateTRexSprite(g);
+            
+            //TRex.updateTRexSprite(g);
         }*/
         
         
