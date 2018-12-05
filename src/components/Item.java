@@ -5,25 +5,32 @@
  */
 package components;
 
+import utility.ImageOutline;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
+import utility.Utility;
 
 /**
  *
- * @author Gennaro
+ * @author claud
  */
 public abstract class Item {
-    
+
     private BufferedImage image;
     private int x;
     private int y;
     private Area collider;
+    //private ImageOutline outline;
 
-    public Item(int x, int y) {
+    public Item(int x, int y, String path) {
         this.x = x;
-        this.y = y;
+        this.image = new Utility().create(path);
+        this.y = y - image.getHeight();
+        ImageOutline outline = new ImageOutline(image);
+        this.collider = new Area(outline.getOutline(image));
     }
 
     public BufferedImage getImage() {
@@ -55,9 +62,9 @@ public abstract class Item {
 //        g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
 //                (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
         Graphics2D g2d = (Graphics2D)g;
-        //g2d.setColor(Color.red);
-        //g2d.draw(collider);
-        //g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
     }
 
     public Area getCollider() {
@@ -67,5 +74,5 @@ public abstract class Item {
     public void setCollider(Area collider) {
         this.collider = collider;
     }
-    
+
 }

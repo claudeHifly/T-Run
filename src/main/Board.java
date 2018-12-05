@@ -93,7 +93,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             gameOver = true;
             TRex.die();
         }
-        Obstacle collidedMoney = moneys.hasCollided(TRex.getCollider());
+        Item collidedMoney = moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             System.out.println("Ho preso una monetina shobalola");
             moneys.getObArray().remove(collidedMoney);

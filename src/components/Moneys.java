@@ -19,14 +19,14 @@ import static main.UserInterface.width;
  */
 public class Moneys {
 
-    private ArrayList<Obstacle> obArray;
+    private ArrayList<Item> obArray;
     private final int moneyOnScreen = 15;
     AffineTransform at = new AffineTransform();
     
 
     public Moneys() {
-        obArray = new ArrayList<Obstacle>();
-        Obstacle ob = new Money(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+        obArray = new ArrayList<Item>();
+        Item ob = new Money(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
         at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
         obArray.add(ob);
@@ -45,14 +45,14 @@ public class Moneys {
     }
 
     public void create(Graphics g) {
-        for (Obstacle ob : obArray) {
+        for (Item ob : obArray) {
             ob.create(g);
         }
 
     }
 
-    public Obstacle hasCollided(Area TRexArea) {
-        for (Obstacle ob : obArray) {
+    public Item hasCollided(Area TRexArea) {
+        for (Item ob : obArray) {
             Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
@@ -66,8 +66,8 @@ public class Moneys {
 
     public void update() {
         //System.out.println("I'm in Obstacles update");
-        Iterator<Obstacle> looper = obArray.iterator();
-        Obstacle firstOb = looper.next();
+        Iterator<Item> looper = obArray.iterator();
+        Item firstOb = looper.next();
 
         firstOb.setX(firstOb.getX() - movementSpeed);
         //at.translate(firstOb.getX() - movementSpeed, 0);
@@ -77,7 +77,7 @@ public class Moneys {
 
         while (looper.hasNext()) {
             //System.out.println("I'm in looper while");
-            Obstacle ob = looper.next();
+            Item ob = looper.next();
             ob.setX(ob.getX() - movementSpeed);
             //at.translate(ob.getX() - movementSpeed, 0);
             at = new AffineTransform();
@@ -103,7 +103,7 @@ public class Moneys {
         }
         else{
             if (obArray.size()<=1){
-                Obstacle ob = new Money(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+                Item ob = new Money(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
                 at = new AffineTransform();
                 at.translate(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
                 ob.getCollider().transform(at);
@@ -127,7 +127,7 @@ public class Moneys {
         return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 200);
     }
 
-    public ArrayList<Obstacle> getObArray() {
+    public ArrayList<Item> getObArray() {
         return obArray;
     }
 }
