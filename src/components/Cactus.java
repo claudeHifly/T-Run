@@ -13,7 +13,7 @@ public class Cactus extends Item{
     
 
     public Cactus(int x, int y) {
-        super(x, y, "src/image/old/Cactus-" + (int) (Math.random() * 4 + 1) + "-colorato.png");
+        super(x, y, "src/image/color/Cactus-" + (int) (Math.random() * 4 + 1) + "-colorato.png");
     }
             
 }

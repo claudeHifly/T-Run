@@ -13,7 +13,7 @@ public class Bird extends Item{
     
     
     public Bird(int x, int y) {
-        super(x, y, "src/image/bird1.png");
+        super(x, y, "src/image/bn/bird1.png");
     }
             
 }

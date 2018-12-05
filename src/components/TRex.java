@@ -90,14 +90,14 @@ public class TRex extends KeyAdapter {
         speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
                                             //in base alla velocità del personaggio.
         
-        image = new Utility().create("src/image/old/Dino-stand.png");
-        imageColorato = new Utility().create("src/image/old/Dino-stand-colorato.png");
-        deadTRex = new Utility().create("src/image/old/Dino-big-eyes-colorato.png");
-        leftFootDino = new Utility().create("src/image/old/Dino-left-up-colorato.png");
-        rightFootDino = new Utility().create("src/image/old/Dino-right-up-colorato.png");
-        lowerHeadDinoLeft = new Utility().create("src/image/old/Dino-below-left-up-colorato.png");
-        lowerHeadDinoRight = new Utility().create("src/image/old/Dino-below-right-up-colorato.png");
-        gameOverImage = new Utility().create("src/image/old/GameOver.png");
+        image = new Utility().create("src/image/color/Dino-stand-colorato.png");
+        imageColorato = new Utility().create("src/image/color/Dino-stand-colorato.png");
+        deadTRex = new Utility().create("src/image/color/Dino-big-eyes-colorato.png");
+        leftFootDino = new Utility().create("src/image/color/Dino-left-up-colorato.png");
+        rightFootDino = new Utility().create("src/image/color/Dino-right-up-colorato.png");
+        lowerHeadDinoLeft = new Utility().create("src/image/color/Dino-below-left-up-colorato.png");
+        lowerHeadDinoRight = new Utility().create("src/image/color/Dino-below-right-up-colorato.png");
+        gameOverImage = new Utility().create("src/image/altro/GameOver.png");
 
         state = RUNNING;
         topReached = false;

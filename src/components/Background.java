@@ -38,10 +38,10 @@ public class Background {
         
         
         //OLD
-        this.backGround = new Utility().create("src/image/old/background3_small.jpg");
+        this.backGround = new Utility().create("src/image/color/background3_small.jpg");
         
         //COLOURED
-        //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
+        //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 
 
         backGroundSet = new ArrayList<GroundImage>();
         

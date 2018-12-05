@@ -47,11 +47,11 @@ public class Ground {
         
         
         //OLD
-        this.grassGround = new Utility().create("src/image/old/Ground-colorato.png");
-        //this.backGround = new Utility().create("src/image/old/background.png");
+        this.grassGround = new Utility().create("src/image/color/Ground-colorato.png");
+        //this.backGround = new Utility().create("src/image/bn/background.png");
         
         //COLOURED
-        //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
+        //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 
 
         grassGroundSet = new ArrayList<GroundImage>();
         //backGroundSet = new ArrayList<GroundImage>();
@@ -69,7 +69,7 @@ public class Ground {
         
         /*
         if(distance >= 300){
-            //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png");
+            //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png");
         }*/
         
         for(GroundImage img: grassGroundSet)

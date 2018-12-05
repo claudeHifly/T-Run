@@ -34,7 +34,7 @@ public class HomePage{
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                BufferedImage image = new Utility().create("src/image/Title small.png");
+                BufferedImage image = new Utility().create("src/image/HomePage/Title small.png");
                 BufferedImage backImage = new Utility().create("src/image/HomePage/sfondoHome.png");
                 Image scaledImage = image.getScaledInstance(714, 256, 100);
                 //Image scaledBackImage = backImage.getScaledInstance(1000, 625, 100);
