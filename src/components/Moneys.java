@@ -52,17 +52,17 @@ public class Moneys {
 
     }
 
-    public boolean hasCollided(Area TRexArea) {
+    public Obstacle hasCollided(Area TRexArea) {
         for (Obstacle ob : obArray) {
             Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
                 System.out.println("Collisione con " + ob.getClass().getSimpleName());
-                return true;
+                return ob;
             }
         }
         
-        return false;
+        return null;
     }
 
     public void update() {
@@ -103,7 +103,7 @@ public class Moneys {
 //            obArray.add(firstOb);
         }
         else{
-            if (obArray.size()==1){
+            if (obArray.size()<=1){
                 Obstacle ob = new Money(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
                 at = new AffineTransform();
                 at.translate(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());

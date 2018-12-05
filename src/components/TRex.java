@@ -163,9 +163,9 @@ public class TRex extends KeyAdapter {
     public void create(Graphics g) {
          
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.BLACK);
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
