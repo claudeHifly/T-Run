@@ -69,6 +69,8 @@ public class TRex extends KeyAdapter {
 
     private int topTRex;
     private int bottomTRex;
+    
+    private AffineTransform at;
 
     private final int LEFT_FOOT = 1,
             RIGHT_FOOT = 2,
@@ -90,7 +92,7 @@ public class TRex extends KeyAdapter {
     private ImageOutline outline;
 
     public TRex() {
-        AffineTransform at = new AffineTransform();
+        at = new AffineTransform();
         deltaT = (float) 1.25;
         gravity = (float) 0.981;
         speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
@@ -167,9 +169,9 @@ public class TRex extends KeyAdapter {
         
          
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setColor(Color.red);
-        //g2d.draw(collider);
-        //g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
@@ -178,23 +180,43 @@ public class TRex extends KeyAdapter {
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
+                    collider = new Area(outline.getOutline(leftFootDino));
+                    at = new AffineTransform();
+                    at.translate(x, y);
+                    collider.transform(at);
                 } else if (foot == LEFT_FOOT) {
                     
                     if (leftCounter < 5){
                         g.drawImage(leftFootDino, x, y, null);
+                        collider = new Area(outline.getOutline(leftFootDino));
+                        at = new AffineTransform();
+                        at.translate(x, y);
+                        collider.transform(at);
                         leftCounter++;
                     } else {
                     foot = RIGHT_FOOT;
                     g.drawImage(rightFootDino, x, y, null);
+                    collider = new Area(outline.getOutline(rightFootDino));
+                    at = new AffineTransform();
+                    at.translate(x, y);
+                    collider.transform(at);
                     leftCounter = 0;    //resetto il contatore e cambio stato
                     }
                 } else {
                     if (rightCounter < 5){
                         g.drawImage(rightFootDino, x, y, null);
+                        collider = new Area(outline.getOutline(rightFootDino));
+                        at = new AffineTransform();
+                        at.translate(x, y);
+                        collider.transform(at);
                         rightCounter++;
                     } else {
                     foot = LEFT_FOOT;
                     g.drawImage(leftFootDino, x, y, null);
+                    collider = new Area(outline.getOutline(leftFootDino));
+                    at = new AffineTransform();
+                    at.translate(x, y);
+                    collider.transform(at);
                     rightCounter = 0;   //resetto il contatore e cambio stato
                     }
                 }
@@ -208,7 +230,9 @@ public class TRex extends KeyAdapter {
 
                     y -= deltaT * speedForJumping;
                     g.drawImage(imageColorato, x, y, null);
-                    at.translate(0, -deltaT * speedForJumping);
+                    collider = new Area(outline.getOutline(rightFootDino));
+                    at = new AffineTransform();
+                    at.translate(x, y);
                     collider.transform(at);
                     speedForJumping -= (deltaT * gravity);
 
@@ -220,6 +244,7 @@ public class TRex extends KeyAdapter {
                     
                     topReached = true;
                     g.drawImage(imageColorato, x, y, null);
+                    
                     
                 }
                 
@@ -233,7 +258,9 @@ public class TRex extends KeyAdapter {
 
                     y += deltaT * speedForJumping;
                     g.drawImage(imageColorato, x, y, null);
-                    at.translate(0, deltaT * speedForJumping);
+                    collider = new Area(outline.getOutline(imageColorato));
+                    at = new AffineTransform();
+                    at.translate(x, y);
                     collider.transform(at);
                     speedForJumping += (deltaT * gravity);
                    
@@ -244,9 +271,9 @@ public class TRex extends KeyAdapter {
                     g.drawImage(imageColorato, x, y, null); //deve sempre essere fatto prima g.drawImage
                                                     //altrimenti abbiamo dei frame in cui scatta
                     y = TRexOnGround;
-                    
+                    collider = new Area(outline.getOutline(imageColorato));
                     at = new AffineTransform();
-                    at.translate(0, -collider.getBounds().getY() + y);
+                    at.translate(x, y);
                     collider.transform(at);
 
                     topReached = false;
@@ -261,14 +288,26 @@ public class TRex extends KeyAdapter {
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT_LOWER;
                     g.drawImage(lowerHeadDinoLeft, x, y, null);
+                    collider = new Area(outline.getOutline(lowerHeadDinoLeft));
+                    at = new AffineTransform();
+                    at.translate(x, y);
+                    collider.transform(at);
                 } else if (foot == LEFT_FOOT_LOWER) {
                     
                     if (leftCounter < 5){
                         g.drawImage(lowerHeadDinoLeft, x, y, null);
+                        collider = new Area(outline.getOutline(lowerHeadDinoLeft));
+                        at = new AffineTransform();
+                        at.translate(x, y);
+                        collider.transform(at);
                         leftCounter++;
                     } else {
                     foot = RIGHT_FOOT_LOWER;
                     g.drawImage(lowerHeadDinoRight, x, y, null);
+                    collider = new Area(outline.getOutline(lowerHeadDinoRight));
+                    at = new AffineTransform();
+                    at.translate(x, y);
+                    collider.transform(at);
                     leftCounter = 0;    //resetto il contatore e cambio stato
                     }
                     
@@ -276,10 +315,18 @@ public class TRex extends KeyAdapter {
                     
                     if (rightCounter < 5){
                         g.drawImage(lowerHeadDinoRight, x, y, null);
+                        collider = new Area(outline.getOutline(lowerHeadDinoRight));
+                        at = new AffineTransform();
+                        at.translate(x, y);
+                        collider.transform(at);
                         rightCounter++;
                     } else {
                         foot = LEFT_FOOT_LOWER;
                         g.drawImage(lowerHeadDinoLeft, x, y, null);
+                        collider = new Area(outline.getOutline(lowerHeadDinoLeft));
+                        at = new AffineTransform();
+                        at.translate(x, y);
+                        collider.transform(at);
                         rightCounter = 0;   //resetto il contatore e cambio stato
                     }
                 }

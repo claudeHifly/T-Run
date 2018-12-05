@@ -23,7 +23,7 @@ public class Obstacles {
     private ArrayList<Obstacle> obArray;
     private final int cactusOnScreen = 6;
     private final double yPercentageCactusOnGround = 0.025;
-    private final double yPercentageBirdOnGround = 0.05;
+    private final double yPercentageBirdOnGround = 0;
     
 
     public Obstacles() {
@@ -42,7 +42,7 @@ public class Obstacles {
             obArray.add(ob);
         }
         int rd = randomDistance();
-        Obstacle ob1 = new Bird(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageBirdOnGround));
+        Obstacle ob1 = new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
         at = new AffineTransform();
         at.translate(rd, ob1.getY());
         ob1.getCollider().transform(at);
@@ -96,7 +96,7 @@ public class Obstacles {
             String type = firstOb.getClass().getSimpleName();
             if (type.equals("Bird")){
                 obArray.remove(firstOb);
-                Obstacle ob = new Bird(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageBirdOnGround));
+                Obstacle ob = new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
                 at = new AffineTransform();
                 at.translate(rd, ob.getY());
                 ob.getCollider().transform(at);
@@ -120,6 +120,10 @@ public class Obstacles {
 
     private int randomDistance() {
         return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
+    }
+    
+    private double randomBirdHeight() {
+        return (Math.random() * 0.1);
     }
 
     public ArrayList<Obstacle> getObArray() {
