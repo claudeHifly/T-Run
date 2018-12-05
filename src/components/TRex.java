@@ -38,7 +38,7 @@ public class TRex extends KeyAdapter {
     private float deltaT;
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
-    private final static int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.52);
+    private final static int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.50);
     private static int jumpFactor = (int) (movementSpeed * 1.3);
     private static int TRexOnGround;
     public final static int x = 50;
@@ -162,10 +162,10 @@ public class TRex extends KeyAdapter {
     //create viene invocato
     public void create(Graphics g) {
          
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.BLACK);
+        //Graphics2D g2d = (Graphics2D) g;
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
@@ -185,7 +185,7 @@ public class TRex extends KeyAdapter {
             case JUMPING:
                 AffineTransform at = new AffineTransform();
 
-                if ((speedForJumping > 0) && topReached == false) {
+                if ((y > maxHeight) && topReached == false) {
 
                     //jumping sprite
 
@@ -199,7 +199,7 @@ public class TRex extends KeyAdapter {
                     //break;
                 }
                 
-                if ((speedForJumping <= 0) && topReached == false) {
+                if ((y <= maxHeight) && topReached == false) {
                     topReached = true;
                     g.drawImage(image, x, y, null);
                     
@@ -220,11 +220,13 @@ public class TRex extends KeyAdapter {
                     speedForJumping += (deltaT * gravity);
                    
                 }
-
-                if (y >= TRexOnGround - 20 && topReached == true) {
+                
+                if (y > TRexOnGround - 10 && topReached == true) {
                     //System.out.println("ground " + bottomTRex);
+                    g.drawImage(image, x, y, null); //deve sempre essere fatto prima g.drawImage
+                                                    //altrimenti abbiamo dei frame in cui scatta
                     y = TRexOnGround;
-                    g.drawImage(image, x, y, null);
+                    
                     at = new AffineTransform();
                     at.translate(0, -collider.getBounds().getY() + y);
                     collider.transform(at);
@@ -232,7 +234,6 @@ public class TRex extends KeyAdapter {
                     topReached = false;
                     speedForJumping = (float) (6 * 2.2);
                     state = RUNNING;
-                    break;
                 }
                 break;
 
