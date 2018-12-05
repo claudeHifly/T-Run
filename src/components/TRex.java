@@ -206,8 +206,8 @@ public class TRex extends KeyAdapter {
 
                     //jumping sprite
                     System.out.println("SALTO FASE 1");
-                    System.out.println(y);
-                    System.out.println("maxHeight" + maxHeight);
+                    System.out.println("y: " + y);
+                    System.out.println("maxHeight: " + maxHeight);
                     y -= deltaT * speedForJumping;
                     g.drawImage(image, x, y, null);
                     at.translate(0, -deltaT * speedForJumping);
@@ -218,7 +218,7 @@ public class TRex extends KeyAdapter {
                     //break;
                 }
                 
-                if ((y <= maxHeight) && topReached == false) {
+                if ((y <= maxHeight || speedForJumping <= 0) && topReached == false) {
                     System.out.println("SALTO FASE 2");
                     topReached = true;
                     g.drawImage(image, x, y, null);
