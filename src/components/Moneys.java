@@ -21,21 +21,21 @@ import static main.UserInterface.width;
 public class Moneys {
 
     private ArrayList<Obstacle> obArray;
-    private final int cactusOnScreen = 6;
+    private final int moneyOnScreen = 6;
     AffineTransform at = new AffineTransform();
     
 
     public Moneys() {
         obArray = new ArrayList<Obstacle>();
-        Obstacle ob = new Money(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
-        at.translate(width*2, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
+        Obstacle ob = new Money(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+        at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
         obArray.add(ob);
-        for (int i = 1; i < cactusOnScreen; i++) {
-            int rd = randomDistance();
-            ob = new Money(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
+        for (int i = 1; i < moneyOnScreen; i++) {
+            int rd = obArray.get(obArray.size() - 1).getX()+ 50;
+            ob = new Money(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
             at = new AffineTransform();
-            at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
+            at.translate(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
             obArray.add(ob);
         }
@@ -82,24 +82,40 @@ public class Moneys {
             at.translate(-movementSpeed, 0);
             ob.getCollider().transform(at);
         }
-
-        if (firstOb.getX() < -firstOb.getImage().getWidth()) { //image is completely out of the screen: remove and move it to the end of the array
+        
+        if ((firstOb.getX() < -firstOb.getImage().getWidth())&&(obArray.size()>1)) { //image is completely out of the screen: remove and move it to the end of the array
             //System.out.println("I'm in if");
-            int rd = randomDistance();
+            //int rd = randomDistance();
 
             obArray.remove(firstOb);
-            Obstacle ob = new Money(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025));
-            at = new AffineTransform();
-            at.translate(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - ob.getImage().getHeight());
-            ob.getCollider().transform(at);
-            obArray.add(ob);
+//            Obstacle ob = new Money(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+//            at = new AffineTransform();
+//            at.translate(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
+//            ob.getCollider().transform(at);
+//            obArray.add(ob);
 //            firstOb.setX(rd);
 //            at = new AffineTransform();
 //            at.translate(rd + firstOb.getImage().getWidth(), 0);
 //            firstOb.getCollider().transform(at);
 //            obArray.add(firstOb);
         }
-
+        else{
+            if (obArray.size()==1){
+                Obstacle ob = new Money(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+                at = new AffineTransform();
+                at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
+                ob.getCollider().transform(at);
+                obArray.add(ob);
+                for (int i = 1; i < moneyOnScreen; i++) {
+                    int rd = obArray.get(obArray.size() - 1).getX()+ 50;
+                    ob = new Money(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+                    at = new AffineTransform();
+                    at.translate(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
+                    ob.getCollider().transform(at);
+                    obArray.add(ob);
+                }
+            }
+        }
     }
 
     private int randomDistance() {
