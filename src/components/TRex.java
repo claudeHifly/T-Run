@@ -15,6 +15,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -161,6 +164,7 @@ public class TRex extends KeyAdapter {
 
     //create viene invocato
     public void create(Graphics g) {
+        
          
         Graphics2D g2d = (Graphics2D) g;
         //g2d.setColor(Color.red);
@@ -284,8 +288,9 @@ public class TRex extends KeyAdapter {
             case DEAD:
                 g.drawImage(deadTRex, x, y, null);
                 //g.drawImage(gameOverImage, 0, 0, null);
-                g.drawString("GAME OVER", UserInterface.width / 2 - 100, UserInterface.height / 2);
-                g.drawString("Press ENTER to restart", UserInterface.width / 2 - 100, UserInterface.height / 2 + 30);
+                g.setFont(new Font("Courier New", Font.BOLD, 25));
+                g.drawString("GAME OVER", UserInterface.width / 2 - 70, UserInterface.height / 2);
+                g.drawString("Press ENTER to restart", UserInterface.width / 2 - 150, UserInterface.height / 2 + 35);
                 break;
             
             /*

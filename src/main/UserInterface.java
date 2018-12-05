@@ -7,6 +7,8 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
 
 /**
  *
@@ -28,6 +30,8 @@ public class UserInterface extends JFrame {
         setSize(width, height);
         setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
         setResizable(false);//dimensioni JFrame non modificabili
+        
+        
     }
     
 
@@ -39,5 +43,6 @@ public class UserInterface extends JFrame {
         });
         
     }
+    
 
 }

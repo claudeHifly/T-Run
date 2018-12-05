@@ -43,10 +43,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
     //INIZIALIZZO BOARD
     public Board() {
 
-        setFocusable(true);//il metodo che mi ha salvato la vita con il keyListener
-
+        setFocusable(true);//keyListener
         addKeyListener(new TRexAdapter());
-
         startGame();
     }
     
@@ -108,8 +106,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             coin += 1;
             score += 1;
         }
-        
-        
+
         
     }
 
@@ -126,7 +123,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         g.setFont(new Font("Courier New", Font.BOLD, 25));
         g.drawString("MT: " + Integer.toString((int)distanceForScore), getWidth() / 4 - 180, 100);
         g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
-        g.drawString("COIN: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
+        g.drawString("COIN: " + Integer.toString(coin), getWidth() / 4 + 150, 100);
 
 
         g.dispose();
