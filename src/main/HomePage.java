@@ -26,7 +26,7 @@ public class HomePage{
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(680, 500);
+        frame.setSize(1371, 558);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
@@ -35,11 +35,11 @@ public class HomePage{
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 BufferedImage image = new Utility().create("src/image/Title small.png");
-                BufferedImage backImage = new Utility().create("src/image/coloured/background_jungle.jpg");
-                Image scaledImage = image.getScaledInstance(670, 250, 100);
-                Image scaledBackImage = backImage.getScaledInstance(1000, 625, 100);
-                g.drawImage(scaledBackImage, 0, 0, this);
-                g.drawImage(scaledImage, 0, 0, this);
+                BufferedImage backImage = new Utility().create("src/image/HomePage/sfondoHome.png");
+                Image scaledImage = image.getScaledInstance(714, 256, 100);
+                //Image scaledBackImage = backImage.getScaledInstance(1000, 625, 100);
+                g.drawImage(backImage, 0, 0, this);
+                g.drawImage(scaledImage, (frame.getWidth() - 714)/2, 0, this);
                 
             }
         };

@@ -33,14 +33,14 @@ public class UserInterface extends JFrame {
     }
     
 
-    public static void main(String[] args) {
-    
-        EventQueue.invokeLater(() -> {
-            UserInterface gameInterface = new UserInterface();
-            gameInterface.setVisible(true);
-        });
-        
-    }
+//    public static void main(String[] args) {
+//    
+//        EventQueue.invokeLater(() -> {
+//            UserInterface gameInterface = new UserInterface();
+//            gameInterface.setVisible(true);
+//        });
+//        
+//    }
     
 
 }

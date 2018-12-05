@@ -59,12 +59,10 @@ public abstract class Item {
 
     public void create(Graphics g) {
         g.drawImage(image, x, y, null);
-//        g.drawRect((int) collider.getBounds().getX(), (int) collider.getBounds().getY(),
-//                (int) collider.getBounds().getWidth(), (int) collider.getBounds().getHeight());
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.BLACK);
+//        g2d.setColor(Color.red);
+//        g2d.draw(collider);
+//        g2d.setColor(Color.BLACK);
     }
 
     public Area getCollider() {
