@@ -29,6 +29,7 @@ import utility.Utility;
 public class TRex extends KeyAdapter {
 
     private BufferedImage image;//immagine TRex stand
+    private BufferedImage imageColorato;//immagine TRex stand colorato
     private BufferedImage deadTRex;//immagine TRex morto
     private BufferedImage leftFootDino;//immagine TRex leftFoot
     private BufferedImage rightFootDino;//immagine TRex rightFoot
@@ -85,12 +86,12 @@ public class TRex extends KeyAdapter {
     public TRex() {
         AffineTransform at = new AffineTransform();
         deltaT = (float) 1.25;
-        System.out.println("DELTAAAAAAAAA" + deltaT);
         gravity = (float) 0.981;
         speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
                                             //in base alla velocità del personaggio.
         
         image = new Utility().create("src/image/old/Dino-stand-colorato.png");
+        imageColorato = new Utility().create("src/image/old/Dino-stand-colorato.png");
         deadTRex = new Utility().create("src/image/old/Dino-big-eyes-colorato.png");
         leftFootDino = new Utility().create("src/image/old/Dino-left-up-colorato.png");
         rightFootDino = new Utility().create("src/image/old/Dino-right-up-colorato.png");
@@ -105,19 +106,10 @@ public class TRex extends KeyAdapter {
         hTRex = image.getHeight(null);
         wTRexLower = lowerHeadDinoLeft.getWidth(null);
         hTRexLower = lowerHeadDinoLeft.getHeight(null);
-        //topTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025);
-        //bottomTRex = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
-
-        //TRexPositionY = bottomTRex;
 
         TRexOnGround = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
 
         y = TRexOnGround;
-        System.out.println("TRex width: " + wTRex);
-        System.out.println("TRex height: " + hTRex);
-        System.out.println("Ground height: " + y);
-        System.out.println("topTRex height: " + topTRex);
-        System.out.println("bottomTRex height: " + bottomTRex);
         foot = NO_FOOT;//inizializzo
         //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
         outline = new ImageOutline(leftFootDino);
@@ -291,7 +283,27 @@ public class TRex extends KeyAdapter {
                 g.drawString("GAME OVER", UserInterface.width / 2 - 100, UserInterface.height / 2);
                 g.drawString("Press ENTER to restart", UserInterface.width / 2 - 100, UserInterface.height / 2 + 30);
                 break;
+            
        }
+    }
+    
+    
+    public void updateTRexSprite(Graphics g){
+        
+        /*System.out.println("updateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        Board.running = false;
+        for (int i = 0; i < 10; i++) {
+            g.
+            g.drawImage(image, x, y, null);
+            g.drawImage(image, x, y, null);
+            g.drawImage(image, x, y, null);
+            g.drawImage(imageColorato, x, y, null);
+            g.drawImage(imageColorato, x, y, null);
+            g.drawImage(imageColorato, x, y, null);
+        }*/
+        
+        //Board.running = true;
+        
     }
 
     public void die(){
@@ -317,4 +329,6 @@ public class TRex extends KeyAdapter {
     public Area getCollider() {
         return collider;
     }
+    
+   
 }

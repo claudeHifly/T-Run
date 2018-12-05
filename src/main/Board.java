@@ -22,8 +22,9 @@ import utility.Utility;
  */
 public class Board extends JPanel implements Runnable, ActionListener {
 
-    private boolean running = true;
+    public static boolean running = true;
     private boolean gameOver = false;
+    private boolean blinking = false;
     private TRex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
@@ -35,6 +36,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private int score;
     private int coin;
     private Thread animator;
+    private Thread blink;
     
     
   
@@ -78,6 +80,24 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
         animator = new Thread(this);
         animator.start();
+        /*
+        blink = new Thread(this){
+            
+            @Override
+            public void run(){
+            System.out.println("Thread Running");
+            
+            this.repaint();
+            try {
+                Thread.sleep(35);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+            }
+        };
+        */
+        
+            
     }
     
     
@@ -95,7 +115,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
 
         if (obstacles.hasCollided(TRex.getCollider())) {
-            System.out.println("Morto shobalola");
             running = false;
             gameOver = true;
             TRex.die();
@@ -107,13 +126,22 @@ public class Board extends JPanel implements Runnable, ActionListener {
             score += 1;
         }
         
+      
+        
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         
- 
+        /*
+        if(distanceForScore >= 3){
+            running = false;
+            blinking = true;
+            System.out.println("blinking");
+            blink.start();      //faccio partire il thread del blink per il cambio grafica
+            TRex.updateTRexSprite(g);
+        }*/
         
         
         background.create(g);
