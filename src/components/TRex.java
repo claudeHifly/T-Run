@@ -199,13 +199,15 @@ public class TRex extends KeyAdapter {
                 break;
                
             case JUMPING:
-                /*
+                
                 AffineTransform at = new AffineTransform();
 
-                if ((y > maxHeight) && topReached == false) {
+                if ( ((y > maxHeight) || (speedForJumping <= 0)) && topReached == false) {
 
                     //jumping sprite
-
+                    System.out.println("SALTO FASE 1");
+                    System.out.println(y);
+                    System.out.println("maxHeight" + maxHeight);
                     y -= deltaT * speedForJumping;
                     g.drawImage(image, x, y, null);
                     at.translate(0, -deltaT * speedForJumping);
@@ -214,12 +216,17 @@ public class TRex extends KeyAdapter {
 
                     //System.out.println("bottomTRex height: " + bottomTRex);
                     //break;
-                }   else if ((y <= maxHeight) && topReached == false) {
+                }
+                
+                if ((y <= maxHeight) && topReached == false) {
+                    System.out.println("SALTO FASE 2");
                     topReached = true;
                     g.drawImage(image, x, y, null);
                     
-                }   else if (topReached == true) {
-
+                }
+                
+                if (topReached == true) {
+                    System.out.println("SALTO FASE 3");
                     //Potrebbe verificarsi il caso in cui, a seguito dei numerosi decrementi effettuati sulla velocità 
                     //del TRex in salita, quest'ultima diventi negativa.
                     if (speedForJumping < 0) {
@@ -234,8 +241,10 @@ public class TRex extends KeyAdapter {
                    
                 }
                 
-                if (y > TRexOnGround - 10 && topReached == true) {
+                if (y >= TRexOnGround - 20 && topReached == true) {
                     //System.out.println("ground " + bottomTRex);
+                    System.out.println("SALTO FASE 4");
+                    
                     g.drawImage(image, x, y, null); //deve sempre essere fatto prima g.drawImage
                                                     //altrimenti abbiamo dei frame in cui scatta
                     y = TRexOnGround;
@@ -249,7 +258,7 @@ public class TRex extends KeyAdapter {
                     state = RUNNING;
                 }
                 break;
-                */
+                
 
             case LOWER_HEAD:
 
