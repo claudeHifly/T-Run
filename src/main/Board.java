@@ -8,13 +8,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
-import static components.TRex.JUMPING;
-import static components.TRex.LOWER_HEAD;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import static java.lang.System.gc;
-//import sun.swing.BakedArrayList;
-import utility.Utility;
 
 /**
  *
@@ -94,7 +88,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             gameOver = true;
             TRex.die();
         }
-        Obstacle collidedMoney = moneys.hasCollided(TRex.getCollider());
+        Item collidedMoney = moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             //System.out.println("Ho preso una monetina shobalola");
             moneys.getObArray().remove(collidedMoney);
@@ -117,6 +111,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         obstacles.create(g);
         
         TRex.create(g);
+        
         g.setFont(new Font("Courier New", Font.BOLD, 25));
         g.drawString("MT: " + Integer.toString((int)distanceForScore), getWidth() / 4 - 180, 100);
         g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
@@ -186,6 +181,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
         public void reset() {
         score = 0;
+        distanceForScore = 0;
+        coin = 0;
         System.out.println("reset");
         gameOver = false;
         startGame();

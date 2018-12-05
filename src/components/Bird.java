@@ -9,7 +9,7 @@ package components;
  *
  * @author claud
  */
-public class Bird extends Obstacle{
+public class Bird extends Item{
     
     
     public Bird(int x, int y) {

@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import main.UserInterface;
 import utility.Utility;
-import main.Board;
-import static main.Board.distance;
 
 /**
  *
