@@ -138,16 +138,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
             }
         }//while running
         
-        
-        while (blinking) {
-            this.updateGame();
-            this.repaint();
-            try {
-                Thread.sleep(35);
-            } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }//while blinking
     }
 
     @Override

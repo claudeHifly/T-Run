@@ -35,9 +35,12 @@ public class TRex extends KeyAdapter {
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
     private final static int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.50);
-    private static int jumpFactor = (int) (movementSpeed * 1.3);
-    private static int TRexOnGround;
-    public final static int x = 50;
+    //private static int jumpFactor = (int) (movementSpeed * 1.3);
+    private static int TRexOnGround;        //in pratica l'altezza del suolo
+    public final static int x = 50;         //distanza del TRex dal bordo sinistro
+    
+    private float jumpStrength, weight;
+    
     private int y;
     private int TRexPositionY;
     private float gravity;
@@ -79,15 +82,18 @@ public class TRex extends KeyAdapter {
                             DIE = 4,
                             LOWER_HEAD = 5,
                             DEAD = 6,
-                            BLINK = 7;
+                            PAUSE = 7,
+                            BLINK = 8;
 
     private ImageOutline outline;
 
     public TRex() {
         at = new AffineTransform();
-        deltaT = (float) 1.25;
-        gravity = (float) 0.981;
-        speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
+        deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
+        gravity = (float) 0.8;
+        jumpStrength = 24;
+        speedForJumping = (float) (6 * 2.2);
+        //speedForJumping = (float) (Ground.movementSpeed * 0.75);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
                                             //in base alla velocità del personaggio.
         
         image = new Utility().create("src/image/color/Dino-stand-colorato.png");
@@ -132,11 +138,23 @@ public class TRex extends KeyAdapter {
         if (keyPressed == KeyEvent.VK_DOWN && state != (JUMPING)) {
             state = LOWER_HEAD;
         }
+        
+        /*
+        if (keyPressed == KeyEvent.VK_ENTER && state != (PAUSE)) {
+            System.out.println("pause");
+            state = PAUSE;
+        } else if (keyPressed == KeyEvent.VK_ENTER && state == (PAUSE)) {
+            state = RUNNING;
+            System.out.println("NOpause");
+        }*/
 
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+        
+        int keyPressed = e.getKeyCode();
+        
     }
 
     @Override
@@ -147,6 +165,7 @@ public class TRex extends KeyAdapter {
         if (keyTyped == KeyEvent.VK_DOWN) {
             state = RUNNING;
         }
+        
 
         if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
             jumpDisabled = false;
@@ -161,13 +180,13 @@ public class TRex extends KeyAdapter {
         
          
         Graphics2D g2d = (Graphics2D) g;
-//        g2d.setColor(Color.red);
-//        g2d.draw(collider);
-//        g2d.setColor(Color.BLACK);
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
-                Board.blinking = false;
+                Board.running = true;
 
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
@@ -218,8 +237,8 @@ public class TRex extends KeyAdapter {
                 
                 AffineTransform at = new AffineTransform();
 
-                if ( ((y > maxHeight) || (speedForJumping <= 0)) && topReached == false) {
-
+                if ( ( /*(y > maxHeight) || */ (speedForJumping >= 0)) && topReached == false) {
+           
                     y -= deltaT * speedForJumping;
                     g.drawImage(imageColorato, x, y, null);
                     collider = new Area(outline.getOutline(rightFootDino));
@@ -227,17 +246,17 @@ public class TRex extends KeyAdapter {
                     at.translate(x, y);
                     collider.transform(at);
                     speedForJumping -= (deltaT * gravity);
+                    
 
                     //System.out.println("bottomTRex height: " + bottomTRex);
                     //break;
                 }
                 
-                if ((y <= maxHeight || speedForJumping <= 0) && topReached == false) {
+                if ( (/*y < maxHeight ||*/ speedForJumping <= 0) && topReached == false) {
                     
-                    topReached = true;
                     g.drawImage(imageColorato, x, y, null);
-                    
-                    
+                    topReached = true;
+
                 }
                 
                 if (topReached == true) {
@@ -250,6 +269,7 @@ public class TRex extends KeyAdapter {
 
                     y += deltaT * speedForJumping;
                     g.drawImage(imageColorato, x, y, null);
+                    
                     collider = new Area(outline.getOutline(imageColorato));
                     at = new AffineTransform();
                     at.translate(x, y);
@@ -258,7 +278,7 @@ public class TRex extends KeyAdapter {
                    
                 }
                 
-                if (y >= TRexOnGround - 20 && topReached == true) {
+                if (Ground.movementSpeed > 20 && y >= TRexOnGround - 75 && topReached == true) {
                     
                     g.drawImage(imageColorato, x, y, null); //deve sempre essere fatto prima g.drawImage
                                                     //altrimenti abbiamo dei frame in cui scatta
@@ -269,9 +289,28 @@ public class TRex extends KeyAdapter {
                     collider.transform(at);
 
                     topReached = false;
+                    //speedForJumping = (float) (Ground.movementSpeed * 0.75);
                     speedForJumping = (float) (6 * 2.2);
                     state = RUNNING;
                 }
+                
+                if (Ground.movementSpeed <= 20 && y >= TRexOnGround - 25 && topReached == true) {
+                    
+                    g.drawImage(imageColorato, x, y, null); //deve sempre essere fatto prima g.drawImage
+                                                    //altrimenti abbiamo dei frame in cui scatta
+                    y = TRexOnGround;
+                    collider = new Area(outline.getOutline(imageColorato));
+                    at = new AffineTransform();
+                    at.translate(x, y);
+                    collider.transform(at);
+
+                    topReached = false;
+                    //speedForJumping = (float) (Ground.movementSpeed * 0.75);
+                    speedForJumping = (float) (6 * 2.2);
+                    state = RUNNING;
+                }
+                
+                
                 break;
                 
 
@@ -331,6 +370,10 @@ public class TRex extends KeyAdapter {
                 g.drawString("GAME OVER", UserInterface.width / 2 - 70, UserInterface.height / 2);
                 g.drawString("Press ENTER to restart", UserInterface.width / 2 - 150, UserInterface.height / 2 + 35);
                 break;
+                
+            case PAUSE:
+                Board.running = false;
+                break;
             
             /*
             case BLINK:
@@ -359,26 +402,7 @@ public class TRex extends KeyAdapter {
        }
     }
     
-    /*
-    public void updateTRexSprite(Graphics g){
-        
-        System.out.println("updateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-        /*Board.running = false;
-        for (int i = 0; i < 10; i++) {
-            
-            g.drawImage(image, x, y, null);
-            g.drawImage(image, x, y, null);
-            g.drawImage(image, x, y, null);
-            g.drawImage(imageColorato, x, y, null);
-            g.drawImage(imageColorato, x, y, null);
-            g.drawImage(imageColorato, x, y, null);
-        }
-        g.dispose();
-        g.drawImage(gameOverImage, x, y, null);
-        
-        //Board.running = true;
-        
-    }*/
+    
 
     public void die(){
         state = DEAD;
