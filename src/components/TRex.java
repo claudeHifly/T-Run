@@ -90,14 +90,14 @@ public class TRex extends KeyAdapter {
         speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
                                             //in base alla velocità del personaggio.
         
-        image = new Utility().create("src/image/color/Dino-stand-colorato.png");
-        imageColorato = new Utility().create("src/image/color/Dino-stand-colorato.png");
-        deadTRex = new Utility().create("src/image/color/Dino-big-eyes-colorato.png");
-        leftFootDino = new Utility().create("src/image/color/Dino-left-up-colorato.png");
-        rightFootDino = new Utility().create("src/image/color/Dino-right-up-colorato.png");
-        lowerHeadDinoLeft = new Utility().create("src/image/color/Dino-below-left-up-colorato.png");
-        lowerHeadDinoRight = new Utility().create("src/image/color/Dino-below-right-up-colorato.png");
-        gameOverImage = new Utility().create("src/image/altro/GameOver.png");
+        image = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-stand-colorato.png"));
+        imageColorato = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-stand-colorato.png"));
+        deadTRex = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-big-eyes-colorato.png"));
+        leftFootDino = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-left-up-colorato.png"));
+        rightFootDino = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-right-up-colorato.png"));
+        lowerHeadDinoLeft = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-left-up-colorato.png"));
+        lowerHeadDinoRight = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-right-up-colorato.png"));
+        gameOverImage = new Utility().create(this.getClass().getClassLoader().getResource("image/altro/GameOver.png"));
 
         state = RUNNING;
         topReached = false;

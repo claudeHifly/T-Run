@@ -12,6 +12,7 @@ import java.util.Iterator;
 import general.UserInterface;
 import utility.Utility;
 import static general.Board.distance;
+import java.net.URL;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Ground {
     public final static int yPosition = (int)(UserInterface.height*0.75);
     public static int movementSpeed = 6;
     public static int speedForCactus = 6;
+    private URL url;
     
     
     
@@ -47,7 +49,8 @@ public class Ground {
         
         
         //OLD
-        this.grassGround = new Utility().create("src/image/color/Ground-colorato.png");
+        url = this.getClass().getClassLoader().getResource("image/color/Ground-colorato.png");
+        this.grassGround = new Utility().create(url);
         //this.backGround = new Utility().create("src/image/bn/background.png");
         
         //COLOURED
