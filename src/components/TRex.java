@@ -67,11 +67,11 @@ public class TRex extends KeyAdapter {
     
     private AffineTransform at;
 
-    private final int LEFT_FOOT = 1,
-            RIGHT_FOOT = 2,
-            NO_FOOT = 3,
-            LEFT_FOOT_LOWER = 4,
-            RIGHT_FOOT_LOWER = 5;
+    private final int   LEFT_FOOT = 1,
+                        RIGHT_FOOT = 2,
+                        NO_FOOT = 3,
+                        LEFT_FOOT_LOWER = 4,
+                        RIGHT_FOOT_LOWER = 5;
 
 
     //stato T-Rex
@@ -90,20 +90,20 @@ public class TRex extends KeyAdapter {
     public TRex() {
         at = new AffineTransform();
         deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
-        gravity = (float) 0.8;
+        gravity = (float) 0.75;
         jumpStrength = 24;
         speedForJumping = (float) (6 * 2.2);
         //speedForJumping = (float) (Ground.movementSpeed * 0.75);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
                                             //in base alla velocità del personaggio.
         
-        image = new Utility().create("src/image/color/Dino-stand-colorato.png");
-        imageColorato = new Utility().create("src/image/color/Dino-stand-colorato.png");
-        deadTRex = new Utility().create("src/image/color/Dino-big-eyes-colorato.png");
-        leftFootDino = new Utility().create("src/image/color/Dino-left-up-colorato.png");
-        rightFootDino = new Utility().create("src/image/color/Dino-right-up-colorato.png");
-        lowerHeadDinoLeft = new Utility().create("src/image/color/Dino-below-left-up-colorato.png");
-        lowerHeadDinoRight = new Utility().create("src/image/color/Dino-below-right-up-colorato.png");
-        gameOverImage = new Utility().create("src/image/altro/GameOver.png");
+        image = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-stand-colorato.png"));
+        imageColorato = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-stand-colorato.png"));
+        deadTRex = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-big-eyes-colorato.png"));
+        leftFootDino = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-left-up-colorato.png"));
+        rightFootDino = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-right-up-colorato.png"));
+        lowerHeadDinoLeft = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-left-up-colorato.png"));
+        lowerHeadDinoRight = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-right-up-colorato.png"));
+        gameOverImage = new Utility().create(this.getClass().getClassLoader().getResource("image/altro/GameOver.png"));
 
         state = RUNNING;
         topReached = false;

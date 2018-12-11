@@ -5,10 +5,9 @@
  */
 package utility;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 
 /**
@@ -17,10 +16,20 @@ import javax.imageio.ImageIO;
  */
 public class Utility {
     
-    public BufferedImage create(String path){
+//    public BufferedImage create(String path){
+//        BufferedImage bi = null;
+//        try {
+//            bi = ImageIO.read(new File(path));
+//        } catch (IOException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//        return bi;
+//    }
+    
+    public BufferedImage create(URL path){
         BufferedImage bi = null;
         try {
-            bi = ImageIO.read(new File(path));
+            bi = ImageIO.read(path);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

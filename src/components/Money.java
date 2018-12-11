@@ -12,7 +12,7 @@ package components;
 public class Money extends Item{
     
      public Money(int x, int y) {
-        super(x, y, "src/image/color/bone_small.png");
+        super(x, y, "image/color/bone_small.png");
      }
 
 }
