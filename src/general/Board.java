@@ -74,7 +74,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
     
 
     public void updateGame() {
-        
         distance += 1;
         distanceForScore += 0.1;
         score += 1;
@@ -82,6 +81,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
         grass_ground.update();
         moneys.update();
         obstacles.update();
+        
+        if ((TRex.getState() != TRex.JUMPING) && !grass_ground.hasCollided(TRex.getCollider())) {
+            running = false;
+            gameOver = true;
+            TRex.die();
+        }
 
         if (obstacles.hasCollided(TRex.getCollider()) != null) {
             running = false;

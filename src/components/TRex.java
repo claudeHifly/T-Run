@@ -161,9 +161,9 @@ public class TRex extends KeyAdapter {
         
          
         Graphics2D g2d = (Graphics2D) g;
-//        g2d.setColor(Color.red);
-//        g2d.draw(collider);
-//        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
@@ -402,6 +402,10 @@ public class TRex extends KeyAdapter {
 
     public Area getCollider() {
         return collider;
+    }
+
+    public int getState() {
+        return state;
     }
     
    
