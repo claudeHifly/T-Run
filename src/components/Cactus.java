@@ -9,30 +9,11 @@ package components;
  *
  * @author claud
  */
-public class Cactus extends Obstacle{
+public class Cactus extends Item{
     
 
     public Cactus(int x, int y) {
-        super(x, y, "src/image/Cactus-" + (int) (Math.random() * 4 + 1) + ".png");
-
-        //this.setImage(new Utility().create(path));
-        //this.setY(y-this.getImage().getHeight());
-        
-        //outline = new ImageOutline(super.getImage());
-        //this.setCollider(new Area(outline.getOutline(super.getImage())));
-        //collider.add(new Area(new Rectangle(super.getX(), super.getY(), super.getImage().getWidth(), super.getImage().getHeight())));
+        super(x, y, "image/color/Cactus-" + (int) (Math.random() * 4 + 1) + "-colorato.png");
     }
             
-    
-//    public static void main(String[] args) throws Exception {
-//        Cactus cactus = new Cactus(0, 0);
-//        
-//        JFrame f = new JFrame("Image Outline");
-//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        f.add(cactus.outline.getGui());
-//        f.pack();
-//        f.setResizable(false);
-//        f.setLocationByPlatform(true);
-//        f.setVisible(true);
-//    }
 }

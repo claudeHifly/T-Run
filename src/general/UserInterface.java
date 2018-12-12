@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package general;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,16 +28,19 @@ public class UserInterface extends JFrame {
         setSize(width, height);
         setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
         setResizable(false);//dimensioni JFrame non modificabili
+        
+        
     }
     
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+//    
+//        EventQueue.invokeLater(() -> {
+//            UserInterface gameInterface = new UserInterface();
+//            gameInterface.setVisible(true);
+//        });
+//        
+//    }
     
-        EventQueue.invokeLater(() -> {
-            UserInterface gameInterface = new UserInterface();
-            gameInterface.setVisible(true);
-        });
-        
-    }
 
 }

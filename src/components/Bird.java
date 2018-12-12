@@ -9,11 +9,11 @@ package components;
  *
  * @author claud
  */
-public class Bird extends Obstacle{
+public class Bird extends Item{
     
     
     public Bird(int x, int y) {
-        super(x, y, "src/image/bird1.png");
+        super(x, y, "image/bn/bird1.png");
     }
             
 }

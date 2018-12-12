@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package general;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ public class ScoreBoard extends javax.swing.JFrame {
      */
     public ScoreBoard() {
         initComponents();
-        LinkedList<String> text = this.readScoreFile();
+        LinkedList<String> text = new LinkedList<>(this.readScoreFile());
         this.fillTable(text);
         setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
         setResizable(false);
@@ -31,7 +31,7 @@ public class ScoreBoard extends javax.swing.JFrame {
         File file = new File("score.txt");
         Scanner sc;
         String[] words = new String[2];
-        LinkedList<String> list = new LinkedList();
+        LinkedList<String> list = new LinkedList<>();
         
         try {
             sc = new Scanner(file);

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package general;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import utility.Utility;
+import java.net.URL;
 
 /**
  *
@@ -24,10 +25,12 @@ import utility.Utility;
 public class HomePage{
     
     public static void main(String[] args) {
+        int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);
+        int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(680, 500);
+        frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
@@ -35,19 +38,21 @@ public class HomePage{
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                BufferedImage image = new Utility().create("src/image/Title small.png");
-                BufferedImage backImage = new Utility().create("src/image/coloured/background_jungle.jpg");
-                Image scaledImage = image.getScaledInstance(670, 250, 100);
-                Image scaledBackImage = backImage.getScaledInstance(1000, 625, 100);
-                g.drawImage(scaledBackImage, 0, 0, this);
-                g.drawImage(scaledImage, 0, 0, this);
+                URL url = this.getClass().getClassLoader().getResource("image/HomePage/Title small.png");
+                BufferedImage image = new Utility().create(url);
+                url = this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png");
+                BufferedImage backImage = new Utility().create(url);
+                Image scaledImage = image.getScaledInstance((int) (width * 0.5), (int) (image.getHeight() * width / image.getWidth() * 0.5), 100);
+                Image scaledBackImage = backImage.getScaledInstance((int) (backImage.getWidth() * height / backImage.getHeight()), height, 100);
                 
+                g.drawImage(scaledBackImage, 0, 0, this);
+                g.drawImage(scaledImage, (int) (width - (width * 0.5))/2, 0, this);
             }
         };
         
         JButton startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
-        startButton.setBounds(265, 365, 150, 50);
+        startButton.setBounds((int) ((frame.getWidth() - 150)/2), (int) (frame.getHeight() * 0.8), 150, 50);
         panel.add(startButton);        
         
         //panel.setBackground(new Color(137,223,51));

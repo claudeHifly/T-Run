@@ -9,10 +9,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
-import main.UserInterface;
+import general.UserInterface;
+import java.net.URL;
 import utility.Utility;
-import main.Board;
-import static main.Board.distance;
 
 /**
  *
@@ -22,6 +21,7 @@ public class Background {
     
     public final static int yPosition = (int)(UserInterface.height*0.75);
     public final static int movementSpeed = 6;
+    private URL url;
     
     
     
@@ -40,10 +40,11 @@ public class Background {
         
         
         //OLD
-        this.backGround = new Utility().create("src/image/old/background3.png");
+        url = this.getClass().getClassLoader().getResource("image/color/background3_small.jpg");
+        this.backGround = new Utility().create(url);
         
         //COLOURED
-        //this.grassGround = new Utility().create("src/image/coloured/T-Run_ground_grass3.png"); 
+        //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 
 
         backGroundSet = new ArrayList<GroundImage>();
         

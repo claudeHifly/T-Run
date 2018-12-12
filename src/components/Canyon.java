@@ -5,17 +5,15 @@
  */
 package components;
 
-import java.awt.geom.Area;
-import javax.swing.JFrame;
-import utility.*;
-
 /**
  *
- * @author Gennaro
+ * @author claud
  */
-/*
-public class Coin extends Item{
+public class Canyon extends Item{
     
-   
-    
-}*/
+
+    public Canyon(int x, int y) {
+        super(x, y, "image/bn/Sun.png");
+    }
+            
+}
