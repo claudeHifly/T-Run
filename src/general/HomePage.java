@@ -63,7 +63,7 @@ public class HomePage{
             @Override
             public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
-            new UserInterface().setVisible(true);
+            UserInterface.instance().setVisible(true);
             }
         });
 
