@@ -65,9 +65,9 @@ public class Obstacles implements Items{
     public void update() {
         AffineTransform at;
         for (Item ob : obArray){
-              ob.setX(ob.getX() - Ground.speedForCactus);
+              ob.setX(ob.getX() - Ground.movementSpeed);
               at = new AffineTransform();
-              at.translate(-Ground.speedForCactus, 0);
+              at.translate(-Ground.movementSpeed, 0);
               ob.getCollider().transform(at);
         }
         Item firstOb = obArray.get(0);

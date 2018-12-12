@@ -41,37 +41,37 @@ public class Ground {
         
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-//            Graphics2D g2d = (Graphics2D)g;
-//            g2d.setColor(Color.red);
-//            g2d.draw(collider);
-//            g2d.setColor(Color.BLACK);
+            Graphics2D g2d = (Graphics2D)g;
+            //g2d.setColor(Color.red);
+            //g2d.draw(collider);
+            //g2d.setColor(Color.BLACK);
         }
         private String randomCanyon(){
             int totalFrequency = 100;
             int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
             if (extract <= canyonFrequency){
-                return "image/bn/GroundCanyon3.png";
+                return "image/bn/GroundCanyon.png";
             } else{ 
-                return "image/bn/Ground3.png";    
+                return "image/bn/Ground.png";    
             }
         }   
     }
     
         
     public final static int yPosition = (int)(UserInterface.height*0.75);
-    public static int movementSpeed = 6;
-    public static int speedForCactus = 6;
+    private int movementSpeed0 = 8;
+    public static int movementSpeed;
     private ArrayList<GroundImage> grassGroundSet;
     private final int groundOnScreen = 3;
     private int nextX;
     
     
     public Ground(){
-        Ground.speedForCactus = movementSpeed;
         grassGroundSet = new ArrayList<>();
         GroundImage ob;
         nextX = 0;
         AffineTransform at;
+        movementSpeed = movementSpeed0;
         for(int i=0; i<groundOnScreen; i++){
             ob = new GroundImage(nextX);
             at = new AffineTransform();
@@ -104,8 +104,7 @@ public class Ground {
     
     public void update() {
         AffineTransform at;
-        movementSpeed = 6 + distance / 250;
-        speedForCactus = movementSpeed;
+        movementSpeed = movementSpeed0 + distance / 500;
         GroundImage ob1;
         for (GroundImage ob: grassGroundSet){
             ob.x -= movementSpeed;

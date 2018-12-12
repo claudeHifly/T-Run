@@ -15,16 +15,10 @@ import utility.Utility;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
 public class Background {
-    
-    public final static int yPosition = (int)(UserInterface.height*0.75);
-    public final static int movementSpeed = 6;
-    private URL url;
-    
-    
-    
+        
     private class GroundImage {
         BufferedImage image;
         int x;
@@ -33,21 +27,16 @@ public class Background {
     private BufferedImage backGround;//immagine suolo
     private ArrayList<GroundImage> backGroundSet;
     
-    
     public Background(){
-        //GROUND
-        //this.yPosition = (int)(UserInterface.height*0.75);
-        
         
         //OLD
-        url = this.getClass().getClassLoader().getResource("image/color/background3_small.jpg");
+        URL url = this.getClass().getClassLoader().getResource("image/bn/background.png");
         this.backGround = new Utility().create(url);
         
         //COLOURED
         //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 
 
         backGroundSet = new ArrayList<GroundImage>();
-        
         
         for(int i=0; i<3; i++){
             GroundImage tmp = new GroundImage();
@@ -70,7 +59,7 @@ public class Background {
         Iterator<GroundImage> looper2 = backGroundSet.iterator();
         GroundImage first2 = looper2.next();
 
-        first2.x -= movementSpeed - (2 * movementSpeed / 3);
+        first2.x -= Ground.movementSpeed / 4;
 
         int previousX2 = first2.x;
         while (looper2.hasNext()) {
@@ -85,10 +74,6 @@ public class Background {
             backGroundSet.add(first2);
         }
         
-      
-
-        
-        
     }
- 
+    
 }
