@@ -41,18 +41,18 @@ public class Ground {
         
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-            Graphics2D g2d = (Graphics2D)g;
-            g2d.setColor(Color.red);
-            g2d.draw(collider);
-            g2d.setColor(Color.BLACK);
+//            Graphics2D g2d = (Graphics2D)g;
+//            g2d.setColor(Color.red);
+//            g2d.draw(collider);
+//            g2d.setColor(Color.BLACK);
         }
         private String randomCanyon(){
             int totalFrequency = 100;
             int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
             if (extract <= canyonFrequency){
-                return "image/bn/GroundCanyon.png";
+                return "image/bn/GroundCanyon3.png";
             } else{ 
-                return "image/bn/Ground - Copia.png";     
+                return "image/bn/Ground3.png";    
             }
         }   
     }
