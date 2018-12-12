@@ -49,7 +49,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         background = new Background();
         grass_ground = new Ground();
         //OSTACOLI
-        obstacles = new Obstacles();
+        System.out.println(grass_ground);
+        obstacles = new Obstacles(grass_ground);
         
         //MONETINE
         moneys = new Moneys();

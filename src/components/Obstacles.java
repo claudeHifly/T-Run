@@ -21,15 +21,17 @@ public class Obstacles implements Items{
     private final int cactusOnScreen = 4;
     private final double yPercentageCactusOnGround = 0.025;
     private final double yPercentageBirdOnGround = 0.1;
-    private final double yPercentageCanyonOnGround = 0;
     private final int cactusFrequency = 90;
     private final int birdFrequency = 10;
     //private final int canyonFrequency = 10;
+    private final Ground ground;
 
-    public Obstacles() {
+    public Obstacles(Ground ground) {
         obArray = new ArrayList<>();
+        this.ground = ground;
         Item ob;
         AffineTransform at;
+        int distance;
         for (int i = 0; i < cactusOnScreen; i++) {
             ob = new Cactus(randomDistance(), (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
@@ -64,6 +66,7 @@ public class Obstacles implements Items{
     @Override
     public void update() {
         AffineTransform at;
+        int distance;
         for (Item ob : obArray){
               ob.setX(ob.getX() - Ground.movementSpeed);
               at = new AffineTransform();
@@ -86,7 +89,11 @@ public class Obstacles implements Items{
         if (obArray.isEmpty()){
             return width;
         }
-        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
+        int distance;
+        do {
+            distance = obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
+        } while (!ground.isCanyon(distance));
+        return distance;
     }
     
     private double randomBirdHeight() {
@@ -96,11 +103,11 @@ public class Obstacles implements Items{
     private Item randomObstacle(){
         int totalFrequency = (cactusFrequency + birdFrequency);
         int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
-        System.out.println(extract);
         if (extract <= cactusFrequency){
             return new Cactus(randomDistance(), (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
         } else 
-            return new Bird(randomDistance(), (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));     
+            return new Bird(randomDistance(), (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
+        
     }
 
     @Override

@@ -28,7 +28,8 @@ public class Ground {
         private int x;
         private int y;
         private Area collider;
-        private final int canyonFrequency = 20;
+        private final int canyonFrequency = 100;
+        
         
         public GroundImage(int x) {
             this.x = x;
@@ -42,15 +43,16 @@ public class Ground {
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
             Graphics2D g2d = (Graphics2D)g;
-            //g2d.setColor(Color.red);
+            g2d.setColor(Color.red);
             //g2d.draw(collider);
-            //g2d.setColor(Color.BLACK);
+            g2d.setColor(Color.BLACK);
         }
         private String randomCanyon(){
             int totalFrequency = 100;
             int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
             if (extract <= canyonFrequency){
                 return "image/bn/GroundCanyon.png";
+                
             } else{ 
                 return "image/bn/Ground.png";    
             }
@@ -59,12 +61,11 @@ public class Ground {
     
         
     public final static int yPosition = (int)(UserInterface.height*0.75);
-    private int movementSpeed0 = 8;
+    private final int movementSpeed0 = 8;
     public static int movementSpeed;
-    private ArrayList<GroundImage> grassGroundSet;
+    private final ArrayList<GroundImage> grassGroundSet;
     private final int groundOnScreen = 3;
     private int nextX;
-    
     
     public Ground(){
         grassGroundSet = new ArrayList<>();
@@ -89,10 +90,10 @@ public class Ground {
         });
     }
     
-    public boolean hasCollided(Area TRexArea) {
+    public boolean hasCollided(Area area) {
         for (GroundImage ob : grassGroundSet) {
             Area inter = (Area) ob.collider.clone();
-            inter.intersect(TRexArea);
+            inter.intersect(area);
             if (!inter.isEmpty()) {
                 System.out.println("Collisione con " + ob.getClass().getSimpleName());
                 return true;
@@ -124,6 +125,14 @@ public class Ground {
             nextX += ob1.image.getWidth();
         }
         
+    }
+    
+    public boolean isCanyon(int x){
+        Area a = new Area(new Rectangle(x - 80, Ground.yPosition, 1, 10));
+        Area b = new Area(new Rectangle(x, Ground.yPosition, 1, 10));
+        Area c = new Area(new Rectangle(x + 80, Ground.yPosition, 1, 10));
+        
+        return hasCollided(a) && hasCollided(b) && hasCollided(c);        
     }
  
 }
