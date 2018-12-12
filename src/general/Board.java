@@ -22,7 +22,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private TRex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
-    private Moneys moneys;
+    private Bones moneys;
     private Background background;
 
     public static int distance;
@@ -52,7 +52,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         obstacles = new Obstacles();
         
         //MONETINE
-        moneys = new Moneys();
+        moneys = new Bones();
         
         //DISTANZA PERCORSA
         distance = 0;

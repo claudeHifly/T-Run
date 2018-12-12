@@ -13,12 +13,13 @@ import java.awt.*;
  * @author claud
  */
 
-public class UserInterface extends JFrame {
+public class UserInterface extends JFrame { //Singleton
 
     public static int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);
     public static int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
+    private static UserInterface instance = null;
     
-    public UserInterface() {
+    private UserInterface() {
 
         
         add(new Board());//con questo metodo inserisco una Board al centro del contenitore JFrame
@@ -30,6 +31,12 @@ public class UserInterface extends JFrame {
         setResizable(false);//dimensioni JFrame non modificabili
         
         
+    }
+    public static UserInterface instance(){
+        if(instance==null){
+            instance= new UserInterface();
+        }
+        return instance;
     }
     
 
