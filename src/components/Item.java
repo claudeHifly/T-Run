@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 import utility.Utility;
 
 /**
@@ -27,7 +28,7 @@ public abstract class Item {
 
     public Item(int x, int y, String path) {
         this.x = x;
-        this.image = new Utility().create(path);
+        this.image = new Utility().create(this.getClass().getClassLoader().getResource(path));
         this.y = y - image.getHeight();
         ImageOutline outline = new ImageOutline(image);
         this.collider = new Area(outline.getOutline(image));
