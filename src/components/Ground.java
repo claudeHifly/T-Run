@@ -32,7 +32,7 @@ public class Ground {
         
         public GroundImage(int x) {
             this.x = x;
-            URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyon.png");
+            URL url = this.getClass().getClassLoader().getResource(randomCanyon());
             this.image = new Utility().create(url);
             this.y = yPosition;
             ImageOutline outline = new ImageOutline(image);
@@ -41,10 +41,10 @@ public class Ground {
         
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-            //Graphics2D g2d = (Graphics2D)g;
-            //g2d.setColor(Color.red);
-            //g2d.draw(collider);
-            //g2d.setColor(Color.BLACK);
+            Graphics2D g2d = (Graphics2D)g;
+            g2d.setColor(Color.red);
+            g2d.draw(collider);
+            g2d.setColor(Color.BLACK);
         }
         private String randomCanyon(){
             int totalFrequency = 100;
