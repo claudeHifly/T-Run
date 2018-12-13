@@ -55,7 +55,7 @@ public class Moneys implements Items{
             Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
-                System.out.println("Collisione con " + ob.getClass().getSimpleName());
+                //System.out.println("Collisione con " + ob.getClass().getSimpleName());
                 return ob;
             }
         }
