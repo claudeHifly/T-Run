@@ -20,6 +20,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private boolean gameOver = false;
     public static boolean blinking = false;
     private TRex TRex;
+    private Blinker blinkerImage;
     private Ground grass_ground;
     private Obstacles obstacles;
     private Moneys moneys;
@@ -27,9 +28,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
     public static int distance;
     public static float distanceForScore;
-    private int score;
-    private int coin;
-    private Thread animator;
+    public static int score;
+    public static int coin;
+    public static Thread animator;
+    public static Thread blinker;
+    
     
     
   
@@ -46,6 +49,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
         //TREX
         TRex = new TRex();
+        blinkerImage = new Blinker();
         background = new Background();
         grass_ground = new Ground();
         //OSTACOLI
@@ -67,11 +71,25 @@ public class Board extends JPanel implements Runnable, ActionListener {
         obstacles.update();
         
         animator = new Thread(this);
+        
+        blinker = new Thread(this) {
+            @Override
+            public void run() {
+
+                try {
+                    System.out.println("Stampiamo solo la stringa per vedere se entra nel Thread del blinker");
+                    Thread.sleep(60);
+                } catch (InterruptedException ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            }
+        };
         animator.start();
 
     }
     
-    
+
 
     public void updateGame() {
         
@@ -104,6 +122,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        
          
         background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
@@ -114,8 +133,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         
         g.setFont(new Font("Courier New", Font.BOLD, 25));
         g.drawString("MT: " + Integer.toString((int)distanceForScore), getWidth() / 4 - 180, 100);
-        g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
-        g.drawString("COIN: " + Integer.toString(coin), getWidth() / 4 + 150, 100);
+        //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
+        g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
 
 
         g.dispose();
@@ -129,9 +148,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
         running = true;
 
         while (running) {
-            this.updateGame();
-            this.repaint();
+            
             try {
+                this.updateGame();
+                this.repaint();
                 Thread.sleep(35);
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());

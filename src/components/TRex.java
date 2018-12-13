@@ -15,13 +15,19 @@ import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import general.Board;
 import general.UserInterface;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utility.Utility;
+import components.Blinker;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Gennaro
  */
-public class TRex extends KeyAdapter {
+public class TRex extends KeyAdapter{
 
     private BufferedImage image;//immagine TRex stand
     private BufferedImage imageColorato;//immagine TRex stand colorato
@@ -31,11 +37,15 @@ public class TRex extends KeyAdapter {
     private BufferedImage lowerHeadDinoLeft;
     private BufferedImage lowerHeadDinoRight;
     private BufferedImage gameOverImage;
+    private BufferedImage graphicTransition;
+    private Icon tunnelGif;
+    public JLabel labelForGif;
     private float deltaT;
+    public static Board boardSovrapposta = new Board();
+    
 
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
     private final static int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.50);
-    //private static int jumpFactor = (int) (movementSpeed * 1.3);
     private static int TRexOnGround;        //in pratica l'altezza del suolo
     public final static int x = 50;         //distanza del TRex dal bordo sinistro
     
@@ -89,8 +99,9 @@ public class TRex extends KeyAdapter {
 
     public TRex() {
         at = new AffineTransform();
+        
         deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
-        gravity = (float) 0.75;
+        gravity = (float) 0.8;
         jumpStrength = 24;
         speedForJumping = (float) (6 * 2.2);
         //speedForJumping = (float) (Ground.movementSpeed * 0.75);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
@@ -104,7 +115,13 @@ public class TRex extends KeyAdapter {
         lowerHeadDinoLeft = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-left-up-colorato.png"));
         lowerHeadDinoRight = new Utility().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-right-up-colorato.png"));
         gameOverImage = new Utility().create(this.getClass().getClassLoader().getResource("image/altro/GameOver.png"));
-
+        graphicTransition = new Utility().create(this.getClass().getClassLoader().getResource("image/color/blinck.jpg"));
+        //tunnelGif = new Utility().create(this.getClass().getClassLoader().getResource("image/color/tunnel.gif"));
+        //tunnelGif = Toolkit.getDefaultToolkit().createImage(this.getClass().getClassLoader().getResource("image/color/tunnel.gif"));
+        //tunnelGif = new ImageIcon(this.getClass().getClassLoader().getResource("image/color/tunnel.gif"));
+        //labelForGif = new JLabel(tunnelGif);
+        //labelForGif.setBounds(0, 0, 600, 600);
+        
         state = RUNNING;
         topReached = false;
 
@@ -123,6 +140,10 @@ public class TRex extends KeyAdapter {
         at.translate(x, y);
         collider.transform(at);
     }
+    
+    
+    
+   
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -135,18 +156,24 @@ public class TRex extends KeyAdapter {
             //System.out.println("Space pressed");
         }
 
-        if (keyPressed == KeyEvent.VK_DOWN && state != (JUMPING)) {
+        if (keyPressed == KeyEvent.VK_DOWN && (state != (JUMPING))) {
             state = LOWER_HEAD;
         }
         
-        /*
+        
         if (keyPressed == KeyEvent.VK_ENTER && state != (PAUSE)) {
-            System.out.println("pause");
             state = PAUSE;
+            
+            System.out.println("pause");
         } else if (keyPressed == KeyEvent.VK_ENTER && state == (PAUSE)) {
+            synchronized (Board.animator) {
+                Board.animator.resume();
+            }
+      
             state = RUNNING;
+
             System.out.println("NOpause");
-        }*/
+        }
 
     }
 
@@ -162,7 +189,7 @@ public class TRex extends KeyAdapter {
 
         int keyTyped = e.getKeyCode();
 
-        if (keyTyped == KeyEvent.VK_DOWN) {
+        if (keyTyped == KeyEvent.VK_DOWN && (state != (JUMPING))) {
             state = RUNNING;
         }
         
@@ -187,6 +214,7 @@ public class TRex extends KeyAdapter {
 
             case RUNNING:
                 Board.running = true;
+                
 
                 if (foot == NO_FOOT) {
                     foot = LEFT_FOOT;
@@ -238,7 +266,7 @@ public class TRex extends KeyAdapter {
                 AffineTransform at = new AffineTransform();
 
                 if ( ( /*(y > maxHeight) || */ (speedForJumping >= 0)) && topReached == false) {
-           
+                    state = JUMPING;
                     y -= deltaT * speedForJumping;
                     g.drawImage(imageColorato, x, y, null);
                     collider = new Area(outline.getOutline(rightFootDino));
@@ -253,14 +281,14 @@ public class TRex extends KeyAdapter {
                 }
                 
                 if ( (/*y < maxHeight ||*/ speedForJumping <= 0) && topReached == false) {
-                    
+                    state = JUMPING;
                     g.drawImage(imageColorato, x, y, null);
                     topReached = true;
 
                 }
                 
                 if (topReached == true) {
-                    
+                    state = JUMPING;
                     //Potrebbe verificarsi il caso in cui, a seguito dei numerosi decrementi effettuati sulla velocità 
                     //del TRex in salita, quest'ultima diventi negativa.
                     if (speedForJumping < 0) {
@@ -367,14 +395,55 @@ public class TRex extends KeyAdapter {
                 g.drawImage(deadTRex, x, y, null);
                 //g.drawImage(gameOverImage, 0, 0, null);
                 g.setFont(new Font("Courier New", Font.BOLD, 25));
+                g.drawString("SCORE: " + Integer.toString((int)Board.distanceForScore + Board.coin), UserInterface.width / 2 - 70, UserInterface.height / 2 - 65);
                 g.drawString("GAME OVER", UserInterface.width / 2 - 70, UserInterface.height / 2);
                 g.drawString("Press ENTER to restart", UserInterface.width / 2 - 150, UserInterface.height / 2 + 35);
                 break;
                 
             case PAUSE:
-                Board.running = false;
+                g.drawImage(imageColorato, x, y, null);//disegno l'ultima position del dinosauro
+              
+                //Board.running = false;
+                
+                synchronized (Board.animator) {
+                    //this.lafelForGif = new JLabel(tunnelGif);
+                    Board.animator.suspend();
+                    //Board.blinker.start();
+                    //UserInterface.frame.getContentPane().add(labelForGif);
+                    g.drawString("PAUSE", 60, 60);
+                    //g.drawImage(graphicTransition, 0, 0, null);
+                    boardSovrapposta.setBackground(Color.red);
+                    UserInterface.frame.add(boardSovrapposta);
+                    
+                   
+
+                }
+                //Board.running = false;
+                //g.drawImage(imageColorato, x, y, null);
                 break;
-            
+
+            /*
+            case BLINK:
+                System.out.println("blinkCounter: " + blinkCounter);
+                state = RUNNING;
+                Board.blinking = false;
+                
+                
+                /*if(blinkCounter == 0 || blinkCounter == 2 || blinkCounter == 4 || blinkCounter == 8){
+                    g.drawImage(imageColorato, x, y, null);
+                    blinkCounter++;
+                } else {
+                    g.drawImage(image, x, y, null);
+                    blinkCounter++;
+                }
+                //System.out.println("NEXTblinkCounter");
+                if(blinkCounter >= 10){
+                    System.out.println("FINE");
+                    Board.blinking = false;
+                    state = RUNNING;
+                    blinkCounter = 0;
+                }
+                break;*/
             /*
             case BLINK:
                 System.out.println("blinkCounter: " + blinkCounter);
