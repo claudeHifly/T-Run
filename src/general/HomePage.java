@@ -15,8 +15,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import utility.Utility;
-import java.net.URL;
+import resources.Resources;
 
 /**
  *
@@ -38,10 +37,10 @@ public class HomePage{
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                URL url = this.getClass().getClassLoader().getResource("image/HomePage/Title small.png");
-                BufferedImage image = new Utility().create(url);
-                url = this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png");
-                BufferedImage backImage = new Utility().create(url);
+                //URL url = this.getClass().getClassLoader().getResource("image/HomePage/Title small.png");
+                BufferedImage image = Resources.instance().getHomepageTitleImage();
+                //url = this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png");
+                BufferedImage backImage = Resources.instance().getHomepageBackgroundImage();
                 Image scaledImage = image.getScaledInstance((int) (width * 0.5), (int) (image.getHeight() * width / image.getWidth() * 0.5), 100);
                 Image scaledBackImage = backImage.getScaledInstance((int) (backImage.getWidth() * height / backImage.getHeight()), height, 100);
                 
