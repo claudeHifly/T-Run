@@ -40,7 +40,6 @@ public class Running implements TrexState{
         if (trex.foot == trex.NO_FOOT) {
             trex.foot = trex.LEFT_FOOT;
             g.drawImage(leftFoot, trex.x, trex.y, null);
-            
             trex.collider = utility.createCollider(leftFoot, trex.x, trex.y);
         } else if (trex.foot == trex.LEFT_FOOT) {
             if (trex.leftCounter < 5){

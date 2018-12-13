@@ -8,6 +8,7 @@ package trex;
 //import static components.TRex.RUNNING;
 //import static components.TRex.state;
 //import static components.TRex.x;
+import components.Ground;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import utility.Utility;
@@ -34,7 +35,7 @@ public class Jumping implements TrexState {
     @Override
     public void create(Graphics g) {
 
-        if ( ((trex.y > trex.maxHeight) || (trex.speedForJumping <= 0)) && trex.topReached == false) {
+        if ( (/*(trex.y > trex.maxHeight) || */(trex.speedForJumping >= 0)) && trex.topReached == false) {
 
             trex.y -= trex.deltaT * trex.speedForJumping;
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);
@@ -45,10 +46,10 @@ public class Jumping implements TrexState {
             //break;
         }
 
-        if ((trex.y <= trex.maxHeight || trex.speedForJumping <= 0) && trex.topReached == false) {
+        if ((/*trex.y <= trex.maxHeight || */trex.speedForJumping <= 0) && trex.topReached == false) {
 
-            trex.topReached = true;
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);
+            trex.topReached = true;
         }
 
         if (trex.topReached == true) {
@@ -66,7 +67,19 @@ public class Jumping implements TrexState {
 
         }
 
-        if (trex.y >= trex.TRexOnGround - 20 && trex.topReached == true) {
+        if (Ground.movementSpeed > 20 && trex.y >= trex.TRexOnGround - 75 && trex.topReached == true) {
+
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null); //deve sempre essere fatto prima g.drawImage
+                                            //altrimenti abbiamo dei frame in cui scatta
+            trex.y = trex.TRexOnGround;
+            trex.collider=utility.createCollider(jumpingImage, trex.x, trex.y);
+
+            trex.topReached = false;
+            trex.speedForJumping = (float) (6 * 2.2);
+            trex.setState(trex.getRunning());
+        }
+        
+        if (Ground.movementSpeed <= 20 && trex.y >= trex.TRexOnGround - 25 && trex.topReached == true) {
 
             g.drawImage(this.jumpingImage, trex.x, trex.y, null); //deve sempre essere fatto prima g.drawImage
                                             //altrimenti abbiamo dei frame in cui scatta

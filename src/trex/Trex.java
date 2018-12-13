@@ -48,6 +48,8 @@ public class Trex extends KeyAdapter implements TrexState{
     private static int jumpFactor = (int) (movementSpeed * 1.3);
     static int TRexOnGround;
     public final static int x = 50;
+    
+    private float jumpStrenght, weight;
     int y;
     private int TRexPositionY;
     float gravity;
@@ -98,8 +100,9 @@ public class Trex extends KeyAdapter implements TrexState{
     
     private void init(){
         //at = new AffineTransform();
-        deltaT = (float) 1.25;
-        gravity = (float) 0.981;
+        deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
+        gravity = (float) 0.75;
+        jumpStrenght = 24;
         speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
                                             //in base alla velocità del personaggio.
         
