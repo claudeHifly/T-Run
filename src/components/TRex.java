@@ -79,7 +79,7 @@ public class TRex extends KeyAdapter {
     public static final int STAND_STILL = 1,
                             RUNNING = 2,
                             JUMPING = 3,
-                            DIE = 4,
+                            //DIE = 4,
                             LOWER_HEAD = 5,
                             DEAD = 6,
                             PAUSE = 7,
@@ -180,9 +180,9 @@ public class TRex extends KeyAdapter {
         
          
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setColor(Color.red);
-        //g2d.draw(collider);
-        //g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
         switch (state) {
 
             case RUNNING:
@@ -218,7 +218,7 @@ public class TRex extends KeyAdapter {
                         g.drawImage(rightFootDino, x, y, null);
                         collider = new Area(outline.getOutline(rightFootDino));
                         at = new AffineTransform();
-                        at.translate(x, y);
+                        at.translate(x, y);       
                         collider.transform(at);
                         rightCounter++;
                     } else {

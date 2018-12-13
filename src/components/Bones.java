@@ -21,10 +21,11 @@ public class Bones implements Items{
 
     private ArrayList<Item> obArray;
     private final int moneyOnScreen = 10;
+    private final double probabilityOfGoldBone = 0.05;
    
     public Bones() {
         obArray = new ArrayList<Item>();
-        Item ob = new Bone(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+        Item ob = new Bone(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),"image/color/bone_small.png");
         AffineTransform at = new AffineTransform();
         at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
@@ -36,7 +37,10 @@ public class Bones implements Items{
             fd = obArray.get(obArray.size() - 1).getX()+ 50;
             if (i==firstSerieNumber||i==secondSerieNumber)
                 fd = obArray.get(obArray.size() - 1).getX()+ 200 + (int)(Math.random()*500);
-            ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+            if(Math.random() < probabilityOfGoldBone)
+                ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/bn/sun.png");
+            else
+                ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_small.png");
             at = new AffineTransform();
             at.translate(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
@@ -69,7 +73,6 @@ public class Bones implements Items{
         //System.out.println("I'm in Obstacles update");
         Iterator<Item> looper = obArray.iterator();
         Item firstOb = null;
-        System.out.println("Numero monete= "+obArray.size());
         firstOb = looper.next();//PERICOLO!!! Si rompe quando non ha un next
 
         firstOb.setX(firstOb.getX() - movementSpeed);
@@ -106,7 +109,7 @@ public class Bones implements Items{
         }
         else{
             if (obArray.size()<=2){
-                Item ob = new Bone(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+                Item ob = new Bone(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),"image/color/bone_small.png");
                 at = new AffineTransform();
                 at.translate(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
                 ob.getCollider().transform(at);
@@ -114,12 +117,14 @@ public class Bones implements Items{
                 int fd=0;
                 int firstSerieNumber=(int)(Math.random()*3+2);
                 int secondSerieNumber=(int)(Math.random()*3+2+firstSerieNumber);
-                System.out.println("random1= "+firstSerieNumber+" random2= "+secondSerieNumber);
                 for (int i = 1; i < moneyOnScreen; i++) {
                     fd = obArray.get(obArray.size() - 1).getX()+ 50;
                     if (i==firstSerieNumber||i==secondSerieNumber)
                         fd = obArray.get(obArray.size() - 1).getX()+ 200 + (int)(Math.random()*500);
-                    ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15));
+                    if(Math.random() < probabilityOfGoldBone)
+                        ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/bn/sun.png");
+                    else
+                        ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_small.png");
                     at = new AffineTransform();
                     at.translate(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
                     ob.getCollider().transform(at);
