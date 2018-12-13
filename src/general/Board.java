@@ -23,7 +23,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private Blinker blinkerImage;
     private Ground grass_ground;
     private Obstacles obstacles;
-    private Moneys moneys;
+    private Bones moneys;
     private Background background;
 
     public static int distance;
@@ -52,11 +52,15 @@ public class Board extends JPanel implements Runnable, ActionListener {
         blinkerImage = new Blinker();
         background = new Background();
         grass_ground = new Ground();
+        
+        //TREX
+        TRex = new TRex();//TREX non resetta deltaT al riavvio
+        
         //OSTACOLI
         obstacles = new Obstacles();
         
         //MONETINE
-        moneys = new Moneys();
+        moneys = new Bones();
         
         //DISTANZA PERCORSA
         distance = 0;

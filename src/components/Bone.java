@@ -9,9 +9,9 @@ package components;
  *
  * @author claud
  */
-public class Money extends Item{
+public class Bone extends Item{
     
-     public Money(int x, int y) {
+     public Bone(int x, int y) {
         super(x, y, "image/color/bone_small.png");
      }
 
