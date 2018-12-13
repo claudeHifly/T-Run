@@ -121,7 +121,8 @@ public class Obstacles implements Items{
             return new Bird(nextX, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
         } else {
             System.out.println("Canyon");
-            nextX = ground.addCanyon();
+            int endCanyon = ground.addCanyon(nextX);
+            nextX = endCanyon;
             return null;
         }
     }

@@ -144,14 +144,24 @@ public class Ground {
         return hasCollided(a) && hasCollided(b) && hasCollided(c);
     }
 
-    public int addCanyon() {
+    public int addCanyon(int x) {
             //grassGroundSet.remove(grassGroundSet.get(grassGroundSet.size() - 1));
-            nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
+            //nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
             GroundImage ob1 = new GroundImage(nextX, "image/bn/GroundCanyonSmall.png");
             AffineTransform at = new AffineTransform();
             at.translate(ob1.x, ob1.y);
             ob1.collider.transform(at);
             grassGroundSet.add(ob1);
+            boolean added = false;
+            for (int i=0; i < grassGroundSet.size(); i++) {
+                if (grassGroundSet.get(i).x >= x){
+                    grassGroundSet.add(i, ob1);
+                    added = true;
+                }
+                if (added){
+                    grassGroundSet.get(i).x += ob1.image.getWidth();
+                }
+            }
             return nextX += ob1.image.getWidth();
     }
 }
