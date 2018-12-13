@@ -5,6 +5,7 @@
  */
 package general;
 
+import trex.*;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
@@ -19,7 +20,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static boolean running = true;
     private boolean gameOver = false;
     public static boolean blinking = false;
-    private TRex TRex;
+    private Trex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
     private Moneys moneys;
@@ -45,7 +46,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public void startGame(){
         
         //TREX
-        TRex = new TRex();
+        TRex = new Trex();
         background = new Background();
         grass_ground = new Ground();
         //OSTACOLI
@@ -86,19 +87,16 @@ public class Board extends JPanel implements Runnable, ActionListener {
         if (obstacles.hasCollided(TRex.getCollider()) != null) {
             running = false;
             gameOver = true;
-            TRex.die();
+            TRex.setState(TRex.getDead());
         }
+        
         Item collidedMoney = moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             //System.out.println("Ho preso una monetina shobalola");
             moneys.getObArray().remove(collidedMoney);
             coin += 1;
             score += 1;
-        }
-        
-        
-
-        
+        }   
     }
 
     @Override
