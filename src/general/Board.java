@@ -23,7 +23,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private Trex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
-    private Moneys moneys;
+    private Bones moneys;
     private Background background;
 
     public static int distance;
@@ -44,16 +44,18 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
     
     public void startGame(){
-        
-        //TREX
-        TRex = new Trex();
+        //GROUND
         background = new Background();
         grass_ground = new Ground();
+        
+        //TREX
+        TRex = new Trex();//TREX non resetta deltaT al riavvio
+        
         //OSTACOLI
         obstacles = new Obstacles();
         
         //MONETINE
-        moneys = new Moneys();
+        moneys = new Bones();
         
         //DISTANZA PERCORSA
         distance = 0;
@@ -136,16 +138,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
             }
         }//while running
         
-        
-        while (blinking) {
-            this.updateGame();
-            this.repaint();
-            try {
-                Thread.sleep(35);
-            } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }//while blinking
     }
 
     @Override

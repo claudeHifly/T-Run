@@ -45,6 +45,4 @@ public class UserInterface extends JFrame { //Singleton
 //        });
 //        
 //    }
-    
-
 }
