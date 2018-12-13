@@ -5,6 +5,7 @@
  */
 package general;
 
+import trex.*;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
@@ -19,7 +20,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static boolean running = true;
     private boolean gameOver = false;
     public static boolean blinking = false;
-    private TRex TRex;
+    private Trex TRex;
     private Blinker blinkerImage;
     private Ground grass_ground;
     private Obstacles obstacles;
@@ -48,13 +49,13 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public void startGame(){
         
         //TREX
-        TRex = new TRex();
+        //TRex = new Trex();
         blinkerImage = new Blinker();
         background = new Background();
         grass_ground = new Ground();
         
         //TREX
-        TRex = new TRex();//TREX non resetta deltaT al riavvio
+        TRex = new Trex();//TREX non resetta deltaT al riavvio
         
         //OSTACOLI
         obstacles = new Obstacles();
@@ -108,19 +109,15 @@ public class Board extends JPanel implements Runnable, ActionListener {
         if (obstacles.hasCollided(TRex.getCollider()) != null) {
             running = false;
             gameOver = true;
-            TRex.die();
+            TRex.setState(TRex.getDead());
         }
-        Item collidedMoney = moneys.hasCollided(TRex.getCollider());
+        Bone collidedMoney = (Bone) moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             //System.out.println("Ho preso una monetina shobalola");
             moneys.getObArray().remove(collidedMoney);
-            coin += 1;
+            coin += collidedMoney.getValue();
             score += 1;
-        }
-        
-        
-
-        
+        }   
     }
 
     @Override
@@ -194,6 +191,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
         
         public void reset() {
+        Ground.movementSpeed = 8;
+        Ground.speedForCactus = 8;
         score = 0;
         distanceForScore = 0;
         coin = 0;
