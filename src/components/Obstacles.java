@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.ArrayList;
+import java.util.Iterator;
 import static general.UserInterface.width;
 
 /**
@@ -109,12 +110,13 @@ public class Obstacles implements Items{
                 int endCanyon = ground.addCanyon(rd);
                 if (endCanyon == rd){
                     System.out.println("DOVRESTI METTERLO ALLA FINE");
+                    return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
                 }
                 return new Empty(endCanyon);
             }
         }
     }
-
+    
     @Override
     public ArrayList<Item> getObArray() {
         return obArray;

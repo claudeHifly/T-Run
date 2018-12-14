@@ -12,6 +12,7 @@ import java.util.Iterator;
 import general.UserInterface;
 import java.net.URL;
 import utility.Utility;
+import resources.Resources;
 
 /**
  *
@@ -30,8 +31,8 @@ public class Background {
     public Background(){
         
         //OLD
-        URL url = this.getClass().getClassLoader().getResource("image/bn/background.png");
-        this.backGround = new Utility().create(url);
+        //url = this.getClass().getClassLoader().getResource("image/color/background3_small.jpg");
+        this.backGround = Resources.instance().getBackgroundImage();
         
         //COLOURED
         //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 

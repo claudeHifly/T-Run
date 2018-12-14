@@ -5,6 +5,7 @@
  */
 package general;
 
+import trex.*;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
@@ -19,20 +20,18 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static boolean running = true;
     private boolean gameOver = false;
     public static boolean blinking = false;
-    private TRex TRex;
+    private Trex TRex;
     private Ground grass_ground;
     private Obstacles obstacles;
-    private Moneys moneys;
+    private Bones moneys;
     private Background background;
 
     public static int distance;
     public static float distanceForScore;
-    private int score;
-    private int coin;
-    private Thread animator;
-    
-    
-  
+    public static int score;
+    public static int coin;
+    public static Thread animator;
+    public static Thread blinker;
 
     //INIZIALIZZO BOARD
     public Board() {
@@ -41,19 +40,23 @@ public class Board extends JPanel implements Runnable, ActionListener {
         addKeyListener(new TRexAdapter());
         startGame();
     }
-    
-    public void startGame(){
-        
+
+    public void startGame() {
+
         //TREX
-        TRex = new TRex();
+        //TRex = new Trex();
         background = new Background();
         grass_ground = new Ground();
+
+        //TREX
+        TRex = new Trex();//TREX non resetta deltaT al riavvio
+
         //OSTACOLI
         obstacles = new Obstacles(grass_ground);
-        
+
         //MONETINE
-        moneys = new Moneys();
-        
+        moneys = new Bones();
+
         //DISTANZA PERCORSA
         distance = 0;
         //SCORE
@@ -65,15 +68,15 @@ public class Board extends JPanel implements Runnable, ActionListener {
         grass_ground.update();
         moneys.update();
         obstacles.update();
-        
+
         animator = new Thread(this);
+
         animator.start();
 
     }
-    
-    
 
     public void updateGame() {
+
         distance += 1;
         distanceForScore += 0.1;
         score += 1;
@@ -81,79 +84,62 @@ public class Board extends JPanel implements Runnable, ActionListener {
         grass_ground.update();
         moneys.update();
         obstacles.update();
-        
-        if ((TRex.getState() != TRex.JUMPING) && !grass_ground.hasCollided(TRex.getCollider())) {
+
+        if (TRex.getState() != TRex.getJumping()&& !grass_ground.hasCollided(TRex.getCollider()))  {
             running = false;
             gameOver = true;
-            TRex.die();
-            System.out.println("mOrTo");
+            TRex.setState(TRex.getDead());
         }
-
+        
         if (obstacles.hasCollided(TRex.getCollider()) != null) {
             running = false;
             gameOver = true;
-            TRex.die();
+            TRex.setState(TRex.getDead());
         }
-        Item collidedMoney = moneys.hasCollided(TRex.getCollider());
+        Bone collidedMoney = (Bone) moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             //System.out.println("Ho preso una monetina shobalola");
             moneys.getObArray().remove(collidedMoney);
-            coin += 1;
+            coin += collidedMoney.getValue();
             score += 1;
         }
-        
-        
-
-        
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-         
+
         background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
         moneys.create(g);
         obstacles.create(g);
-        
-        TRex.create(g);
-        
-        g.setFont(new Font("Courier New", Font.BOLD, 25));
-        g.drawString("MT: " + Integer.toString((int)distanceForScore), getWidth() / 4 - 180, 100);
-        g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
-        g.drawString("COIN: " + Integer.toString(coin), getWidth() / 4 + 150, 100);
 
+        TRex.create(g);
+
+        g.setFont(new Font("Courier New", Font.BOLD, 25));
+        g.drawString("MT: " + Integer.toString((int) distanceForScore), getWidth() / 4 - 180, 100);
+        //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
+        g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
 
         g.dispose();
-  
-    }
-    
 
+    }
 
     @Override
     public void run() {
         running = true;
 
         while (running) {
-            this.updateGame();
-            this.repaint();
+
             try {
+                this.updateGame();
+                this.repaint();
                 Thread.sleep(35);
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             }
         }//while running
-        
-        
-        while (blinking) {
-            this.updateGame();
-            this.repaint();
-            try {
-                Thread.sleep(35);
-            } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }//while blinking
+
     }
 
     @Override
@@ -166,32 +152,33 @@ public class Board extends JPanel implements Runnable, ActionListener {
         @Override
         public void keyPressed(KeyEvent e) {
             TRex.keyPressed(e);
-            
+
             int keyPressed = e.getKeyCode();
 
             if (keyPressed == KeyEvent.VK_ENTER && gameOver) {
-            
+
                 reset();
             }
         }
-        
+
         @Override
-        public void keyTyped(KeyEvent e){
+        public void keyTyped(KeyEvent e) {
             TRex.keyTyped(e);
         }
-        
+
         @Override
-        public void keyReleased(KeyEvent e){
+        public void keyReleased(KeyEvent e) {
             TRex.keyReleased(e);
         }
-        
+
         public void reset() {
-        score = 0;
-        distanceForScore = 0;
-        coin = 0;
-        System.out.println("reset");
-        gameOver = false;
-        startGame();
+            Ground.movementSpeed = 8;
+            score = 0;
+            distanceForScore = 0;
+            coin = 0;
+            System.out.println("reset");
+            gameOver = false;
+            startGame();
         }
     }
 
