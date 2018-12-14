@@ -12,6 +12,7 @@ import java.util.Iterator;
 import general.UserInterface;
 import utility.Utility;
 import static general.Board.distance;
+import static general.UserInterface.width;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.net.URL;
@@ -22,57 +23,59 @@ import utility.ImageOutline;
  * @author Gennaro
  */
 public class Ground {
-    
-    private class GroundImage{
+
+    private class GroundImage {
+
         private BufferedImage image;
         private int x;
         private int y;
         private Area collider;
-        private final int canyonFrequency = 20;
-        
+
         public GroundImage(int x) {
             this.x = x;
-            URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyon.png");
+            URL url = this.getClass().getClassLoader().getResource("image/bn/Ground-" + (int) (Math.random() * 2 + 1) + ".png");
             this.image = new Utility().create(url);
             this.y = yPosition;
             ImageOutline outline = new ImageOutline(image);
             this.collider = new Area(outline.getOutline(image));
         }
         
+        public GroundImage(int x, String s) {
+            this.x = x;
+            URL url = this.getClass().getClassLoader().getResource(s);
+            this.image = new Utility().create(url);
+            this.y = yPosition;
+            ImageOutline outline = new ImageOutline(image);
+            this.collider = new Area(outline.getOutline(image));
+        }
+
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-            //Graphics2D g2d = (Graphics2D)g;
-            //g2d.setColor(Color.red);
-            //g2d.draw(collider);
-            //g2d.setColor(Color.BLACK);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(Color.red);
+            g2d.draw(collider);
+            g2d.setColor(Color.BLACK);
         }
-        private String randomCanyon(){
-            int totalFrequency = 100;
-            int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
-            if (extract <= canyonFrequency){
-                return "image/bn/GroundCanyon.png";
-            } else{ 
-                return "image/bn/Ground - Copia.png";     
-            }
-        }   
+
     }
-    
-        
-    public final static int yPosition = (int)(UserInterface.height*0.75);
-    public static int movementSpeed = 6;
-    public static int speedForCactus = 6;
-    private ArrayList<GroundImage> grassGroundSet;
-    private final int groundOnScreen = 3;
+
+    public final static int yPosition = (int) (UserInterface.height * 0.75);
+    private final int movementSpeed0 = 8;
+    public static int movementSpeed;
+    private final ArrayList<GroundImage> grassGroundSet;
+    private final int groundOnScreen;
     private int nextX;
-    
-    
-    public Ground(){
-        Ground.speedForCactus = movementSpeed;
+
+    public Ground() {
         grassGroundSet = new ArrayList<>();
         GroundImage ob;
         nextX = 0;
         AffineTransform at;
-        for(int i=0; i<groundOnScreen; i++){
+        movementSpeed = movementSpeed0;
+        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall.png");
+        BufferedImage image = new Utility().create(url);
+        groundOnScreen = (int) (width * 3 / image.getWidth());
+        for (int i = 0; i < groundOnScreen; i++) {
             ob = new GroundImage(nextX);
             at = new AffineTransform();
             at.translate(ob.x, ob.y);
@@ -80,51 +83,73 @@ public class Ground {
             grassGroundSet.add(ob);
             nextX += ob.image.getWidth();
         }
-        
+
     }
-    
+
+    public int getGroundOnScreen() {
+        return groundOnScreen;
+    }
+
     public void create(Graphics g) {
         grassGroundSet.forEach((ob) -> {
             ob.create(g);
         });
     }
-    
-    public boolean hasCollided(Area TRexArea) {
+
+    public boolean hasCollided(Area area) {
         for (GroundImage ob : grassGroundSet) {
             Area inter = (Area) ob.collider.clone();
-            inter.intersect(TRexArea);
+            inter.intersect(area);
             if (!inter.isEmpty()) {
-                System.out.println("Collisione con " + ob.getClass().getSimpleName());
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public void update() {
         AffineTransform at;
-        movementSpeed = 6 + distance / 250;
-        speedForCactus = movementSpeed;
+        movementSpeed = movementSpeed0 + distance / 500;
         GroundImage ob1;
-        for (GroundImage ob: grassGroundSet){
+        for (GroundImage ob : grassGroundSet) {
             ob.x -= movementSpeed;
             at = new AffineTransform();
             at.translate(-movementSpeed, 0);
             ob.collider.transform(at);
         }
         GroundImage firstGround = grassGroundSet.get(0);
-        nextX = grassGroundSet.get(grassGroundSet.size()-1).x + grassGroundSet.get(grassGroundSet.size()-1).image.getWidth();
-        if (firstGround.x < -firstGround.image.getWidth()){
+        nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
+        if (firstGround.x < -firstGround.image.getWidth()) {
             grassGroundSet.remove(firstGround);
             ob1 = new GroundImage(nextX);
             at = new AffineTransform();
             at.translate(ob1.x, ob1.y);
             ob1.collider.transform(at);
-            grassGroundSet.add(ob1);            
+            grassGroundSet.add(ob1);
             nextX += ob1.image.getWidth();
         }
-        
+
     }
- 
+
+    public int addCanyon(int x) {
+        AffineTransform at;
+        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall.png");
+        BufferedImage image = new Utility().create(url);
+        ImageOutline outline = new ImageOutline(image);
+        x -= image.getWidth() / 2;
+        Area collider = new Area(outline.getOutline(image));
+        nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
+        for (int i = 0; i < grassGroundSet.size(); i++) {
+            if (grassGroundSet.get(i).x >= x) {
+                grassGroundSet.get(i).image = image;
+                at = new AffineTransform();
+                at.translate(grassGroundSet.get(i).x, grassGroundSet.get(i).y);
+                collider.transform(at);
+                grassGroundSet.get(i).collider = collider;
+                return grassGroundSet.get(i).x + grassGroundSet.get(i).image.getWidth() / 2;
+            }
+        }
+        return x;     
+    }
 }

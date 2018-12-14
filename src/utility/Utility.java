@@ -5,6 +5,9 @@
  */
 package utility;
 
+import java.awt.Graphics;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -16,16 +19,6 @@ import javax.imageio.ImageIO;
  */
 public class Utility {
     
-//    public BufferedImage create(String path){
-//        BufferedImage bi = null;
-//        try {
-//            bi = ImageIO.read(new File(path));
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//        return bi;
-//    }
-    
     public BufferedImage create(URL path){
         BufferedImage bi = null;
         try {
@@ -34,5 +27,14 @@ public class Utility {
             System.out.println(ex.getMessage());
         }
         return bi;
+    }
+    
+    public Area createCollider(BufferedImage img, int x, int y){
+        ImageOutline outline = new ImageOutline(img);
+        Area collider = new Area(outline.getOutline(img));
+        AffineTransform at = new AffineTransform();
+        at.translate(x, y);
+        collider.transform(at);
+        return collider;
     }
 }

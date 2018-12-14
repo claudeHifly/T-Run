@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.ArrayList;
+import java.util.Iterator;
 import static general.UserInterface.width;
 
 /**
@@ -18,18 +19,20 @@ import static general.UserInterface.width;
 public class Obstacles implements Items{
 
     private final ArrayList<Item> obArray;
-    private final int cactusOnScreen = 4;
+    private final int cactusOnScreen;
     private final double yPercentageCactusOnGround = 0.025;
     private final double yPercentageBirdOnGround = 0.1;
-    private final double yPercentageCanyonOnGround = 0;
-    private final int cactusFrequency = 90;
-    private final int birdFrequency = 10;
-    //private final int canyonFrequency = 10;
+    private final int cactusFrequency = 25;
+    private final int birdFrequency = 25;
+    private final int canyonFrequency = 50;
+    private final Ground ground;
 
-    public Obstacles() {
+    public Obstacles(Ground ground) {
         obArray = new ArrayList<>();
+        this.ground = ground;
         Item ob;
         AffineTransform at;
+        cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
             ob = new Cactus(randomDistance(), (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
@@ -53,7 +56,7 @@ public class Obstacles implements Items{
             Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
-                System.out.println("Collisione con " + ob.getClass().getSimpleName());
+                //System.out.println("Collisione con " + ob.getClass().getSimpleName());
                 return ob;
             }
         }
@@ -65,9 +68,9 @@ public class Obstacles implements Items{
     public void update() {
         AffineTransform at;
         for (Item ob : obArray){
-              ob.setX(ob.getX() - Ground.speedForCactus);
+              ob.setX(ob.getX() - Ground.movementSpeed);
               at = new AffineTransform();
-              at.translate(-Ground.speedForCactus, 0);
+              at.translate(-Ground.movementSpeed, 0);
               ob.getCollider().transform(at);
         }
         Item firstOb = obArray.get(0);
@@ -79,14 +82,13 @@ public class Obstacles implements Items{
             ob.getCollider().transform(at);
             obArray.add(ob);
         }
-
     }
 
     private int randomDistance() {
         if (obArray.isEmpty()){
             return width;
         }
-        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
+        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 300 + 300);
     }
     
     private double randomBirdHeight() {
@@ -94,15 +96,27 @@ public class Obstacles implements Items{
     }
     
     private Item randomObstacle(){
-        int totalFrequency = (cactusFrequency + birdFrequency);
+        int totalFrequency = (cactusFrequency + birdFrequency + canyonFrequency);
         int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
-        System.out.println(extract);
+        int rd = randomDistance();
         if (extract <= cactusFrequency){
-            return new Cactus(randomDistance(), (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-        } else 
-            return new Bird(randomDistance(), (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));     
+            return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+        } 
+        else{
+            if (extract <= cactusFrequency + birdFrequency){
+                return new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
+            }
+            else {
+                int endCanyon = ground.addCanyon(rd);
+                if (endCanyon == rd){
+                    System.out.println("DOVRESTI METTERLO ALLA FINE");
+                    return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+                }
+                return new Empty(endCanyon);
+            }
+        }
     }
-
+    
     @Override
     public ArrayList<Item> getObArray() {
         return obArray;

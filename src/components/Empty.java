@@ -5,15 +5,17 @@
  */
 package components;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author claud
  */
-public class Canyon extends Item{
+public class Empty extends Item{
+    
+    public Empty(int x) {
+        super(x,200,"image/bn/Sun.png");
+    }
     
 
-    public Canyon(int x, int y) {
-        super(x, y, "image/bn/Sun.png");
-    }
-            
 }
