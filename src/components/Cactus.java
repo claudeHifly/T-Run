@@ -5,6 +5,8 @@
  */
 package components;
 
+import general.Board;
+
 /**
  *
  * @author claud
@@ -14,6 +16,14 @@ public class Cactus extends Item{
 
     public Cactus(int x, int y) {
         super(x, y, "image/bn/Cactus-" + (int) (Math.random() * 4 + 1) + ".png");
+    }
+
+    @Override
+    public void collisionAction(Item collidedItem) {
+        Board.running = false;
+        Board.gameOver = true;
+        super.TRex.setState(TRex.getDead());
+                
     }
             
 }

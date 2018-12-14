@@ -16,6 +16,9 @@ public class Empty extends Item{
     public Empty(int x) {
         super(x,200,"image/bn/Sun.png");
     }
-    
 
+    @Override
+    public void collisionAction(Item collidedItem) {
+    }
+    
 }

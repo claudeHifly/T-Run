@@ -18,7 +18,7 @@ import java.awt.event.*;
 public class Board extends JPanel implements Runnable, ActionListener {
 
     public static boolean running = true;
-    private boolean gameOver = false;
+    public static boolean gameOver = false;
     public static boolean blinking = false;
     private Trex TRex;
     private Ground grass_ground;
@@ -49,7 +49,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         grass_ground = new Ground();
 
         //TREX
-        TRex = new Trex();//TREX non resetta deltaT al riavvio
+        TRex = Trex.instance();
 
         //OSTACOLI
         obstacles = new Obstacles(grass_ground);
@@ -85,23 +85,31 @@ public class Board extends JPanel implements Runnable, ActionListener {
         moneys.update();
         obstacles.update();
 
-        if (TRex.getState() != TRex.getJumping()&& !grass_ground.hasCollided(TRex.getCollider()))  {
+        if (TRex.getState() != TRex.getJumping() && !grass_ground.hasCollided(TRex.getCollider())) {
             running = false;
             gameOver = true;
             TRex.setState(TRex.getDead());
         }
-        
-        if (obstacles.hasCollided(TRex.getCollider()) != null) {
+
+        Item collidedObstacle = obstacles.hasCollided(TRex.getCollider());
+        if (collidedObstacle != null) {
+
+            collidedObstacle.collisionAction(collidedObstacle);
+            /*
             running = false;
             gameOver = true;
             TRex.setState(TRex.getDead());
+            TRex.setState(TRex.getDead());*/
         }
-        Bone collidedMoney = (Bone) moneys.hasCollided(TRex.getCollider());
+
+        Item collidedMoney = moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             //System.out.println("Ho preso una monetina shobalola");
+            System.out.println(collidedMoney.getClass().getSimpleName());
             moneys.getObArray().remove(collidedMoney);
-            coin += collidedMoney.getValue();
-            score += 1;
+            collidedMoney.collisionAction(collidedMoney);
+            //coin += collidedMoney.getValue();
+            //score += 1;
         }
     }
 
@@ -178,6 +186,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             coin = 0;
             System.out.println("reset");
             gameOver = false;
+            TRex.setState(TRex.getRunning());
             startGame();
         }
     }

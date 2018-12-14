@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package components;
+
+import general.Board;
+import static general.Board.coin;
+import static general.Board.score;
+
 /**
  *
  * @author claud
@@ -13,7 +18,7 @@ public class Bone extends Item{
     
      public Bone(int x, int y, String path) {
              super(x, y, path);
-             if (path.equals("image/color/bone_gold2.png")){
+             if (path.equals("image/bn/bonewhite.png")){
                  this.value=50;
              }
              else{
@@ -23,6 +28,12 @@ public class Bone extends Item{
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public void collisionAction(Item collidedItem) {
+            Board.coin += ((Bone) collidedItem).getValue();
+            //Board.score += 1;
     }
 
 }

@@ -16,9 +16,8 @@ import static general.UserInterface.width;
  *
  * @author claud
  */
-public class Obstacles implements Items{
+public class Obstacles extends Items{
 
-    private final ArrayList<Item> obArray;
     private final int cactusOnScreen;
     private final double yPercentageCactusOnGround = 0.025;
     private final double yPercentageBirdOnGround = 0.1;
@@ -40,28 +39,6 @@ public class Obstacles implements Items{
             ob.getCollider().transform(at);
             obArray.add(ob);
         }
-    }
-
-    @Override
-    public void create(Graphics g) {
-        obArray.forEach((ob) -> {
-            ob.create(g);
-        });
-
-    }
-
-    @Override
-    public Item hasCollided(Area TRexArea) {
-        for (Item ob : obArray) {
-            Area inter = (Area) ob.getCollider().clone();
-            inter.intersect(TRexArea);
-            if (!inter.isEmpty()) {
-                //System.out.println("Collisione con " + ob.getClass().getSimpleName());
-                return ob;
-            }
-        }
-        
-        return null;
     }
 
     @Override
@@ -117,8 +94,4 @@ public class Obstacles implements Items{
         }
     }
     
-    @Override
-    public ArrayList<Item> getObArray() {
-        return obArray;
-    }
 }
