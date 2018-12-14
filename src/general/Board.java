@@ -186,7 +186,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
             coin = 0;
             System.out.println("reset");
             gameOver = false;
-            TRex.setState(TRex.getRunning());
             startGame();
         }
     }

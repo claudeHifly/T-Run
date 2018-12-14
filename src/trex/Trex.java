@@ -98,14 +98,16 @@ public class Trex extends KeyAdapter implements TrexState{
         //this.blink = new Blink(this);
 
         this.state = running;
-        
         this.init();
     }
     
     public static Trex instance(){
         if (instance == null)
             instance = new Trex();
-        instance.init();
+        if(instance.getState()==instance.getDead()){
+            instance.init();
+            instance.setState(instance.getRunning());
+        }
         return instance;
         
     }
