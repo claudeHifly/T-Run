@@ -97,7 +97,7 @@ public class Trex extends KeyAdapter implements TrexState{
         //this.pause = new Pause(this);
         //this.blink = new Blink(this);
 
-        this.state = running; 
+        this.state = running;
         
         this.init();
     }
@@ -105,7 +105,9 @@ public class Trex extends KeyAdapter implements TrexState{
     public static Trex instance(){
         if (instance == null)
             instance = new Trex();
+        instance.init();
         return instance;
+        
     }
     
     private void init(){

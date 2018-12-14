@@ -18,7 +18,7 @@ public class Bone extends Item{
     
      public Bone(int x, int y, String path) {
              super(x, y, path);
-             if (path.equals("image/bn/bonewhite.png")){
+             if (path.equals("image/color/bone_gold2.png")){
                  this.value=50;
              }
              else{
