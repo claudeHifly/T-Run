@@ -49,7 +49,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
         background = new Background();
         grass_ground = new Ground();
         //OSTACOLI
-        System.out.println(grass_ground);
         obstacles = new Obstacles(grass_ground);
         
         //MONETINE
@@ -87,6 +86,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             running = false;
             gameOver = true;
             TRex.die();
+            System.out.println("mOrTo");
         }
 
         if (obstacles.hasCollided(TRex.getCollider()) != null) {
