@@ -18,7 +18,7 @@ import java.awt.event.*;
 public class Board extends JPanel implements Runnable, ActionListener {
 
     public static boolean running = true;
-    private boolean gameOver = false;
+    public static boolean gameOver = false;
     public static boolean blinking = false;
     private Trex TRex;
     private Blinker blinkerImage;
@@ -47,15 +47,13 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
     
     public void startGame(){
-        
-        //TREX
-        //TRex = new Trex();
+      
         blinkerImage = new Blinker();
         background = new Background();
         grass_ground = new Ground();
         
         //TREX
-        TRex = new Trex();//TREX non resetta deltaT al riavvio
+        TRex = Trex.instance();
         
         //OSTACOLI
         obstacles = new Obstacles();
@@ -106,17 +104,24 @@ public class Board extends JPanel implements Runnable, ActionListener {
         moneys.update();
         obstacles.update();
 
-        if (obstacles.hasCollided(TRex.getCollider()) != null) {
+        Item collidedObstacle = obstacles.hasCollided(TRex.getCollider());
+        if (collidedObstacle != null) {
+            
+            collidedObstacle.collisionAction(collidedObstacle);
+            /*
             running = false;
             gameOver = true;
-            TRex.setState(TRex.getDead());
+            TRex.setState(TRex.getDead());*/
         }
-        Bone collidedMoney = (Bone) moneys.hasCollided(TRex.getCollider());
+        
+        Item collidedMoney = moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             //System.out.println("Ho preso una monetina shobalola");
+            System.out.println(collidedMoney.getClass().getSimpleName());
             moneys.getObArray().remove(collidedMoney);
-            coin += collidedMoney.getValue();
-            score += 1;
+            collidedMoney.collisionAction(collidedMoney);
+            //coin += collidedMoney.getValue();
+            //score += 1;
         }   
     }
 

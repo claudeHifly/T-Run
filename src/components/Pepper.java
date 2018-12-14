@@ -9,20 +9,23 @@ import general.Board;
 
 /**
  *
- * @author claud
+ * @author Gennaro
  */
-public class Bird extends Item{
+
+public class Pepper extends Item{
     
-    
-    public Bird(int x, int y) {
-        super(x, y, "image/bn/bird1.png");
-    }
-    
+     public Pepper(int x, int y, String path) {
+             super(x, y, path);
+             
+     }
+
+
     @Override
     public void collisionAction(Item collidedItem) {
-        Board.running = false;
-        Board.gameOver = true;
-        super.TRex.setState(TRex.getDead());        
+            //Board.coin += ((Bone) collidedItem).getValue();
+            //Board.score += 1;
+            System.out.println("HO PRESO IL PEPPER");
     }
-            
+
+    
 }

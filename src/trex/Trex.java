@@ -23,6 +23,7 @@ import resources.Resources;
  */
 public class Trex extends KeyAdapter implements TrexState{
     
+    private static Trex instance = null;
     private TrexState running;
     private TrexState jumping;
     private TrexState dead;
@@ -84,7 +85,7 @@ public class Trex extends KeyAdapter implements TrexState{
     
     //ImageOutline outline;
 
-    public Trex() {
+    private Trex() {
         
         deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
         System.out.println("deltaT " + deltaT);
@@ -99,6 +100,12 @@ public class Trex extends KeyAdapter implements TrexState{
         this.state = running; 
         
         this.init();
+    }
+    
+    public static Trex instance(){
+        if (instance == null)
+            instance = new Trex();
+        return instance;
     }
     
     private void init(){

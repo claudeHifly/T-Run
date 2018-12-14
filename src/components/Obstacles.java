@@ -16,46 +16,48 @@ import static general.UserInterface.width;
  *
  * @author claud
  */
-public class Obstacles implements Items{
+public class Obstacles extends Items{
 
-    private ArrayList<Item> obArray;
+    //private ArrayList<Item> obArray;
     private final int cactusOnScreen = 6;
     private final double yPercentageCactusOnGround = 0.025;
     private final double yPercentageBirdOnGround = 0;
     
 
     public Obstacles() {
-        obArray = new ArrayList<Item>();
+        super.obArray = new ArrayList<Item>();
         Item ob = new Cactus(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
         AffineTransform at = new AffineTransform();
         at.translate(width, ob.getY());
         ob.getCollider().transform(at);
-        obArray.add(ob);
+        super.obArray.add(ob);
         for (int i = 1; i < cactusOnScreen; i++) {
             int rd = randomDistance();
             ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
             at.translate(rd, ob.getY());
             ob.getCollider().transform(at);
-            obArray.add(ob);
+            super.obArray.add(ob);
         }
         int rd = randomDistance();
         Item ob1 = new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
         at = new AffineTransform();
         at.translate(rd, ob1.getY());
         ob1.getCollider().transform(at);
-        obArray.add(ob1);
+        super.obArray.add(ob1);
     }
 
+    /*
     public void create(Graphics g) {
-        for (Item ob : obArray) {
+        for (Item ob : super.obArray) {
             ob.create(g);
         }
 
-    }
+    }*/
 
+    /*
     public Item hasCollided(Area TRexArea) {
-        for (Item ob : obArray) {
+        for (Item ob : super.obArray) {
             Area inter = (Area) ob.getCollider().clone();
             inter.intersect(TRexArea);
             if (!inter.isEmpty()) {
@@ -65,11 +67,12 @@ public class Obstacles implements Items{
         }
         
         return null;
-    }
+    }*/
 
+    @Override
     public void update() {
         //System.out.println("I'm in Obstacles update");
-        Iterator<Item> looper = obArray.iterator();
+        Iterator<Item> looper = super.obArray.iterator();
         Item firstOb = looper.next();
 
         firstOb.setX(firstOb.getX() - Ground.speedForCactus);
@@ -93,19 +96,19 @@ public class Obstacles implements Items{
             int rd = randomDistance();
             String type = firstOb.getClass().getSimpleName();
             if (type.equals("Bird")){
-                obArray.remove(firstOb);
+                super.obArray.remove(firstOb);
                 Item ob = new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
                 at = new AffineTransform();
                 at.translate(rd, ob.getY());
                 ob.getCollider().transform(at);
-                obArray.add(ob);
+                super.obArray.add(ob);
             } else {
-                obArray.remove(firstOb);
+                super.obArray.remove(firstOb);
                 Item ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
                 at = new AffineTransform();
                 at.translate(rd, ob.getY());
                 ob.getCollider().transform(at);
-                obArray.add(ob);
+                super.obArray.add(ob);
             }
 //            firstOb.setX(rd);
 //            at = new AffineTransform();
@@ -117,14 +120,15 @@ public class Obstacles implements Items{
     }
 
     private int randomDistance() {
-        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
+        return super.obArray.get(super.obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
     }
     
     private double randomBirdHeight() {
         return (Math.random() * 0.1);
     }
 
+    /*
     public ArrayList<Item> getObArray() {
-        return obArray;
-    }
+        return super.obArray;
+    }*/
 }

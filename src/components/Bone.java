@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package components;
+
+import general.Board;
+import static general.Board.coin;
+import static general.Board.score;
+
 /**
  *
  * @author claud
@@ -23,6 +28,12 @@ public class Bone extends Item{
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public void collisionAction(Item collidedItem) {
+            Board.coin += ((Bone) collidedItem).getValue();
+            //Board.score += 1;
     }
 
 }
