@@ -21,6 +21,7 @@ public class LowerHead implements TrexState {
     private final Trex trex;
     private final BufferedImage lowerHeadDinoLeft;
     private final BufferedImage lowerHeadDinoRight;
+    private final BufferedImage biggerAuraImage;
     private Utility utility;
     
     public LowerHead(Trex trex) {
@@ -28,6 +29,7 @@ public class LowerHead implements TrexState {
         this.utility = new Utility();
         lowerHeadDinoLeft = Resources.instance().getLowerHeadLeftFootImage();
         lowerHeadDinoRight = Resources.instance().getLowerHeadRightFootImage();
+        this.biggerAuraImage = Resources.instance().getBiggerAuraImage();
     }
 
     @Override
@@ -36,6 +38,9 @@ public class LowerHead implements TrexState {
     if (trex.foot == trex.NO_FOOT) {
             trex.foot = trex.LEFT_FOOT_LOWER;
             g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
+            if(trex.getPower() == trex.pepperPower){
+                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                }
             trex.collider=utility.createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //            trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
 //            trex.at = new AffineTransform();
@@ -45,6 +50,9 @@ public class LowerHead implements TrexState {
 
             if (trex.leftCounter < 5){
                 g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
+                if(trex.getPower() == trex.pepperPower){
+                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                }
                 trex.collider=utility.createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
 //                trex.at = new AffineTransform();
@@ -54,6 +62,9 @@ public class LowerHead implements TrexState {
             } else {
                 trex.foot = trex.RIGHT_FOOT_LOWER;
                 g.drawImage(this.lowerHeadDinoRight, trex.x, trex.y, null);
+                if(trex.getPower() == trex.pepperPower){
+                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                }
                 trex.collider=utility.createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
 //                trex.at = new AffineTransform();
@@ -66,6 +77,9 @@ public class LowerHead implements TrexState {
 
             if (trex.rightCounter < 5){
                 g.drawImage(this.lowerHeadDinoRight, trex.x, trex.y, null);
+                if(trex.getPower() == trex.pepperPower){
+                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                }
                 trex.collider=utility.createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
 //                trex.at = new AffineTransform();
@@ -75,6 +89,9 @@ public class LowerHead implements TrexState {
             } else {
                 trex.foot = trex.LEFT_FOOT_LOWER;
                 g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
+                if(trex.getPower() == trex.pepperPower){
+                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                }
                 trex.collider=utility.createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
 //                trex.at = new AffineTransform();

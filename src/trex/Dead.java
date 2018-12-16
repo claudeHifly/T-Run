@@ -5,6 +5,7 @@
  */
 package trex;
 
+import general.Board;
 import general.UserInterface;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -27,11 +28,15 @@ public class Dead implements TrexState {
 
     @Override
     public void create(Graphics g) {
+        Board.running = false;
+        Board.gameOver = true;
         g.drawImage(this.deadTRex, trex.x, trex.y, null);
+        //System.out.println("GAME OVER");
         //g.drawImage(gameOverImage, 0, 0, null);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
         g.drawString("GAME OVER", UserInterface.width / 2 - 70, UserInterface.height / 2);
         g.drawString("Press ENTER to restart", UserInterface.width / 2 - 150, UserInterface.height / 2 + 35);
+        
     }
     
 }

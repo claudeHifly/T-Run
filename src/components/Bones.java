@@ -21,16 +21,24 @@ public class Bones extends Items{
 
     //private ArrayList<Item> obArray;
     private final int moneyOnScreen = 10;
-    private final double probabilityOfGoldBone = 0.15;
-    private final double probabilityOfPepper = 0.05;
+    public static double probabilityOfGoldBone;
+    public static double probabilityOfPepper;
    
     public Bones() {
         super.obArray = new ArrayList<Item>();
-        Item ob = new Bone(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),"image/bn/bone_small.png");
+        
+
+        this.probabilityOfGoldBone = 0.15;
+        this.probabilityOfPepper = 0.65;
+        
+        Item ob = new Bone(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),"image/color/bone_small.png");
+        
         AffineTransform at = new AffineTransform();
         at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
         ob.getCollider().transform(at);
+        
         super.obArray.add(ob);
+        
         int fd=0;
         int firstSerieNumber=(int)(Math.random()*4+2);
         int secondSerieNumber=(int)(Math.random()*4+2+firstSerieNumber);
@@ -38,15 +46,21 @@ public class Bones extends Items{
             fd = super.obArray.get(super.obArray.size() - 1).getX()+ 50;
             if (i==firstSerieNumber||i==secondSerieNumber)
                 fd = super.obArray.get(super.obArray.size() - 1).getX()+ 200 + (int)(Math.random()*500);
-            if(Math.random() < probabilityOfPepper)
-                if(Math.random() < 0.5)
+            
+            if (Math.random() < probabilityOfPepper) {
+                if (Math.random() < 0.2) {
                     ob = new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/pepper.png");
-                else
+                } else if (Math.random() > 0.4){
                     ob = new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/ham.png");
-            else if(Math.random() < probabilityOfGoldBone)
+                } else {
+                    ob = new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/mulScore.png");
+                }
+            } else if (Math.random() < probabilityOfGoldBone) {
                 ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_gold2.png");
-            else 
+            } else {
                 ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_small.png");
+            }
+            
             at = new AffineTransform();
             at.translate(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
             ob.getCollider().transform(at);
@@ -130,15 +144,22 @@ public class Bones extends Items{
                     fd = super.obArray.get(super.obArray.size() - 1).getX()+ 50;
                     if (i==firstSerieNumber||i==secondSerieNumber)
                         fd = super.obArray.get(super.obArray.size() - 1).getX()+ 200 + (int)(Math.random()*500);
-                    if(Math.random() < probabilityOfPepper)
-                        if(Math.random() < 0.5)
+                    
+                    
+                    if (Math.random() < probabilityOfPepper) {
+                        if (Math.random() < 0.2) {
                             ob = new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/pepper.png");
-                        else
+                        } else if (Math.random() > 0.4) {
                             ob = new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/ham.png");
-                    else if(Math.random() < probabilityOfGoldBone)
+                        } else {
+                            ob = new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/mulScore.png");
+                        }
+                    } else if (Math.random() < probabilityOfGoldBone) {
                         ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_gold2.png");
-                    else
+                    } else {
                         ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_small.png");
+                    }
+
                     at = new AffineTransform();
                     at.translate(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
                     ob.getCollider().transform(at);

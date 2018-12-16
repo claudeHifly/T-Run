@@ -55,10 +55,10 @@ public class HomePage extends JPanel{
                 //url = this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png");
                 BufferedImage backImage = Resources.instance().getHomepageBackgroundImage();
                 Image scaledImage = image.getScaledInstance((int) (width * 0.5), (int) (image.getHeight() * width / image.getWidth() * 0.5), 100);
-                Image scaledBackImage = backImage.getScaledInstance((int) (backImage.getWidth() * height / backImage.getHeight()), height, 100);
+                Image scaledBackImage = backImage.getScaledInstance(width, height, 100);
                 
                 g.drawImage(scaledBackImage, 0, 0, this);
-                g.drawImage(scaledImage, (int) (width - (width * 0.5))/2, 0, this);
+                //g.drawImage(scaledImage, (int) (width - (width * 0.5))/2, 0, this);
             }
         };
         

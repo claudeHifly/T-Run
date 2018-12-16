@@ -85,10 +85,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
         moneys.update();
         obstacles.update();
 
-        if (TRex.getState() != TRex.getJumping() && !grass_ground.hasCollided(TRex.getCollider())) {
-            running = false;
-            gameOver = true;
-            TRex.setState(TRex.getDead());
+        if ( (TRex.getState() != TRex.getFalling()) && (TRex.getState() != TRex.getJumping()) && !grass_ground.hasCollided(TRex.getCollider())) {
+            
+            //System.out.println("ho preso il canyon");
+            //running = false;
+            //gameOver = true;
+            TRex.setState(TRex.getFalling());
         }
 
         Item collidedObstacle = obstacles.hasCollided(TRex.getCollider());
@@ -140,6 +142,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         while (running) {
 
             try {
+                //System.out.println("running");
                 this.updateGame();
                 this.repaint();
                 Thread.sleep(35);
@@ -180,7 +183,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         public void reset() {
-            Ground.movementSpeed = 8;
+            Ground.movementSpeed0 = 8;
+            TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
+            TRex.setMultiplier(false);
             score = 0;
             distanceForScore = 0;
             coin = 0;

@@ -60,7 +60,7 @@ public class Ground {
     }
 
     public final static int yPosition = (int) (UserInterface.height * 0.75);
-    private final int movementSpeed0 = 8;
+    public static int movementSpeed0 = 8;
     public static int movementSpeed;
     private final ArrayList<GroundImage> grassGroundSet;
     private final int groundOnScreen;
@@ -72,7 +72,7 @@ public class Ground {
         nextX = 0;
         AffineTransform at;
         movementSpeed = movementSpeed0;
-        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall.png");
+        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall2.png");
         BufferedImage image = new Utility().create(url);
         groundOnScreen = (int) (width * 3 / image.getWidth());
         for (int i = 0; i < groundOnScreen; i++) {
@@ -97,13 +97,18 @@ public class Ground {
     }
 
     public boolean hasCollided(Area area) {
+        
+        
         for (GroundImage ob : grassGroundSet) {
             Area inter = (Area) ob.collider.clone();
             inter.intersect(area);
             if (!inter.isEmpty()) {
+                
                 return true;
             }
         }
+        
+        //System.out.println("ho preso il canyon");
 
         return false;
     }
@@ -134,7 +139,7 @@ public class Ground {
 
     public int addCanyon(int x) {
         AffineTransform at;
-        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall.png");
+        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall2.png");
         BufferedImage image = new Utility().create(url);
         ImageOutline outline = new ImageOutline(image);
         x -= image.getWidth() / 2;
@@ -150,6 +155,6 @@ public class Ground {
                 return grassGroundSet.get(i).x + grassGroundSet.get(i).image.getWidth() / 2;
             }
         }
-        return x;     
+        return x;
     }
 }

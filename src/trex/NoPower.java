@@ -9,16 +9,18 @@ import java.awt.Graphics;
 
 /**
  *
- * @author Angela
+ * @author Gennaro
  */
-public class Blink implements TrexState {
-
-    public Blink(Trex trex) {
+public class NoPower implements TrexPower{
+    
+    private final Trex trex;
+    
+    public NoPower (Trex trex){
+       this.trex = trex; 
     }
 
     @Override
     public void create(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
