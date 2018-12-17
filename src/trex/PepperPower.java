@@ -23,7 +23,7 @@ public class PepperPower implements TrexPower{
     public PepperPower(Trex trex) {
         this.trex = trex;
         //this.trex.setState(trex.getPepperPower());
-        this.auraTRex = Resources.instance().getAuraImage();
+        this.auraTRex = Resources.instance().getAura();
     }
 
     @Override

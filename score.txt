@@ -1,3 +1,5 @@
+cla,10579
+pim,673
 aaa,30
 bbb,20
 ccc,10

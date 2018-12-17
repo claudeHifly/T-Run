@@ -31,8 +31,7 @@ public class Background {
     public Background(){
         
         //OLD
-        //url = this.getClass().getClassLoader().getResource("image/color/background3_small.jpg");
-        this.backGround = Resources.instance().getBackgroundImage();
+        this.backGround = Resources.instance().getBackgroundCol();
         
         //COLOURED
         //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 

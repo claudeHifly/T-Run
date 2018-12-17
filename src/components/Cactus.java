@@ -6,6 +6,8 @@
 package components;
 
 import general.Board;
+import java.awt.image.BufferedImage;
+import utility.Resources;
 
 /**
  *
@@ -15,7 +17,7 @@ public class Cactus extends Item{
     
 
     public Cactus(int x, int y) {
-        super(x, y, "image/color/Cactus-" + (int) (Math.random() * 4 + 1) + ".png");
+        super(x, y, Resources.instance().getCactusCol());
     }
 
     @Override

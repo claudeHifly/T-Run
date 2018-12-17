@@ -22,9 +22,9 @@ public class LowerHead implements TrexState {
     
     public LowerHead(Trex trex) {
         this.trex = trex;
-        lowerHeadDinoLeft = Resources.instance().getLowerHeadLeftFootImage();
-        lowerHeadDinoRight = Resources.instance().getLowerHeadRightFootImage();
-        this.biggerAuraImage = Resources.instance().getBiggerAuraImage();
+        lowerHeadDinoLeft = Resources.instance().getDinoBelowLeftUpCol();
+        lowerHeadDinoRight = Resources.instance().getDinoBelowRightUpCol();
+        this.biggerAuraImage = Resources.instance().getBiggerAuraCol();
     }
 
     @Override

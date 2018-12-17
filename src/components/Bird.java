@@ -10,7 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import utility.Utility;
+import utility.*;
 
 /**
  *
@@ -19,7 +19,7 @@ import utility.Utility;
 public class Bird extends Item{
        
     public Bird(int x, int y) {
-        super(x, y, "image/color/bird1.png");
+        super(x, y, Resources.instance().getBird1Col());
     }
     
     @Override

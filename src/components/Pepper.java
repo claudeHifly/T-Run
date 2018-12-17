@@ -8,6 +8,7 @@ package components;
 import general.Board;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.Timer;
 
 /**
@@ -17,8 +18,8 @@ import java.util.Timer;
 
 public class Pepper extends Item{
     
-     public Pepper(int x, int y, String path) {
-             super(x, y, path);  
+     public Pepper(int x, int y, BufferedImage image) {
+             super(x, y, image);  
      }
      
 

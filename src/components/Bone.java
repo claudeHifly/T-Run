@@ -8,6 +8,8 @@ package components;
 import general.Board;
 import static general.Board.coin;
 import static general.Board.score;
+import java.awt.image.BufferedImage;
+import utility.Resources;
 
 /**
  *
@@ -16,9 +18,9 @@ import static general.Board.score;
 public class Bone extends Item{
     private final int value;
     
-     public Bone(int x, int y, String path) {
-             super(x, y, path);
-             if (path.equals("image/color/bone_gold2.png")){
+     public Bone(int x, int y, BufferedImage image) {
+             super(x, y, image);
+             if (image == Resources.instance().getBoneSpecial() || image == Resources.instance().getBoneSpecial()){
                  this.value=50;
              }
              else{

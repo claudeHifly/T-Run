@@ -27,10 +27,10 @@ public abstract class Item {
     private Area collider;
     //private ImageOutline outline;
 
-    public Item(int x, int y, String path) {
+    public Item(int x, int y, BufferedImage image) {
         TRex = Trex.instance();
         this.x = x;
-        this.image = Utility.instance().create(this.getClass().getClassLoader().getResource(path));
+        this.image = image;
         this.y = y - image.getHeight();
         ImageOutline outline = new ImageOutline(image);
         this.collider = new Area(outline.getOutline(image));

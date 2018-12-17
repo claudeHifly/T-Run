@@ -20,7 +20,7 @@ import java.util.TreeSet;
  */
 public class Scoreboard {
 
-    private static TreeSet<Record> scoreboard = new TreeSet();
+    private static TreeSet<Record> scoreboard = new TreeSet<>();
     private static File file;
     private static String name = null;
 

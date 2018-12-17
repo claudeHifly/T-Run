@@ -12,6 +12,7 @@ import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Iterator;
 import static general.UserInterface.width;
+import utility.Resources;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Bones extends Items{
         this.probabilityOfGoldBone = 0.15;
         this.probabilityOfPepper = 0.65;
         
-        Item ob = new Bone(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),"image/color/bone_small.png");
+        Item ob = new Bone(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),Resources.instance().getBoneCol());
         
         AffineTransform at = new AffineTransform();
         at.translate(width, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
@@ -49,16 +50,16 @@ public class Bones extends Items{
             
             if (Math.random() < probabilityOfPepper) {
                 if (Math.random() < 0.2) {
-                    ob = new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/pepper.png");
+                    ob = new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getPepperCol());
                 } else if (Math.random() > 0.4){
-                    ob = new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/ham.png");
+                    ob = new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getHamCol());
                 } else {
-                    ob = new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/mulScore.png");
+                    ob = new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getMulScoreCol());
                 }
             } else if (Math.random() < probabilityOfGoldBone) {
-                ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_gold2.png");
+                ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getBoneSpecialCol());
             } else {
-                ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_small.png");
+                ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getBoneCol());
             }
             
             at = new AffineTransform();
@@ -132,7 +133,7 @@ public class Bones extends Items{
         }
         else{
             if (super.obArray.size()<=2){
-                Item ob = new Bone(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),"image/color/bone_small.png");
+                Item ob = new Bone(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15),Resources.instance().getBoneCol());
                 at = new AffineTransform();
                 at.translate(width+200, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15) - ob.getImage().getHeight());
                 ob.getCollider().transform(at);
@@ -148,16 +149,16 @@ public class Bones extends Items{
                     
                     if (Math.random() < probabilityOfPepper) {
                         if (Math.random() < 0.2) {
-                            ob = new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/pepper.png");
+                            ob = new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getPepperCol());
                         } else if (Math.random() > 0.4) {
-                            ob = new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/ham.png");
+                            ob = new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getHamCol());
                         } else {
-                            ob = new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/mulScore.png");
+                            ob = new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getMulScoreCol());
                         }
                     } else if (Math.random() < probabilityOfGoldBone) {
-                        ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_gold2.png");
+                        ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getBoneSpecialCol());
                     } else {
-                        ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), "image/color/bone_small.png");
+                        ob = new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * 0.15), Resources.instance().getBoneCol());
                     }
 
                     at = new AffineTransform();

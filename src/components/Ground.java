@@ -32,28 +32,26 @@ public class Ground {
 
         public GroundImage(int x) {
             this.x = x;
-            URL url = this.getClass().getClassLoader().getResource("image/bn/Ground-" + (int) (Math.random() * 2 + 1) + ".png");
-            this.image = Utility.instance().create(url);
+            this.image = Resources.instance().getGroundCol();
             this.y = yPosition;
             ImageOutline outline = new ImageOutline(image);
             this.collider = new Area(outline.getOutline(image));
         }
         
-        public GroundImage(int x, String s) {
-            this.x = x;
-            URL url = this.getClass().getClassLoader().getResource(s);
-            this.image = Utility.instance().create(url);
-            this.y = yPosition;
-            ImageOutline outline = new ImageOutline(image);
-            this.collider = new Area(outline.getOutline(image));
-        }
+//        public GroundImage(int x, String s) {
+//            this.x = x;
+//            this.image = Resources.instance().getGroundCanyonCol();
+//            this.y = yPosition;
+//            ImageOutline outline = new ImageOutline(image);
+//            this.collider = new Area(outline.getOutline(image));
+//        }
 
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(Color.red);
-            g2d.draw(collider);
-            g2d.setColor(Color.BLACK);
+//            g2d.setColor(Color.red);
+//            g2d.draw(collider);
+//            g2d.setColor(Color.BLACK);
         }
 
     }
@@ -71,9 +69,7 @@ public class Ground {
         nextX = 0;
         AffineTransform at;
         movementSpeed = movementSpeed0;
-        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall.png");
-        BufferedImage image = Utility.instance().create(url);
-        groundOnScreen = (int) (width * 3 / image.getWidth());
+        groundOnScreen = (int) (width * 3 / Resources.instance().getGroundCanyonCol().getWidth());
         for (int i = 0; i < groundOnScreen; i++) {
             ob = new GroundImage(nextX);
             at = new AffineTransform();
@@ -138,8 +134,7 @@ public class Ground {
 
     public int addCanyon(int x) {
         AffineTransform at;
-        URL url = this.getClass().getClassLoader().getResource("image/bn/GroundCanyonSmall.png");
-        BufferedImage image = Utility.instance().create(url);
+        BufferedImage image = Resources.instance().getGroundCanyonCol();
         ImageOutline outline = new ImageOutline(image);
         x -= image.getWidth() / 2;
         Area collider = new Area(outline.getOutline(image));

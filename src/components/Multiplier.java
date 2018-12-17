@@ -5,6 +5,7 @@
  */
 package components;
 
+import java.awt.image.BufferedImage;
 import java.util.Timer;
 
 /**
@@ -13,8 +14,8 @@ import java.util.Timer;
  */
 public class Multiplier extends Item{
     
-    public Multiplier(int x, int y, String path) {
-             super(x, y, path);
+    public Multiplier(int x, int y, BufferedImage image) {
+             super(x, y, image);
              
      }
 

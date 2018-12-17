@@ -5,14 +5,16 @@
  */
 package components;
 
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author Gennaro
  */
 public class Ham extends Item {
     
-    public Ham(int x, int y, String path) {
-             super(x, y, path);
+    public Ham(int x, int y, BufferedImage image) {
+             super(x, y, image);
              
      }
 

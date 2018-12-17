@@ -92,8 +92,8 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
         deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
         System.out.println("deltaT " + deltaT);
         
-        this.mulBanner1 = Resources.instance().getMulBanner1Image();
-        this.mulBanner2 = Resources.instance().getMulBanner2Image();
+        this.mulBanner1 = Resources.instance().getMulBanner1Col();
+        this.mulBanner2 = Resources.instance().getMulBanner2Col();
         
         this.running = new Running(this);
         this.jumping = new Jumping(this);
@@ -132,17 +132,17 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
 
         topReached = false;
 
-        wTRex = Resources.instance().getJumpingImage().getWidth(null);
-        hTRex = Resources.instance().getJumpingImage().getHeight(null);
+        wTRex = Resources.instance().getDinoStandCol().getWidth(null);
+        hTRex = Resources.instance().getDinoStandCol().getHeight(null);
 
-        wTRexLower = Resources.instance().getLowerHeadLeftFootImage().getWidth(null);
-        hTRexLower = Resources.instance().getLowerHeadLeftFootImage().getHeight(null);
+        wTRexLower = Resources.instance().getDinoBelowLeftUpCol().getWidth(null);
+        hTRexLower = Resources.instance().getDinoBelowLeftUpCol().getHeight(null);
 
         TRexOnGround = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
         y = TRexOnGround;
         foot = NO_FOOT;//inizializzo
         //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
-        collider = Utility.instance().createCollider(Resources.instance().getLeftFootImage(), this.x, this.y);
+        collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUpCol(), this.x, this.y);
 //        outline = new ImageOutline(leftFootDino);
 //        collider = new Area(outline.getOutline(leftFootDino));
 //        at.translate(x, y);

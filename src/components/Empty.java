@@ -6,6 +6,7 @@
 package components;
 
 import java.awt.Graphics;
+import utility.Resources;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.awt.Graphics;
 public class Empty extends Item{
     
     public Empty(int x) {
-        super(x,200,"image/bn/Sun.png");
+        super(x,200,Resources.instance().getEmpty());
     }
 
     @Override
