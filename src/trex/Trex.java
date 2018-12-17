@@ -7,6 +7,7 @@ package trex;
 
 import components.Ground;
 import static components.Ground.movementSpeed;
+import general.Board;
 import general.UserInterface;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -114,7 +115,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
     public static Trex instance(){
         if (instance == null)
             instance = new Trex();
-        if(instance.getState()==instance.getDead()){
+        if(instance.getState() == instance.getDead()){
             instance.init();
             instance.setState(instance.getRunning());
         }
@@ -151,6 +152,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
    
     @Override
     public void create(Graphics g) {
+        
         state.create(g);
         
         Graphics2D g2d = (Graphics2D) g;
@@ -243,7 +245,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
 
         int keyPressed = e.getKeyCode();
         
-        if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (lowerHead) && !(jumpDisabled)) {
+        if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
             this.state = jumping ;
             jumpDisabled = true;
             //System.out.println("Space pressed");

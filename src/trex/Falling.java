@@ -6,9 +6,7 @@
 package trex;
 
 import components.Ground;
-import general.Board;
 import general.UserInterface;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import utility.Resources;
@@ -19,7 +17,7 @@ import utility.Resources;
  */
 public class Falling implements TrexState {
     
-    private final Trex trex;
+    private Trex trex;
     private final BufferedImage fallingImage;//immagine TRex fall
     
     public Falling(Trex trex) {

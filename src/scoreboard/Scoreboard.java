@@ -20,7 +20,7 @@ import java.util.TreeSet;
  */
 public class Scoreboard {
 
-    private static TreeSet<Record> scoreboard = new TreeSet();
+    private static TreeSet<Record> scoreboard = new TreeSet<Record>();
     private static File file;
     private static String name = null;
 
@@ -73,8 +73,8 @@ public class Scoreboard {
 
         int xPosFirstColumn = (int) (ScoreUserInterface.width*0.20);
         int xPosSecondColumn = (int) (ScoreUserInterface.width*0.65);
-        int yPos = (int) (ScoreUserInterface.height*0.28);
-        int yPosOffset = (int) (ScoreUserInterface.height*0.075);
+        int yPos = (int) (ScoreUserInterface.height*0.30);
+        int yPosOffset = (int) (ScoreUserInterface.height*0.06);
 
         g.drawString("Name:", xPosFirstColumn, yPos);
         g.drawString("Score:", xPosSecondColumn, yPos);

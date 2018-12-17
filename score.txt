@@ -1,3 +1,10 @@
-aaa,30
-bbb,20
-ccc,10
+asd,740
+sdf,607
+hhh,607
+fgh,607
+asd,607
+fff,562
+frh,469
+fff,469
+dfc,469
+   ,445

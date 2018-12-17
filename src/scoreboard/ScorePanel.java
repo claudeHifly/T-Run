@@ -6,7 +6,6 @@
 package scoreboard;
 
 import general.Board;
-import general.UserInterface;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -21,7 +20,6 @@ import utility.Resources;
 public class ScorePanel extends JPanel{
 
     private BufferedImage scoreboardImage = Resources.instance().getScoreboardBackgroundImage();
-    private boolean flag = true;
     
     public ScorePanel() {
         this.init();

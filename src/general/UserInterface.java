@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in he editor.
  */
 package general;
 
@@ -17,7 +17,6 @@ public class UserInterface extends JFrame { //Singleton
 
     public static int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);    //dovrebbero essere final
     public static int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
-    public static JFrame frame = new JFrame();
     private static UserInterface instance = null;
     
     private UserInterface() {
@@ -38,4 +37,9 @@ public class UserInterface extends JFrame { //Singleton
         }
         return instance;
     }
+
+    public static void setInstance(UserInterface instance) {
+        UserInterface.instance = instance;
+    }
+    
 }
