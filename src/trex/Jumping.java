@@ -9,6 +9,7 @@ package trex;
 //import static components.TRex.state;
 //import static components.TRex.x;
 import components.Ground;
+import general.Board;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import utility.*;
@@ -74,7 +75,8 @@ public class Jumping implements TrexState {
 
         }
 
-        if (Ground.movementSpeed > 20 && trex.y >= trex.TRexOnGround - 75 && trex.topReached == true) {
+        if ((Ground.movementSpeed > 20 && trex.y >= trex.TRexOnGround - 75 && trex.topReached == true) || 
+                (Board.grass_ground.hasCollided(trex.getCollider()))) {
 
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);   //deve sempre essere fatto prima g.drawImage
                                                                     //altrimenti abbiamo dei frame in cui scatta
@@ -90,7 +92,8 @@ public class Jumping implements TrexState {
             trex.setState(trex.getRunning());
         }
         
-        if (Ground.movementSpeed <= 20 && trex.y >= trex.TRexOnGround - 25 && trex.topReached == true) {
+        if ((Ground.movementSpeed <= 20 && trex.y >= trex.TRexOnGround - 25 && trex.topReached == true) ||
+                (Board.grass_ground.hasCollided(trex.getCollider()))) {
 
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);   //deve sempre essere fatto prima g.drawImage
                                                                     //altrimenti abbiamo dei frame in cui scatta

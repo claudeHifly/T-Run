@@ -21,24 +21,30 @@ public class Falling implements TrexState {
     
     private final Trex trex;
     private final BufferedImage fallingImage;//immagine TRex fall
+    private final BufferedImage auraImage;
     
     public Falling(Trex trex) {
         this.trex = trex;
-        this.fallingImage = Resources.instance().getJumpingImage();
+        this.fallingImage = Resources.instance().getDeadImage();
+        this.auraImage = Resources.instance().getAuraImage();
     }
     
     @Override
     public void create(Graphics g) {
         if (trex.y < UserInterface.instance().height) {
-            System.out.println("cadooooo");
+            
             Ground.movementSpeed0 = 0;
             Ground.movementSpeed = 0;
             trex.y += trex.deltaT * trex.speedForJumping;
             g.drawImage(this.fallingImage, trex.x, trex.y, null);
+            if(trex.getPower() == trex.pepperPower){
+                     g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
+                }
             trex.speedForJumping += (trex.deltaT * trex.gravity);
         } else {
+            trex.setMultiplier(false);
             trex.setState(trex.getDead());
-            System.out.println("morto");
+            
             trex.create(g);
         }
     }
