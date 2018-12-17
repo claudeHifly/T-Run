@@ -11,8 +11,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import java.net.URL;
-import utility.Utility;
+import trex.Trex;
+import utility.*;
 
 /**
  *
@@ -20,6 +20,7 @@ import utility.Utility;
  */
 public abstract class Item {
 
+    protected Trex TRex;
     private BufferedImage image;
     private int x;
     private int y;
@@ -27,12 +28,15 @@ public abstract class Item {
     //private ImageOutline outline;
 
     public Item(int x, int y, String path) {
+        TRex = Trex.instance();
         this.x = x;
-        this.image = new Utility().create(this.getClass().getClassLoader().getResource(path));
+        this.image = Utility.instance().create(this.getClass().getClassLoader().getResource(path));
         this.y = y - image.getHeight();
         ImageOutline outline = new ImageOutline(image);
         this.collider = new Area(outline.getOutline(image));
     }
+    
+    public abstract void collisionAction(Item collidedItem);
 
     public BufferedImage getImage() {
         return image;
@@ -60,10 +64,10 @@ public abstract class Item {
 
     public void create(Graphics g) {
         g.drawImage(image, x, y, null);
-        Graphics2D g2d = (Graphics2D)g;
-//        g2d.setColor(Color.red);
-//        g2d.draw(collider);
-//        g2d.setColor(Color.BLACK);
+        Graphics2D g2d = (Graphics2D) g;
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.BLACK);
     }
 
     public Area getCollider() {

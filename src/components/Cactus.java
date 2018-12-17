@@ -5,6 +5,8 @@
  */
 package components;
 
+import general.Board;
+
 /**
  *
  * @author claud
@@ -13,7 +15,26 @@ public class Cactus extends Item{
     
 
     public Cactus(int x, int y) {
-        super(x, y, "image/color/Cactus-" + (int) (Math.random() * 4 + 1) + "-colorato.png");
+        super(x, y, "image/color/Cactus-" + (int) (Math.random() * 4 + 1) + ".png");
+    }
+
+    @Override
+    public void collisionAction(Item collidedItem) {
+        
+        if (super.TRex.getPower() == TRex.pepperPower) {
+            System.out.println("BRUCIA CACTUS");
+            
+            
+            if (super.TRex.multiplier == true) {
+                Board.coin += 2 * 5;
+            } else {
+                Board.coin += 5;
+            }
+        } else {
+            Board.running = false;
+            Board.gameOver = true;
+            super.TRex.setState(TRex.getDead());
+        }
     }
             
 }

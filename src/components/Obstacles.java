@@ -16,115 +16,85 @@ import static general.UserInterface.width;
  *
  * @author claud
  */
-public class Obstacles implements Items{
+public class Obstacles extends Items{
 
-    private ArrayList<Item> obArray;
-    private final int cactusOnScreen = 6;
+    private final int cactusOnScreen;
     private final double yPercentageCactusOnGround = 0.025;
-    private final double yPercentageBirdOnGround = 0;
-    
+    private final double yPercentageBirdOnGround = 0.1;
+    private final int cactusFrequency = 25;
+    private final int birdFrequency = 25;
+    private final int canyonFrequency = 50;
+    private final Ground ground;
 
-    public Obstacles() {
-        obArray = new ArrayList<Item>();
-        Item ob = new Cactus(width, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-        AffineTransform at = new AffineTransform();
-        at.translate(width, ob.getY());
-        ob.getCollider().transform(at);
-        obArray.add(ob);
-        for (int i = 1; i < cactusOnScreen; i++) {
-            int rd = randomDistance();
-            ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+    public Obstacles(Ground ground) {
+        obArray = new ArrayList<>();
+        this.ground = ground;
+        Item ob;
+        AffineTransform at;
+        cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
+        for (int i = 0; i < cactusOnScreen; i++) {
+            ob = new Cactus(randomDistance(), (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
-            at.translate(rd, ob.getY());
+            at.translate(ob.getX(), ob.getY());
             ob.getCollider().transform(at);
             obArray.add(ob);
         }
-        int rd = randomDistance();
-        Item ob1 = new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
-        at = new AffineTransform();
-        at.translate(rd, ob1.getY());
-        ob1.getCollider().transform(at);
-        obArray.add(ob1);
     }
 
-    public void create(Graphics g) {
-        for (Item ob : obArray) {
-            ob.create(g);
-        }
-
-    }
-
-    public Item hasCollided(Area TRexArea) {
-        for (Item ob : obArray) {
-            Area inter = (Area) ob.getCollider().clone();
-            inter.intersect(TRexArea);
-            if (!inter.isEmpty()) {
-                System.out.println("Collisione con " + ob.getClass().getSimpleName());
-                return ob;
-            }
-        }
-        
-        return null;
-    }
-
+    @Override
     public void update() {
-        //System.out.println("I'm in Obstacles update");
-        Iterator<Item> looper = obArray.iterator();
-        Item firstOb = looper.next();
-
-        firstOb.setX(firstOb.getX() - Ground.speedForCactus);
-        //at.translate(firstOb.getX() - movementSpeed, 0);
-        AffineTransform at = new AffineTransform();
-        at.translate(-Ground.speedForCactus, 0);
-        firstOb.getCollider().transform(at);
-
-        while (looper.hasNext()) {
-            //System.out.println("I'm in looper while");
-            Item ob = looper.next();
-            ob.setX(ob.getX() - Ground.speedForCactus);
-            //at.translate(ob.getX() - movementSpeed, 0);
+        AffineTransform at;
+        for (Item ob : obArray){
+              ob.setX(ob.getX() - Ground.movementSpeed);
+              at = new AffineTransform();
+              at.translate(-Ground.movementSpeed, 0);
+              ob.getCollider().transform(at);
+        }
+        Item firstOb = obArray.get(0);
+        if ((firstOb.getX() < -firstOb.getImage().getWidth()) && (!obArray.isEmpty())) { //image is completely out of the screen: remove and move it to the end of the array
+            obArray.remove(firstOb);
+            Item ob = randomObstacle();
             at = new AffineTransform();
-            at.translate(-Ground.speedForCactus, 0);
+            at.translate(ob.getX(), ob.getY());
             ob.getCollider().transform(at);
+            obArray.add(ob);
         }
-
-        if (firstOb.getX() < -firstOb.getImage().getWidth()) { //image is completely out of the screen: remove and move it to the end of the array
-            //System.out.println("I'm in if");
-            int rd = randomDistance();
-            String type = firstOb.getClass().getSimpleName();
-            if (type.equals("Bird")){
-                obArray.remove(firstOb);
-                Item ob = new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
-                at = new AffineTransform();
-                at.translate(rd, ob.getY());
-                ob.getCollider().transform(at);
-                obArray.add(ob);
-            } else {
-                obArray.remove(firstOb);
-                Item ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-                at = new AffineTransform();
-                at.translate(rd, ob.getY());
-                ob.getCollider().transform(at);
-                obArray.add(ob);
-            }
-//            firstOb.setX(rd);
-//            at = new AffineTransform();
-//            at.translate(rd + firstOb.getImage().getWidth(), 0);
-//            firstOb.getCollider().transform(at);
-//            obArray.add(firstOb);
-        }
-
     }
 
     private int randomDistance() {
-        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 200 + 500);
+        if (obArray.isEmpty()){
+            return width;
+        }
+        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 300 + 300);
     }
     
     private double randomBirdHeight() {
-        return (Math.random() * 0.1);
+        return (Math.random() * yPercentageBirdOnGround);
     }
-
-    public ArrayList<Item> getObArray() {
-        return obArray;
+    
+    private Item randomObstacle(){
+        int totalFrequency = (cactusFrequency + birdFrequency + canyonFrequency);
+        int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
+        int rd = randomDistance();
+        if (extract <= cactusFrequency){
+            return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+        } 
+        else{
+            if (extract <= cactusFrequency + birdFrequency){
+                return new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
+            }
+            
+            else {
+                
+                int endCanyon = ground.addCanyon(rd);
+                /*
+                if (endCanyon == rd){
+                    System.out.println("DOVRESTI METTERLO ALLA FINE");
+                    return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+                }*/
+                return new Empty(endCanyon);
+            }
+        }
     }
+    
 }

@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package components;
+package trex;
+
+import java.awt.Graphics;
 
 /**
  *
- * @author claud
+ * @author Angela
  */
-public class Money extends Item{
+public interface TrexState {
     
-     public Money(int x, int y) {
-        super(x, y, "image/color/bone_small.png");
-     }
-
+    public void create(Graphics g);
+    
 }

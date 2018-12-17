@@ -15,42 +15,52 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import utility.Utility;
-import java.net.URL;
+import utility.Resources;
 
 /**
  *
  * @author Angela
  */
-public class HomePage{
+public class HomePage extends JPanel{
+    
+    public static JButton startButton;
+    public static JFrame frame;
+    
+    public HomePage() {
+        setFocusable(true);//keyListener
+    }
+
     
     public static void main(String[] args) {
         int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);
         int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-
+        
+        
+       
         JPanel panel = new JPanel() {
+            
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                URL url = this.getClass().getClassLoader().getResource("image/HomePage/Title small.png");
-                BufferedImage image = new Utility().create(url);
-                url = this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png");
-                BufferedImage backImage = new Utility().create(url);
+                //URL url = this.getClass().getClassLoader().getResource("image/HomePage/Title small.png");
+                BufferedImage image = Resources.instance().getHomepageTitleImage();
+                //url = this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png");
+                BufferedImage backImage = Resources.instance().getHomepageBackgroundImage();
                 Image scaledImage = image.getScaledInstance((int) (width * 0.5), (int) (image.getHeight() * width / image.getWidth() * 0.5), 100);
-                Image scaledBackImage = backImage.getScaledInstance((int) (backImage.getWidth() * height / backImage.getHeight()), height, 100);
+                Image scaledBackImage = backImage.getScaledInstance(width, height, 100);
                 
                 g.drawImage(scaledBackImage, 0, 0, this);
-                g.drawImage(scaledImage, (int) (width - (width * 0.5))/2, 0, this);
+                //g.drawImage(scaledImage, (int) (width - (width * 0.5))/2, 0, this);
             }
         };
         
-        JButton startButton = new JButton("START");
+        startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
         startButton.setBounds((int) ((frame.getWidth() - 150)/2), (int) (frame.getHeight() * 0.8), 150, 50);
         panel.add(startButton);        
@@ -70,5 +80,25 @@ public class HomePage{
 
         frame.validate(); // because you added panel after setVisible was called
         frame.repaint(); // because you added panel after setVisible was called
+        
+        
     }
+    
+    /*   
+    public void keyPressed(KeyEvent e) {
+
+        int keyPressed = e.getKeyCode();
+
+        if (keyPressed == KeyEvent.VK_ENTER) {
+            System.out.println("START");
+            startButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.setVisible(false);
+                    new UserInterface().setVisible(true);
+                }
+            });
+        }//if keyPressed
+    }*/
+                    
 }
