@@ -66,6 +66,9 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
     int leftCounter;        //contatore per l'animazione del piede sinistro
     int rightCounter;       //contatore per l'animazione del piede destro
     
+    int animation1;
+    int animation2;
+    
     
     private int blinkCounter;       //contatore per il numero di blink;
 
@@ -92,6 +95,9 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
         
         deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
         System.out.println("deltaT " + deltaT);
+        
+        this.animation1 = 0;
+        this.animation2 = 0;
         
         this.mulBanner1 = Resources.instance().getMulBanner1Image();
         this.mulBanner2 = Resources.instance().getMulBanner2Image();
@@ -159,22 +165,27 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
         //g2d.setColor(Color.red);
         //g2d.draw(collider);
         //g2d.setColor(Color.black);
-        
-        if(multiplier == true){
-            
-            if (bannerCounter == BANNER1) {
-                if (leftCounter < 5) {
-                    g.drawImage(mulBanner1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+        if (instance.getState() != dead) {
+            if (multiplier == true) {
+
+                if (bannerCounter == BANNER1) {
+                    if (animation1 < 5) {
+                        g.drawImage(mulBanner1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation1++;
+                    } else {
+                        bannerCounter = BANNER2;
+                        g.drawImage(mulBanner2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation1 = 0;
+                    }
                 } else {
-                    bannerCounter = BANNER2;
-                    g.drawImage(mulBanner2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
-                }
-            } else {
-                if (rightCounter < 5) {
-                    g.drawImage(mulBanner2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
-                } else {
-                    bannerCounter = BANNER1;
-                    g.drawImage(mulBanner1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                    if (animation2 < 5) {
+                        g.drawImage(mulBanner2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation2++;
+                    } else {
+                        bannerCounter = BANNER1;
+                        g.drawImage(mulBanner1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation2 = 0;
+                    }
                 }
             }
         }
@@ -245,7 +256,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
 
         int keyPressed = e.getKeyCode();
         
-        if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
+        if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
             this.state = jumping ;
             jumpDisabled = true;
             //System.out.println("Space pressed");

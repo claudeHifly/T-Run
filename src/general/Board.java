@@ -10,7 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import components.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import scoreboard.ScoreUserInterface;
+import utility.Resources;
 
 /**
  *
@@ -22,10 +24,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static boolean gameOver = false;
     public static boolean blinking = false;
     private Trex TRex;
-    private Ground grass_ground;
+    public static Ground grass_ground;
     private Obstacles obstacles;
     private Bones moneys;
     private Background background;
+    private Item collidedObstacle;
+    private final BufferedImage explosionImage;
 
     public static int distance;
     public static float distanceForScore;
@@ -43,7 +47,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         /*this.nameLabel = new JLabel("Name:");
         this.nameLabel.setVisible(true);
         this.add(this.nameLabel);*/
-        
+        this.explosionImage = Resources.instance().getExplosion();
         setFocusable(true);//keyListener
         addKeyListener(new TRexAdapter());
         startGame();
@@ -86,7 +90,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
         distance += 1;
         distanceForScore += 0.1;
-        score += 1;
+        
+        score = coin + (int) distanceForScore;  //PUNTEGGIO FINALE
+        
         background.update();
         grass_ground.update();
         moneys.update();
@@ -100,10 +106,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
             TRex.setState(TRex.getFalling());
         }
 
-        Item collidedObstacle = obstacles.hasCollided(TRex.getCollider());
-        if (collidedObstacle != null) {
+        this.collidedObstacle = obstacles.hasCollided(TRex.getCollider());
+        if (this.collidedObstacle != null) {
 
-            collidedObstacle.collisionAction(collidedObstacle);
+            this.collidedObstacle.collisionAction(collidedObstacle);
             /*
             running = false;
             gameOver = true;
@@ -137,6 +143,17 @@ public class Board extends JPanel implements Runnable, ActionListener {
         g.drawString("MT: " + Integer.toString((int) distanceForScore), getWidth() / 4 - 180, 100);
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
         g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
+        
+        if (collidedObstacle != null) {
+
+            collidedObstacle.collisionAction(collidedObstacle);
+
+            if (TRex.getPower() == TRex.pepperPower) {
+                g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
+
+            }
+
+        }
 
         g.dispose();
 
