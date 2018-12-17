@@ -15,6 +15,7 @@ import static general.UserInterface.width;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.net.URL;
+import utility.ImageOutline;
 
 /**
  *

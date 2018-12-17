@@ -5,6 +5,7 @@
  */
 package utility;
 
+import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
