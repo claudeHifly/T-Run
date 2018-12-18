@@ -9,6 +9,7 @@ import components.Ground;
 import static components.Ground.movementSpeed;
 import general.Board;
 import general.UserInterface;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
@@ -162,9 +163,9 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower{
         state.create(g);
         
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setColor(Color.red);
-        //g2d.draw(collider);
-        //g2d.setColor(Color.black);
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.black);
         if (instance.getState() != dead) {
             if (multiplier == true) {
 

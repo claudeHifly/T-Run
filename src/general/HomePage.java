@@ -126,12 +126,5 @@ public class HomePage extends JFrame{
         public void paintComponent(Graphics g) {
           g.drawImage(this.scaledFootprintImage, (int) (width*0.44), (int) (height*0.7), null);
         }
-        // This method override will tell the LayoutManager how large this component
-        // should be. We'll want to make this component the same size as the `img`.
-        /*@Override
-        public Dimension getPreferredSize() {
-            return new Dimension(this.scaledFootprintImage.getWidth(null), this.scaledFootprintImage.getHeight(null));
-        }*/
-        // The MouseListener that handles the click, etc.
     }
 }
