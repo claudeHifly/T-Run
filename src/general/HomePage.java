@@ -5,14 +5,19 @@
  */
 package general;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import utility.Resources;
@@ -36,32 +41,44 @@ public class HomePage extends JFrame{
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                BufferedImage image = Resources.instance().getHomepageTitleImage();
                 BufferedImage backImage = Resources.instance().getHomepageBackgroundImage();
-                Image scaledImage = image.getScaledInstance((int) (width * 0.5), (int) (image.getHeight() * width / image.getWidth() * 0.5), 100);
                 Image scaledBackImage = backImage.getScaledInstance(width, height, 100);
                 
+                /*BufferedImage footprintImage = Resources.instance().getHomepageFootprintImage();
+                Image scaledFootprintImage = footprintImage.getScaledInstance((int) (width*0.1), (int) (height*0.1), 100);*/
+                
                 g.drawImage(scaledBackImage, 0, 0, this);
-                //g.drawImage(scaledImage, (int) (width - (width * 0.5))/2, 0, this);
+                
+                g.setFont(new Font("Courier New", Font.BOLD, 25));
+                g.drawString("Click on footprint to start", (int) (width*0.35), (int) (height*0.92));
+                //g.drawImage(scaledFootprintImage, (int) (width*0.48), (int) (height*0.8), this);
             }
         };
         
-        startButton = new JButton("START");
+        /*startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
         startButton.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 150, 50);
-        panel.add(startButton);        
+        //startButton.setVisible(false);
+        panel.add(startButton); */
         
         //panel.setBackground(new Color(137,223,51));
-        panel.setLayout(null);
-        add(panel);
+        ImageShowingComponent footprint = new ImageShowingComponent(this);
+        footprint.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 150, 50);
+        footprint.setVisible(true);
+        panel.setLayout(new BorderLayout());
+        panel.add(footprint);
         
-        startButton.addActionListener(new ActionListener() { 
+        //panel.setLayout(null);
+        add(panel);
+        //panel.add(footprint);
+        
+        /*startButton.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
             setVisible(false);
             UserInterface.instance().setVisible(true);
             }
-        });
+        });*/
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,5 +96,47 @@ public class HomePage extends JFrame{
         int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);
         int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
         HomePage frame = new HomePage();   
-    }            
+    }  
+    
+    private class ImageShowingComponent extends JComponent {
+
+        // The image to display
+        private final BufferedImage footprintImage;
+        private final Image scaledFootprintImage;
+        private MouseListener listenerStart;
+        //private MouseListener listenerDemo;
+
+        // Instantiate the panel and perform initialization
+        ImageShowingComponent(HomePage frame) {
+            this.listenerStart = new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    frame.setVisible(false);
+                    UserInterface.instance().setVisible(true);
+                }
+            };
+            
+            /*this.listenerDemo = new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    frame.setVisible(false);
+                    //apri demo
+                }
+            };*/
+          addMouseListener(listenerStart);
+          this.footprintImage = Resources.instance().getHomepageFootprintImage();
+          this.scaledFootprintImage = footprintImage.getScaledInstance((int) (width*0.1), (int) (height*0.2), 100);
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+          g.drawImage(this.scaledFootprintImage, (int) (width*0.44), (int) (height*0.7), null);
+        }
+        // This method override will tell the LayoutManager how large this component
+        // should be. We'll want to make this component the same size as the `img`.
+        /*public Dimension getPreferredSize() {
+        return new Dimension(img.getWidth(), img.getHeight());
+        }*/
+        // The MouseListener that handles the click, etc.
+    }
 }

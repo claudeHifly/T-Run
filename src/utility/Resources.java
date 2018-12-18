@@ -18,6 +18,7 @@ public class Resources { //singleton
     // IMMAGINI HOMESCREEN
     private final BufferedImage homepageTitleImage;
     private final BufferedImage homepageBackgroundImage;
+    private final BufferedImage homepageFootprintImage;
     // SCOREBOARD
     private final BufferedImage scoreboardBackgroundImage;    
     
@@ -101,6 +102,7 @@ public class Resources { //singleton
         //IMMAGINI HOMESCREEN
         homepageTitleImage = Utility.instance().instance().create(this.getClass().getClassLoader().getResource("image/HomePage/Title small.png"));
         homepageBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png"));
+        homepageFootprintImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/Footprint small.png"));
         
         // SCOREBOARD
         scoreboardBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/scoreboard/scoreScreen1.jpg"));
@@ -199,6 +201,10 @@ public class Resources { //singleton
 
     public BufferedImage getHomepageBackgroundImage() {
         return homepageBackgroundImage;
+    }
+    
+    public BufferedImage getHomepageFootprintImage(){
+        return homepageFootprintImage;
     }
 
     public BufferedImage getScoreboardBackgroundImage() {
