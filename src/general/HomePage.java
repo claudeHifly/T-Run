@@ -6,9 +6,11 @@
 package general;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,8 +65,6 @@ public class HomePage extends JFrame{
         
         //panel.setBackground(new Color(137,223,51));
         ImageShowingComponent footprint = new ImageShowingComponent(this);
-        footprint.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 150, 50);
-        footprint.setVisible(true);
         panel.setLayout(new BorderLayout());
         panel.add(footprint);
         
@@ -103,27 +103,25 @@ public class HomePage extends JFrame{
         // The image to display
         private final BufferedImage footprintImage;
         private final Image scaledFootprintImage;
-        private MouseListener listenerStart;
-        //private MouseListener listenerDemo;
+        private MouseListener listener;
 
         // Instantiate the panel and perform initialization
         ImageShowingComponent(HomePage frame) {
-            this.listenerStart = new MouseAdapter() {
+            this.listener = new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    frame.setVisible(false);
-                    UserInterface.instance().setVisible(true);
+                    int xOnScreen = e.getX();
+                    int yOnScreen = e.getY();
+                    
+                    //Controllo che il click sia stato fatto nella porzione di schermo dove è presente l'immagine
+                    if((xOnScreen >= (int) (width*0.44) && xOnScreen <= (int) (width*0.44)+(int) (width*0.1)) && (yOnScreen >= (int) (height*0.7) && yOnScreen <= (int) (height*0.7)+(int) (height*0.2))){
+                        frame.setVisible(false);
+                        UserInterface.instance().setVisible(true);
+                    }
                 }
             };
             
-            /*this.listenerDemo = new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    frame.setVisible(false);
-                    //apri demo
-                }
-            };*/
-          addMouseListener(listenerStart);
+          this.addMouseListener(listener);
           this.footprintImage = Resources.instance().getHomepageFootprintImage();
           this.scaledFootprintImage = footprintImage.getScaledInstance((int) (width*0.1), (int) (height*0.2), 100);
         }
@@ -134,8 +132,9 @@ public class HomePage extends JFrame{
         }
         // This method override will tell the LayoutManager how large this component
         // should be. We'll want to make this component the same size as the `img`.
-        /*public Dimension getPreferredSize() {
-        return new Dimension(img.getWidth(), img.getHeight());
+        /*@Override
+        public Dimension getPreferredSize() {
+            return new Dimension(this.scaledFootprintImage.getWidth(null), this.scaledFootprintImage.getHeight(null));
         }*/
         // The MouseListener that handles the click, etc.
     }
