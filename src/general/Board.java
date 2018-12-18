@@ -29,7 +29,15 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private Bones moneys;
     private Background background;
     private Item collidedObstacle;
+    private Item collidedMoney;
     private final BufferedImage explosionImage;
+    private String collidedObstacleString;
+    private String collidedMoneyString;
+    private final BufferedImage score5Col;
+    private final BufferedImage score10Col;
+    private final BufferedImage score20Col;
+    
+    
 
     public static int distance;
     public static float distanceForScore;
@@ -39,6 +47,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static Thread animator;
     public static Thread blinker;
     
+    
     public static boolean openScoreboard = true;
     //INIZIALIZZO BOARD
     public Board() {
@@ -46,7 +55,13 @@ public class Board extends JPanel implements Runnable, ActionListener {
         /*this.nameLabel = new JLabel("Name:");
         this.nameLabel.setVisible(true);
         this.add(this.nameLabel);*/
+        
         this.explosionImage = Resources.instance().getExplosionCol();
+        this.score5Col = Resources.instance().getScore5Col();
+        this.score10Col = Resources.instance().getScore10Col();
+        this.score20Col = Resources.instance().getScore20Col();
+        
+        
         setFocusable(true);//keyListener
         addKeyListener(new TRexAdapter());
         startGame();
@@ -58,6 +73,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         //TRex = new Trex();
         background = new Background();
         grass_ground = new Ground();
+        this.collidedObstacleString = null;
+        this.collidedMoneyString = null;
 
         //TREX
         TRex = Trex.instance();
@@ -108,8 +125,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         this.collidedObstacle = obstacles.hasCollided(TRex.getCollider());
+        this.collidedMoney = moneys.hasCollided(TRex.getCollider());
+        
         if (this.collidedObstacle != null) {
-
+            this.collidedObstacleString = collidedObstacle.getClass().getSimpleName();
+            this.collidedMoneyString = collidedObstacle.getClass().getSimpleName();
             this.collidedObstacle.collisionAction(collidedObstacle);
             /*
             running = false;
@@ -118,7 +138,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
             TRex.setState(TRex.getDead());*/
         }
 
-        Item collidedMoney = moneys.hasCollided(TRex.getCollider());
         if (collidedMoney != null) {
             //System.out.println("Ho preso una monetina shobalola");
             System.out.println(collidedMoney.getClass().getSimpleName());
@@ -145,16 +164,71 @@ public class Board extends JPanel implements Runnable, ActionListener {
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
         g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
         
-        if (collidedObstacle != null) {
+        if (collidedObstacle!= null) {
+            
+            //esplosione BIRD
+            if (collidedObstacleString.equals("Bird")) {
+                
+                /*
+                if (birdCounter == BIRD1) {
+                    if (animation1 < 5) {
+                        g.drawImage(bird1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation1++;
+                    } else {
+                        birdCounter = BIRD2;
+                        g.drawImage(bird2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation1 = 0;
+                    }
+                } else {
+                    if (animation2 < 5) {
+                        g.drawImage(bird2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation2++;
+                    } else {
+                        birdCounter = BIRD1;
+                        g.drawImage(bird1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation2 = 0;
+                    }
+                }*/
+                
+                
+                collidedObstacle.collisionAction(collidedObstacle);
 
-            collidedObstacle.collisionAction(collidedObstacle);
+                if (TRex.getPower() == TRex.pepperPower) {
+                    g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
 
-            if (TRex.getPower() == TRex.pepperPower) {
-                g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
+                    if (this.TRex.multiplier == true) {
 
+                        g.drawImage(score20Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+
+                    } else {
+
+                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+
+                    }
+                }
+            }
+            
+            //esplosione CACTUS
+            if (collidedObstacleString.equals("Cactus")) {
+                //collidedObstacle.getClass().getSimpleName()
+                System.out.println(collidedObstacle.getClass().getSimpleName());
+                collidedObstacle.collisionAction(collidedObstacle);
+
+                if (TRex.getPower() == TRex.pepperPower) {
+                    g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
+
+                    if (this.TRex.multiplier == true) {
+                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+
+                    } else {
+                        g.drawImage(score5Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+
+                    }
+                }
             }
 
         }
+        
 
         g.dispose();
 

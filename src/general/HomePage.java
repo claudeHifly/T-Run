@@ -53,9 +53,9 @@ public class HomePage extends JFrame{
             }
         };
         
-        /*startButton = new JButton("START");
+       /* startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
-        startButton.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 150, 50);
+        startButton.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 180, 50);
         //startButton.setVisible(false);
         panel.add(startButton); */
         
@@ -68,11 +68,11 @@ public class HomePage extends JFrame{
         add(panel);
         //panel.add(footprint);
         
-        /*startButton.addActionListener(new ActionListener() { 
+/*        startButton.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
             setVisible(false);
-            UserInterface.instance().setVisible(true);
+            //UserInterface.instance().setVisible(true);
             }
         });*/
 
