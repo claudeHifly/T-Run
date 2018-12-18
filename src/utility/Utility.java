@@ -41,7 +41,7 @@ public class Utility { //singleton
     
     public Area createCollider(BufferedImage img, int x, int y){
         ImageOutline outline = new ImageOutline(img);
-        Area collider = new Area(outline.getOutline(img));
+        Area collider = new Area(outline.getOutline());
         AffineTransform at = new AffineTransform();
         at.translate(x, y);
         collider.transform(at);

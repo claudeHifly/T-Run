@@ -34,8 +34,9 @@ public class HomePage extends JPanel{
 
     
     public static void main(String[] args) {
+        Resources.instance();
         int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);
-        int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
+        int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);        
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -63,9 +64,9 @@ public class HomePage extends JPanel{
         startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
         startButton.setBounds((int) ((frame.getWidth() - 150)/2), (int) (frame.getHeight() * 0.8), 150, 50);
-        panel.add(startButton);        
-        
-        //panel.setBackground(new Color(137,223,51));
+        panel.add(startButton); 
+
+
         panel.setLayout(null);
         frame.add(panel);
         

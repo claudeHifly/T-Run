@@ -29,14 +29,14 @@ public class ImageOutline {
                 BufferedImage.TYPE_INT_RGB);
     }
     
-    public Area getOutline(BufferedImage bi) {
+    public Area getOutline() {
         // construct the GeneralPath
         GeneralPath gp = new GeneralPath();
 
         boolean cont = false;
-        for (int xx = 0; xx < bi.getWidth(); xx++) {
-            for (int yy = 0; yy < bi.getHeight(); yy++) {
-                if (bi.getRGB(xx, yy) >> 24 != 0x00) {
+        for (int xx = 0; xx < image.getWidth(); xx++) {
+            for (int yy = 0; yy < image.getHeight(); yy++) {
+                if (image.getRGB(xx, yy) >> 24 != 0x00) {
                     if (cont) {
                         gp.lineTo(xx, yy);
                         gp.lineTo(xx, yy + 1);

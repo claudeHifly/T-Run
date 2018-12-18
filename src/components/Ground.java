@@ -32,26 +32,20 @@ public class Ground {
 
         public GroundImage(int x) {
             this.x = x;
-            this.image = Resources.instance().getGroundCol();
+            this.image = Resources.instance().getGround();
             this.y = yPosition;
             ImageOutline outline = new ImageOutline(image);
-            this.collider = new Area(outline.getOutline(image));
+            this.collider = new Area(outline.getOutline());
+            this.image = Resources.instance().getGroundCol();
         }
         
-//        public GroundImage(int x, String s) {
-//            this.x = x;
-//            this.image = Resources.instance().getGroundCanyonCol();
-//            this.y = yPosition;
-//            ImageOutline outline = new ImageOutline(image);
-//            this.collider = new Area(outline.getOutline(image));
-//        }
 
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
             Graphics2D g2d = (Graphics2D) g;
-//            g2d.setColor(Color.red);
-//            g2d.draw(collider);
-//            g2d.setColor(Color.BLACK);
+            g2d.setColor(Color.red);
+            g2d.draw(collider);
+            g2d.setColor(Color.BLACK);
         }
 
     }
@@ -69,7 +63,7 @@ public class Ground {
         nextX = 0;
         AffineTransform at;
         movementSpeed = movementSpeed0;
-        groundOnScreen = (int) (width * 3 / Resources.instance().getGroundCanyonCol().getWidth());
+        groundOnScreen = (int) (width * 3 / Resources.instance().getGroundCanyon().getWidth());
         for (int i = 0; i < groundOnScreen; i++) {
             ob = new GroundImage(nextX);
             at = new AffineTransform();
@@ -135,9 +129,8 @@ public class Ground {
     public int addCanyon(int x) {
         AffineTransform at;
         BufferedImage image = Resources.instance().getGroundCanyonCol();
-        ImageOutline outline = new ImageOutline(image);
         x -= image.getWidth() / 2;
-        Area collider = new Area(outline.getOutline(image));
+        Area collider = new Area((new ImageOutline(Resources.instance().getGroundCanyon())).getOutline());
         nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
         for (int i = 0; i < grassGroundSet.size(); i++) {
             if (grassGroundSet.get(i).x >= x) {

@@ -157,10 +157,10 @@ public class Resources { //singleton
         dinoRightUpCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-right-up.png"));
         dinoStandCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-stand.png"));
         // GROUND
-        ground1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Ground-1.png"));
-        ground2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Ground-2.png"));
-        ground3Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Ground-3.png"));
-        groundCanyonCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/GroundCanyon.png"));
+        ground1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Ground-1.png"));
+        ground2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Ground-2.png"));
+        ground3Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Ground-3.png"));
+        groundCanyonCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/GroundCanyon.png"));
         // BACKGROUND
         backgroundCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/background.jpg"));
         // UCCELLO
@@ -178,8 +178,8 @@ public class Resources { //singleton
         mulBanner2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulBanner2.png"));        
         mulScoreCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulScore.png"));
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
-       
-
+        
+        
         
     }
     

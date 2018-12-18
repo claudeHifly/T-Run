@@ -33,7 +33,7 @@ public abstract class Item {
         this.image = image;
         this.y = y - image.getHeight();
         ImageOutline outline = new ImageOutline(image);
-        this.collider = new Area(outline.getOutline(image));
+        this.collider = new Area(outline.getOutline());
     }
     
     public abstract void collisionAction(Item collidedItem);
@@ -65,6 +65,7 @@ public abstract class Item {
     public void create(Graphics g) {
         g.drawImage(image, x, y, null);
         Graphics2D g2d = (Graphics2D) g;
+        
         //g2d.setColor(Color.red);
         //g2d.draw(collider);
         //g2d.setColor(Color.BLACK);

@@ -1,5 +1,9 @@
 cla,10579
 pim,673
+luc,666
+gh,418
+sup,219
+pol,104
 aaa,30
 bbb,20
 ccc,10
