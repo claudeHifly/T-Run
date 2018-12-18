@@ -97,6 +97,14 @@ public class Resources { //singleton
     private final BufferedImage mulScoreCol;
     private final BufferedImage pepperCol;
     
+    private final BufferedImage score1Col;
+    private final BufferedImage score2Col;
+    private final BufferedImage score5Col;
+    private final BufferedImage score10Col;
+    private final BufferedImage score20Col;
+    private final BufferedImage score50Col;
+    private final BufferedImage score100Col;
+    
     private Resources() {
         
         //IMMAGINI HOMESCREEN
@@ -181,7 +189,13 @@ public class Resources { //singleton
         mulScoreCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulScore.png"));
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
         
-        
+        score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
+        score2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score2.png"));
+        score5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score5.png"));
+        score10Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score10.png"));
+        score20Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score20.png"));
+        score50Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score50.png"));
+        score100Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score100.png"));
         
     }
     
@@ -434,6 +448,35 @@ public class Resources { //singleton
     public BufferedImage getEmpty() {
         return empty;
     }
+
+    public BufferedImage getScore1Col() {
+        return score1Col;
+    }
+
+    public BufferedImage getScore2Col() {
+        return score2Col;
+    }
+
+    public BufferedImage getScore5Col() {
+        return score5Col;
+    }
+
+    public BufferedImage getScore10Col() {
+        return score10Col;
+    }
+
+    public BufferedImage getScore20Col() {
+        return score20Col;
+    }
+
+    public BufferedImage getScore50Col() {
+        return score50Col;
+    }
+
+    public BufferedImage getScore100Col() {
+        return score100Col;
+    }
+    
     
     
 }

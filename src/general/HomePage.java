@@ -55,15 +55,15 @@ public class HomePage extends JFrame{
             }
         };
         
-        /*startButton = new JButton("START");
+        startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
-        startButton.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 150, 50);
+        startButton.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 180, 50);
         //startButton.setVisible(false);
-        panel.add(startButton); */
+        panel.add(startButton); 
         
         //panel.setBackground(new Color(137,223,51));
         ImageShowingComponent footprint = new ImageShowingComponent(this);
-        footprint.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 150, 50);
+        //footprint.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 150, 50);
         footprint.setVisible(true);
         panel.setLayout(new BorderLayout());
         panel.add(footprint);
@@ -72,13 +72,13 @@ public class HomePage extends JFrame{
         add(panel);
         //panel.add(footprint);
         
-        /*startButton.addActionListener(new ActionListener() { 
+        startButton.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
             setVisible(false);
-            UserInterface.instance().setVisible(true);
+            //UserInterface.instance().setVisible(true);
             }
-        });*/
+        });
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -5,6 +5,7 @@
  */
 package components;
 
+import general.UserInterface;
 import utility.ImageOutline;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,6 +19,7 @@ import utility.*;
  *
  * @author claud
  */
+
 public abstract class Item {
 
     protected Trex TRex;
@@ -25,15 +27,26 @@ public abstract class Item {
     private int x;
     private int y;
     private Area collider;
+    private int birdCounter;
+    final int BIRD1 = 6;
+    final int BIRD2 = 7;
+    
+    int animation1;
+    int animation2;
+    private final BufferedImage bird1;
+    private final BufferedImage bird2;
     //private ImageOutline outline;
 
     public Item(int x, int y, BufferedImage image) {
+        this.birdCounter = BIRD1;
         TRex = Trex.instance();
         this.x = x;
         this.image = image;
         this.y = y - image.getHeight();
         ImageOutline outline = new ImageOutline(image);
         this.collider = new Area(outline.getOutline());
+        this.bird1 = Resources.instance().getBird1Col();
+        this.bird2 = Resources.instance().getBird2Col();
     }
     
     public abstract void collisionAction(Item collidedItem);
@@ -63,7 +76,33 @@ public abstract class Item {
     }
 
     public void create(Graphics g) {
-        g.drawImage(image, x, y, null);
+        
+        if (image == Resources.instance().getBird1Col()) {
+            //System.out.println("try to animate birds");
+            if (birdCounter == BIRD1) {
+                if (animation1 < 5) {
+                    g.drawImage(bird1, x, y, null);
+                    animation1++;
+                } else {
+                    birdCounter = BIRD2;
+                    g.drawImage(bird2, x, y, null);
+                    animation1 = 0;
+                }
+            } else {
+                if (animation2 < 5) {
+                    g.drawImage(bird2, x, y, null);
+                    animation2++;
+                } else {
+                    birdCounter = BIRD1;
+                    g.drawImage(bird1, x, y, null);
+                    animation2 = 0;
+                }
+            }
+            //animation bird
+        } else {
+            //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            g.drawImage(image, x, y, null);
+        }
         Graphics2D g2d = (Graphics2D) g;
         
         //g2d.setColor(Color.red);
