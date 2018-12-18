@@ -5,45 +5,45 @@
  */
 package components;
 
-import java.awt.image.BufferedImage;
 import java.util.Timer;
+import utility.Resources;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
-public class Multiplier extends Item{
-    
-    public Multiplier(int x, int y, BufferedImage image) {
-             super(x, y, image);
-             
-     }
+public class Multiplier extends Item {
 
+    public Multiplier(int x, int y) {
+        super(x, y, Resources.instance().getMulScoreCol());
+
+    }
 
     @Override
     public void collisionAction(Item collidedItem) {
-            super.TRex.setMultiplier(true);
-            System.out.println("HO PRESO IL MOLTIPLICATIORE");
-            mulCountdown();
+        super.TRex.setMultiplier(true);
+        //Bones.probabilityMultiplier = 0;
+        System.out.println("HO PRESO IL MOLTIPLICATIORE");
+        mulCountdown();
     }
-    
-    public void mulCountdown(){
-        
+
+    public void mulCountdown() {
+
         Timer mulTimer = new java.util.Timer();
-        
-        mulTimer.schedule( 
-            new java.util.TimerTask() {
-                @Override
-                public void run() {
-                    //System.out.println("Time Over -> No PepperPower");
-                    TRex.setMultiplier(false);              //resetto il moltiplicatore
-                    mulTimer.cancel();
-                    
-                }
-            }, 
-            10000   //10 secondi di powerUP Pepper
+
+        mulTimer.schedule(
+                new java.util.TimerTask() {
+            @Override
+            public void run() {
+                //System.out.println("Time Over -> No PepperPower");
+                TRex.setMultiplier(false);              //resetto il moltiplicatore
+                mulTimer.cancel();
+
+            }
+        },
+                10000 //10 secondi di powerUP Pepper
         );
 
     }
-    
+
 }

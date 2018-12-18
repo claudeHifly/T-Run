@@ -15,29 +15,29 @@ import utility.Resources;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
-public class ScorePanel extends JPanel{
+public class ScorePanel extends JPanel {
 
     private BufferedImage scoreboardImage = Resources.instance().getScoreboardBackgroundImage();
-    
+
     public ScorePanel() {
         this.init();
     }
-    
-    private void init(){
+
+    private void init() {
         this.repaint();
     }
-    
+
     @Override
-    public void paint(Graphics g){
-        this.create(g);   
+    public void paint(Graphics g) {
+        this.create(g);
     }
-    
-    public void create(Graphics g){     
+
+    public void create(Graphics g) {
         Image scaledScoreboardImage = scoreboardImage.getScaledInstance(ScoreUserInterface.width, ScoreUserInterface.height, 100);
-        g.drawImage(scaledScoreboardImage, 0,0, null);
+        g.drawImage(scaledScoreboardImage, 0, 0, null);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
-        Scoreboard.loadScores(ScoreUserInterface.playerName, Board.score, g); 
+        Scoreboard.loadScores(ScoreUserInterface.playerName, Board.score, g);
     }
 }
