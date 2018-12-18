@@ -7,6 +7,7 @@ package scoreboard;
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import trex.Trex;
 
 /**
  *
@@ -19,7 +20,7 @@ public class ScoreUserInterface extends JFrame{
     static String playerName;
     private static ScoreUserInterface instance = null;
     
-    public ScoreUserInterface() {
+    private ScoreUserInterface() {
         
         this.add(new ScorePanel());//con questo metodo inserisco una Board al centro del contenitore JFrame
         this.setTitle("T-Run Scoreboard");//setto il titolo
@@ -31,9 +32,9 @@ public class ScoreUserInterface extends JFrame{
     }
     
     public static ScoreUserInterface instance(String playerName){
-        if(instance == null){
+        if(instance == null)
             instance = new ScoreUserInterface();
-        }
+        
         ScoreUserInterface.playerName = playerName;
         instance.setVisible(true);
         return instance;

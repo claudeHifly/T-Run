@@ -38,6 +38,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static int coin;
     public static Thread animator;
     public static Thread blinker;
+    
+    public static boolean openScoreboard = true;
 
     //INIZIALIZZO BOARD
     public Board() {
@@ -181,7 +183,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     private class TRexAdapter extends KeyAdapter {
-
+        
         @Override
         public void keyPressed(KeyEvent e) {
             TRex.keyPressed(e);
@@ -189,13 +191,13 @@ public class Board extends JPanel implements Runnable, ActionListener {
             int keyPressed = e.getKeyCode();
 
             if (keyPressed == KeyEvent.VK_ENTER && gameOver) {
-
+                openScoreboard = true;
                 reset();
             }
-            if (keyPressed == KeyEvent.VK_SPACE && gameOver) {
-
+            if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard) {
                 String name = JOptionPane.showInputDialog("Enter your name:","");
                 if(name != null){
+                    openScoreboard = false;
                     if(name.length() > 3)
                         ScoreUserInterface.instance(name.substring(0,3));
                     else

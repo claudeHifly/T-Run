@@ -33,10 +33,10 @@ public class Dead implements TrexState{
         g.drawImage(this.deadTRex, trex.x, trex.y, null);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
 
-        g.drawString("GAME OVER", UserInterface.width / 2 - 90, UserInterface.height-490);
-        g.drawString("SCORE: "+Board.score, UserInterface.width / 2 - 90, UserInterface.height-450);
+        g.drawString("GAME OVER", (int) (UserInterface.width*0.46), (int) (UserInterface.height*0.37));
+        g.drawString("SCORE: "+Board.score, (int) (UserInterface.width*0.46), (int) (UserInterface.height*0.42));
         
-        g.drawString("Press ENTER to restart", UserInterface.width / 2 - 200, UserInterface.height-380);
-        g.drawString("Press SPACE to save score", UserInterface.width / 2 - 200, UserInterface.height-340);        
+        g.drawString("Press ENTER to restart", (int) (UserInterface.width*0.39), (int) (UserInterface.height*0.51));
+        g.drawString("Press SPACE to save score",(int) (UserInterface.width*0.39), (int) (UserInterface.height*0.56));        
     }
 }
