@@ -1,5 +1,6 @@
 cla,10579
 ANG,1176
+ANG,705
 pim,673
 luc,666
 fff,500
@@ -7,4 +8,3 @@ gh,418
 iii,347
 sup,219
 pol,104
-aaa,100

@@ -5,7 +5,6 @@
  */
 package utility;
 
-import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
@@ -39,9 +38,21 @@ public class Utility { //singleton
         return bi;
     }
     
+    public Area createCollider(BufferedImage img){
+        ImageOutline outline = new ImageOutline(img);
+        return new Area(outline.getOutline());
+    }
+    
+    public Area moveCollider(Area collider, int x, int y){
+        AffineTransform at = new AffineTransform();
+        at.translate(x-collider.getBounds2D().getX(), y-collider.getBounds2D().getY());
+        collider.transform(at);
+        return collider;
+    }
+    
     public Area createCollider(BufferedImage img, int x, int y){
         ImageOutline outline = new ImageOutline(img);
-        Area collider = new Area(outline.getOutline());
+        Area collider =  new Area(outline.getOutline());
         AffineTransform at = new AffineTransform();
         at.translate(x, y);
         collider.transform(at);

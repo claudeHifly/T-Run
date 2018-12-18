@@ -5,6 +5,7 @@
  */
 package utility;
 
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 /**
@@ -97,6 +98,26 @@ public class Resources { //singleton
     private final BufferedImage mulScoreCol;
     private final BufferedImage pepperCol;
     
+    //COLLIDER
+    //DINO
+    private final Area dinoCollider;
+    private final Area dinoBelowCollider;
+    //CACTUS
+   /* private final Area cactus1Collider;
+    private final Area cactus2Collider;
+    private final Area cactus3Collider;
+    private final Area cactus4Collider;
+    private final Area cactus5Collider;
+    //GROUND
+    private final Area ground1Collider;
+    private final Area ground2Collider;
+    private final Area ground3Collider;
+    private final Area groundCanyonCollider;
+    //BIRD
+    private final Area bird1Collider;
+    private final Area bird2Collider;
+    //BONE
+    private final Area boneCollider;*/
     private final BufferedImage score1Col;
     private final BufferedImage score2Col;
     private final BufferedImage score5Col;
@@ -189,6 +210,10 @@ public class Resources { //singleton
         mulScoreCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulScore.png"));
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
         
+        //COLLIDER
+        //DINO
+        dinoCollider = Utility.instance().createCollider(dinoStand);
+        dinoBelowCollider = Utility.instance().createCollider(dinoBelowLeftUp);
         score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
         score2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score2.png"));
         score5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score5.png"));
@@ -449,6 +474,9 @@ public class Resources { //singleton
         return empty;
     }
 
+    public Area getDinoCollider() {
+        return dinoCollider;
+    }
     public BufferedImage getScore1Col() {
         return score1Col;
     }

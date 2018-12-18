@@ -11,6 +11,7 @@ package trex;
 import components.Ground;
 import general.Board;
 import java.awt.Graphics;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import utility.*;
 
@@ -24,16 +25,20 @@ public class Jumping implements TrexState {
     private final BufferedImage jumpingImage;//immagine TRex rightFoot
     private final BufferedImage auraImage;
     
+    private final Area dinoCollider;
+    
     public Jumping(Trex trex) {
         this.trex = trex;
         
         this.jumpingImage = Resources.instance().getDinoStandCol();
         this.auraImage = Resources.instance().getAuraCol();
+        
+        this.dinoCollider = Resources.instance().getDinoCollider();
     }
 
     @Override
     public void create(Graphics g) {
-
+        trex.collider = Resources.getInstance().getDinoCollider();
         if ( (/*(trex.y > trex.maxHeight) || */(trex.speedForJumping >= 0)) && trex.topReached == false) {
 
             trex.y -= trex.deltaT * trex.speedForJumping;
@@ -41,7 +46,12 @@ public class Jumping implements TrexState {
             if(trex.getPower() == trex.pepperPower){
                      g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
                 }
-            trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider = Utility.instance().createCollider(jumpingImage);
+            
+            //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
+            trex.collider=Utility.instance().moveCollider(trex.collider,trex.x, trex.y);
+            //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
             trex.speedForJumping -= (trex.deltaT * trex.gravity);
 
             //System.out.println("bottomTRex height: " + bottomTRex);
@@ -70,7 +80,12 @@ public class Jumping implements TrexState {
             if(trex.getPower() == trex.pepperPower){
                      g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
                 }
-            trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider = Utility.instance().createCollider(jumpingImage);
+            //trex.collider = Resources.getInstance().getDinoCollider();
+             //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
+            trex.collider=Utility.instance().moveCollider(trex.collider,trex.x, trex.y);
+            //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
             trex.speedForJumping += (trex.deltaT * trex.gravity);
 
         }
@@ -85,7 +100,12 @@ public class Jumping implements TrexState {
                 g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }
             trex.y = trex.TRexOnGround;
-            trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider = Utility.instance().createCollider(jumpingImage);
+            //trex.collider = Resources.getInstance().getDinoCollider();
+             //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
+            trex.collider=Utility.instance().moveCollider(trex.collider,trex.x, trex.y);
+            //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
 
             trex.topReached = false;
             trex.speedForJumping = (float) (6 * 2.2);
@@ -102,7 +122,12 @@ public class Jumping implements TrexState {
                 g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }                                                       
             trex.y = trex.TRexOnGround;
-            trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider=Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            //trex.collider = Utility.instance().createCollider(jumpingImage);
+            //trex.collider = Resources.getInstance().getDinoCollider();
+             //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
+            trex.collider=Utility.instance().moveCollider(trex.collider,trex.x, trex.y);
+            //System.out.println("COLLIDER: "+trex.collider.getBounds2D().getY());
 
             trex.topReached = false;
             trex.speedForJumping = (float) (6 * 2.2);
