@@ -14,6 +14,7 @@ import utility.Resources;
  */
 public class Pepper extends Item {
 
+
     public Pepper(int x, int y) {
         super(x, y, Resources.instance().getPepperCol());
     }
@@ -22,14 +23,15 @@ public class Pepper extends Item {
     public void collisionAction(Item collidedItem) {
 
         System.out.println("HO PRESO IL PEPPER");
-        //Bones.probabilityOfPepper = 0;
+        
         super.TRex.setPower(TRex.getPepperPower());
         pepperCountdown();
 
     }
 
     public void pepperCountdown() {
-
+        int normalFrequency = PowerUp.frequencyPepper;
+        PowerUp.frequencyPepper = 0;
         Timer pepperTimer = new java.util.Timer();
 
         pepperTimer.schedule(
@@ -38,7 +40,7 @@ public class Pepper extends Item {
             public void run() {
                 //System.out.println("Time Over -> No PepperPower");
                 TRex.setPower(TRex.getNoPower());       //resetto il powerUP
-                //Bones.probabilityOfPepper = 0.65;       //ripristino la probabilità di spawn del peperoncino
+                PowerUp.frequencyPepper = normalFrequency;       //ripristino la probabilità di spawn del peperoncino
                 pepperTimer.cancel();
 
             }

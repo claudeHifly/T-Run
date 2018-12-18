@@ -17,7 +17,6 @@ public class Cactus extends Item {
 
     public Cactus(int x, int y) {
         super(x, y, Resources.instance().getCactusCol());
-        System.out.println(getCollider());
     }
 
     @Override

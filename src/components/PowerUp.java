@@ -22,11 +22,11 @@ public class PowerUp extends Items {
     private final int minPowerUpSeries = 2;
     private final int distancePowerUp = 50;
     private final double yPercentagePowerUpOnGround = 0.15;
-    public static int frequencyBone = 60;
     public static int frequencyBoneGold = 15;
     public static int frequencyPepper = 5;
     public static int frequencyHam = 15;
     public static int frequencyMultiplier = 5;
+    public int numberSeries;
 
     public PowerUp() {
         obArray = new ArrayList<>();
@@ -34,7 +34,7 @@ public class PowerUp extends Items {
         AffineTransform at;
         for (int i = 0; i < powerUpSeriesOnScreen; i++) {
             int fd = randomDistanceSeries();
-            int numberSeries = randomPowerUpForSeries();
+            numberSeries = randomPowerUpForSeries();
             for (int j = 0; j < numberSeries; j++) {
                 ob = randomPowerUp(fd + j * distancePowerUp);
                 at = new AffineTransform();
@@ -71,7 +71,6 @@ public class PowerUp extends Items {
     @Override
     public void update() {
         AffineTransform at;
-        Item ob1;
         for (Item ob : obArray) {
             //System.out.println("I'm in looper while");
             ob.setX(ob.getX() - movementSpeed);
@@ -86,7 +85,7 @@ public class PowerUp extends Items {
         }
         if (obArray.size() <= maxPowerUpSeries * (powerUpSeriesOnScreen - 1)) {
             int fd = randomDistanceSeries();
-            int numberSeries = randomPowerUpForSeries();
+            numberSeries = randomPowerUpForSeries();
             for (int j = 0; j < numberSeries; j++) {
                 Item ob = randomPowerUp(fd + j * distancePowerUp);
                 at = new AffineTransform();
@@ -112,28 +111,29 @@ public class PowerUp extends Items {
     }
 
     private Item randomPowerUp(int fd) {
-        int totalFrequency = (frequencyBone + frequencyBoneGold + frequencyPepper + frequencyHam + frequencyMultiplier);
+        int totalFrequency = 100;
         int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
-        if (extract <= frequencyBone) {
-            return new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
+        if (extract <= frequencyMultiplier) {
+            numberSeries = 1;
+            return new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
         } else {
-            if (extract <= frequencyBone + frequencyBoneGold) {
+            if (extract <= frequencyMultiplier + frequencyBoneGold) {
+                numberSeries = 1;
                 return new BoneSpecial(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
             } else {
-                if (extract <= frequencyBone + frequencyBoneGold + frequencyPepper) {
+                if (extract <= frequencyMultiplier + frequencyBoneGold + frequencyPepper) {
+                    numberSeries = 1;
                     return new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
                 } else {
-                    if (extract <= frequencyBone + frequencyBoneGold + frequencyPepper + frequencyHam) {
+                    if (extract <= frequencyMultiplier + frequencyBoneGold + frequencyPepper + frequencyHam) {
+                        numberSeries = 1;
                         return new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
                     } else {
-                        return new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
+                        return new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
                     }
                 }
             }
         }
     }
-    /*
-    public ArrayList<Item> getObArray() {
-        return super.obArray;
-    }*/
+
 }

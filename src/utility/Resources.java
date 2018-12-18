@@ -16,6 +16,7 @@ public class Resources { //singleton
 
     private static Resources instance = null;
     private int pickedCactus;
+    private int pickedGround;
 
     // IMMAGINI HOMESCREEN
     private final BufferedImage homepageTitleImage;
@@ -270,8 +271,8 @@ public class Resources { //singleton
     }
 
     public BufferedImage getGround() {
-        int picked = (int) (Math.random() * 2 + 1);
-        switch (picked) {
+        pickedGround = (int) (Math.random() * 2 + 1);
+        switch (pickedGround) {
             case 1:
                 return this.ground1;
             case 2:
@@ -380,8 +381,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getGroundCol() {
-        int picked = (int) (Math.random() * 2 + 1);
-        switch (picked) {
+        switch (pickedGround) {
             case 1:
                 return this.ground1Col;
             case 2:

@@ -28,6 +28,8 @@ public class Multiplier extends Item {
     }
 
     public void mulCountdown() {
+        int normalFrequency = PowerUp.frequencyMultiplier;
+        PowerUp.frequencyPepper = 0;
 
         Timer mulTimer = new java.util.Timer();
 
@@ -37,6 +39,7 @@ public class Multiplier extends Item {
             public void run() {
                 //System.out.println("Time Over -> No PepperPower");
                 TRex.setMultiplier(false);              //resetto il moltiplicatore
+                PowerUp.frequencyMultiplier = normalFrequency;
                 mulTimer.cancel();
 
             }

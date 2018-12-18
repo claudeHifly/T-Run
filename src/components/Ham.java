@@ -5,6 +5,7 @@
  */
 package components;
 
+import general.Board;
 import utility.Resources;
 
 /**
@@ -20,8 +21,7 @@ public class Ham extends Item {
 
     @Override
     public void collisionAction(Item collidedItem) {
-        //Board.coin += ((Bone) collidedItem).getValue();
-        //Board.score += 1;
+        Board.coin += 1;
         System.out.println("HO PRESO HAM");
     }
 }
