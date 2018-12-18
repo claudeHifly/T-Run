@@ -197,11 +197,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
                     if (this.TRex.multiplier == true) {
 
-                        g.drawImage(score20Col, collidedObstacle.getX() - 20, collidedObstacle.getY() - 24, null);
+                        g.drawImage(score20Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
 
                     } else {
 
-                        g.drawImage(score10Col, collidedObstacle.getX() - 20, collidedObstacle.getY() - 24, null);
+                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
 
                     }
                 }
@@ -217,10 +217,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
                     g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
 
                     if (this.TRex.multiplier == true) {
-                        g.drawImage(score10Col, collidedObstacle.getX() - 20, collidedObstacle.getY() - 24, null);
+                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
 
                     } else {
-                        g.drawImage(score5Col, collidedObstacle.getX() - 20, collidedObstacle.getY() - 24, null);
+                        g.drawImage(score5Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
 
                     }
                 }

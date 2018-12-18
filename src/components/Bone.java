@@ -20,7 +20,7 @@ public class Bone extends Item{
     
      public Bone(int x, int y, BufferedImage image) {
              super(x, y, image);
-             if (image == Resources.instance().getBoneSpecial() || image == Resources.instance().getBoneSpecial()){
+             if (image == Resources.instance().getBoneSpecialCol() || image == Resources.instance().getBoneSpecial()){
                  this.value=50;
              }
              else{
