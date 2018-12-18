@@ -40,7 +40,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static Thread blinker;
     
     public static boolean openScoreboard = true;
-
     //INIZIALIZZO BOARD
     public Board() {
 
@@ -79,6 +78,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         grass_ground.update();
         moneys.update();
         obstacles.update();
+        
+        //bar = new HealthBar();
 
         animator = new Thread(this);
 
@@ -87,7 +88,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     public void updateGame() {
-
+        
         distance += 1;
         distanceForScore += 0.1;
         
