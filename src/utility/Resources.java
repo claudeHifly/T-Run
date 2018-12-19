@@ -126,6 +126,10 @@ public class Resources { //singleton
     private final BufferedImage score50Col;
     private final BufferedImage score100Col;
     
+    //HEALTH BAR
+    private final BufferedImage healthBar;
+    private final BufferedImage healthBarRectangle;
+    
     private Resources() {
         
         //IMMAGINI HOMESCREEN
@@ -210,10 +214,16 @@ public class Resources { //singleton
         mulScoreCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulScore.png"));
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
         
+        //HEALTH BAR
+        healthBar = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/barraDellaVita.png"));
+        healthBarRectangle = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/taccaVita.png"));
+        
         //COLLIDER
         //DINO
         dinoCollider = Utility.instance().createCollider(dinoStand);
         dinoBelowCollider = Utility.instance().createCollider(dinoBelowLeftUp);
+        
+        //
         score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
         score2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score2.png"));
         score5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score5.png"));
@@ -221,6 +231,7 @@ public class Resources { //singleton
         score20Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score20.png"));
         score50Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score50.png"));
         score100Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score100.png"));
+
         
     }
     
@@ -503,6 +514,14 @@ public class Resources { //singleton
 
     public BufferedImage getScore100Col() {
         return score100Col;
+    }
+
+    public BufferedImage getHealthBar() {
+        return healthBar;
+    }
+
+    public BufferedImage getHealthBarRectangle() {
+        return healthBarRectangle;
     }
     
     

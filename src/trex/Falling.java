@@ -6,6 +6,7 @@
 package trex;
 
 import components.Ground;
+import components.HealthBar;
 import general.UserInterface;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -41,7 +42,8 @@ public class Falling implements TrexState {
             trex.speedForJumping += (trex.deltaT * trex.gravity);
         } else {
             trex.setMultiplier(false);
-            trex.setState(trex.getDead());
+            HealthBar.instance().decrease(HealthBar.MAX);
+            //trex.setState(trex.getDead());
             
             trex.create(g);
         }

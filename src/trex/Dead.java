@@ -5,6 +5,7 @@
  */
 package trex;
 
+import components.HealthBar;
 import general.Board;
 import general.UserInterface;
 import java.awt.Font;
@@ -30,6 +31,7 @@ public class Dead implements TrexState{
     public void create(Graphics g) {
         Board.running = false;
         Board.gameOver = true;
+        HealthBar.instance().create(g);
         g.drawImage(this.deadTRex, trex.x, trex.y, null);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
 
@@ -37,6 +39,8 @@ public class Dead implements TrexState{
         g.drawString("SCORE: "+Board.score, (int) (UserInterface.width*0.46), (int) (UserInterface.height*0.42));
         
         g.drawString("Press ENTER to restart", (int) (UserInterface.width*0.39), (int) (UserInterface.height*0.51));
-        g.drawString("Press SPACE to save score",(int) (UserInterface.width*0.39), (int) (UserInterface.height*0.56));        
+        g.drawString("Press SPACE to save score",(int) (UserInterface.width*0.39), (int) (UserInterface.height*0.56)); 
+        
+        HealthBar.instance().setInstance(null);
     }
 }

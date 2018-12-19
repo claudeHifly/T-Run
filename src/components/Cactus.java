@@ -6,7 +6,6 @@
 package components;
 
 import general.Board;
-import java.awt.image.BufferedImage;
 import utility.Resources;
 
 /**
@@ -33,9 +32,12 @@ public class Cactus extends Item{
                 Board.coin += 5;
             }
         } else {
-            Board.running = false;
-            Board.gameOver = true;
-            super.TRex.setState(TRex.getDead());
+            if(!Board.gameOver)
+                HealthBar.instance().decrease(10);
+            
+            //Board.running = false;
+            //Board.gameOver = true;
+            //super.TRex.setState(TRex.getDead());
         }
     }
             

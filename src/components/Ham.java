@@ -24,5 +24,6 @@ public class Ham extends Item {
             //Board.coin += ((Bone) collidedItem).getValue();
             //Board.score += 1;
             System.out.println("HO PRESO HAM");
+            HealthBar.instance().increase(200);
     }
 }

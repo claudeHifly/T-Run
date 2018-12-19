@@ -6,10 +6,6 @@
 package components;
 
 import general.Board;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.image.BufferedImage;
 import utility.*;
 
 /**
@@ -33,9 +29,11 @@ public class Bird extends Item{
                 Board.coin += 10;
             }
         } else {
-        Board.running = false;
+             if(!Board.gameOver)
+                HealthBar.instance().decrease(5);
+        /*Board.running = false;
         Board.gameOver = true;
-        super.TRex.setState(TRex.getDead()); 
+        super.TRex.setState(TRex.getDead()); */
         }
         
         
