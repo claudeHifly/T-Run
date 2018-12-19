@@ -120,7 +120,7 @@ public class Resources { //singleton
     private final BufferedImage arrowUp;
     private final BufferedImage arrowRight;
     private final BufferedImage demoButton;
-    
+
     //HEALTH BAR
     private final BufferedImage healthBar;
     private final BufferedImage healthBarRectangle;
@@ -380,6 +380,10 @@ public class Resources { //singleton
         }
     }
 
+    public BufferedImage generateGroundCanyon() {
+        return groundCanyon;
+    }
+
     public BufferedImage getGroundCanyon() {
         if (!HomePage.demo) {
             return groundCanyon;
@@ -546,7 +550,8 @@ public class Resources { //singleton
 
     public BufferedImage getDemoButton() {
         return demoButton;
-    }    
+    }
+
     public BufferedImage getPortal() {
         return portal;
     }

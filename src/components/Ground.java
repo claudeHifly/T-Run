@@ -126,7 +126,7 @@ public class Ground {
         AffineTransform at;
         BufferedImage image = Resources.instance().getGroundCanyon();
         x -= image.getWidth() / 2;
-        Area collider = new Area((new ImageOutline(Resources.instance().getGroundCanyon())).getOutline());
+        Area collider = new Area((new ImageOutline(Resources.instance().generateGroundCanyon())).getOutline());
         nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
         for (int i = 0; i < grassGroundSet.size(); i++) {
             if (grassGroundSet.get(i).x >= x) {
