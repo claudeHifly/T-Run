@@ -10,6 +10,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -28,13 +30,15 @@ public class HomePage extends JFrame {
 
     int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8);
     int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.7);
+    public static boolean demo;
 
-    public static JButton startButton;
+    public static JButton demoButton;
     //public static JFrame frame;
 
     public HomePage() {
         setFocusable(true);//keyListener   
         setSize(width, height);
+        demo = false;
         JPanel panel = new JPanel() {
 
             @Override
@@ -53,11 +57,11 @@ public class HomePage extends JFrame {
             }
         };
 
-        /* startButton = new JButton("START");
-        startButton.setFont(new Font("Courier New", Font.BOLD, 30));
-        startButton.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 180, 50);
+        demoButton = new JButton("START DEMO");
+        demoButton.setFont(new Font("Courier New", Font.BOLD, 30));
+        demoButton.setBounds((int) ((getWidth() - 150) / 2), (int) (getHeight() * 0.5), 180, 50);
         //startButton.setVisible(false);
-        panel.add(startButton); */
+        panel.add(demoButton);
         //panel.setBackground(new Color(137,223,51));
         ImageShowingComponent footprint = new ImageShowingComponent(this);
         panel.setLayout(new BorderLayout());
@@ -67,13 +71,14 @@ public class HomePage extends JFrame {
         add(panel);
         //panel.add(footprint);
 
-        /*        startButton.addActionListener(new ActionListener() { 
+        demoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            setVisible(false);
-            //UserInterface.instance().setVisible(true);
+                demo = true;
+                setVisible(false);
+                UserInterface.instance().setVisible(true);
             }
-        });*/
+        });
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setSize(width, height);

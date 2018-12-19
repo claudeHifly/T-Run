@@ -20,7 +20,7 @@ public class Multiplier extends Item {
     }
 
     @Override
-    public void collisionAction(Item collidedItem) {
+    public void collisionAction() {
         super.TRex.setMultiplier(true);
         //Bones.probabilityMultiplier = 0;
         System.out.println("HO PRESO IL MOLTIPLICATIORE");

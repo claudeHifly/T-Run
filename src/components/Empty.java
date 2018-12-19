@@ -5,6 +5,8 @@
  */
 package components;
 
+import general.Board;
+import general.HomePage;
 import utility.Resources;
 
 /**
@@ -13,12 +15,18 @@ import utility.Resources;
  */
 public class Empty extends Item {
 
-    public Empty(int x) {
-        super(x, 200, Resources.instance().getEmpty());
+    private final int distanceArrowCanyon = 55;
+
+    public Empty(int x, int y) {
+        super(x, y, Resources.instance().getEmpty());
+        if (HomePage.demo) {
+            Board.arrows.addArrowUp(x - distanceArrowCanyon, (int) (Ground.yPosition));
+            
+        }
     }
 
     @Override
-    public void collisionAction(Item collidedItem) {
+    public void collisionAction() {
     }
 
 }

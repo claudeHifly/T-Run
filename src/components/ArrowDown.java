@@ -5,23 +5,21 @@
  */
 package components;
 
-import general.Board;
 import utility.Resources;
 
 /**
  *
  * @author G8
  */
-public class Ham extends Item {
+public class ArrowDown extends Item {
 
-    public Ham(int x, int y) {
-        super(x, y, Resources.instance().getHamCol());
-
+    public ArrowDown(int x, int y) {
+        super(x, y, Resources.instance().getArrowDown());
     }
 
     @Override
     public void collisionAction() {
-        Board.coin += 1;
-        System.out.println("HO PRESO HAM");
+        TRex.setState(TRex.getLowerHead());
     }
+
 }

@@ -7,6 +7,8 @@ package trex;
 
 import components.Ground;
 import static components.Ground.movementSpeed;
+import general.Board;
+import general.HomePage;
 import general.UserInterface;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -244,31 +246,43 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        
         int keyPressed = e.getKeyCode();
+        
+        if (!HomePage.demo) {
+            
 
-        if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
-            this.state = jumping;
-            jumpDisabled = true;
-            //System.out.println("Space pressed");
-        }
+            if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
+                this.state = jumping;
+                jumpDisabled = true;
+                //System.out.println("Space pressed");
+            }
 
-        if (keyPressed == KeyEvent.VK_DOWN && this.state != (jumping)) {
-            this.state = lowerHead;
+            if (keyPressed == KeyEvent.VK_DOWN && this.state != (jumping)) {
+                this.state = lowerHead;
+            }
+        } else {
+            if (keyPressed == KeyEvent.VK_ESCAPE) {
+                HomePage.demo = false;
+                UserInterface.instance().setVisible(false);
+                UserInterface.setInstance(null);
+                new HomePage();
+            }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (!HomePage.demo) {
+            int keyTyped = e.getKeyCode();
 
-        int keyTyped = e.getKeyCode();
+            if (keyTyped == KeyEvent.VK_DOWN && (state != jumping)) {
+                this.state = running;
+            }
 
-        if (keyTyped == KeyEvent.VK_DOWN && (state != jumping)) {
-            this.state = running;
-        }
-
-        if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
-            jumpDisabled = false;
+            if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
+                jumpDisabled = false;
+            }
         }
 
     }
