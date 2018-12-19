@@ -4,25 +4,35 @@
  * and open the template in the editor.
  */
 package components;
+
+import general.Board;
+import utility.Resources;
+
 /**
  *
- * @author claud
+ * @author G8
  */
-public class Bone extends Item{
+public class Bone extends Item {
+
     private final int value;
-    
-     public Bone(int x, int y, String path) {
-             super(x, y, path);
-             if (path.equals("image/color/bone_gold2.png")){
-                 this.value=50;
-             }
-             else{
-                 this.value=1;
-             }
-     }
+
+    public Bone(int x, int y) {
+        super(x, y, Resources.instance().getBone());
+        this.value = 1;
+    }
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public void collisionAction() {
+        if (super.TRex.multiplier == true) {
+            Board.coin += 2 * value;
+            //Board.score += 1;
+        } else {
+            Board.coin += value;
+        }
     }
 
 }

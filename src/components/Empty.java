@@ -5,17 +5,28 @@
  */
 package components;
 
-import java.awt.Graphics;
+import general.Board;
+import general.HomePage;
+import utility.Resources;
 
 /**
  *
- * @author claud
+ * @author G8
  */
-public class Empty extends Item{
-    
-    public Empty(int x) {
-        super(x,200,"image/bn/Sun.png");
+public class Empty extends Item {
+
+    private final int distanceArrowCanyon = 55;
+
+    public Empty(int x, int y) {
+        super(x, y, Resources.instance().getEmpty());
+        if (HomePage.demo) {
+            Board.arrows.addArrowUp(x - distanceArrowCanyon, (int) (Ground.yPosition));
+            
+        }
     }
-    
+
+    @Override
+    public void collisionAction() {
+    }
 
 }

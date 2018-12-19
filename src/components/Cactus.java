@@ -5,15 +5,44 @@
  */
 package components;
 
+import general.Board;
+import general.HomePage;
+import java.awt.geom.Area;
+import utility.*;
+
 /**
  *
- * @author claud
+ * @author G8
  */
-public class Cactus extends Item{
-    
+public class Cactus extends Item {
+    private final int distanceArrowCactus = 40;
 
     public Cactus(int x, int y) {
-        super(x, y, "image/bn/Cactus-" + (int) (Math.random() * 4 + 1) + ".png");
+        super(x, y, Resources.instance().getCactus());
+        if (HomePage.demo) {
+            Board.arrows.addArrowUp(x - distanceArrowCactus, (int) (Ground.yPosition));
+        }
     }
+
+    @Override
+    public void collisionAction() {
+
+        if (super.TRex.getPower() == TRex.pepperPower) {
+            System.out.println("BRUCIA CACTUS");
+
+            if (super.TRex.multiplier == true) {
+                Board.coin += 2 * 5;
+            } else {
+                Board.coin += 5;
+            }
+        } else {
+            if(!Board.gameOver)
+                HealthBar.instance().decrease(1);
             
+            //Board.running = false;
+            //Board.gameOver = true;
+            //super.TRex.setState(TRex.getDead());
+        }
+    }
+
 }

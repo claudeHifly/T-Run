@@ -11,13 +11,34 @@ import java.util.ArrayList;
 
 /**
  *
- * @author claud
+ * @author G8
  */
-public interface Items {
-    
-    
-    public void create(Graphics g);
-    public Item hasCollided(Area TRexArea);
-    public void update();
-    public ArrayList<Item> getObArray();       
+public abstract class Items {
+
+    protected ArrayList<Item> obArray;
+
+    public void create(Graphics g) {
+        for (Item ob : obArray) {
+            ob.create(g);
+        }
+    }
+
+    public Item hasCollided(Area TRexArea) {
+        for (Item ob : obArray) {
+            Area inter = (Area) ob.getCollider().clone();
+            inter.intersect(TRexArea);
+            if (!inter.isEmpty()) {
+                return ob;
+            }
+        }
+
+        return null;
+    }
+
+    public abstract void update();
+
+    public ArrayList<Item> getObArray() {
+        return obArray;
+    }
+
 }
