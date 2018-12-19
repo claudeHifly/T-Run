@@ -5,6 +5,7 @@
  */
 package components;
 
+import general.Board;
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
@@ -33,7 +34,8 @@ public class Obstacles extends Items{
         AffineTransform at;
         cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
-            ob = new Cactus(randomDistance(), (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+            int randomDistance = randomDistance();
+            ob = new Cactus(randomDistance, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
             at.translate(ob.getX(), ob.getY());
             ob.getCollider().transform(at);

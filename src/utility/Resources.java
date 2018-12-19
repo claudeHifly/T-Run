@@ -118,6 +118,7 @@ public class Resources { //singleton
     private final Area bird2Collider;
     //BONE
     private final Area boneCollider;*/
+    //SCORE
     private final BufferedImage score1Col;
     private final BufferedImage score2Col;
     private final BufferedImage score5Col;
@@ -125,6 +126,10 @@ public class Resources { //singleton
     private final BufferedImage score20Col;
     private final BufferedImage score50Col;
     private final BufferedImage score100Col;
+    
+    //DEMO
+    private final BufferedImage arrowUPCol;
+    private final BufferedImage arrowDOWNCol;
     
     private Resources() {
         
@@ -209,11 +214,7 @@ public class Resources { //singleton
         mulBanner2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulBanner2.png"));        
         mulScoreCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulScore.png"));
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
-        
-        //COLLIDER
-        //DINO
-        dinoCollider = Utility.instance().createCollider(dinoStand);
-        dinoBelowCollider = Utility.instance().createCollider(dinoBelowLeftUp);
+        // SCORE
         score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
         score2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score2.png"));
         score5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score5.png"));
@@ -221,6 +222,15 @@ public class Resources { //singleton
         score20Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score20.png"));
         score50Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score50.png"));
         score100Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score100.png"));
+        // ARROW - DEMO
+        arrowUPCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/arrowUP.png"));
+        arrowDOWNCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/arrowDOWN.png"));
+        
+        //COLLIDER
+        //DINO
+        dinoCollider = Utility.instance().createCollider(dinoStand);
+        dinoBelowCollider = Utility.instance().createCollider(dinoBelowLeftUp);
+        
         
     }
     
@@ -504,6 +514,15 @@ public class Resources { //singleton
     public BufferedImage getScore100Col() {
         return score100Col;
     }
+
+    public BufferedImage getArrowUPCol() {
+        return arrowUPCol;
+    }
+
+    public BufferedImage getArrowDOWNCol() {
+        return arrowDOWNCol;
+    }
+    
     
     
     

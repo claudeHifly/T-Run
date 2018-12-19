@@ -10,6 +10,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,7 +26,7 @@ import utility.Resources;
  *
  * @author Angela
  */
-public class HomePage extends JFrame{
+public class HomePage extends JFrame {
     int width = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.8);
     int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
     
@@ -53,11 +55,11 @@ public class HomePage extends JFrame{
             }
         };
         
-       /* startButton = new JButton("START");
+        startButton = new JButton("START");
         startButton.setFont(new Font("Courier New", Font.BOLD, 30));
         startButton.setBounds((int) ((getWidth() - 150)/2), (int) (getHeight() * 0.8), 180, 50);
         //startButton.setVisible(false);
-        panel.add(startButton); */
+        panel.add(startButton);
         
         //panel.setBackground(new Color(137,223,51));
         ImageShowingComponent footprint = new ImageShowingComponent(this);
@@ -68,13 +70,15 @@ public class HomePage extends JFrame{
         add(panel);
         //panel.add(footprint);
         
-/*        startButton.addActionListener(new ActionListener() { 
+        startButton.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
             setVisible(false);
-            //UserInterface.instance().setVisible(true);
+            Board.demo = true;
+            UserInterface.instance().setVisible(true);
+            
             }
-        });*/
+        });
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,6 +97,8 @@ public class HomePage extends JFrame{
         int height = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.7);
         HomePage frame = new HomePage();   
     }  
+
+    
     
     private class ImageShowingComponent extends JComponent {
 
@@ -113,6 +119,7 @@ public class HomePage extends JFrame{
                     if((xOnScreen >= (int) (width*0.44) && xOnScreen <= (int) (width*0.44)+(int) (width*0.1)) && (yOnScreen >= (int) (height*0.7) && yOnScreen <= (int) (height*0.7)+(int) (height*0.2))){
                         frame.setVisible(false);
                         UserInterface.instance().setVisible(true);
+                        Board.demo = false;
                     }
                 }
             };

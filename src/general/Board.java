@@ -20,6 +20,8 @@ import utility.Resources;
  */
 public class Board extends JPanel implements Runnable, ActionListener {
 
+    public static boolean demo;
+    
     public static boolean running = true;
     public static boolean gameOver = false;
     public static boolean blinking = false;
@@ -69,7 +71,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     public void startGame() {
-
+        System.out.println("demo: " + demo);
         //TREX
         //TRex = new Trex();
         background = new Background();
@@ -167,29 +169,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             
             //esplosione BIRD
             if (collidedObstacleString.equals("Bird")) {
-                
-                /*
-                if (birdCounter == BIRD1) {
-                    if (animation1 < 5) {
-                        g.drawImage(bird1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
-                        animation1++;
-                    } else {
-                        birdCounter = BIRD2;
-                        g.drawImage(bird2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
-                        animation1 = 0;
-                    }
-                } else {
-                    if (animation2 < 5) {
-                        g.drawImage(bird2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
-                        animation2++;
-                    } else {
-                        birdCounter = BIRD1;
-                        g.drawImage(bird1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
-                        animation2 = 0;
-                    }
-                }*/
-                
-                
+               
                 collidedObstacle.collisionAction(collidedObstacle);
 
                 if (TRex.getPower() == TRex.pepperPower) {
@@ -302,4 +282,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             startGame();
         }
     }
+
+    
+    
 }

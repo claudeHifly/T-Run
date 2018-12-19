@@ -24,9 +24,8 @@ public class Cactus extends Item{
     public void collisionAction(Item collidedItem) {
         
         if (super.TRex.getPower() == TRex.pepperPower) {
-            System.out.println("BRUCIA CACTUS");
-            
-            
+            //System.out.println("BRUCIA CACTUS");
+
             if (super.TRex.multiplier == true) {
                 Board.coin += 2 * 5;
             } else {
