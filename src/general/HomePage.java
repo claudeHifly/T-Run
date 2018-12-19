@@ -48,7 +48,7 @@ public class HomePage extends JFrame {
                 g.drawImage(scaledBackImage, 0, 0, this);
 
                 g.setFont(new Font("Courier New", Font.BOLD, 25));
-                g.drawString("Click on footprint to start", (int) (width * 0.35), (int) (height * 0.92));
+                g.drawString("Click on footprint to start", (int) (width * 0.33), (int) (height * 0.92));
                 //g.drawImage(scaledFootprintImage, (int) (width*0.48), (int) (height*0.8), this);
             }
         };
