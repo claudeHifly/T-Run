@@ -49,7 +49,7 @@ public class HealthBar{ //Singleton
         for(int i = 0; i<this.cnt; i++)
             g.drawImage(this.scaledRectImage, (int) (scaledImage.getWidth(null)*0.069+i*rectangle.getWidth(null)), (int) (scaledImage.getHeight(null)*0.15), null);
     
-        g.drawImage(this.scaledImage, 5, 4, null);
+        g.drawImage(this.scaledImage, (int) (width*0.01), (int) (height*0.01), null);
     }
     
     public void increase(double n){
