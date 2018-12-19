@@ -12,13 +12,13 @@ import utility.Resources;
  *
  * @author G8
  */
-public class Bone extends Item {
+public class BoneSpecial extends Item {
 
     private final int value;
 
-    public Bone(int x, int y) {
-        super(x, y, Resources.instance().getBoneCol());
-        this.value = 1;
+    public BoneSpecial(int x, int y) {
+        super(x, y, Resources.instance().getBoneSpecialCol());
+        this.value = 10;
     }
 
     public int getValue() {

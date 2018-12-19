@@ -1,3 +1,4 @@
+ANG,1631
 ANG,1301
 fff,500
 aaa,100
@@ -7,4 +8,3 @@ ggg,20
 aaa,10
 fff,8
 ggg,5
-bbb,5

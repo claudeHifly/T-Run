@@ -9,14 +9,14 @@ import java.awt.Graphics;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
-public class NoPower implements TrexPower{
-    
+public class NoPower implements TrexPower {
+
     private final Trex trex;
-    
-    public NoPower (Trex trex){
-       this.trex = trex; 
+
+    public NoPower(Trex trex) {
+        this.trex = trex;
     }
 
     @Override

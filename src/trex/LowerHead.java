@@ -11,7 +11,7 @@ import utility.*;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
 public class LowerHead implements TrexState {
 
@@ -19,7 +19,7 @@ public class LowerHead implements TrexState {
     private final BufferedImage lowerHeadDinoLeft;
     private final BufferedImage lowerHeadDinoRight;
     private final BufferedImage biggerAuraImage;
-    
+
     public LowerHead(Trex trex) {
         this.trex = trex;
         lowerHeadDinoLeft = Resources.instance().getDinoBelowLeftUpCol();
@@ -29,26 +29,26 @@ public class LowerHead implements TrexState {
 
     @Override
     public void create(Graphics g) {
-        
-    if (trex.foot == trex.NO_FOOT) {
+
+        if (trex.foot == trex.NO_FOOT) {
             trex.foot = trex.LEFT_FOOT_LOWER;
             g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
-            if(trex.getPower() == trex.pepperPower){
-                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
-                }
-            trex.collider=Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
+            if (trex.getPower() == trex.pepperPower) {
+                g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+            }
+            trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //            trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
 //            trex.at = new AffineTransform();
 //            trex.at.translate(trex.x, trex.y);
 //            trex.collider.transform(trex.at);
         } else if (trex.foot == trex.LEFT_FOOT_LOWER) {
 
-            if (trex.leftCounter < 5){
+            if (trex.leftCounter < 5) {
                 g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
-                if(trex.getPower() == trex.pepperPower){
-                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
-                trex.collider=Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
+                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
 //                trex.at = new AffineTransform();
 //                trex.at.translate(trex.x, trex.y);
@@ -57,10 +57,10 @@ public class LowerHead implements TrexState {
             } else {
                 trex.foot = trex.RIGHT_FOOT_LOWER;
                 g.drawImage(this.lowerHeadDinoRight, trex.x, trex.y, null);
-                if(trex.getPower() == trex.pepperPower){
-                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
-                trex.collider=Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
+                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
 //                trex.at = new AffineTransform();
 //                trex.at.translate(trex.x, trex.y);
@@ -70,12 +70,12 @@ public class LowerHead implements TrexState {
 
         } else {
 
-            if (trex.rightCounter < 5){
+            if (trex.rightCounter < 5) {
                 g.drawImage(this.lowerHeadDinoRight, trex.x, trex.y, null);
-                if(trex.getPower() == trex.pepperPower){
-                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
-                trex.collider=Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
+                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
 //                trex.at = new AffineTransform();
 //                trex.at.translate(trex.x, trex.y);
@@ -84,10 +84,10 @@ public class LowerHead implements TrexState {
             } else {
                 trex.foot = trex.LEFT_FOOT_LOWER;
                 g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
-                if(trex.getPower() == trex.pepperPower){
-                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
-                trex.collider=Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
+                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
 //                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
 //                trex.at = new AffineTransform();
 //                trex.at.translate(trex.x, trex.y);

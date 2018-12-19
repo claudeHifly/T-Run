@@ -16,7 +16,7 @@ import utility.Resources;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
 public class Board extends JPanel implements Runnable, ActionListener {
 
@@ -26,7 +26,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private Trex TRex;
     public static Ground grass_ground;
     private Obstacles obstacles;
-    private Bones moneys;
+    private PowerUp moneys;
     private Background background;
     private Item collidedObstacle;
     private Item collidedMoney;
@@ -36,8 +36,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private final BufferedImage score5Col;
     private final BufferedImage score10Col;
     private final BufferedImage score20Col;
-    
-    
 
     public static int distance;
     public static float distanceForScore;
@@ -46,8 +44,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static int coin;
     public static Thread animator;
     public static Thread blinker;
-    
-    
+
     public static boolean openScoreboard = true;
     //public HealthBar bar = HealthBar.instance();
     
@@ -57,13 +54,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
         /*this.nameLabel = new JLabel("Name:");
         this.nameLabel.setVisible(true);
         this.add(this.nameLabel);*/
-        
         this.explosionImage = Resources.instance().getExplosionCol();
         this.score5Col = Resources.instance().getScore5Col();
         this.score10Col = Resources.instance().getScore10Col();
         this.score20Col = Resources.instance().getScore20Col();
-        
-        
+
         setFocusable(true);//keyListener
         addKeyListener(new TRexAdapter());
         startGame();
@@ -84,7 +79,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         obstacles = new Obstacles(grass_ground);
 
         //MONETINE
-        moneys = new Bones();
+        moneys = new PowerUp();
 
         //DISTANZA PERCORSA
         distance = 0;
@@ -111,16 +106,16 @@ public class Board extends JPanel implements Runnable, ActionListener {
         HealthBar.instance().decrease(1);
         distance += 1;
         distanceForScore += 0.1;
-        
+
         score = coin + (int) distanceForScore;  //PUNTEGGIO FINALE
-        
+
         background.update();
         grass_ground.update();
         moneys.update();
         obstacles.update();
 
-        if ( (TRex.getState() != TRex.getFalling()) && (TRex.getState() != TRex.getJumping()) && !grass_ground.hasCollided(TRex.getCollider())) {
-            
+        if ((TRex.getState() != TRex.getFalling()) && (TRex.getState() != TRex.getJumping()) && !grass_ground.hasCollided(TRex.getCollider())) {
+
             //System.out.println("ho preso il canyon");
             //running = false;
             //gameOver = true;
@@ -130,7 +125,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         this.collidedObstacle = obstacles.hasCollided(TRex.getCollider());
         
         this.collidedMoney = moneys.hasCollided(TRex.getCollider());
-        
+
         if (this.collidedObstacle != null) {
             this.collidedObstacleString = collidedObstacle.getClass().getSimpleName();
             this.collidedMoneyString = collidedObstacle.getClass().getSimpleName();
@@ -168,12 +163,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
         g.drawString("MT: " + Integer.toString((int) distanceForScore), getWidth() / 4 - 180, 100);
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
         g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
-        
-        if (collidedObstacle!= null) {
-            
+
+        if (collidedObstacle != null) {
+
             //esplosione BIRD
             if (collidedObstacleString.equals("Bird")) {
-                
+
                 /*
                 if (birdCounter == BIRD1) {
                     if (animation1 < 5) {
@@ -194,8 +189,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
                         animation2 = 0;
                     }
                 }*/
-                
-                
                 collidedObstacle.collisionAction(collidedObstacle);
 
                 if (TRex.getPower() == TRex.pepperPower) {
@@ -212,7 +205,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
                     }
                 }
             }
-            
+
             //esplosione CACTUS
             if (collidedObstacleString.equals("Cactus")) {
                 //collidedObstacle.getClass().getSimpleName()
@@ -263,7 +256,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     private class TRexAdapter extends KeyAdapter {
-        
+
         @Override
         public void keyPressed(KeyEvent e) {
             TRex.keyPressed(e);
@@ -275,13 +268,14 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 reset();
             }
             if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard) {
-                String name = JOptionPane.showInputDialog("Enter your name:","");
-                if(name != null){
+                String name = JOptionPane.showInputDialog("Enter your name:", "");
+                if (name != null) {
                     openScoreboard = false;
-                    if(name.length() > 3)
-                        ScoreUserInterface.instance(name.substring(0,3));
-                    else
+                    if (name.length() > 3) {
+                        ScoreUserInterface.instance(name.substring(0, 3));
+                    } else {
                         ScoreUserInterface.instance(name);
+                    }
                 }
             }
         }

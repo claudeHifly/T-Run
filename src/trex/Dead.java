@@ -17,11 +17,11 @@ import utility.Resources;
  *
  * @author Angela
  */
-public class Dead implements TrexState{
+public class Dead implements TrexState {
 
     private final Trex trex;
     private final BufferedImage deadTRex;//immagine TRex morto
-    
+
     public Dead(Trex trex) {
         this.trex = trex;
         this.deadTRex = Resources.instance().getDinoBigEyesCol();

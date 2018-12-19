@@ -5,54 +5,49 @@
  */
 package components;
 
-import general.Board;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.Timer;
+import utility.Resources;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
+public class Pepper extends Item {
 
-public class Pepper extends Item{
-    
-     public Pepper(int x, int y, BufferedImage image) {
-             super(x, y, image);  
-     }
-     
+
+    public Pepper(int x, int y) {
+        super(x, y, Resources.instance().getPepperCol());
+    }
 
     @Override
     public void collisionAction(Item collidedItem) {
 
         System.out.println("HO PRESO IL PEPPER");
-        Bones.probabilityOfPepper = 0;
+        
         super.TRex.setPower(TRex.getPepperPower());
         pepperCountdown();
 
     }
-    
-    public void pepperCountdown(){
-        
+
+    public void pepperCountdown() {
+        int normalFrequency = PowerUp.frequencyPepper;
+        PowerUp.frequencyPepper = 0;
         Timer pepperTimer = new java.util.Timer();
-        
-        pepperTimer.schedule( 
-            new java.util.TimerTask() {
-                @Override
-                public void run() {
-                    //System.out.println("Time Over -> No PepperPower");
-                    TRex.setPower(TRex.getNoPower());       //resetto il powerUP
-                    Bones.probabilityOfPepper = 0.65;       //ripristino la probabilità di spawn del peperoncino
-                    pepperTimer.cancel();
-                    
-                }
-            }, 
-            15000   //10 secondi di powerUP Pepper
+
+        pepperTimer.schedule(
+                new java.util.TimerTask() {
+            @Override
+            public void run() {
+                //System.out.println("Time Over -> No PepperPower");
+                TRex.setPower(TRex.getNoPower());       //resetto il powerUP
+                PowerUp.frequencyPepper = normalFrequency;       //ripristino la probabilità di spawn del peperoncino
+                pepperTimer.cancel();
+
+            }
+        },
+                15000 //10 secondi di powerUP Pepper
         );
-        
-        
+
     }//fine pepperCountdown;
 
-    
 }

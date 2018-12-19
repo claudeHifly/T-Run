@@ -9,9 +9,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
-import general.UserInterface;
-import java.net.URL;
-import utility.Utility;
 import utility.Resources;
 
 /**
@@ -19,43 +16,44 @@ import utility.Resources;
  * @author G8
  */
 public class Background {
-        
+
     private class GroundImage {
+
         BufferedImage image;
         int x;
     }
-    
+
     private BufferedImage backGround;//immagine suolo
     private ArrayList<GroundImage> backGroundSet;
-    
-    public Background(){
-        
+
+    public Background() {
+
         //OLD
         this.backGround = Resources.instance().getBackgroundCol();
-        
+
         //COLOURED
         //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 
-
         backGroundSet = new ArrayList<GroundImage>();
-        
-        for(int i=0; i<3; i++){
+
+        for (int i = 0; i < 3; i++) {
             GroundImage tmp = new GroundImage();
             tmp.image = backGround;
             tmp.x = 0;
             backGroundSet.add(tmp);
         }
-        
+
     }
-    
+
     public void create(Graphics g) {
-        
-        for(GroundImage img: backGroundSet)
+
+        for (GroundImage img : backGroundSet) {
             g.drawImage(backGround, (int) img.x, 0, null);
-        
+        }
+
     }
-    
+
     public void update() {
-        
+
         Iterator<GroundImage> looper2 = backGroundSet.iterator();
         GroundImage first2 = looper2.next();
 
@@ -73,7 +71,7 @@ public class Background {
             first2.x = previousX2 + backGround.getWidth();
             backGroundSet.add(first2);
         }
-        
+
     }
-    
+
 }

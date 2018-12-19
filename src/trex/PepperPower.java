@@ -13,13 +13,13 @@ import utility.Resources;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
-public class PepperPower implements TrexPower{
-    
+public class PepperPower implements TrexPower {
+
     private final Trex trex;
     private final BufferedImage auraTRex;//immagine TRex coun aura di fuoco
-    
+
     public PepperPower(Trex trex) {
         this.trex = trex;
         //this.trex.setState(trex.getPepperPower());
@@ -30,5 +30,5 @@ public class PepperPower implements TrexPower{
     public void create(Graphics g) {
         g.drawImage(this.auraTRex, trex.x, trex.y, null);
     }
-    
+
 }
