@@ -107,6 +107,11 @@ public class Resources { //singleton
     private final BufferedImage score20Col;
     private final BufferedImage score50Col;
     private final BufferedImage score100Col;
+
+    // DEMO
+    private final BufferedImage arrowDown;
+    private final BufferedImage arrowUp;
+    private final BufferedImage arrowRight;
     
     //HEALTH BAR
     private final BufferedImage healthBar;
@@ -207,8 +212,11 @@ public class Resources { //singleton
         score20Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score20.png"));
         score50Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score50.png"));
         score100Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score100.png"));
-
         
+        // DEMO
+        arrowDown = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowDOWN.png"));
+        arrowUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowUP.png"));
+        arrowRight = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowRIGHT.png"));
     }
 
     public static Resources instance() {
@@ -487,6 +495,18 @@ public class Resources { //singleton
 
     public BufferedImage getScore100Col() {
         return score100Col;
+    }
+
+    public BufferedImage getArrowDown() {
+        return arrowDown;
+    }
+
+    public BufferedImage getArrowUp() {
+        return arrowUp;
+    }
+
+    public BufferedImage getArrowRight() {
+        return arrowRight;
     }
 
     public BufferedImage getHealthBar() {

@@ -26,7 +26,7 @@ public class Bone extends Item {
     }
 
     @Override
-    public void collisionAction(Item collidedItem) {
+    public void collisionAction() {
         if (super.TRex.multiplier == true) {
             Board.coin += 2 * value;
             //Board.score += 1;

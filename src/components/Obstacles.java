@@ -5,6 +5,8 @@
  */
 package components;
 
+import general.Board;
+import general.HomePage;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import static general.UserInterface.width;
@@ -18,8 +20,8 @@ public class Obstacles extends Items {
     private final int cactusOnScreen;
     private final double yPercentageCactusOnGround = 0.025;
     private final double yPercentageBirdOnGround = 0.1;
-    private final int birdFrequency = 10;
-    private final int canyonFrequency = 20;
+    private final int birdFrequency = 20;
+    private final int canyonFrequency = 30;
     private final Ground ground;
 
     public Obstacles(Ground ground) {
@@ -29,7 +31,11 @@ public class Obstacles extends Items {
         AffineTransform at;
         cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
-            ob = new Cactus(randomDistance(), (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+            int rd = randomDistance();
+//            if (HomePage.demo) {
+//                Board.arrows.addArrow(rd - distanceArrowCactus, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+//            }
+            ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
             at.translate(ob.getX(), ob.getY());
             ob.getCollider().transform(at);
@@ -72,13 +78,16 @@ public class Obstacles extends Items {
         int totalFrequency = 100;
         int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
         int rd = randomDistance();
+//        if (HomePage.demo) {
+//            Board.arrows.addArrow(rd - 20, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+//        }
         if (extract <= canyonFrequency) {
             int endCanyon = ground.addCanyon(rd);
             if (endCanyon == rd) {
                 System.out.println("DOVRESTI METTERLO ALLA FINE");
                 return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             }
-            return new Empty(endCanyon);
+            return new Empty(endCanyon, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
         } else {
             if (extract <= canyonFrequency + birdFrequency) {
                 return new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));

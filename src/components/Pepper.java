@@ -20,7 +20,7 @@ public class Pepper extends Item {
     }
 
     @Override
-    public void collisionAction(Item collidedItem) {
+    public void collisionAction() {
 
         System.out.println("HO PRESO IL PEPPER");
         

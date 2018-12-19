@@ -7,14 +7,25 @@ package trex;
 
 import components.Ground;
 import static components.Ground.movementSpeed;
+import components.HealthBar;
+import general.Board;
+import static general.Board.coin;
+import static general.Board.distanceForScore;
+import static general.Board.gameOver;
+import static general.Board.score;
+import general.HomePage;
 import general.UserInterface;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utility.*;
 
 /**
@@ -244,31 +255,59 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        
         int keyPressed = e.getKeyCode();
+        
+        if (!HomePage.demo) {
+            
 
-        if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
-            this.state = jumping;
-            jumpDisabled = true;
-            //System.out.println("Space pressed");
-        }
+            if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
+                this.state = jumping;
+                jumpDisabled = true;
+                //System.out.println("Space pressed");
+            }
 
-        if (keyPressed == KeyEvent.VK_DOWN && this.state != (jumping)) {
-            this.state = lowerHead;
+            if (keyPressed == KeyEvent.VK_DOWN && this.state != (jumping)) {
+                this.state = lowerHead;
+            }
+        } else {
+            if (keyPressed == KeyEvent.VK_ESCAPE) {
+                //HomePage.demo = false;
+                
+//                HealthBar.setInstance(null);
+//                Ground.movementSpeed0 = 8;
+//                setPower(getNoPower());       //resetto il gioco, inizializzo a NoPower
+//                setMultiplier(false);
+//                Board.score = 0;
+//                Board.distanceForScore = 0;
+//                Board.coin = 0;
+//                System.out.println("reset");
+//                Board.gameOver = false;
+//                
+//                instance=null;
+//                //UserInterface.instance().setVisible(false);
+//                UserInterface.instance().dispose();
+//                //UserInterface.setInstance(null);
+//                
+//                new HomePage();
+                  setState(getDead());
+                
+            }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (!HomePage.demo) {
+            int keyTyped = e.getKeyCode();
 
-        int keyTyped = e.getKeyCode();
+            if (keyTyped == KeyEvent.VK_DOWN && (state != jumping)) {
+                this.state = running;
+            }
 
-        if (keyTyped == KeyEvent.VK_DOWN && (state != jumping)) {
-            this.state = running;
-        }
-
-        if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
-            jumpDisabled = false;
+            if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
+                jumpDisabled = false;
+            }
         }
 
     }
