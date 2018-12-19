@@ -64,9 +64,11 @@ public class Bird extends Item {
                 Board.coin += 10;
             }
         } else {
-            Board.running = false;
-            Board.gameOver = true;
-            super.TRex.setState(TRex.getDead());
+             if(!Board.gameOver)
+                HealthBar.instance().decrease(1);
+        /*Board.running = false;
+        Board.gameOver = true;
+        super.TRex.setState(TRex.getDead()); */
         }
     }
 

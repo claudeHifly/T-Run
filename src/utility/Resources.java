@@ -5,7 +5,6 @@
  */
 package utility;
 
-import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 /**
@@ -114,6 +113,10 @@ public class Resources { //singleton
     private final BufferedImage arrowUp;
     private final BufferedImage arrowRight;
     
+    //HEALTH BAR
+    private final BufferedImage healthBar;
+    private final BufferedImage healthBarRectangle;
+    
     private Resources() {
 
         //IMMAGINI HOMESCREEN
@@ -196,8 +199,12 @@ public class Resources { //singleton
         mulBanner2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulBanner2.png"));
         mulScoreCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulScore.png"));
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
-
-        // SCORE OSTACOLI BRUCIATI
+        
+        //HEALTH BAR
+        healthBar = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/barraDellaVita.png"));
+        healthBarRectangle = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/taccaVita.png"));
+        
+        //
         score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
         score2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score2.png"));
         score5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score5.png"));
@@ -502,4 +509,14 @@ public class Resources { //singleton
         return arrowRight;
     }
 
+    public BufferedImage getHealthBar() {
+        return healthBar;
+    }
+
+    public BufferedImage getHealthBarRectangle() {
+        return healthBarRectangle;
+    }
+    
+    
+    
 }

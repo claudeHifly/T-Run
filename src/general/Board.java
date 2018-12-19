@@ -49,7 +49,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static Thread blinker;
 
     public static boolean openScoreboard = true;
-
+    //public HealthBar bar = HealthBar.instance();
+    
     //INIZIALIZZO BOARD
     public Board() {
 
@@ -109,6 +110,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         obstacles.update();
+        
+        //bar = new HealthBar();
 
         animator = new Thread(this);
 
@@ -117,7 +120,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     public void updateGame() {
-
+        
+        HealthBar.instance().decrease(0.05);
         distance += 1;
         distanceForScore += 0.1;
 
@@ -173,7 +177,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
+        
+        
         background.create(g);
         grass_ground.create(g);//creare sempre prima il ground
         moneys.create(g);
@@ -252,7 +257,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
             }
 
         }
-
+        if(!gameOver)
+            HealthBar.instance().create(g);
         g.dispose();
 
     }
@@ -316,6 +322,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         public void reset() {
+            HealthBar.instance().increase(100);
             Ground.movementSpeed0 = 8;
             TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
             TRex.setMultiplier(false);
@@ -324,6 +331,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             coin = 0;
             System.out.println("reset");
             gameOver = false;
+            
             startGame();
         }
     }
