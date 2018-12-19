@@ -24,8 +24,8 @@ public class Falling implements TrexState {
 
     public Falling(Trex trex) {
         this.trex = trex;
-        this.fallingImage = Resources.instance().getDinoBigEyesCol();
-        this.auraImage = Resources.instance().getAuraCol();
+        this.fallingImage = Resources.instance().getDinoBigEyes();
+        this.auraImage = Resources.instance().getAura();
     }
 
     @Override

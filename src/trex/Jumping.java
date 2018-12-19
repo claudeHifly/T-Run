@@ -27,8 +27,8 @@ public class Jumping implements TrexState {
     public Jumping(Trex trex) {
         this.trex = trex;
 
-        this.jumpingImage = Resources.instance().getDinoStandCol();
-        this.auraImage = Resources.instance().getAuraCol();
+        this.jumpingImage = Resources.instance().getDinoStand();
+        this.auraImage = Resources.instance().getAura();
     }
 
     @Override

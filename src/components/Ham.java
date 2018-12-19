@@ -14,7 +14,7 @@ import utility.Resources;
 public class Ham extends Item {
 
     public Ham(int x, int y) {
-        super(x, y, Resources.instance().getHamCol());
+        super(x, y, Resources.instance().getHam());
 
     }
 

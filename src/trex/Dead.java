@@ -24,7 +24,7 @@ public class Dead implements TrexState {
 
     public Dead(Trex trex) {
         this.trex = trex;
-        this.deadTRex = Resources.instance().getDinoBigEyesCol();
+        this.deadTRex = Resources.instance().getDinoBigEyes();
     }
 
     @Override

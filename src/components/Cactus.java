@@ -18,7 +18,7 @@ public class Cactus extends Item {
     private final int distanceArrowCactus = 40;
 
     public Cactus(int x, int y) {
-        super(x, y, Resources.instance().getCactusCol());
+        super(x, y, Resources.instance().getCactus());
         if (HomePage.demo) {
             Board.arrows.addArrowUp(x - distanceArrowCactus, (int) (Ground.yPosition));
         }

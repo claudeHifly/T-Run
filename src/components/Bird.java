@@ -30,9 +30,9 @@ public class Bird extends Item {
     private final int distanceArrowBird = 40;
 
     public Bird(int x, int y) {
-        super(x, y, Resources.instance().getBird1Col());
-        this.bird1 = Resources.instance().getBird1Col();
-        this.bird2 = Resources.instance().getBird2Col();
+        super(x, y, Resources.instance().getBird1());
+        this.bird1 = Resources.instance().getBird1();
+        this.bird2 = Resources.instance().getBird2();
         this.birdCounter = BIRD1;
         if (HomePage.demo) {
             System.out.println("Differenza" + (Ground.yPosition - y));

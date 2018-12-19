@@ -36,9 +36,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private String collidedArrowString;
     private String collidedObstacleString;
     private String collidedMoneyString;
-    private final BufferedImage score5Col;
-    private final BufferedImage score10Col;
-    private final BufferedImage score20Col;
 
     public static int distance;
     public static float distanceForScore;
@@ -57,10 +54,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         /*this.nameLabel = new JLabel("Name:");
         this.nameLabel.setVisible(true);
         this.add(this.nameLabel);*/
-        this.explosionImage = Resources.instance().getExplosionCol();
-        this.score5Col = Resources.instance().getScore5Col();
-        this.score10Col = Resources.instance().getScore10Col();
-        this.score20Col = Resources.instance().getScore20Col();
+        this.explosionImage = Resources.instance().getExplosion();
 
         setFocusable(true);//keyListener
         addKeyListener(new TRexAdapter());
@@ -225,15 +219,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 if (TRex.getPower() == TRex.pepperPower) {
                     g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
 
-                    if (this.TRex.multiplier == true) {
 
-                        g.drawImage(score20Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
-
-                    } else {
-
-                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
-
-                    }
                 }
             }
 
@@ -246,13 +232,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 if (TRex.getPower() == TRex.pepperPower) {
                     g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
 
-                    if (this.TRex.multiplier == true) {
-                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
 
-                    } else {
-                        g.drawImage(score5Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
-
-                    }
                 }
             }
 

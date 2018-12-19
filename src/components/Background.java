@@ -29,7 +29,7 @@ public class Background {
     public Background() {
 
         //OLD
-        this.backGround = Resources.instance().getBackgroundCol();
+        this.backGround = Resources.instance().getBackground();
 
         //COLOURED
         //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 
