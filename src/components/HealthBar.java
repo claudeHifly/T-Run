@@ -33,7 +33,7 @@ public class HealthBar{ //Singleton
         this.emptyBar = Resources.instance().getHealthBar();
         this.rectangle = Resources.instance().getHealthBarRectangle();
         this.scaledImage = emptyBar.getScaledInstance((int) (width*0.975),(int) (height*0.098), 100);
-        this.scaledRectImage = rectangle.getScaledInstance(rectangle.getWidth(),(int) (height*0.073), 100);
+        this.scaledRectImage = rectangle.getScaledInstance(rectangle.getWidth(),(int) (height*0.0735), 100);
         MAX = scaledImage.getWidth(null)- (int) (scaledImage.getWidth(null)*0.069);
         this.cnt = MAX;
     }
@@ -45,11 +45,10 @@ public class HealthBar{ //Singleton
     }
     
     public void create(Graphics g){
-        
         for(int i = 0; i<this.cnt; i++)
-            g.drawImage(this.scaledRectImage, (int) (scaledImage.getWidth(null)*0.069+i*rectangle.getWidth(null)), (int) (scaledImage.getHeight(null)*0.15), null);
+            g.drawImage(this.scaledRectImage, (int) (scaledImage.getWidth(null)*0.07+i*rectangle.getWidth(null)), (int) (scaledImage.getHeight(null)*0.16), null);
     
-        g.drawImage(this.scaledImage, 5, 4, null);
+        g.drawImage(this.scaledImage, (int) (width*0.01), (int) (height*0.01), null);
     }
     
     public void increase(double n){

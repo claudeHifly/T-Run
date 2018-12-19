@@ -50,18 +50,15 @@ public class HomePage extends JFrame {
                 /*BufferedImage footprintImage = Resources.instance().getHomepageFootprintImage();
                 Image scaledFootprintImage = footprintImage.getScaledInstance((int) (width*0.1), (int) (height*0.1), 100);*/
                 g.drawImage(scaledBackImage, 0, 0, this);
-
-                g.setFont(new Font("Courier New", Font.BOLD, 25));
-                g.drawString("Click on footprint to start", (int) (width * 0.35), (int) (height * 0.92));
                 //g.drawImage(scaledFootprintImage, (int) (width*0.48), (int) (height*0.8), this);
             }
         };
 
-        demoButton = new JButton("START DEMO");
+        /*demoButton = new JButton("START DEMO");
         demoButton.setFont(new Font("Courier New", Font.BOLD, 30));
         demoButton.setBounds((int) ((getWidth() - 150) / 2), (int) (getHeight() * 0.5), 180, 50);
         //startButton.setVisible(false);
-        panel.add(demoButton);
+        panel.add(demoButton);*/
         //panel.setBackground(new Color(137,223,51));
         ImageShowingComponent footprint = new ImageShowingComponent(this);
         panel.setLayout(new BorderLayout());
@@ -71,14 +68,14 @@ public class HomePage extends JFrame {
         add(panel);
         //panel.add(footprint);
 
-        demoButton.addActionListener(new ActionListener() {
+        /*demoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 demo = true;
                 setVisible(false);
                 UserInterface.instance().setVisible(true);
             }
-        });
+        });*/
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setSize(width, height);
@@ -100,6 +97,8 @@ public class HomePage extends JFrame {
         // The image to display
         private final BufferedImage footprintImage;
         private final Image scaledFootprintImage;
+        private final BufferedImage demoButtonImage;
+        private final Image scaledDemoButtonImage;
         private MouseListener listener;
 
         // Instantiate the panel and perform initialization
@@ -115,17 +114,25 @@ public class HomePage extends JFrame {
                         frame.setVisible(false);
                         UserInterface.instance().setVisible(true);
                     }
+                    else if((xOnScreen >= (int) (width * 0.6) && xOnScreen <= (int) (width * 0.6) + (int) (width * 0.05)) && (yOnScreen >= (int) (height * 0.75) && yOnScreen <= (int) (height * 0.75) + (int) (height * 0.1))) {
+                        demo = true;
+                        frame.setVisible(false);
+                        UserInterface.instance().setVisible(true);
+                    }
                 }
             };
 
             this.addMouseListener(listener);
             this.footprintImage = Resources.instance().getHomepageFootprintImage();
             this.scaledFootprintImage = footprintImage.getScaledInstance((int) (width * 0.1), (int) (height * 0.2), 100);
+            this.demoButtonImage = Resources.instance().getDemoButton();
+            this.scaledDemoButtonImage = demoButtonImage.getScaledInstance((int) (width * 0.05), (int) (height * 0.1), 100);
         }
 
         @Override
         public void paintComponent(Graphics g) {
             g.drawImage(this.scaledFootprintImage, (int) (width * 0.44), (int) (height * 0.7), null);
+            g.drawImage(this.scaledDemoButtonImage, (int) (width * 0.6), (int) (height * 0.75), null);
         }
     }
 }
