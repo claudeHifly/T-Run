@@ -191,9 +191,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
         TRex.create(g);
 
         g.setFont(new Font("Courier New", Font.BOLD, 25));
-        g.drawString("MT: " + Integer.toString((int) distanceForScore), getWidth() / 4 - 180, 100);
+        g.drawString("MT: " + Integer.toString((int) distanceForScore), (int) (UserInterface.width*0.4), (int) (UserInterface.height*0.2));
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
-        g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
+        g.drawString("BONES: " + Integer.toString(coin), (int) (UserInterface.width*0.5), (int) (UserInterface.height*0.2));
+        if(HomePage.demo && !gameOver)
+            g.drawString("Press ESC to stop demo mode", (int) (UserInterface.width*0.35), (int) (UserInterface.height*0.9));
 
         if (collidedObstacle != null) {
 

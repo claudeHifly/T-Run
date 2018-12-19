@@ -45,7 +45,7 @@ public class Dead implements TrexState {
             g.drawString("Press SPACE to save score",(int) (UserInterface.width*0.39), (int) (UserInterface.height*0.56));
         }
         else
-            g.drawString("Press ENTER to start the game!", (int) (UserInterface.width*0.30), (int) (UserInterface.height*0.51));
+            g.drawString("Press ENTER to start the game!", (int) (UserInterface.width*0.33), (int) (UserInterface.height*0.51));
         
         HealthBar.instance().setInstance(null);
     }

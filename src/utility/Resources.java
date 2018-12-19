@@ -112,6 +112,7 @@ public class Resources { //singleton
     private final BufferedImage arrowDown;
     private final BufferedImage arrowUp;
     private final BufferedImage arrowRight;
+    private final BufferedImage demoButton;
     
     //HEALTH BAR
     private final BufferedImage healthBar;
@@ -122,7 +123,7 @@ public class Resources { //singleton
         //IMMAGINI HOMESCREEN
         homepageTitleImage = Utility.instance().instance().create(this.getClass().getClassLoader().getResource("image/HomePage/Title small.png"));
         homepageBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png"));
-        homepageFootprintImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/Footprint small.png"));
+        homepageFootprintImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/FootprintStart.png"));
 
         // SCOREBOARD
         scoreboardBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/scoreboard/scoreScreen1.jpg"));
@@ -217,6 +218,7 @@ public class Resources { //singleton
         arrowDown = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowDOWN.png"));
         arrowUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowUP.png"));
         arrowRight = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowRIGHT.png"));
+        demoButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/DemoButton.png"));
     }
 
     public static Resources instance() {
@@ -516,7 +518,8 @@ public class Resources { //singleton
     public BufferedImage getHealthBarRectangle() {
         return healthBarRectangle;
     }
-    
-    
-    
+
+    public BufferedImage getDemoButton() {
+        return demoButton;
+    }    
 }
