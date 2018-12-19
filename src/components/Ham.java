@@ -21,6 +21,6 @@ public class Ham extends Item {
     @Override
     public void collisionAction(Item collidedItem) {
             System.out.println("HO PRESO HAM");
-            HealthBar.instance().increase(150);
+            HealthBar.instance().increase(20);
     }
 }

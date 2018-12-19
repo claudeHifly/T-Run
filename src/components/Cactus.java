@@ -32,7 +32,7 @@ public class Cactus extends Item {
             }
         } else {
             if(!Board.gameOver)
-                HealthBar.instance().decrease(10);
+                HealthBar.instance().decrease(1);
             
             //Board.running = false;
             //Board.gameOver = true;

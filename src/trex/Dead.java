@@ -29,6 +29,7 @@ public class Dead implements TrexState {
 
     @Override
     public void create(Graphics g) {
+       //trex.deltaT=0;
         Board.running = false;
         Board.gameOver = true;
         HealthBar.instance().create(g);

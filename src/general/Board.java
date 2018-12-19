@@ -103,7 +103,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
     public void updateGame() {
         
-        HealthBar.instance().decrease(1);
+        HealthBar.instance().decrease(0.05);
         distance += 1;
         distanceForScore += 0.1;
 
@@ -291,7 +291,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         public void reset() {
-            HealthBar.instance().increase(HealthBar.MAX);
+            HealthBar.instance().increase(100);
             Ground.movementSpeed0 = 8;
             TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
             TRex.setMultiplier(false);
