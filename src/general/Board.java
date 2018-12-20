@@ -344,8 +344,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         color = false;
         colorGame = false;
         changed = false;
-        HomePage.demo = false;
-        HealthBar.instance().increase(100);
+        //HomePage.demo = false;
+        //HealthBar.instance().increase(100);
         this.explosionImage = Resources.instance().getExplosion();
         TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
         TRex.setMultiplier(false);
