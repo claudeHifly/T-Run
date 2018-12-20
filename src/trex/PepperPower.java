@@ -23,7 +23,8 @@ public class PepperPower implements TrexPower {
 
     @Override
     public void create(Graphics g) {
-        g.drawImage(this.auraTRex, Trex.instance().x, Trex.instance().y, null);
+        Trex trex = Trex.getInstance();
+        g.drawImage(this.auraTRex, trex.x, trex.y, null);
     }
 
 }

@@ -16,8 +16,9 @@ import static org.junit.Assert.*;
  * @author G8
  */
 public class UtilityTest {
+
     Utility utility;
-    
+
     public UtilityTest() {
         this.utility = Utility.instance();
     }
@@ -34,7 +35,7 @@ public class UtilityTest {
     /**
      * Test of create method, of class Utility.
      */
-   @Test
+    @Test
     public void testCreate() {
         System.out.println("create");
         URL path = this.getClass().getClassLoader().getResource("image/color/Dino-stand.png");
@@ -53,5 +54,5 @@ public class UtilityTest {
         Area result = utility.createCollider(img, 0, 0);
         assertNotNull(result);
     }
-    
+
 }

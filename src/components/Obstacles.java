@@ -6,8 +6,8 @@
 package components;
 
 import static general.Board.color;
-import java.util.ArrayList;
 import static general.UserInterface.width;
+import java.util.ArrayList;
 import utility.Utility;
 
 /**
@@ -32,7 +32,7 @@ public class Obstacles extends Items {
         cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
             int rd = randomDistance();
-            ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+            ob = new Cactus(rd, (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             Utility.instance().moveCollider(ob.getCollider(), ob.getX(), ob.getY());
             obArray.add(ob);
         }
@@ -43,14 +43,12 @@ public class Obstacles extends Items {
         for (Item ob : obArray) {
             ob.setX(ob.getX() - Ground.movementSpeed);
             Utility.instance().moveCollider(ob.getCollider(), -Ground.movementSpeed, 0);
-
         }
         Item firstOb = obArray.get(0);
         if ((firstOb.getX() < -firstOb.getImage().getWidth()) && (!obArray.isEmpty())) { //image is completely out of the screen: remove and move it to the end of the array
             obArray.remove(firstOb);
             Item ob = randomObstacle();
             Utility.instance().moveCollider(ob.getCollider(), ob.getX(), ob.getY());
-
             obArray.add(ob);
         }
     }
@@ -72,21 +70,16 @@ public class Obstacles extends Items {
         int rd = randomDistance();
         if (color && !tardis) {
             tardis = true;
-            return new Portal(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-
+            return new Portal(rd, (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
         }
         if (extract <= canyonFrequency) {
             int endCanyon = ground.addCanyon(rd);
-//            if (endCanyon == rd) {
-//                System.out.println("DOVRESTI METTERLO ALLA FINE");
-//                return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-//            }
             return new Empty(endCanyon);
         } else {
             if (extract <= canyonFrequency + birdFrequency) {
-                return new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
+                return new Bird(rd, (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));
             } else {
-                return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+                return new Cactus(rd, (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             }
         }
     }

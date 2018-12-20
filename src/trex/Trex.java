@@ -1,16 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to implement the main character of the game, the TRex, according to the State design pattern.
+ * This class is used to manage the Trex state and therefore the TRex behaviour.
+ * This class is also implemented using the Singleton design pattern.
  */
 package trex;
 
 import components.Ground;
 import general.HomePage;
 import general.UserInterface;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Area;
@@ -51,10 +49,9 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     float speedForJumping;
     private boolean jumpDisabled;
 
-    //questi due contatori mi servono per rallentare l'animazione dei piedi
-    //del TRex altrimenti cambierebbe sprite ogni 25ms
-    int leftCounter;        //contatore per l'animazione del piede sinistro
-    int rightCounter;       //contatore per l'animazione del piede destro
+    int leftCounter;        //left foot animation counter
+    int rightCounter;       //right foot animation counter
+
     int animation1;
     int animation2;
     Area collider;
@@ -133,10 +130,12 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     @Override
     public void create(Graphics g) {
         state.create(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.black);
+
+        //Uncommenting the lines below, you can see the the TRex collider during the gameplay
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(Color.red);
+//        g2d.draw(collider);
+//        g2d.setColor(Color.black);
         if (instance.getState() != dead) {
             if (multiplier == true) {
                 if (bannerCounter == BANNER1) {
@@ -264,6 +263,5 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     public void setMultiplier(boolean multiplier) {
         this.multiplier = multiplier;
     }
-    
-    
+
 }

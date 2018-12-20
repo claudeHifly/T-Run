@@ -6,8 +6,8 @@
 package components;
 
 import static components.Ground.movementSpeed;
-import java.util.ArrayList;
 import static general.UserInterface.width;
+import java.util.ArrayList;
 import utility.Utility;
 
 /**
@@ -16,7 +16,6 @@ import utility.Utility;
  */
 public class PowerUp extends Items {
 
-    //private ArrayList<Item> obArray;
     private final int powerUpSeriesOnScreen = 10;
     private final int maxPowerUpSeries = 6;
     private final int minPowerUpSeries = 2;
@@ -42,37 +41,13 @@ public class PowerUp extends Items {
             }
         }
 
-        //System.out.println(obArray);
     }
 
-    /*
-    public void create(Graphics g) {
-        for (Item ob : super.obArray) {
-            ob.create(g);
-        }
-
-    }*/
-
- /*
-    public Item hasCollided(Area TRexArea) {
-        for (Item ob : super.obArray) {
-            Area inter = (Area) ob.getCollider().clone();
-            inter.intersect(TRexArea);
-            if (!inter.isEmpty()) {
-                System.out.println("Collisione con " + ob.getClass().getSimpleName());
-                return ob;
-            }
-        }
-        
-        return null;
-    }*/
     @Override
     public void update() {
         for (Item ob : obArray) {
-            //System.out.println("I'm in looper while");
             ob.setX(ob.getX() - movementSpeed);
-            //at.translate(ob.getX() - movementSpeed, 0);
-            Utility.instance().moveCollider(ob.getCollider(),-movementSpeed, 0 );
+            Utility.instance().moveCollider(ob.getCollider(), -movementSpeed, 0);
         }
         Item firstOb = obArray.get(0);
         if ((firstOb.getX() < -firstOb.getImage().getWidth())) {
@@ -87,7 +62,6 @@ public class PowerUp extends Items {
                 obArray.add(ob);
             }
         }
-
     }
 
     private int randomDistanceSeries() {
@@ -95,34 +69,31 @@ public class PowerUp extends Items {
             return width;
         }
         return obArray.get(obArray.size() - 1).getX() + 300 + (int) (Math.random() * 500);
-
     }
 
     private int randomPowerUpForSeries() {
         return (int) (Math.random() * (maxPowerUpSeries - minPowerUpSeries) + minPowerUpSeries);
-
     }
 
     private Item randomPowerUp(int fd) {
         int totalFrequency = 100;
         int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
         if (extract <= frequencyMultiplier) {
-            return new Multiplier(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
+            return new Multiplier(fd, (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
         } else {
             if (extract <= frequencyMultiplier + frequencyBoneGold) {
-                return new BoneSpecial(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
+                return new BoneSpecial(fd, (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
             } else {
                 if (extract <= frequencyMultiplier + frequencyBoneGold + frequencyPepper) {
-                    return new Pepper(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
+                    return new Pepper(fd, (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
                 } else {
                     if (extract <= frequencyMultiplier + frequencyBoneGold + frequencyPepper + frequencyHam) {
-                        return new Ham(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
+                        return new Ham(fd, (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
                     } else {
-                        return new Bone(fd, (int) (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
+                        return new Bone(fd, (Ground.yPosition) - (int) (Ground.yPosition * yPercentagePowerUpOnGround));
                     }
                 }
             }
         }
     }
-
 }

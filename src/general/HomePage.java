@@ -83,13 +83,15 @@ public class HomePage extends JFrame {
                 public void mouseClicked(MouseEvent e) {
                     int xOnScreen = e.getX();
                     int yOnScreen = e.getY();
-                    //Controllo che il click sia stato fatto nella porzione di schermo dove è presente l'immagine
+
+                    //Check if the click is in the area of the start button image
                     if ((xOnScreen >= (int) (width * 0.44) && xOnScreen <= (int) (width * 0.44) + (int) (width * 0.1)) && (yOnScreen >= (int) (height * 0.7) && yOnScreen <= (int) (height * 0.7) + (int) (height * 0.2))) {
                         frame.setVisible(false);
                         UserInterface.instance().setVisible(true);
                         Board.demo = false;
                         levelMusicSound.stopSound();
-                    } else if ((xOnScreen >= (int) (width * 0.6) && xOnScreen <= (int) (width * 0.6) + (int) (width * 0.05)) && (yOnScreen >= (int) (height * 0.75) && yOnScreen <= (int) (height * 0.75) + (int) (height * 0.1))) {
+                    } //Check if the click is in the area of the demo button image
+                    else if ((xOnScreen >= (int) (width * 0.6) && xOnScreen <= (int) (width * 0.6) + (int) (width * 0.05)) && (yOnScreen >= (int) (height * 0.75) && yOnScreen <= (int) (height * 0.75) + (int) (height * 0.1))) {
                         demo = true;
                         levelMusicSound.stopSound();
                         frame.setVisible(false);

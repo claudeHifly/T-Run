@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to implement a character super mode that allows to gain bonus points by colliding with the obstacles.
  */
 package components;
 
@@ -14,36 +12,36 @@ import utility.Resources;
  */
 public class Pepper extends Item {
 
-
     public Pepper(int x, int y) {
         super(x, y, Resources.instance().getPepper());
     }
 
+    /**
+     * This method sets the Trex's state to 'PepperPower' when the character
+     * collides with the pepper item. Then a countdown is switched on.
+     */
     @Override
     public void collisionAction() {
-
-        System.out.println("HO PRESO IL PEPPER");
-        
         super.TRex.setPower(TRex.getPepperPower());
         pepperCountdown();
 
     }
 
+    /**
+     * This method implements, by using a timer, the contdown associated with
+     * the pepper item. After 15s the pepper effects is cancelled.
+     */
     public void pepperCountdown() {
         Timer pepperTimer = new java.util.Timer();
-
         pepperTimer.schedule(
                 new java.util.TimerTask() {
             @Override
             public void run() {
                 TRex.setPower(TRex.getNoPower());       //resetto il powerUP      //ripristino la probabilità di spawn del peperoncino
                 pepperTimer.cancel();
-
             }
         },
-                15000 //10 secondi di powerUP Pepper
+                15000 //15 seconds of pepper power up
         );
-
-    }//fine pepperCountdown;
-
+    }                                                            //end of pepperCountdown;
 }

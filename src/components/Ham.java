@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements a kind of power-up, the ham, that increases the health bar level by 20%.
  */
 package components;
 
@@ -20,7 +18,6 @@ public class Ham extends Item {
 
     @Override
     public void collisionAction() {
-            System.out.println("HO PRESO HAM");
-            HealthBar.instance().increase(20);
+        HealthBar.instance().increase(20);
     }
 }

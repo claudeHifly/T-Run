@@ -31,7 +31,6 @@ public class Falling implements TrexState {
     public void create(Graphics g) {
         Trex trex = Trex.getInstance();
         if (trex.y < UserInterface.instance().height) {
-
             Ground.movementSpeed0 = 0;
             Ground.movementSpeed = 0;
             trex.y += trex.deltaT * trex.speedForJumping;
@@ -44,7 +43,6 @@ public class Falling implements TrexState {
         } else {
             trex.setMultiplier(false);
             HealthBar.instance().decrease(HealthBar.MAX);
-            //trex.setState(trex.getDead());
 
             trex.create(g);
         }

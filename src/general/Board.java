@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements the JPanel in which is shown, step by step, the game evolution. 
  */
 package general;
 
@@ -55,6 +53,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
         startGame();
     }
 
+    /**
+     * This method initializes all the features to start gaming. If the game is
+     * in the demo mode, arrows are needed. The thresholdScore attribute is used
+     * to set the score the player must reach to switch the design of the game
+     * from black and white to coloured.
+     */
     public void startGame() {
         background = new Background();
         ground = new Ground();
@@ -86,6 +90,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
         animator.start();
     }
 
+    /**
+     * This method updates, step by step, the game by increasing the score,
+     * decreasing the health bar level, moving the ground and the background
+     * along the x-axis, etc.. In this method is also checked if the character
+     * has collided with an item in order to perform the right action.
+     */
     public void updateGame() {
         HealthBar.instance().decrease(0.05);
         distance += 1;
@@ -125,11 +135,14 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * This method drows the 'state' of the game on the JPanel.
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         background.create(g);
-        ground.create(g);//creare sempre prima il ground
+        ground.create(g);
         moneys.create(g);
         if (HomePage.demo) {
             arrows.create(g);
@@ -151,6 +164,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         g.dispose();
     }
 
+    /**
+     * Game thread task.
+     */
     @Override
     public void run() {
         running = true;
@@ -165,6 +181,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * This method allows to reset all the features of the game in order to
+     * restart the game.
+     */
     public void reset() {
         Ground.movementSpeed0 = 8;
         color = false;
@@ -172,7 +192,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         changed = false;
         HomePage.demo = false;
         this.explosionImage = Resources.instance().getExplosion();
-        TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
+        TRex.setPower(TRex.getNoPower());       //reset of the game, initialize to NoPower
         TRex.setMultiplier(false);
         score = 0;
         distanceForScore = 0;
@@ -185,6 +205,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         startGame();
     }
 
+    /**
+     * This method initializes the coloured version of the game.
+     */
     public void colorGame() {
         color = false;
         gameOver = false;
@@ -217,7 +240,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
     }
 
+    /**
+     * This private nested class implements the keyboard functionality for the
+     * game.
+     */
     private class TRexAdapter extends KeyAdapter {
+
         @Override
         public void keyPressed(KeyEvent e) {
             TRex.keyPressed(e);
@@ -226,7 +254,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 openScoreboard = true;
                 reset();
             }
-            if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard) {
+            if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard && !HomePage.demo) {
                 String name = JOptionPane.showInputDialog("Enter your name:", "");
                 if (name != null) {
                     openScoreboard = false;
@@ -235,7 +263,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
                     } else {
                         ScoreUserInterface.instance(name);
                     }
-                    
                 }
             }
         }
@@ -249,7 +276,5 @@ public class Board extends JPanel implements Runnable, ActionListener {
         public void keyReleased(KeyEvent e) {
             TRex.keyReleased(e);
         }
-
     }
-
 }

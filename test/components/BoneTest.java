@@ -13,10 +13,11 @@ import static org.junit.Assert.*;
  * @author ArtSen
  */
 public class BoneTest {
+
     Bone bone;
-    
+
     public BoneTest() {
-        bone = new Bone(0,0);
+        bone = new Bone(0, 0);
     }
 
     /**
@@ -29,5 +30,5 @@ public class BoneTest {
         int result = bone.getValue();
         assertEquals(expResult, result);
     }
-    
+
 }

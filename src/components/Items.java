@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements a collection of items.
+ * The 'hasCollided' method returns the specific item with which the character has collided.
  */
 package components;
 
@@ -18,9 +17,9 @@ public abstract class Items {
     protected ArrayList<Item> obArray;
 
     public void create(Graphics g) {
-        for (Item ob : obArray) {
+        obArray.forEach((ob) -> {
             ob.create(g);
-        }
+        });
     }
 
     public Item hasCollided(Area TRexArea) {
@@ -31,7 +30,6 @@ public abstract class Items {
                 return ob;
             }
         }
-
         return null;
     }
 

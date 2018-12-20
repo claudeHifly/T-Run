@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to load the old scores from a file, add the new score, show the scoreboard and save all in the file again.
  */
 package scoreboard;
 
@@ -24,6 +22,10 @@ public class Scoreboard {
     private static File file;
     private static final String name = null;
 
+    /**
+     * This method is used to read the file that containes the scores. The
+     * scores read are added into a TreeSet structure.
+     */
     public static TreeSet<Record> readFromScoreFile() {
         file = new File("score.txt");
         Scanner sc;
@@ -40,7 +42,10 @@ public class Scoreboard {
         return scoreboard;
     }
 
-    public static void saveOnScoreFile() {
+    /**
+     * This method is used to save the scores on the file.
+     */
+    private static void saveOnScoreFile() {
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(file, "UTF-8");
@@ -48,10 +53,10 @@ public class Scoreboard {
             if (size > 0) {
                 int i = 0;
                 Iterator it = scoreboard.iterator();
-                writer.write("");                           //sovrascrive il file
+                writer.write("");                                   //overwrite the file
                 while (it.hasNext() && i < 10) {
                     Record tmp = (Record) it.next();
-                    writer.println(tmp.name + "," + tmp.score); //fa append() al file
+                    writer.println(tmp.name + "," + tmp.score);     //append on the file
                     i++;
                 }
             }
@@ -62,20 +67,20 @@ public class Scoreboard {
         }
     }
 
+    /**
+     * This method is used to add to the TreeSet the new score and to show the
+     * scoreboard in the ScorePanel JPanel.
+     */
     public static void loadScores(String name, int score, Graphics g) {
-
         scoreboard.add(new Record(name, score));
         scoreboard = readFromScoreFile();
-
         int xPosFirstColumn = (int) (ScoreUserInterface.width * 0.20);
         int xPosSecondColumn = (int) (ScoreUserInterface.width * 0.65);
         int yPos = (int) (ScoreUserInterface.height * 0.30);
         int yPosOffset = (int) (ScoreUserInterface.height * 0.06);
-
         g.drawString("Name:", xPosFirstColumn, yPos);
         g.drawString("Score:", xPosSecondColumn, yPos);
         yPos += yPosOffset;
-
         yPosOffset = (int) (ScoreUserInterface.height * 0.05);
         int size = scoreboard.size();
         int i = 0;
@@ -87,10 +92,13 @@ public class Scoreboard {
             yPos += yPosOffset;
             i++;
         }
-
         saveOnScoreFile();
     }
 
+    /**
+     * This method returns the lowest score of the scoreboard, that is the last
+     * entry of the TreeSet.
+     */
     public static int getLowest() {
         try {
             if (scoreboard.size() <= 10) {
@@ -98,7 +106,7 @@ public class Scoreboard {
             } else {
                 int i = 0;
                 Iterator it = scoreboard.iterator();
-                while (it.hasNext() && i < 9) {
+                while (it.hasNext() && i < 10) {
                     Record tmp = (Record) it.next();
                     i++;
                 }
@@ -110,6 +118,10 @@ public class Scoreboard {
         }
     }
 
+    /**
+     * This private nested class is used to save the name and the score of the
+     * player in order to build the scoreboard.
+     */
     private static class Record implements Comparable<Record> {
 
         private String name;
@@ -121,7 +133,7 @@ public class Scoreboard {
         }
 
         @Override
-        public int compareTo(Record o) { //Il return è fatto al contrario per ordinare in senso discendente
+        public int compareTo(Record o) {                //Descending order
             if (this.score > o.score) {
                 return -1;
             } else if (this.score < o.score) {

@@ -1,18 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to build a list of ground images and shift them in order to simulate the character movement.
  */
 package components;
 
+import static general.Board.distance;
+import general.UserInterface;
+import static general.UserInterface.width;
 import java.awt.*;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import general.UserInterface;
 import utility.*;
-import static general.Board.distance;
-import static general.UserInterface.width;
-import java.awt.geom.Area;
 
 /**
  *
@@ -27,7 +25,7 @@ public class Ground {
         private int y;
         private Area collider;
 
-        public GroundImage(int x) {
+        GroundImage(int x) {
             this.x = x;
             this.image = Resources.instance().generateGround();
             this.y = yPosition;
@@ -37,10 +35,12 @@ public class Ground {
 
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(Color.red);
-            g2d.draw(collider);
-            g2d.setColor(Color.BLACK);
+
+            //Uncommenting the lines below, you can see the the ground collider during the gameplay
+//            Graphics2D g2d = (Graphics2D) g;
+//            g2d.setColor(Color.red);
+//            g2d.draw(collider);
+//            g2d.setColor(Color.BLACK);
         }
 
     }
@@ -57,7 +57,7 @@ public class Ground {
         GroundImage ob;
         nextX = 0;
         movementSpeed = movementSpeed0;
-        groundOnScreen = (int) (width * 3 / Resources.instance().getGroundCanyon().getWidth());
+        groundOnScreen = (width * 3 / Resources.instance().getGroundCanyon().getWidth());
         for (int i = 0; i < groundOnScreen; i++) {
             ob = new GroundImage(nextX);
             Utility.instance().moveCollider(ob.collider, ob.x, ob.y);
@@ -78,17 +78,13 @@ public class Ground {
     }
 
     public boolean hasCollided(Area area) {
-
         for (GroundImage ob : grassGroundSet) {
             Area inter = (Area) ob.collider.clone();
             inter.intersect(area);
             if (!inter.isEmpty()) {
-
                 return true;
             }
         }
-
-        //System.out.println("ho preso il canyon");
         return false;
     }
 
@@ -108,7 +104,6 @@ public class Ground {
             grassGroundSet.add(ob1);
             nextX += ob1.image.getWidth();
         }
-
     }
 
     public int addCanyon(int x) {

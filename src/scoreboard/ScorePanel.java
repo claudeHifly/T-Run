@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements the JPanel in which is shown the scoreboard of the game. 
  */
 package scoreboard;
 

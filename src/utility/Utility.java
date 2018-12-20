@@ -27,6 +27,7 @@ public class Utility { //Singleton
         }
         return instance;
     }
+
     private Utility() {
     }
 

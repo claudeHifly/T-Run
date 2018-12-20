@@ -17,12 +17,13 @@ import static org.junit.Assert.*;
  * @author G8
  */
 public class UserInterfaceTest {
+
     UserInterface UI;
-    
+
     public UserInterfaceTest() {
         this.UI = UserInterface.instance();
     }
-    
+
     /**
      * Test of instance method, of class UserInterface.
      */
@@ -31,5 +32,5 @@ public class UserInterfaceTest {
         System.out.println("instance");
         assertNotNull(UI);
     }
-    
+
 }

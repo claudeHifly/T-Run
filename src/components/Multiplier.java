@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to implement the multiplier functionality that allows to double the bonus points gain by the character.
+ * The multiplier is implemented as an item.
  */
 package components;
 
@@ -16,20 +15,25 @@ public class Multiplier extends Item {
 
     public Multiplier(int x, int y) {
         super(x, y, Resources.instance().getMulScore());
-
     }
 
+    /**
+     * This method sets the Trex's boolean 'multiplier' attribute to True when
+     * the character collides with the multiplier item. Then a countdown is
+     * switched on.
+     */
     @Override
     public void collisionAction() {
         super.TRex.setMultiplier(true);
-        System.out.println("HO PRESO IL MOLTIPLICATIORE");
         mulCountdown();
     }
 
+    /**
+     * This method implements, by using a timer, the contdown associated with
+     * the multiplier item. After 10s the multiplier effects is cancelled.
+     */
     public void mulCountdown() {
-
         Timer mulTimer = new java.util.Timer();
-
         mulTimer.schedule(
                 new java.util.TimerTask() {
             @Override
@@ -38,9 +42,7 @@ public class Multiplier extends Item {
                 mulTimer.cancel();
             }
         },
-                10000 //10 secondi di powerUP Pepper
+                10000 //10 seconds of multiplier power up
         );
-
     }
-
 }

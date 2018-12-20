@@ -1,17 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This abstract class is a superclass that implements, according to the Strategy design pattern, all the items of the game.
+ * Each subclass have to implement the abstract 'collisionAction' method.
  */
 package components;
 
-import utility.*;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import trex.Trex;
+import utility.*;
 
 /**
  *
@@ -61,13 +58,13 @@ public abstract class Item {
     }
 
     public void create(Graphics g) {
-        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         g.drawImage(image, x, y, null);
-        Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.BLACK);
+        //Uncommenting the rows below, you can see the the items collider during the gameplay
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(Color.red);
+//        g2d.draw(collider);
+//        g2d.setColor(Color.BLACK);
     }
 
     public Area getCollider() {

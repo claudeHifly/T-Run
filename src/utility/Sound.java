@@ -14,58 +14,58 @@ import javax.sound.sampled.*;
  * @author G8
  */
 public class Sound {
-    
-   private Clip clip;
-   private String name;
 
-   public Sound(String filename) {
+    private Clip clip;
+    private String name;
 
-      try {
-         name = filename;
-         File yourFile = new File(filename);
-         AudioInputStream stream;
-         AudioFormat format;
-         DataLine.Info info;
-         stream = AudioSystem.getAudioInputStream(yourFile);
-         format = stream.getFormat();
-         info = new DataLine.Info(Clip.class, format);
-         clip = (Clip) AudioSystem.getLine(info);
-         clip.open(stream);
-      } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-         System.out.println("Error reading sound file: " + filename +".\n" + e.toString());
-      }
-   }
+    public Sound(String filename) {
 
-   public void playSound() {
-       
-      if(clip == null ){
-         if(name != null){
-            System.out.println("Error playing " + name + "; file not initialized");
-         }
-         return;
-      }
-      clip.start();
-   }
+        try {
+            name = filename;
+            File yourFile = new File(filename);
+            AudioInputStream stream;
+            AudioFormat format;
+            DataLine.Info info;
+            stream = AudioSystem.getAudioInputStream(yourFile);
+            format = stream.getFormat();
+            info = new DataLine.Info(Clip.class, format);
+            clip = (Clip) AudioSystem.getLine(info);
+            clip.open(stream);
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+            System.out.println("Error reading sound file: " + filename + ".\n" + e.toString());
+        }
+    }
 
-   public void stopSound() {
-      if(clip == null ){
-         if(name != null){
-            System.out.println("Error stopping " + name + "; file not initialized");
-         }
-         return;
-      }
-      clip.stop();
-   }
+    public void playSound() {
 
-   public void playSoundOnce() {
-      if(clip == null ){
-         if(name != null){
-            System.out.println("Error playing " + name + "; file not initialized");
-         }
-         return;
-      }
-      clip.start();
-      clip.loop(0);
-   }
-    
+        if (clip == null) {
+            if (name != null) {
+                System.out.println("Error playing " + name + "; file not initialized");
+            }
+            return;
+        }
+        clip.start();
+    }
+
+    public void stopSound() {
+        if (clip == null) {
+            if (name != null) {
+                System.out.println("Error stopping " + name + "; file not initialized");
+            }
+            return;
+        }
+        clip.stop();
+    }
+
+    public void playSoundOnce() {
+        if (clip == null) {
+            if (name != null) {
+                System.out.println("Error playing " + name + "; file not initialized");
+            }
+            return;
+        }
+        clip.start();
+        clip.loop(0);
+    }
+
 }

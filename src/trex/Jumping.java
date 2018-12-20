@@ -27,57 +27,58 @@ public class Jumping implements TrexState {
 
     @Override
     public void create(Graphics g) {
-        if (((Trex.instance().speedForJumping >= 0)) && Trex.instance().topReached == false) {
-            Trex.instance().y -= Trex.instance().deltaT * Trex.instance().speedForJumping;
-            g.drawImage(this.jumpingImage, Trex.instance().x, Trex.instance().y, null);
-            if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+        Trex trex = Trex.getInstance();
+        if (((trex.speedForJumping >= 0)) && trex.topReached == false) {
+            trex.y -= trex.deltaT * trex.speedForJumping;
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null);
+            if (trex.getPower() == trex.pepperPower) {
+                g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }
-            Trex.instance().collider = Utility.instance().createCollider(jumpingImage, Trex.instance().x, Trex.instance().y);
-            Trex.instance().speedForJumping -= (Trex.instance().deltaT * Trex.instance().gravity);
+            trex.collider = Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            trex.speedForJumping -= (trex.deltaT * trex.gravity);
         }
-        if ((Trex.instance().speedForJumping <= 0) && Trex.instance().topReached == false) {
-            g.drawImage(this.jumpingImage, Trex.instance().x, Trex.instance().y, null);
-            if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+        if ((trex.speedForJumping <= 0) && trex.topReached == false) {
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null);
+            if (trex.getPower() == trex.pepperPower) {
+                g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }
-            Trex.instance().topReached = true;
+            trex.topReached = true;
         }
-        if (Trex.instance().topReached == true) {
-            if (Trex.instance().speedForJumping < 0) {
-                Trex.instance().speedForJumping = 0;
+        if (trex.topReached == true) {
+            if (trex.speedForJumping < 0) {
+                trex.speedForJumping = 0;
             }
-            Trex.instance().y += Trex.instance().deltaT * Trex.instance().speedForJumping;
-            g.drawImage(this.jumpingImage, Trex.instance().x, Trex.instance().y, null);
-            if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+            trex.y += trex.deltaT * trex.speedForJumping;
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null);
+            if (trex.getPower() == trex.pepperPower) {
+                g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }
-            Trex.instance().collider = Utility.instance().createCollider(jumpingImage, Trex.instance().x, Trex.instance().y);
-            Trex.instance().speedForJumping += (Trex.instance().deltaT * Trex.instance().gravity);
+            trex.collider = Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            trex.speedForJumping += (trex.deltaT * trex.gravity);
         }
-        if ((Ground.movementSpeed > 20 && Trex.instance().y >= Trex.instance().TRexOnGround - 75 && Trex.instance().topReached == true)
-                || (Board.ground.hasCollided(Trex.instance().getCollider()))) {
-            g.drawImage(this.jumpingImage, Trex.instance().x, Trex.instance().y, null); 
-            if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+        if ((Ground.movementSpeed > 20 && trex.y >= trex.TRexOnGround - 75 && trex.topReached == true)
+                || (Board.ground.hasCollided(trex.getCollider()))) {
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null);
+            if (trex.getPower() == trex.pepperPower) {
+                g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }
-            Trex.instance().y = Trex.instance().TRexOnGround;
-            Trex.instance().collider = Utility.instance().createCollider(jumpingImage, Trex.instance().x, Trex.instance().y);
-            Trex.instance().topReached = false;
-            Trex.instance().speedForJumping = (float) (6 * 2.2);
-            Trex.instance().setState(Trex.instance().getRunning());
+            trex.y = trex.TRexOnGround;
+            trex.collider = Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            trex.topReached = false;
+            trex.speedForJumping = (float) (6 * 2.2);
+            trex.setState(trex.getRunning());
         }
-        if ((Ground.movementSpeed <= 20 && Trex.instance().y >= Trex.instance().TRexOnGround - 25 && Trex.instance().topReached == true)
-                || (Board.ground.hasCollided(Trex.instance().getCollider()))) {
-            g.drawImage(this.jumpingImage, Trex.instance().x, Trex.instance().y, null);
-            if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+        if ((Ground.movementSpeed <= 20 && trex.y >= trex.TRexOnGround - 25 && trex.topReached == true)
+                || (Board.ground.hasCollided(trex.getCollider()))) {
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null);
+            if (trex.getPower() == trex.pepperPower) {
+                g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }
-            Trex.instance().y = Trex.instance().TRexOnGround;
-            Trex.instance().collider = Utility.instance().createCollider(jumpingImage, Trex.instance().x, Trex.instance().y);
-            Trex.instance().topReached = false;
-            Trex.instance().speedForJumping = (float) (6 * 2.2);
-            Trex.instance().setState(Trex.instance().getRunning());
+            trex.y = trex.TRexOnGround;
+            trex.collider = Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
+            trex.topReached = false;
+            trex.speedForJumping = (float) (6 * 2.2);
+            trex.setState(trex.getRunning());
         }
     }
 }

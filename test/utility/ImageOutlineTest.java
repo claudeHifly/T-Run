@@ -14,13 +14,14 @@ import static org.junit.Assert.*;
  * @author G8
  */
 public class ImageOutlineTest {
+
     ImageOutline imageOutline;
-    
+
     public ImageOutlineTest() {
         BufferedImage img = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-stand.png"));
         this.imageOutline = new ImageOutline(img);
     }
-    
+
     /**
      * Test of getOutline method, of class ImageOutline.
      */
@@ -29,5 +30,5 @@ public class ImageOutlineTest {
         System.out.println("getOutline");
         assertNotNull(imageOutline);
     }
-    
+
 }

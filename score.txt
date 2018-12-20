@@ -8,3 +8,9 @@ pig,843
 fff,500
 ppp,179
 boh,133
+pig,843
+fff,500
+dem,224
+aaa,100
+hhh,89
+ANG,50

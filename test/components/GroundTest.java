@@ -14,8 +14,9 @@ import static org.junit.Assert.*;
  * @author ArtSen
  */
 public class GroundTest {
+
     Ground ground;
-    
+
     public GroundTest() {
         ground = new Ground();
     }
@@ -51,5 +52,5 @@ public class GroundTest {
         int result = ground.addCanyon(0);
         assertNotNull(result);
     }
-    
+
 }

@@ -13,8 +13,9 @@ import static org.junit.Assert.*;
  * @author G8
  */
 public class ScoreUserInterfaceTest {
+
     ScoreUserInterface sUI;
-    
+
     public ScoreUserInterfaceTest() {
         this.sUI = ScoreUserInterface.instance("playerName");
     }
@@ -27,5 +28,5 @@ public class ScoreUserInterfaceTest {
         System.out.println("instance");
         assertNotNull(sUI);
     }
-    
+
 }

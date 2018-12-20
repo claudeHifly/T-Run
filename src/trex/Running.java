@@ -5,7 +5,6 @@
  */
 package trex;
 
-//import static components.TRex.x;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import utility.*;
@@ -28,48 +27,48 @@ public class Running implements TrexState, TrexPower {
 
     @Override
     public void create(Graphics g) {
-        if (Trex.instance().foot == Trex.instance().NO_FOOT) {
-            Trex.instance().foot = Trex.instance().LEFT_FOOT;
-            g.drawImage(leftFoot, Trex.instance().x, Trex.instance().y, null);
-            if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+        Trex trex = Trex.getInstance();
+        if (trex.foot == trex.NO_FOOT) {
+            trex.foot = trex.LEFT_FOOT;
+            g.drawImage(leftFoot, trex.x, trex.y, null);
+            if (trex.getPower() == trex.pepperPower) {
+                g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
             }
-            Trex.instance().collider = Utility.instance().createCollider(leftFoot, Trex.instance().x, Trex.instance().y);
-        } else if (Trex.instance().foot == Trex.instance().LEFT_FOOT) {
-            if (Trex.instance().leftCounter < 5) {
-                g.drawImage(leftFoot, Trex.instance().x, Trex.instance().y, null);
-                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                    g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+            trex.collider = Utility.instance().createCollider(leftFoot, trex.x, trex.y);
+        } else if (trex.foot == trex.LEFT_FOOT) {
+            if (trex.leftCounter < 5) {
+                g.drawImage(leftFoot, trex.x, trex.y, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
                 }
-                Trex.instance().collider = Utility.instance().createCollider(leftFoot, Trex.instance().x, Trex.instance().y);
-                Trex.instance().leftCounter++;
-            } 
-            else {
-                Trex.instance().foot = Trex.instance().RIGHT_FOOT;
-                g.drawImage(rightFoot, Trex.instance().x, Trex.instance().y, null);
-                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                    g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+                trex.collider = Utility.instance().createCollider(leftFoot, trex.x, trex.y);
+                trex.leftCounter++;
+            } else {
+                trex.foot = trex.RIGHT_FOOT;
+                g.drawImage(rightFoot, trex.x, trex.y, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
                 }
-                Trex.instance().collider = Utility.instance().createCollider(rightFoot, Trex.instance().x, Trex.instance().y);
-                Trex.instance().leftCounter = 0;    //resetto il contatore e cambio stato
+                trex.collider = Utility.instance().createCollider(rightFoot, trex.x, trex.y);
+                trex.leftCounter = 0;    //resetto il contatore e cambio stato
             }
         } else {
-            if (Trex.instance().rightCounter < 5) {
-                g.drawImage(rightFoot, Trex.instance().x, Trex.instance().y, null);
-                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                    g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+            if (trex.rightCounter < 5) {
+                g.drawImage(rightFoot, trex.x, trex.y, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
                 }
-                Trex.instance().collider = Utility.instance().createCollider(rightFoot, Trex.instance().x, Trex.instance().y);
-                Trex.instance().rightCounter++;
+                trex.collider = Utility.instance().createCollider(rightFoot, trex.x, trex.y);
+                trex.rightCounter++;
 
             } else {
-                Trex.instance().foot = Trex.instance().LEFT_FOOT;
-                g.drawImage(leftFoot, Trex.instance().x, Trex.instance().y, null);
-                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
-                    g.drawImage(auraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
+                trex.foot = trex.LEFT_FOOT;
+                g.drawImage(leftFoot, trex.x, trex.y, null);
+                if (trex.getPower() == trex.pepperPower) {
+                    g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
                 }
-                Trex.instance().collider = Utility.instance().createCollider(leftFoot, Trex.instance().x, Trex.instance().y);
-                Trex.instance().rightCounter = 0;   //resetto il contatore e cambio stato
+                trex.collider = Utility.instance().createCollider(leftFoot, trex.x, trex.y);
+                trex.rightCounter = 0;   //resetto il contatore e cambio stato
             }
         }
     }

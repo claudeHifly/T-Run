@@ -13,12 +13,12 @@ import static org.junit.Assert.*;
  * @author G8
  */
 public class ResourcesTest {
+
     Resources resource;
-    
+
     public ResourcesTest() {
         resource = Resources.instance();
     }
-
 
     /**
      * Test of instance method, of class Resources.
@@ -28,5 +28,5 @@ public class ResourcesTest {
         System.out.println("instance");
         assertNotNull(resource);
     }
-    
+
 }

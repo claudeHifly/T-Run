@@ -13,8 +13,9 @@ import static org.junit.Assert.*;
  * @author ArtSen
  */
 public class HealthBarTest {
+
     HealthBar healthbar;
-    
+
     public HealthBarTest() {
         healthbar = HealthBar.instance();
     }
@@ -28,5 +29,4 @@ public class HealthBarTest {
         assertNotNull(healthbar);
     }
 
-    
 }

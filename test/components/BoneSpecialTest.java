@@ -13,12 +13,12 @@ import static org.junit.Assert.*;
  * @author ArtSen
  */
 public class BoneSpecialTest {
+
     BoneSpecial bonesp;
-    
+
     public BoneSpecialTest() {
-        bonesp = new BoneSpecial(0,0);
+        bonesp = new BoneSpecial(0, 0);
     }
-    
 
     /**
      * Test of getValue method, of class BoneSpecial.
@@ -30,5 +30,5 @@ public class BoneSpecialTest {
         int result = bonesp.getValue();
         assertEquals(expResult, result);
     }
-    
+
 }

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements a kind of collectable item, the bone.
  */
 package components;
 
@@ -25,11 +23,15 @@ public class Bone extends Item {
         return value;
     }
 
+    /**
+     * This method manage the character collision with the item. After a
+     * collision with the item, the character gains one bonus point. If the
+     * character has the multiplier power-up, the bonus points made are two.
+     */
     @Override
     public void collisionAction() {
         if (super.TRex.multiplier == true) {
             Board.coin += 2 * value;
-            //Board.score += 1;
         } else {
             Board.coin += value;
         }

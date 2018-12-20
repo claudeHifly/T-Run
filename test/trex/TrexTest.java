@@ -13,8 +13,9 @@ import static org.junit.Assert.*;
  * @author G8
  */
 public class TrexTest {
+
     Trex trex;
-    
+
     public TrexTest() {
         this.trex = Trex.instance();
     }
@@ -38,5 +39,5 @@ public class TrexTest {
         boolean result = trex.isMultiplier();
         assertEquals(expResult, result);
     }
-    
+
 }
