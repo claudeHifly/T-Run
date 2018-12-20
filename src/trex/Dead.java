@@ -16,12 +16,12 @@ import utility.Resources;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
 public class Dead implements TrexState {
 
     private final Trex trex;
-    private final BufferedImage deadTRex;//immagine TRex morto
+    private final BufferedImage deadTRex;
 
     public Dead(Trex trex) {
         this.trex = trex;
@@ -30,7 +30,6 @@ public class Dead implements TrexState {
 
     @Override
     public void create(Graphics g) {
-       //trex.deltaT=0;
         Board.running = false;
         Board.gameOver = true;
         HealthBar.instance().create(g);

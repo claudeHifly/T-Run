@@ -16,7 +16,6 @@ import static general.UserInterface.width;
  */
 public class PowerUp extends Items {
 
-    //private ArrayList<Item> obArray;
     private final int powerUpSeriesOnScreen = 10;
     private final int maxPowerUpSeries = 6;
     private final int minPowerUpSeries = 2;
@@ -44,37 +43,13 @@ public class PowerUp extends Items {
             }
         }
 
-        //System.out.println(obArray);
     }
 
-    /*
-    public void create(Graphics g) {
-        for (Item ob : super.obArray) {
-            ob.create(g);
-        }
-
-    }*/
-
- /*
-    public Item hasCollided(Area TRexArea) {
-        for (Item ob : super.obArray) {
-            Area inter = (Area) ob.getCollider().clone();
-            inter.intersect(TRexArea);
-            if (!inter.isEmpty()) {
-                System.out.println("Collisione con " + ob.getClass().getSimpleName());
-                return ob;
-            }
-        }
-        
-        return null;
-    }*/
     @Override
     public void update() {
         AffineTransform at;
         for (Item ob : obArray) {
-            //System.out.println("I'm in looper while");
             ob.setX(ob.getX() - movementSpeed);
-            //at.translate(ob.getX() - movementSpeed, 0);
             at = new AffineTransform();
             at.translate(-movementSpeed, 0);
             ob.getCollider().transform(at);

@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to implement the main character of the game, the TRex, according to the State design pattern.
+ * This is the interface of the TRex and all the class that implement the TRex state must implement the own create method.
  */
 package trex;
 

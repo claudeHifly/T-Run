@@ -5,9 +5,6 @@
  */
 package trex;
 
-//import static components.TRex.RUNNING;
-//import static components.TRex.state;
-//import static components.TRex.x;
 import components.Ground;
 import general.Board;
 import java.awt.Graphics;
@@ -21,7 +18,7 @@ import utility.*;
 public class Jumping implements TrexState {
 
     private final Trex trex;
-    private final BufferedImage jumpingImage;//immagine TRex rightFoot
+    private final BufferedImage jumpingImage;
     private final BufferedImage auraImage;
 
     public Jumping(Trex trex) {
@@ -34,7 +31,7 @@ public class Jumping implements TrexState {
     @Override
     public void create(Graphics g) {
 
-        if ((/*(trex.y > trex.maxHeight) || */(trex.speedForJumping >= 0)) && trex.topReached == false) {
+        if (((trex.speedForJumping >= 0)) && trex.topReached == false) {
 
             trex.y -= trex.deltaT * trex.speedForJumping;
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);
@@ -44,11 +41,9 @@ public class Jumping implements TrexState {
             trex.collider = Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
             trex.speedForJumping -= (trex.deltaT * trex.gravity);
 
-            //System.out.println("bottomTRex height: " + bottomTRex);
-            //break;
         }
 
-        if ((/*trex.y <= trex.maxHeight || */trex.speedForJumping <= 0) && trex.topReached == false) {
+        if ((trex.speedForJumping <= 0) && trex.topReached == false) {
 
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);
             if (trex.getPower() == trex.pepperPower) {

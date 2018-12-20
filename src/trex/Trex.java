@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to implement the main character of the game, the TRex, according to the State design pattern.
+ * This class is used to manage the Trex state and therefore the TRex behaviour.
+ * This class is also implemented using the Singleton design pattern.
  */
 package trex;
 
@@ -9,15 +9,12 @@ import components.Ground;
 import static components.Ground.movementSpeed;
 import general.HomePage;
 import general.UserInterface;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import utility.*;
-import utility.Sound;
 
 /**
  *
@@ -64,15 +61,11 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     private static int wTRexLower;
     private static int hTRexLower;
 
-    //questi due contatori mi servono per rallentare l'animazione dei piedi
-    //del TRex altrimenti cambierebbe sprite ogni 25ms
-    int leftCounter;        //contatore per l'animazione del piede sinistro
-    int rightCounter;       //contatore per l'animazione del piede destro
+    int leftCounter;        //left foot animation counter
+    int rightCounter;       //right foot animation counter
 
     int animation1;
     int animation2;
-
-    private int blinkCounter;       //contatore per il numero di blink;
 
     Area collider;
     int foot;
@@ -116,7 +109,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         this.multiplier = false;
         this.state = running;
-        this.power = noPower;      //inizializzo, nessun powerUP
+        this.power = noPower;               //At the beginning the character does not have power up
         this.bannerCounter = BANNER1;
         this.init();
     }
@@ -134,12 +127,10 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     }
 
     private void init() {
-        //at = new AffineTransform();
 
         gravity = (float) 0.75;
         jumpStrenght = 24;
-        speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
-        //in base alla velocità del personaggio.
+        speedForJumping = (float) (6 * 2.2);
 
         topReached = false;
 
@@ -151,13 +142,8 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         TRexOnGround = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
         y = TRexOnGround;
-        foot = NO_FOOT;//inizializzo
-        //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
+        foot = NO_FOOT;
         collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), this.x, this.y);
-//        outline = new ImageOutline(leftFootDino);
-//        collider = new Area(outline.getOutline(leftFootDino));
-//        at.translate(x, y);
-//        collider.transform(at);
     }
 
     @Override
@@ -165,10 +151,13 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         state.create(g);
 
+        //Uncommenting the lines below, you can see the the TRex collider during the gameplay
+        
 //        Graphics2D g2d = (Graphics2D) g;
 //        g2d.setColor(Color.red);
 //        g2d.draw(collider);
 //        g2d.setColor(Color.black);
+
         if (instance.getState() != dead) {
             if (multiplier == true) {
 
@@ -259,7 +248,6 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
                 
                 this.state = jumping;
                 jumpDisabled = true;
-                //System.out.println("Space pressed");
             }
 
             if (keyPressed == KeyEvent.VK_DOWN && this.state != (jumping)) {
@@ -267,24 +255,6 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
             }
         } else {
             if (keyPressed == KeyEvent.VK_ESCAPE) {
-                //HomePage.demo = false;
-                
-//                HealthBar.setInstance(null);
-//                Ground.movementSpeed0 = 8;
-//                setPower(getNoPower());       //resetto il gioco, inizializzo a NoPower
-//                setMultiplier(false);
-//                Board.score = 0;
-//                Board.distanceForScore = 0;
-//                Board.coin = 0;
-//                System.out.println("reset");
-//                Board.gameOver = false;
-//                
-//                instance=null;
-//                //UserInterface.instance().setVisible(false);
-//                UserInterface.instance().dispose();
-//                //UserInterface.setInstance(null);
-//                
-//                new HomePage();
                   setState(getDead());
                 
             }

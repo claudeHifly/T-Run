@@ -5,7 +5,6 @@
  */
 package trex;
 
-//import static components.TRex.x;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -18,8 +17,8 @@ import utility.*;
 public class Running implements TrexState, TrexPower {
 
     private final Trex trex;
-    private final BufferedImage leftFoot;//immagine TRex leftFoot
-    private final BufferedImage rightFoot;//immagine TRex rightFoot
+    private final BufferedImage leftFoot;
+    private final BufferedImage rightFoot;
     private final BufferedImage auraImage;
 
     public Running(Trex trex) {

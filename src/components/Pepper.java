@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to implement a character super mode that allows to gain bonus points by colliding with the obstacles.
  */
 package components;
 
@@ -18,17 +16,22 @@ public class Pepper extends Item {
     public Pepper(int x, int y) {
         super(x, y, Resources.instance().getPepper());
     }
-
+    
+/**
+ * This method sets the Trex's state to 'PepperPower' when the character collides with the pepper item.
+ * Then a countdown is switched on.
+ */
     @Override
-    public void collisionAction() {
-
-        System.out.println("HO PRESO IL PEPPER");
-        
+    public void collisionAction() {        
         super.TRex.setPower(TRex.getPepperPower());
         pepperCountdown();
 
     }
-
+    
+/**
+ * This method implements, by using a timer, the contdown associated with the pepper item.
+ * After 15s the pepper effects is cancelled.
+ */  
     public void pepperCountdown() {
         int normalFrequency = PowerUp.frequencyPepper;
         PowerUp.frequencyPepper = 0;
@@ -38,16 +41,15 @@ public class Pepper extends Item {
                 new java.util.TimerTask() {
             @Override
             public void run() {
-                //System.out.println("Time Over -> No PepperPower");
-                TRex.setPower(TRex.getNoPower());       //resetto il powerUP
-                PowerUp.frequencyPepper = normalFrequency;       //ripristino la probabilità di spawn del peperoncino
+                TRex.setPower(TRex.getNoPower());                //reset of the power up
+                PowerUp.frequencyPepper = normalFrequency;       //reset of the pepper's spawn probability
                 pepperTimer.cancel();
 
             }
         },
-                15000 //10 secondi di powerUP Pepper
+                15000                                            //15 seconds of pepper power up
         );
 
-    }//fine pepperCountdown;
+    }                                                            //end of pepperCountdown;
 
 }

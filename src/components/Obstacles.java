@@ -5,11 +5,7 @@
  */
 package components;
 
-import general.Board;
 import static general.Board.color;
-import static general.Board.colorGame;
-import general.HomePage;
-import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import static general.UserInterface.width;
@@ -37,9 +33,6 @@ public class Obstacles extends Items {
         cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
             int rd = randomDistance();
-//            if (HomePage.demo) {
-//                Board.arrows.addArrow(rd - distanceArrowCactus, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-//            }
             ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
             at.translate(ob.getX(), ob.getY());
@@ -90,10 +83,6 @@ public class Obstacles extends Items {
         }
         if (extract <= canyonFrequency) {
             int endCanyon = ground.addCanyon(rd);
-//            if (endCanyon == rd) {
-//                System.out.println("DOVRESTI METTERLO ALLA FINE");
-//                return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-//            }
             return new Empty(endCanyon);
         } else {
             if (extract <= canyonFrequency + birdFrequency) {

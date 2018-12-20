@@ -31,10 +31,8 @@ public class HomePage extends JFrame {
     int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.7);
     public static boolean demo;
 
-    public static JButton startButton;
     private final Sound levelMusicSound = new Sound(levelMusic);
     public static JButton demoButton;
-    //public static JFrame frame;
     
     
 
@@ -48,36 +46,16 @@ public class HomePage extends JFrame {
                 super.paintComponent(g);
                 BufferedImage backImage = Resources.instance().getHomepageBackgroundImage();
                 Image scaledBackImage = backImage.getScaledInstance(width, height, 100);
-
-                /*BufferedImage footprintImage = Resources.instance().getHomepageFootprintImage();
-                Image scaledFootprintImage = footprintImage.getScaledInstance((int) (width*0.1), (int) (height*0.1), 100);*/
                 g.drawImage(scaledBackImage, 0, 0, this);
-                //g.drawImage(scaledFootprintImage, (int) (width*0.48), (int) (height*0.8), this);
             }
         };
-
-        /*demoButton = new JButton("START DEMO");
-        demoButton.setFont(new Font("Courier New", Font.BOLD, 30));
-        demoButton.setBounds((int) ((getWidth() - 150) / 2), (int) (getHeight() * 0.5), 180, 50);
-        //startButton.setVisible(false);
-        panel.add(demoButton);*/
-        //panel.setBackground(new Color(137,223,51));
+        
         ImageShowingComponent footprint = new ImageShowingComponent(this);
         panel.setLayout(new BorderLayout());
         panel.add(footprint);
 
-        //panel.setLayout(null);
         add(panel);
-        //panel.add(footprint);
 
-        /*demoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                demo = true;
-                setVisible(false);
-                UserInterface.instance().setVisible(true);
-            }
-        });*/
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         
@@ -86,8 +64,8 @@ public class HomePage extends JFrame {
         setSize(width, height);
         setLocationRelativeTo(null);
         setResizable(false);
-        validate(); // because you added panel after setVisible was called
-        repaint(); // because you added panel after setVisible was called
+        validate();
+        repaint(); 
     }
 
     public static void main(String[] args) {
@@ -114,13 +92,14 @@ public class HomePage extends JFrame {
                     int xOnScreen = e.getX();
                     int yOnScreen = e.getY();
 
-                    //Controllo che il click sia stato fatto nella porzione di schermo dove è presente l'immagine
+                    //Check if the click is in the area of the start button image
                     if ((xOnScreen >= (int) (width * 0.44) && xOnScreen <= (int) (width * 0.44) + (int) (width * 0.1)) && (yOnScreen >= (int) (height * 0.7) && yOnScreen <= (int) (height * 0.7) + (int) (height * 0.2))) {
                         frame.setVisible(false);
                         UserInterface.instance().setVisible(true);
                         Board.demo = false;
                         levelMusicSound.stopSound();
                     }
+                    //Check if the click is in the area of the demo button image
                     else if((xOnScreen >= (int) (width * 0.6) && xOnScreen <= (int) (width * 0.6) + (int) (width * 0.05)) && (yOnScreen >= (int) (height * 0.75) && yOnScreen <= (int) (height * 0.75) + (int) (height * 0.1))) {
                         demo = true;
                         levelMusicSound.stopSound();

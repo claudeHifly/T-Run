@@ -1,14 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements a kind of obstacle, the bird.
+ * In this class is also managed the bird animation.
  */
 package components;
 
 import general.Board;
 import general.HomePage;
 import java.awt.Graphics;
-import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import utility.*;
 
@@ -29,35 +27,40 @@ public class Bird extends Item {
 
     private final int distanceArrowBird = 40;
 
+/**
+ * This is the class constructor.
+ * If the game is in demo mode, this method combines arrows with birds to indicate the action that must be performed by the character
+ * in order to avoid the obstacle.
+ */
     public Bird(int x, int y) {
         super(x, y, Resources.instance().getBird1());
         this.bird1 = Resources.instance().getBird1();
         this.bird2 = Resources.instance().getBird2();
         this.birdCounter = BIRD1;
+        
         if (HomePage.demo) {
-            System.out.println("Differenza" + (Ground.yPosition - y));
             double heightBelow = (Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), 0, 0)).getBounds2D().getHeight();
-            System.out.println("Altezza Seduto" + heightBelow);
-            System.out.println("Altezza In piedi" + Resources.instance().getDinoStand().getHeight());
 
             if (Ground.yPosition - y > Resources.instance().getDinoStand().getHeight()) {
                 Board.arrows.addArrowRight(x - distanceArrowBird, Ground.yPosition);
             } else if (Ground.yPosition - y > heightBelow) {
-                System.out.println("Sotto");
                 Board.arrows.addArrowDown(x - distanceArrowBird, Ground.yPosition);
             } else {
-                System.out.println("Sopra");
                 Board.arrows.addArrowUp(x - distanceArrowBird, Ground.yPosition);
             }
 
         }
     }
 
+/**
+ * This method manage the character collision with the obstacle.
+ * If the character does not have the pepper power-up, after the collision the health bar level is decreased.
+ * Otherwise, the character gains some bonus points. If the character also has the multiplier power-up, the bonus points made are doubled.
+ */
     @Override
     public void collisionAction() {
 
         if (super.TRex.getPower() == TRex.pepperPower) {
-            System.out.println("BRUCIA UCCELLO");
             if (super.TRex.multiplier == true) {
                 Board.coin += 2 * 10;
             } else {
@@ -66,12 +69,10 @@ public class Bird extends Item {
         } else {
              if(!Board.gameOver)
                 HealthBar.instance().decrease(1);
-        /*Board.running = false;
-        Board.gameOver = true;
-        super.TRex.setState(TRex.getDead()); */
         }
     }
 
+    @Override
     public void create(Graphics g) {
 
         if (birdCounter == BIRD1) {

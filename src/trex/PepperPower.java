@@ -5,8 +5,6 @@
  */
 package trex;
 
-import general.UserInterface;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import utility.Resources;
@@ -18,11 +16,10 @@ import utility.Resources;
 public class PepperPower implements TrexPower {
 
     private final Trex trex;
-    private final BufferedImage auraTRex;//immagine TRex coun aura di fuoco
+    private final BufferedImage auraTRex;
 
     public PepperPower(Trex trex) {
         this.trex = trex;
-        //this.trex.setState(trex.getPepperPower());
         this.auraTRex = Resources.instance().getAura();
     }
 

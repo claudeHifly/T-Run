@@ -37,10 +37,6 @@ public class LowerHead implements TrexState {
                 g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
             }
             trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//            trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
-//            trex.at = new AffineTransform();
-//            trex.at.translate(trex.x, trex.y);
-//            trex.collider.transform(trex.at);
         } else if (trex.foot == trex.LEFT_FOOT_LOWER) {
 
             if (trex.leftCounter < 5) {
@@ -49,10 +45,6 @@ public class LowerHead implements TrexState {
                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
                 trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
                 trex.leftCounter++;
             } else {
                 trex.foot = trex.RIGHT_FOOT_LOWER;
@@ -61,10 +53,6 @@ public class LowerHead implements TrexState {
                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
                 trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
                 trex.leftCounter = 0;    //resetto il contatore e cambio stato
             }
 
@@ -76,10 +64,6 @@ public class LowerHead implements TrexState {
                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
                 trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
                 trex.rightCounter++;
             } else {
                 trex.foot = trex.LEFT_FOOT_LOWER;
@@ -88,10 +72,6 @@ public class LowerHead implements TrexState {
                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
                 trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
                 trex.rightCounter = 0;   //resetto il contatore e cambio stato
             }
         }

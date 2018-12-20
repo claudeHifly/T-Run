@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements a way to simulate a canyon.
  */
 package components;
 
@@ -17,6 +15,11 @@ public class Empty extends Item {
 
     private final int distanceArrowCanyon = 55;
 
+/**
+ * This is the class constructor.
+ * If the game is in demo mode, this method add an up arrow to indicate the action that must be performed by the character
+ * in order to avoid the canyon.
+ */
     public Empty(int x) {
         super(x, -1, Resources.instance().getEmpty());
         if (HomePage.demo) {
