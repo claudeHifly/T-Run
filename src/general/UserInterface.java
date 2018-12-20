@@ -26,7 +26,8 @@ public class UserInterface extends JFrame { //Singleton
 
         this.setSize(width, height);
         this.setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
-        this.setResizable(true);//dimensioni JFrame non modificabili
+        this.setResizable(false);//dimensioni JFrame non modificabili
+        
 
     }
 
