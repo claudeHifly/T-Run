@@ -49,8 +49,8 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     float speedForJumping;
     private boolean jumpDisabled;
 
-    int leftCounter;        //left foot animation counter
-    int rightCounter;       //right foot animation counter
+    int leftCounter;
+    int rightCounter;
 
     int animation1;
     int animation2;
@@ -65,6 +65,11 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     final int BANNER1 = 6;
     final int BANNER2 = 7;
 
+    /**
+     * This method is used to get the TRex instance if exist or create a new one
+     * calling the constructor method. If this method is called when the TRex is
+     * in Dead state the method init will be called.
+     */
     public static Trex instance() {
         if (instance == null) {
             instance = new Trex();
@@ -113,6 +118,9 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         this.init();
     }
 
+    /**
+     * This method is used to re-station the TRex in the starting position.
+     */
     private void init() {
         gravity = (float) 0.75;
         speedForJumping = (float) (6 * 2.2);
@@ -127,6 +135,9 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), Trex.x, this.y);
     }
 
+    /**
+     * This method is used to draw the multiplier power-up animation.
+     */
     @Override
     public void create(Graphics g) {
         state.create(g);
@@ -205,6 +216,10 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         return noPower;
     }
 
+    /**
+     * This method is used to manage the KeyPressd events in order to perform
+     * different actions relative to which key has been pressed.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int keyPressed = e.getKeyCode();
@@ -223,6 +238,10 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         }
     }
 
+    /**
+     * This method is used to manage the KeyReleased events in order to perform
+     * different actions relative to which key has been pressed.
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         if (!HomePage.demo) {

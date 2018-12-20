@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to represent LowerHead state of the TRex, that is
+ * the state in which the TRex goes down to avoid an obstacle.
  */
 package trex;
 
@@ -25,6 +24,9 @@ public class LowerHead implements TrexState {
         this.biggerAuraImage = Resources.instance().getBiggerAura();
     }
 
+    /**
+     * This method is used to manage the TRex rendering in LowerHead state.
+     */
     @Override
     public void create(Graphics g) {
         Trex trex = Trex.getInstance();
@@ -51,7 +53,7 @@ public class LowerHead implements TrexState {
                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
                 trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-                trex.leftCounter = 0;    //resetto il contatore e cambio stato
+                trex.leftCounter = 0;
             }
         } else {
             if (trex.rightCounter < 5) {
@@ -68,7 +70,7 @@ public class LowerHead implements TrexState {
                     g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
                 }
                 trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-                trex.rightCounter = 0;   //resetto il contatore e cambio stato
+                trex.rightCounter = 0;
             }
         }
     }

@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to represent the Falling state of the TRex, that is
+ * the state in which the TRex is falling in a canyon.
  */
 package trex;
 
@@ -27,6 +26,9 @@ public class Falling implements TrexState {
         this.auraImage = Resources.instance().getAura();
     }
 
+    /**
+     * This method is used to manage the Trex falling physics.
+     */
     @Override
     public void create(Graphics g) {
         Trex trex = Trex.getInstance();
