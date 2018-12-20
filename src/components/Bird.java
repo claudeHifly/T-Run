@@ -93,12 +93,7 @@ public class Bird extends Item {
                 animation2 = 0;
             }
         }
-        //animation bird
-        //Graphics2D g2d = (Graphics2D) g;
 
-        //g2d.setColor(Color.red);
-        //g2d.draw(collider);
-        //g2d.setColor(Color.BLACK);
     }
 
 }

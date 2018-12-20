@@ -40,10 +40,10 @@ public class Ground {
 
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-            Graphics2D g2d = (Graphics2D) g;
-            //g2d.setColor(Color.red);
-            //g2d.draw(collider);
-            //g2d.setColor(Color.BLACK);
+//            Graphics2D g2d = (Graphics2D) g;
+//            g2d.setColor(Color.red);
+//            g2d.draw(collider);
+//            g2d.setColor(Color.BLACK);
         }
 
     }

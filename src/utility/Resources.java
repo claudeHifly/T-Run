@@ -22,7 +22,6 @@ public class Resources { //singleton
     private int pickedGround;
 
     // IMMAGINI HOMESCREEN
-    private final BufferedImage homepageTitleImage;
     private final BufferedImage homepageBackgroundImage;
     private final BufferedImage homepageFootprintImage;
     // SCOREBOARD
@@ -124,14 +123,15 @@ public class Resources { //singleton
     //HEALTH BAR
     private final BufferedImage healthBar;
     private final BufferedImage healthBarRectangle;
-    
+    private final BufferedImage healthBarCol;
+    private final BufferedImage healthBarRectangleCol;
 
     private Resources() {
 
         //IMMAGINI HOMESCREEN
-        homepageTitleImage = Utility.instance().instance().create(this.getClass().getClassLoader().getResource("image/HomePage/Title small.png"));
         homepageBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png"));
         homepageFootprintImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/FootprintStart.png"));
+        demoButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/DemoButton.png"));
 
         // SCOREBOARD
         scoreboardBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/scoreboard/scoreScreen1.jpg"));
@@ -210,8 +210,10 @@ public class Resources { //singleton
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
 
         //HEALTH BAR
-        healthBar = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/barraDellaVita.png"));
-        healthBarRectangle = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/taccaVita.png"));
+        healthBar = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/barraDellaVita.png"));
+        healthBarRectangle = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/taccaVita.png"));
+        healthBarCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/barraDellaVita.png"));
+        healthBarRectangleCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/taccaVita.png"));
 
         // SCORE OSTACOLI BRUCIATI
         score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
@@ -226,7 +228,6 @@ public class Resources { //singleton
         arrowDown = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowDOWN.png"));
         arrowUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowUP.png"));
         arrowRight = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowRIGHT.png"));
-        demoButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/DemoButton.png"));
 
         // PORTAL
         portal = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/tardis-2.png"));
@@ -243,10 +244,6 @@ public class Resources { //singleton
 
     public static Resources getInstance() {
         return instance;
-    }
-
-    public BufferedImage getHomepageTitleImage() {
-        return homepageTitleImage;
     }
 
     public BufferedImage getHomepageBackgroundImage() {
@@ -544,11 +541,19 @@ public class Resources { //singleton
     }
 
     public BufferedImage getHealthBar() {
-        return healthBar;
+        if (!Board.colorGame) {
+            return healthBar;
+        } else {
+            return healthBarCol;
+        }
     }
 
     public BufferedImage getHealthBarRectangle() {
-        return healthBarRectangle;
+        if (!Board.colorGame) {
+            return healthBarRectangle;
+        } else {
+            return healthBarRectangleCol;
+        }
     }
 
     public BufferedImage getDemoButton() {

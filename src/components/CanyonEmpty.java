@@ -13,14 +13,14 @@ import utility.Resources;
  *
  * @author G8
  */
-public class Empty extends Item {
+public class CanyonEmpty extends Item {
 
     private final int distanceArrowCanyon = 55;
 
-    public Empty(int x) {
+    public CanyonEmpty(int x) {
         super(x, -1, Resources.instance().getEmpty());
         if (HomePage.demo) {
-            Board.arrows.obArray.add(this);
+            Board.arrows.addArrowUp(x - distanceArrowCanyon, (int) (Ground.yPosition));
             
         }
     }

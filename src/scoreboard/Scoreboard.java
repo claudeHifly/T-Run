@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 
+
 /**
  *
  * @author G8
@@ -93,6 +94,14 @@ public class Scoreboard {
 
         saveOnScoreFile();
     }
+    
+    public static int getLowest(){
+        try {
+            return scoreboard.last().score;
+        } catch(Exception e){
+            return 0;
+        }
+    }
 
     private static class Record implements Comparable<Record> {
 
@@ -115,4 +124,5 @@ public class Scoreboard {
             }
         }
     }
+    
 }
