@@ -9,9 +9,9 @@ import java.awt.Graphics;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
 public interface TrexPower {
-    
+
     public void create(Graphics g);
 }

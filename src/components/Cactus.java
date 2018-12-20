@@ -6,15 +6,14 @@
 package components;
 
 import general.Board;
-import java.awt.image.BufferedImage;
-import utility.Resources;
+import java.awt.geom.Area;
+import utility.*;
 
 /**
  *
- * @author claud
+ * @author G8
  */
-public class Cactus extends Item{
-    
+public class Cactus extends Item {
 
     public Cactus(int x, int y) {
         super(x, y, Resources.instance().getCactusCol());
@@ -22,7 +21,7 @@ public class Cactus extends Item{
 
     @Override
     public void collisionAction(Item collidedItem) {
-        
+
         if (super.TRex.getPower() == TRex.pepperPower) {
             //System.out.println("BRUCIA CACTUS");
 
@@ -32,10 +31,13 @@ public class Cactus extends Item{
                 Board.coin += 5;
             }
         } else {
-            Board.running = false;
-            Board.gameOver = true;
-            super.TRex.setState(TRex.getDead());
+            if(!Board.gameOver)
+                HealthBar.instance().decrease(10);
+            
+            //Board.running = false;
+            //Board.gameOver = true;
+            //super.TRex.setState(TRex.getDead());
         }
     }
-            
+
 }

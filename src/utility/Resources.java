@@ -5,24 +5,25 @@
  */
 package utility;
 
-import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
 public class Resources { //singleton
-    
+
     private static Resources instance = null;
-    
+    private int pickedCactus;
+    private int pickedGround;
+
     // IMMAGINI HOMESCREEN
     private final BufferedImage homepageTitleImage;
     private final BufferedImage homepageBackgroundImage;
     private final BufferedImage homepageFootprintImage;
     // SCOREBOARD
-    private final BufferedImage scoreboardBackgroundImage;    
-    
+    private final BufferedImage scoreboardBackgroundImage;
+
     // IMMAGINI B/N
     // OSTACOLI
     private final BufferedImage cactus1;
@@ -60,7 +61,7 @@ public class Resources { //singleton
     private final BufferedImage mulBanner2;
     private final BufferedImage mulScore;
     private final BufferedImage pepper;
-    
+
     // IMMAGINI COLORATE
     // OSTACOLI
     private final BufferedImage cactus1Col;
@@ -97,28 +98,8 @@ public class Resources { //singleton
     private final BufferedImage mulBanner2Col;
     private final BufferedImage mulScoreCol;
     private final BufferedImage pepperCol;
-    
-    //COLLIDER
-    //DINO
-    private final Area dinoCollider;
-    private final Area dinoBelowCollider;
-    //CACTUS
-   /* private final Area cactus1Collider;
-    private final Area cactus2Collider;
-    private final Area cactus3Collider;
-    private final Area cactus4Collider;
-    private final Area cactus5Collider;
-    //GROUND
-    private final Area ground1Collider;
-    private final Area ground2Collider;
-    private final Area ground3Collider;
-    private final Area groundCanyonCollider;
-    //BIRD
-    private final Area bird1Collider;
-    private final Area bird2Collider;
-    //BONE
-    private final Area boneCollider;*/
-    //SCORE
+
+    // SCORE OSTACOLI BRUCIATI
     private final BufferedImage score1Col;
     private final BufferedImage score2Col;
     private final BufferedImage score5Col;
@@ -131,17 +112,20 @@ public class Resources { //singleton
     private final BufferedImage arrowUPCol;
     private final BufferedImage arrowDOWNCol;
     
+    //HEALTH BAR
+    private final BufferedImage healthBar;
+    private final BufferedImage healthBarRectangle;
+    
     private Resources() {
-        
+
         //IMMAGINI HOMESCREEN
         homepageTitleImage = Utility.instance().instance().create(this.getClass().getClassLoader().getResource("image/HomePage/Title small.png"));
         homepageBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png"));
         homepageFootprintImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/Footprint small.png"));
-        
+
         // SCOREBOARD
         scoreboardBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/scoreboard/scoreScreen1.jpg"));
-       
-        
+
         // IMMAGINI BN
         cactus1 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Cactus-1.png"));
         cactus2 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Cactus-2.png"));
@@ -172,13 +156,13 @@ public class Resources { //singleton
         // POWER-UP
         explosion = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/explosion.png"));
         aura = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/aura.png"));
-        biggerAura = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/biggerAura.png"));        
-        ham = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/ham.png"));   
+        biggerAura = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/biggerAura.png"));
+        ham = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/ham.png"));
         mulBanner1 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/mulBanner1.png"));
-        mulBanner2 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/mulBanner2.png"));        
+        mulBanner2 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/mulBanner2.png"));
         mulScore = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/mulScore.png"));
         pepper = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/pepper.png"));
-        
+
         //IMMAGINI COLORATE
         cactus1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Cactus-1.png"));
         cactus2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Cactus-2.png"));
@@ -208,13 +192,18 @@ public class Resources { //singleton
         // POWER-UP
         explosionCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/explosion.png"));
         auraCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/aura.png"));
-        biggerAuraCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/biggerAura.png"));        
-        hamCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/ham.png"));   
+        biggerAuraCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/biggerAura.png"));
+        hamCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/ham.png"));
         mulBanner1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulBanner1.png"));
-        mulBanner2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulBanner2.png"));        
+        mulBanner2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulBanner2.png"));
         mulScoreCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/mulScore.png"));
         pepperCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/pepper.png"));
-        // SCORE
+        
+        //HEALTH BAR
+        healthBar = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/barraDellaVita.png"));
+        healthBarRectangle = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/taccaVita.png"));
+        
+        //
         score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
         score2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score2.png"));
         score5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score5.png"));
@@ -226,17 +215,15 @@ public class Resources { //singleton
         arrowUPCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/arrowUP.png"));
         arrowDOWNCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/arrowDOWN.png"));
         
-        //COLLIDER
-        //DINO
-        dinoCollider = Utility.instance().createCollider(dinoStand);
-        dinoBelowCollider = Utility.instance().createCollider(dinoBelowLeftUp);
+   
         
         
     }
-    
-    public static Resources instance(){
-        if (instance == null)
+
+    public static Resources instance() {
+        if (instance == null) {
             instance = new Resources();
+        }
         return instance;
     }
 
@@ -251,8 +238,8 @@ public class Resources { //singleton
     public BufferedImage getHomepageBackgroundImage() {
         return homepageBackgroundImage;
     }
-    
-    public BufferedImage getHomepageFootprintImage(){
+
+    public BufferedImage getHomepageFootprintImage() {
         return homepageFootprintImage;
     }
 
@@ -261,8 +248,8 @@ public class Resources { //singleton
     }
 
     public BufferedImage getCactus() {
-        int picked = (int) (Math.random() * 4 + 1);
-        switch(picked){
+        pickedCactus = (int) (Math.random() * 4 + 1);
+        switch (pickedCactus) {
             case 1:
                 return this.cactus1;
             case 2:
@@ -274,7 +261,7 @@ public class Resources { //singleton
             case 5:
                 return this.cactus5;
         }
-        return this.cactus2;
+        return this.cactus1;
     }
 
     public BufferedImage getDinoBelowLeftUp() {
@@ -302,8 +289,8 @@ public class Resources { //singleton
     }
 
     public BufferedImage getGround() {
-        int picked = (int) (Math.random() * 2 + 1);
-        switch(picked){
+        pickedGround = (int) (Math.random() * 2 + 1);
+        switch (pickedGround) {
             case 1:
                 return this.ground1;
             case 2:
@@ -371,8 +358,8 @@ public class Resources { //singleton
     }
 
     public BufferedImage getCactusCol() {
-        int picked = (int) (Math.random() * 4 + 1);
-        switch(picked){
+        pickedCactus = (int) (Math.random() * 4 + 1);
+        switch (pickedCactus) {
             case 1:
                 return this.cactus1Col;
             case 2:
@@ -384,7 +371,7 @@ public class Resources { //singleton
             case 5:
                 return this.cactus5Col;
         }
-        return this.cactus2Col;
+        return this.cactus1Col;
     }
 
     public BufferedImage getDinoBelowLeftUpCol() {
@@ -412,8 +399,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getGroundCol() {
-        int picked = (int) (Math.random() * 2 + 1);
-        switch(picked){
+        switch (pickedGround) {
             case 1:
                 return this.ground1Col;
             case 2:
@@ -484,9 +470,6 @@ public class Resources { //singleton
         return empty;
     }
 
-    public Area getDinoCollider() {
-        return dinoCollider;
-    }
     public BufferedImage getScore1Col() {
         return score1Col;
     }
@@ -515,6 +498,13 @@ public class Resources { //singleton
         return score100Col;
     }
 
+    public BufferedImage getHealthBar() {
+        return healthBar;
+    }
+
+    public BufferedImage getHealthBarRectangle() {
+        return healthBarRectangle;
+    }
     public BufferedImage getArrowUPCol() {
         return arrowUPCol;
     }

@@ -14,21 +14,23 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
 public class Utility { //singleton
-    
+
     private static Utility instance = null;
 
-    private Utility(){}
-    
-    public static Utility instance(){
-        if (instance == null)
+    private Utility() {
+    }
+
+    public static Utility instance() {
+        if (instance == null) {
             instance = new Utility();
+        }
         return instance;
     }
-    
-    public BufferedImage create(URL path){
+
+    public BufferedImage create(URL path) {
         BufferedImage bi = null;
         try {
             bi = ImageIO.read(path);
@@ -37,22 +39,10 @@ public class Utility { //singleton
         }
         return bi;
     }
-    
-    public Area createCollider(BufferedImage img){
+
+    public Area createCollider(BufferedImage img, int x, int y) {
         ImageOutline outline = new ImageOutline(img);
-        return new Area(outline.getOutline());
-    }
-    
-    public Area moveCollider(Area collider, int x, int y){
-        AffineTransform at = new AffineTransform();
-        at.translate(x-collider.getBounds2D().getX(), y-collider.getBounds2D().getY());
-        collider.transform(at);
-        return collider;
-    }
-    
-    public Area createCollider(BufferedImage img, int x, int y){
-        ImageOutline outline = new ImageOutline(img);
-        Area collider =  new Area(outline.getOutline());
+        Area collider = new Area(outline.getOutline());
         AffineTransform at = new AffineTransform();
         at.translate(x, y);
         collider.transform(at);

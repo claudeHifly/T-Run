@@ -9,10 +9,10 @@ import java.awt.Graphics;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
 public interface TrexState {
-    
+
     public void create(Graphics g);
-    
+
 }

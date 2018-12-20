@@ -7,9 +7,8 @@ package utility;
 
 /**
  *
- * @author sivoc
+ * @author G8
  */
-
 import java.awt.image.*;
 import java.awt.geom.*;
 
@@ -19,7 +18,6 @@ public class ImageOutline {
     private final BufferedImage image;
 
     private final BufferedImage imageTwoTone;
-    
 
     public ImageOutline(BufferedImage image) {
         this.image = image;
@@ -28,7 +26,7 @@ public class ImageOutline {
                 image.getHeight(),
                 BufferedImage.TYPE_INT_RGB);
     }
-    
+
     public Area getOutline() {
         // construct the GeneralPath
         GeneralPath gp = new GeneralPath();

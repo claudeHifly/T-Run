@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
 public class Scoreboard {
 
@@ -24,80 +24,78 @@ public class Scoreboard {
     private static File file;
     private static String name = null;
 
-    private static TreeSet<Record> readFromScoreFile(){
+    private static TreeSet<Record> readFromScoreFile() {
         file = new File("score.txt");
         Scanner sc;
         String[] data = new String[2];
-        
+
         try {
             sc = new Scanner(file);
-            while (sc.hasNextLine()){
+            while (sc.hasNextLine()) {
                 data = sc.nextLine().split(",");
-                scoreboard.add(new Record(data[0],Integer.parseInt(data[1])));
+                scoreboard.add(new Record(data[0], Integer.parseInt(data[1])));
             }
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
         return scoreboard;
     }
-    
-    private static void saveOnScoreFile(){
+
+    private static void saveOnScoreFile() {
         PrintWriter writer = null;
 
         try {
             writer = new PrintWriter(file, "UTF-8");
             int size = scoreboard.size();
-            
-            if(size > 0){
+
+            if (size > 0) {
                 int i = 0;
                 Iterator it = scoreboard.iterator();
                 writer.write("");                           //sovrascrive il file
-                while(it.hasNext() && i < 10){
+                while (it.hasNext() && i < 10) {
                     Record tmp = (Record) it.next();
-                    writer.println(tmp.name+","+tmp.score); //fa append() al file
+                    writer.println(tmp.name + "," + tmp.score); //fa append() al file
                     i++;
                 }
             }
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             System.out.println(ex.getMessage());
-        }
-        finally{
+        } finally {
             writer.close();
         }
-}
-    
-    public static void loadScores(String name, int score, Graphics g){
-        
+    }
+
+    public static void loadScores(String name, int score, Graphics g) {
+
         scoreboard.add(new Record(name, score));
         scoreboard = readFromScoreFile();
 
-        int xPosFirstColumn = (int) (ScoreUserInterface.width*0.20);
-        int xPosSecondColumn = (int) (ScoreUserInterface.width*0.65);
-        int yPos = (int) (ScoreUserInterface.height*0.30);
-        int yPosOffset = (int) (ScoreUserInterface.height*0.06);
+        int xPosFirstColumn = (int) (ScoreUserInterface.width * 0.20);
+        int xPosSecondColumn = (int) (ScoreUserInterface.width * 0.65);
+        int yPos = (int) (ScoreUserInterface.height * 0.30);
+        int yPosOffset = (int) (ScoreUserInterface.height * 0.06);
 
         g.drawString("Name:", xPosFirstColumn, yPos);
         g.drawString("Score:", xPosSecondColumn, yPos);
         yPos += yPosOffset;
-        
-        
-        yPosOffset = (int) (ScoreUserInterface.height*0.05);
+
+        yPosOffset = (int) (ScoreUserInterface.height * 0.05);
         int size = scoreboard.size();
-        int i=0;
+        int i = 0;
         Iterator it = scoreboard.iterator();
-        while(it.hasNext() && i<10){
+        while (it.hasNext() && i < 10) {
             Record tmp = (Record) it.next();
-            g.drawString(""+tmp.name, xPosFirstColumn, yPos);
-            g.drawString(""+tmp.score, xPosSecondColumn, yPos);
+            g.drawString("" + tmp.name, xPosFirstColumn, yPos);
+            g.drawString("" + tmp.score, xPosSecondColumn, yPos);
             yPos += yPosOffset;
             i++;
         }
-        
+
         saveOnScoreFile();
     }
-    
-    private static class Record implements Comparable<Record>{
-        
+
+    private static class Record implements Comparable<Record> {
+
         private String name;
         private int score;
 
@@ -108,15 +106,13 @@ public class Scoreboard {
 
         @Override
         public int compareTo(Record o) { //Il return è fatto al contrario per ordinare in senso discendente
-            if(this.score > o.score)
+            if (this.score > o.score) {
                 return -1;
-            else 
-                if(this.score < o.score)
-                    return +1;
-            else
-                return this.name.compareTo(o.name) * -1; 
+            } else if (this.score < o.score) {
+                return +1;
+            } else {
+                return this.name.compareTo(o.name) * -1;
+            }
         }
     }
 }
-
-

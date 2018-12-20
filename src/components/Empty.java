@@ -5,21 +5,20 @@
  */
 package components;
 
-import java.awt.Graphics;
 import utility.Resources;
 
 /**
  *
- * @author claud
+ * @author G8
  */
-public class Empty extends Item{
-    
+public class Empty extends Item {
+
     public Empty(int x) {
-        super(x,200,Resources.instance().getEmpty());
+        super(x, 200, Resources.instance().getEmpty());
     }
 
     @Override
     public void collisionAction(Item collidedItem) {
     }
-    
+
 }

@@ -5,24 +5,22 @@
  */
 package components;
 
-import java.awt.image.BufferedImage;
+import utility.Resources;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
 public class Ham extends Item {
-    
-    public Ham(int x, int y, BufferedImage image) {
-             super(x, y, image);
-             
-     }
 
+    public Ham(int x, int y) {
+        super(x, y, Resources.instance().getHamCol());
+
+    }
 
     @Override
     public void collisionAction(Item collidedItem) {
-            //Board.coin += ((Bone) collidedItem).getValue();
-            //Board.score += 1;
             System.out.println("HO PRESO HAM");
+            HealthBar.instance().increase(150);
     }
 }

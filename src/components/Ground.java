@@ -14,12 +14,11 @@ import static general.Board.distance;
 import static general.UserInterface.width;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.net.URL;
 import utility.ImageOutline;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
 public class Ground {
 
@@ -38,7 +37,6 @@ public class Ground {
             this.collider = new Area(outline.getOutline());
             this.image = Resources.instance().getGroundCol();
         }
-        
 
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
@@ -86,19 +84,17 @@ public class Ground {
     }
 
     public boolean hasCollided(Area area) {
-        
-        
+
         for (GroundImage ob : grassGroundSet) {
             Area inter = (Area) ob.collider.clone();
             inter.intersect(area);
             if (!inter.isEmpty()) {
-                
+
                 return true;
             }
         }
-        
-        //System.out.println("ho preso il canyon");
 
+        //System.out.println("ho preso il canyon");
         return false;
     }
 
