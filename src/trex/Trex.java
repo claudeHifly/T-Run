@@ -1,31 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to manage the event that involve the TRex changing its state.
+ * This class has been implemented in according to the Design Pattern Singleton.
  */
 package trex;
 
 import components.Ground;
 import static components.Ground.movementSpeed;
-import components.HealthBar;
-import general.Board;
-import static general.Board.coin;
-import static general.Board.distanceForScore;
-import static general.Board.gameOver;
-import static general.Board.score;
 import general.HomePage;
 import general.UserInterface;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utility.*;
 
 /**
@@ -72,15 +59,12 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     private static int wTRexLower;
     private static int hTRexLower;
 
-    //questi due contatori mi servono per rallentare l'animazione dei piedi
-    //del TRex altrimenti cambierebbe sprite ogni 25ms
-    int leftCounter;        //contatore per l'animazione del piede sinistro
-    int rightCounter;       //contatore per l'animazione del piede destro
+    int leftCounter;        
+    int rightCounter;       
 
     int animation1;
     int animation2;
 
-    private int blinkCounter;       //contatore per il numero di blink;
 
     Area collider;
     int foot;
@@ -99,7 +83,6 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     final int BANNER1 = 6;
     final int BANNER2 = 7;
 
-    //ImageOutline outline;
     private Trex() {
 
         deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
@@ -122,11 +105,15 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         this.multiplier = false;
         this.state = running;
-        this.power = noPower;      //inizializzo, nessun powerUP
+        this.power = noPower;
         this.bannerCounter = BANNER1;
         this.init();
     }
-
+    
+/**
+ * This method is used to get the TRex instance if exist or create a new one calling the constructor method.
+ * If this method is called when the TRex is in Dead state the method init will be called.
+ */
     public static Trex instance() {
         if (instance == null) {
             instance = new Trex();
@@ -139,13 +126,14 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
     }
 
+/**
+ * This method is used to re-station the TRex in the starting position.
+ */
     private void init() {
-        //at = new AffineTransform();
 
         gravity = (float) 0.75;
         jumpStrenght = 24;
-        speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
-        //in base alla velocità del personaggio.
+        speedForJumping = (float) (6 * 2.2);
 
         topReached = false;
 
@@ -157,24 +145,22 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         TRexOnGround = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
         y = TRexOnGround;
-        foot = NO_FOOT;//inizializzo
-        //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
+        foot = NO_FOOT;
         collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), this.x, this.y);
-//        outline = new ImageOutline(leftFootDino);
-//        collider = new Area(outline.getOutline(leftFootDino));
-//        at.translate(x, y);
-//        collider.transform(at);
     }
 
+/**
+ * This method is used to draw the multiplier power-up animation.
+ */
     @Override
     public void create(Graphics g) {
 
         state.create(g);
-
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.black);
+// Uncommenting the rows below is possible to see the TRex collider during the gameplay.
+        //Graphics2D g2d = (Graphics2D) g;
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.black);
         if (instance.getState() != dead) {
             if (multiplier == true) {
 
@@ -253,6 +239,10 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         Trex.TRexOnGround = TRexOnGround;
     }
 
+/*
+ * This method is used to manage the KeyPressd events in order to perform different
+ * actions relative to which key has been pressed.
+ */
     @Override
     public void keyPressed(KeyEvent e) {
         
@@ -264,7 +254,6 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
             if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
                 this.state = jumping;
                 jumpDisabled = true;
-                //System.out.println("Space pressed");
             }
 
             if (keyPressed == KeyEvent.VK_DOWN && this.state != (jumping)) {
@@ -272,30 +261,16 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
             }
         } else {
             if (keyPressed == KeyEvent.VK_ESCAPE) {
-                //HomePage.demo = false;
-                
-//                HealthBar.setInstance(null);
-//                Ground.movementSpeed0 = 8;
-//                setPower(getNoPower());       //resetto il gioco, inizializzo a NoPower
-//                setMultiplier(false);
-//                Board.score = 0;
-//                Board.distanceForScore = 0;
-//                Board.coin = 0;
-//                System.out.println("reset");
-//                Board.gameOver = false;
-//                
-//                instance=null;
-//                //UserInterface.instance().setVisible(false);
-//                UserInterface.instance().dispose();
-//                //UserInterface.setInstance(null);
-//                
-//                new HomePage();
                   setState(getDead());
                 
             }
         }
     }
 
+/*
+ * This method is used to manage the KeyReleased events in order to perform different
+ * actions relative to which key has been pressed.
+ */
     @Override
     public void keyReleased(KeyEvent e) {
         if (!HomePage.demo) {

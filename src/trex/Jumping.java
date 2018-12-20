@@ -1,13 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to represent the Jumping state of the TRex, that is the state
+ * in which the TRex jump in order to avoid an obstacle.
  */
 package trex;
 
-//import static components.TRex.RUNNING;
-//import static components.TRex.state;
-//import static components.TRex.x;
 import components.Ground;
 import general.Board;
 import java.awt.Graphics;
@@ -31,10 +27,13 @@ public class Jumping implements TrexState {
         this.auraImage = Resources.instance().getAura();
     }
 
+/**
+ * This method is used to manage the TRex's jump physics. 
+ */
     @Override
     public void create(Graphics g) {
 
-        if ((/*(trex.y > trex.maxHeight) || */(trex.speedForJumping >= 0)) && trex.topReached == false) {
+        if (((trex.speedForJumping >= 0)) && trex.topReached == false) {
 
             trex.y -= trex.deltaT * trex.speedForJumping;
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);
@@ -44,11 +43,9 @@ public class Jumping implements TrexState {
             trex.collider = Utility.instance().createCollider(jumpingImage, trex.x, trex.y);
             trex.speedForJumping -= (trex.deltaT * trex.gravity);
 
-            //System.out.println("bottomTRex height: " + bottomTRex);
-            //break;
         }
 
-        if ((/*trex.y <= trex.maxHeight || */trex.speedForJumping <= 0) && trex.topReached == false) {
+        if ((trex.speedForJumping <= 0) && trex.topReached == false) {
 
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);
             if (trex.getPower() == trex.pepperPower) {
@@ -59,8 +56,6 @@ public class Jumping implements TrexState {
 
         if (trex.topReached == true) {
 
-            //Potrebbe verificarsi il caso in cui, a seguito dei numerosi decrementi effettuati sulla velocità 
-            //del TRex in salita, quest'ultima diventi negativa.
             if (trex.speedForJumping < 0) {
                 trex.speedForJumping = 0;
             }
@@ -78,8 +73,7 @@ public class Jumping implements TrexState {
         if ((Ground.movementSpeed > 20 && trex.y >= trex.TRexOnGround - 75 && trex.topReached == true)
                 || (Board.ground.hasCollided(trex.getCollider()))) {
 
-            g.drawImage(this.jumpingImage, trex.x, trex.y, null);   //deve sempre essere fatto prima g.drawImage
-            //altrimenti abbiamo dei frame in cui scatta
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null);
 
             if (trex.getPower() == trex.pepperPower) {
                 g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
@@ -95,8 +89,7 @@ public class Jumping implements TrexState {
         if ((Ground.movementSpeed <= 20 && trex.y >= trex.TRexOnGround - 25 && trex.topReached == true)
                 || (Board.ground.hasCollided(trex.getCollider()))) {
 
-            g.drawImage(this.jumpingImage, trex.x, trex.y, null);   //deve sempre essere fatto prima g.drawImage
-            //altrimenti abbiamo dei frame in cui scatta
+            g.drawImage(this.jumpingImage, trex.x, trex.y, null);
 
             if (trex.getPower() == trex.pepperPower) {
                 g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);

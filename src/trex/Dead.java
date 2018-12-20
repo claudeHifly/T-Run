@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to represent the Dead state of the TRex.
  */
 package trex;
 
@@ -16,7 +14,7 @@ import utility.Resources;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
 public class Dead implements TrexState {
 
@@ -28,9 +26,13 @@ public class Dead implements TrexState {
         this.deadTRex = Resources.instance().getDinoBigEyes();
     }
 
+/**
+ * This method is used to enable the restart game functionality and the record saving
+ * when the game over.
+ * Its behaviour changes if the demo mode is enabled.
+ */
     @Override
     public void create(Graphics g) {
-       //trex.deltaT=0;
         Board.running = false;
         Board.gameOver = true;
         HealthBar.instance().create(g);

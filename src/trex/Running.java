@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is used to represent the Running state of TRex.
  */
 package trex;
 
@@ -30,6 +28,9 @@ public class Running implements TrexState, TrexPower {
         this.auraImage = Resources.instance().getAura();
     }
 
+/**
+ * This method is used to manage the TRex rendering in Running state.
+ */
     @Override
     public void create(Graphics g) {
 
@@ -76,7 +77,7 @@ public class Running implements TrexState, TrexPower {
                     g.drawImage(auraImage, trex.x - 10, trex.y - 35, null);
                 }
                 trex.collider = Utility.instance().createCollider(leftFoot, trex.x, trex.y);
-                trex.rightCounter = 0;   //resetto il contatore e cambio stato
+                trex.rightCounter = 0; 
             }
         }
     }
