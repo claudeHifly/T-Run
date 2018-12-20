@@ -5,10 +5,7 @@
  */
 package components;
 
-import general.Board;
 import static general.Board.color;
-import static general.Board.colorGame;
-import general.HomePage;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import static general.UserInterface.width;
@@ -36,9 +33,6 @@ public class Obstacles extends Items {
         cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
             int rd = randomDistance();
-//            if (HomePage.demo) {
-//                Board.arrows.addArrow(rd - distanceArrowCactus, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-//            }
             ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
             at = new AffineTransform();
             at.translate(ob.getX(), ob.getY());
@@ -82,21 +76,14 @@ public class Obstacles extends Items {
         int totalFrequency = 100;
         int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
         int rd = randomDistance();
-        if (color){
-            if(tardis)
-                return new Empty(rd,(int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-            else{
-                tardis = true;
-                return new Portal(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-            }
+        if (color && !tardis) {
+            tardis = true;
+            return new Portal(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+
         }
         if (extract <= canyonFrequency) {
             int endCanyon = ground.addCanyon(rd);
-            if (endCanyon == rd) {
-                System.out.println("DOVRESTI METTERLO ALLA FINE");
-                return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-            }
-            return new Empty(endCanyon, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+            return new Empty(endCanyon);
         } else {
             if (extract <= canyonFrequency + birdFrequency) {
                 return new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));

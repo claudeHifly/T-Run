@@ -1,13 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to provide methods to add all kind of arrows and associate them with their own colliders. 
+ * The 'update' method updates the position of the both images and colliders along x-axis.
  */
 package components;
-
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
-import static general.UserInterface.width;
 
 /**
  *

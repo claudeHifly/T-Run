@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to implement the health bar for the stamina functionality.
+ * This class is implemented according to the Singleton design pattern.
  */
 package components;
 
@@ -16,9 +15,9 @@ import utility.Resources;
 
 /**
  *
- * @author Angela
+ * @author G8
  */
-public class HealthBar{ //Singleton
+public class HealthBar{
     private static HealthBar instance = null;
     
     private final BufferedImage emptyBar;
@@ -29,11 +28,17 @@ public class HealthBar{ //Singleton
     public static int MAX = 0;
     private int cnt;
    
+/** 
+ * Constructor method.
+ * MAX defines the maximum health level.
+ * cnt is the current health level.
+ */
     private HealthBar() {
         this.emptyBar = Resources.instance().getHealthBar();
         this.rectangle = Resources.instance().getHealthBarRectangle();
         this.scaledImage = emptyBar.getScaledInstance((int) (width*0.975),(int) (height*0.098), 100);
         this.scaledRectImage = rectangle.getScaledInstance(rectangle.getWidth(),(int) (height*0.0735), 100);
+        
         MAX = scaledImage.getWidth(null)- (int) (scaledImage.getWidth(null)*0.069);
         this.cnt = MAX;
     }
@@ -51,17 +56,21 @@ public class HealthBar{ //Singleton
         g.drawImage(this.scaledImage, (int) (width*0.01), (int) (height*0.01), null);
     }
     
+/**
+ * This method increases the health level by n%.
+ */    
     public void increase(double n){
         this.cnt += n*MAX/100;
         if(this.cnt > MAX)
             this.cnt = MAX;
     }
-    
+
+/**
+ * This method decreases the health level by n%.
+ */    
     public void decrease(double n){
         this.cnt -= n*MAX/100;
         if(this.cnt <= 0){
-            //this.cnt = MAX;
-            //Board.running = false;
             Board.gameOver = true;
             Trex.instance().setState(Trex.instance().getDead());
         }
@@ -69,6 +78,14 @@ public class HealthBar{ //Singleton
 
     public static void setInstance(HealthBar instance) {
         HealthBar.instance = instance;
+    }
+
+    public int getCnt() {
+        return cnt;
+    }
+
+    public void setCnt(int cnt) {
+        this.cnt = cnt;
     }
     
 }

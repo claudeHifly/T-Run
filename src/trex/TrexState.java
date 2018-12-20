@@ -1,5 +1,6 @@
 /*
- * This interface is used to implements all the TRex state using the State Design Pattern 
+ * This class is used to implement the main character of the game, the TRex, according to the State design pattern.
+ * This is the interface of the TRex and all the class that implement the TRex state must implement the own create method.
  */
 package trex;
 

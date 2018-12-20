@@ -19,7 +19,7 @@ import utility.Resources;
 public class Dead implements TrexState {
 
     private final Trex trex;
-    private final BufferedImage deadTRex;//immagine TRex morto
+    private final BufferedImage deadTRex;
 
     public Dead(Trex trex) {
         this.trex = trex;

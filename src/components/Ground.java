@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to build a list of ground images and shift them in order to simulate the character movement.
  */
 package components;
 
@@ -40,10 +38,13 @@ public class Ground {
 
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(Color.red);
-            g2d.draw(collider);
-            g2d.setColor(Color.BLACK);
+            
+        //Uncommenting the lines below, you can see the the ground collider during the gameplay
+        
+//            Graphics2D g2d = (Graphics2D) g;
+//            g2d.setColor(Color.red);
+//            g2d.draw(collider);
+//            g2d.setColor(Color.BLACK);
         }
 
     }
@@ -94,7 +95,6 @@ public class Ground {
             }
         }
 
-        //System.out.println("ho preso il canyon");
         return false;
     }
 

@@ -1,19 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to implement an item that allows the design switch of the game.
+ * When the character collides with this item, the 'coloGame' attribute is setted to True and so, in the game, are shown the coloured images instead of the black and white ones.
  */
 package components;
 
 import general.Board;
-import general.UserInterface;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
 import utility.Resources;
 
 /**
  *
- * @author sivoc
+ * @author G8
  */
 public class Portal extends Item {
 
@@ -26,7 +22,6 @@ public class Portal extends Item {
         Board.running = false;
         Board.colorGame = true;
         Board.gameOver = true;
-        //super.TRex.setState(TRex.getDead());
     }
     
 }

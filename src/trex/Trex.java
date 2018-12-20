@@ -1,6 +1,7 @@
 /*
- * The purpose of this class is to manage the event that involve the TRex changing its state.
- * This class has been implemented in according to the Design Pattern Singleton.
+ * This class is used to implement the main character of the game, the TRex, according to the State design pattern.
+ * This class is used to manage the Trex state and therefore the TRex behaviour.
+ * This class is also implemented using the Singleton design pattern.
  */
 package trex;
 
@@ -21,6 +22,7 @@ import utility.*;
  */
 public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
+    
     private static Trex instance = null;
     private TrexState running;
     private TrexState jumping;
@@ -93,6 +95,8 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         this.mulBanner1 = Resources.instance().getMulBanner1();
         this.mulBanner2 = Resources.instance().getMulBanner2();
+        
+        
 
         this.running = new Running(this);
         this.jumping = new Jumping(this);
@@ -156,11 +160,14 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     public void create(Graphics g) {
 
         state.create(g);
-// Uncommenting the rows below is possible to see the TRex collider during the gameplay.
-        //Graphics2D g2d = (Graphics2D) g;
-        //g2d.setColor(Color.red);
-        //g2d.draw(collider);
-        //g2d.setColor(Color.black);
+
+        //Uncommenting the lines below, you can see the the TRex collider during the gameplay
+        
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(Color.red);
+//        g2d.draw(collider);
+//        g2d.setColor(Color.black);
+
         if (instance.getState() != dead) {
             if (multiplier == true) {
 
@@ -252,6 +259,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
             
 
             if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
+                
                 this.state = jumping;
                 jumpDisabled = true;
             }
@@ -281,6 +289,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
             }
 
             if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
+                
                 jumpDisabled = false;
             }
         }

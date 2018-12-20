@@ -45,7 +45,6 @@ public class Falling implements TrexState {
         } else {
             trex.setMultiplier(false);
             HealthBar.instance().decrease(HealthBar.MAX);
-            //trex.setState(trex.getDead());
             
             trex.create(g);
         }

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to load the old scores from a file, add the new score, show the scoreboard and save all in the file again.
  */
 package scoreboard;
 
@@ -14,6 +12,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 
+
 /**
  *
  * @author G8
@@ -24,7 +23,11 @@ public class Scoreboard {
     private static File file;
     private static String name = null;
 
-    private static TreeSet<Record> readFromScoreFile() {
+    /**
+     * This method is used to read the file that containes the scores.
+     * The scores read are added into a TreeSet structure.
+     */
+    public static TreeSet<Record> readFromScoreFile() {
         file = new File("score.txt");
         Scanner sc;
         String[] data = new String[2];
@@ -40,7 +43,10 @@ public class Scoreboard {
         }
         return scoreboard;
     }
-
+    
+    /**
+     * This method is used to save the scores on the file.
+     */
     private static void saveOnScoreFile() {
         PrintWriter writer = null;
 
@@ -51,10 +57,10 @@ public class Scoreboard {
             if (size > 0) {
                 int i = 0;
                 Iterator it = scoreboard.iterator();
-                writer.write("");                           //sovrascrive il file
+                writer.write("");                                   //overwrite the file
                 while (it.hasNext() && i < 10) {
                     Record tmp = (Record) it.next();
-                    writer.println(tmp.name + "," + tmp.score); //fa append() al file
+                    writer.println(tmp.name + "," + tmp.score);     //append on the file
                     i++;
                 }
             }
@@ -65,6 +71,9 @@ public class Scoreboard {
         }
     }
 
+    /**
+     * This method is used to add to the TreeSet the new score and to show the scoreboard in the ScorePanel JPanel.
+     */
     public static void loadScores(String name, int score, Graphics g) {
 
         scoreboard.add(new Record(name, score));
@@ -93,7 +102,20 @@ public class Scoreboard {
 
         saveOnScoreFile();
     }
-
+    /**
+     * This method returns the lowest score of the scoreboard, that is the last entry of the TreeSet. 
+     */
+    public static int getLowest(){
+        try {
+            return scoreboard.last().score;
+        } catch(Exception e){
+            return 0;
+        }
+    }
+    
+    /**
+     * This private nested class is used to save the name and the score of the player in order to build the scoreboard.
+     */
     private static class Record implements Comparable<Record> {
 
         private String name;
@@ -105,7 +127,7 @@ public class Scoreboard {
         }
 
         @Override
-        public int compareTo(Record o) { //Il return è fatto al contrario per ordinare in senso discendente
+        public int compareTo(Record o) {                //Descending order
             if (this.score > o.score) {
                 return -1;
             } else if (this.score < o.score) {
@@ -115,4 +137,5 @@ public class Scoreboard {
             }
         }
     }
+    
 }

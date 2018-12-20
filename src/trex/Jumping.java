@@ -17,7 +17,7 @@ import utility.*;
 public class Jumping implements TrexState {
 
     private final Trex trex;
-    private final BufferedImage jumpingImage;//immagine TRex rightFoot
+    private final BufferedImage jumpingImage;
     private final BufferedImage auraImage;
 
     public Jumping(Trex trex) {
