@@ -231,6 +231,8 @@ public class Resources { //singleton
 
         // PORTAL
         portal = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/tardis-2.png"));
+        
+        
     }
 
     public static Resources instance() {
@@ -562,4 +564,16 @@ public class Resources { //singleton
         return portal;
     }
 
+    public BufferedImage getArrowUPCol() {
+        return arrowUp;
+    }
+
+    public BufferedImage getArrowDOWNCol() {
+        return arrowDown;
+    }
+
+    
+    
+    
+    
 }

@@ -14,12 +14,15 @@ import java.awt.image.BufferedImage;
 import scoreboard.*;
 import utility.Resources;
 
+
 /**
  *
  * @author G8
  */
 public class Board extends JPanel implements Runnable, ActionListener {
 
+    public static boolean demo;
+    
     public static boolean running = true;
     public static boolean gameOver = false;
     public static boolean blinking = false;
@@ -68,7 +71,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     public void startGame() {
-
+        System.out.println("demo: " + demo);
+        
         //TREX
         //TRex = new Trex();
         background = new Background();
@@ -462,4 +466,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
 //            startGame();
 //        }
     }
+    
+
+
 }
