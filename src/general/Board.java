@@ -77,8 +77,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
         moneys.update();
         Scoreboard.readFromScoreFile();
         lowestScore = Scoreboard.getLowest();
-        System.out.println(lowestScore);
-        System.out.println(Scoreboard.getScoreboard().size());
         if (lowestScore < thresholdScore) {
             lowestScore = thresholdScore;
         }
