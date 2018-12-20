@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import utility.*;
+import utility.Sound;
 
 /**
  *
@@ -24,6 +25,7 @@ import utility.*;
  */
 public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
+    
     private static Trex instance = null;
     private TrexState running;
     private TrexState jumping;
@@ -100,6 +102,8 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         this.mulBanner1 = Resources.instance().getMulBanner1();
         this.mulBanner2 = Resources.instance().getMulBanner2();
+        
+        
 
         this.running = new Running(this);
         this.jumping = new Jumping(this);
@@ -252,6 +256,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
             
 
             if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
+                
                 this.state = jumping;
                 jumpDisabled = true;
                 //System.out.println("Space pressed");
@@ -296,6 +301,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
             }
 
             if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
+                
                 jumpDisabled = false;
             }
         }

@@ -9,6 +9,7 @@ import general.Board;
 import static general.Board.color;
 import static general.Board.colorGame;
 import general.HomePage;
+import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import static general.UserInterface.width;
