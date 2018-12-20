@@ -103,7 +103,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         ground.update();
         moneys.update();
 
-        if ((lowestScore = Scoreboard.getLowest()) < thresholdScore) {
+        Scoreboard.readFromScoreFile();
+        if ((lowestScore = Scoreboard.getLowest()) <= thresholdScore || HomePage.demo) {
             lowestScore = thresholdScore;
         }
 
@@ -424,7 +425,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 openScoreboard = true;
                 reset();
             }
-            if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard) {
+            if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard && !HomePage.demo) {
                 String name = JOptionPane.showInputDialog("Enter your name:", "");
                 if (name != null) {
                     openScoreboard = false;

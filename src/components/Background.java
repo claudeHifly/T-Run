@@ -32,7 +32,6 @@ public class Background {
         this.backGround = Resources.instance().getBackground();
 
         //COLOURED
-        //this.grassGround = new Utility().create("src/image/altro/T-Run_ground_grass3.png"); 
         backGroundSet = new ArrayList<GroundImage>();
 
         for (int i = 0; i < 3; i++) {

@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The purpose of this class is to build the right arrows used in the demo mode.
+ * When the character collides with a right arrow, the 'collisionAction' method set the state of the character to 'Running'.
  */
 package components;
 

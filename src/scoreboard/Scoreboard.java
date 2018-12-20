@@ -25,7 +25,7 @@ public class Scoreboard {
     private static File file;
     private static String name = null;
 
-    private static TreeSet<Record> readFromScoreFile() {
+    public static TreeSet<Record> readFromScoreFile() {
         file = new File("score.txt");
         Scanner sc;
         String[] data = new String[2];
