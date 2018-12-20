@@ -100,7 +100,7 @@ public class Scoreboard {
      * entry of the TreeSet.
      */
     public static int getLowest() {
-        try {
+        if (scoreboard.size() > 0) {
             if (scoreboard.size() <= 10) {
                 return scoreboard.last().score;
             } else {
@@ -112,8 +112,7 @@ public class Scoreboard {
                 }
                 return ((Record) it.next()).score;
             }
-        } catch (Exception e) {
-            System.out.println("Scoreboard vuota");
+        } else {
             return 0;
         }
     }
