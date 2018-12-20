@@ -20,7 +20,7 @@ public class Empty extends Item {
     public Empty(int x) {
         super(x, -1, Resources.instance().getEmpty());
         if (HomePage.demo) {
-            Board.arrows.obArray.add(this);
+            Board.arrows.addArrowUp(x - distanceArrowCanyon, (int) (Ground.yPosition));
             
         }
     }

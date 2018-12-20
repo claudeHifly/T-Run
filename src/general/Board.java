@@ -122,7 +122,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         distance += 1;
         distanceForScore += 0.1;
 
-        if (score == lowestScore) {
+        if (score >= lowestScore && !colorGame) {
             color = true;
         }
 
@@ -199,6 +199,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         g.drawString("MT: " + Integer.toString((int) distanceForScore), (int) (UserInterface.width * 0.4), (int) (UserInterface.height * 0.2));
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
         g.drawString("BONES: " + Integer.toString(coin), (int) (UserInterface.width * 0.5), (int) (UserInterface.height * 0.2));
+        
+        if(HomePage.demo && !gameOver)
+            g.drawString("Press ESC to stop demo", (int) (UserInterface.width * 0.39), (int) (UserInterface.height * 0.9));
 
         if (collidedObstacle != null) {
 
@@ -335,13 +338,13 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     public void reset() {
-        HomePage.demo = false;
+        //HomePage.demo = false;
 
         Ground.movementSpeed0 = 8;
         color = false;
         colorGame = false;
         changed = false;
-        //HomePage.demo = false;
+        HomePage.demo = false;
         //HealthBar.instance().increase(100);
         this.explosionImage = Resources.instance().getExplosion();
         TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
