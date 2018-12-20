@@ -228,7 +228,7 @@ public class Resources { //singleton
         demoButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/DemoButton.png"));
 
         // PORTAL
-        portal = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowRIGHT.png"));
+        portal = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/tardis-2.png"));
     }
 
     public static Resources instance() {
@@ -260,7 +260,7 @@ public class Resources { //singleton
 
     public BufferedImage getCactus() {
         pickedCactus = (int) (Math.random() * 4 + 1);
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             switch (pickedCactus) {
                 case 1:
                     return this.cactus1;
@@ -292,7 +292,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getDinoBelowLeftUp() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return dinoBelowLeftUp;
         } else {
             return dinoBelowLeftUpCol;
@@ -300,7 +300,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getDinoBelowRightUp() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return dinoBelowRightUp;
         } else {
             return dinoBelowRightUpCol;
@@ -309,7 +309,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getDinoBigEyes() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return dinoBigEyes;
         } else {
             return dinoBigEyesCol;
@@ -317,7 +317,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getDinoLeftUp() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return dinoLeftUp;
         } else {
             return dinoLeftUpCol;
@@ -325,7 +325,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getDinoRightUp() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return dinoRightUp;
         } else {
             return dinoRightUpCol;
@@ -333,7 +333,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getDinoStand() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return dinoStand;
         } else {
             return dinoStandCol;
@@ -357,7 +357,7 @@ public class Resources { //singleton
 
     public BufferedImage getGround() {
 
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             switch (pickedGround) {
                 case 1:
                     return this.ground1;
@@ -385,7 +385,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getGroundCanyon() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return groundCanyon;
         } else {
             return groundCanyonCol;
@@ -393,7 +393,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getBackground() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return background;
         } else {
             return backgroundCol;
@@ -401,7 +401,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getBird1() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return bird1;
         } else {
             return bird1Col;
@@ -409,7 +409,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getBird2() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return bird2;
         } else {
             return bird2Col;
@@ -417,7 +417,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getBone() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return bone;
         } else {
             return boneCol;
@@ -425,7 +425,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getBoneSpecial() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return boneSpecial;
         } else {
             return boneSpecialCol;
@@ -433,7 +433,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getExplosion() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return explosion;
         } else {
             return explosionCol;
@@ -441,7 +441,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getAura() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return aura;
         } else {
             return auraCol;
@@ -449,7 +449,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getBiggerAura() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return biggerAura;
         } else {
             return biggerAuraCol;
@@ -457,7 +457,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getHam() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return ham;
         } else {
             return hamCol;
@@ -465,7 +465,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getMulBanner1() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return mulBanner1;
         } else {
             return mulBanner1Col;
@@ -473,7 +473,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getMulBanner2() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return mulBanner2;
         } else {
             return mulBanner2Col;
@@ -481,7 +481,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getMulScore() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return mulScore;
         } else {
             return mulScoreCol;
@@ -489,7 +489,7 @@ public class Resources { //singleton
     }
 
     public BufferedImage getPepper() {
-        if (!HomePage.demo) {
+        if (!Board.colorGame) {
             return pepper;
         } else {
             return pepperCol;

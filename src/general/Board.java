@@ -23,8 +23,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
     public static boolean running = true;
     public static boolean gameOver = false;
     public static boolean blinking = false;
+    public static boolean color = false;
+    public static boolean colorGame = false;
+    public static boolean changed = false;
     private Trex TRex;
-    public static Ground grass_ground;
+    public static Ground ground;
     private Obstacles obstacles;
     public static Arrows arrows;
     private PowerUp moneys;
@@ -37,17 +40,17 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private String collidedObstacleString;
     private String collidedMoneyString;
 
-    public static int distance;
+    public static int distance = 0;
     public static float distanceForScore;
 
-    public static int score;
-    public static int coin;
+    public static int score = 0;
+    public static int coin = 0;
     public static Thread animator;
     public static Thread blinker;
 
     public static boolean openScoreboard = true;
     //public HealthBar bar = HealthBar.instance();
-    
+
     //INIZIALIZZO BOARD
     public Board() {
 
@@ -66,7 +69,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         //TREX
         //TRex = new Trex();
         background = new Background();
-        grass_ground = new Ground();
+        ground = new Ground();
         if (HomePage.demo) {
             this.collidedArrowString = null;
         }
@@ -83,20 +86,14 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         //OSTACOLI
-        obstacles = new Obstacles(grass_ground);
+        obstacles = new Obstacles(ground);
 
         //MONETINE
         moneys = new PowerUp();
 
-        //DISTANZA PERCORSA
-        distance = 0;
-        //SCORE
-        score = 0;
-        coin = 0;
-
         //ATTENZIONE: questo deve essere fatto nella classe Partita
         background.update();
-        grass_ground.update();
+        ground.update();
         moneys.update();
 
         if (HomePage.demo) {
@@ -104,9 +101,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         obstacles.update();
-        
-        //bar = new HealthBar();
 
+        //bar = new HealthBar();
         animator = new Thread(this);
 
         animator.start();
@@ -114,22 +110,26 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     public void updateGame() {
-        
+
         HealthBar.instance().decrease(0.05);
         distance += 1;
         distanceForScore += 0.1;
 
+        if (distance == 10) {
+            color = true;
+        }
+
         score = coin + (int) distanceForScore;  //PUNTEGGIO FINALE
 
         background.update();
-        grass_ground.update();
+        ground.update();
         moneys.update();
         if (HomePage.demo) {
             arrows.update();
         }
         obstacles.update();
 
-        if ((TRex.getState() != TRex.getFalling()) && (TRex.getState() != TRex.getJumping()) && !grass_ground.hasCollided(TRex.getCollider())) {
+        if ((TRex.getState() != TRex.getFalling()) && (TRex.getState() != TRex.getJumping()) && !ground.hasCollided(TRex.getCollider())) {
 
             //System.out.println("ho preso il canyon");
             //running = false;
@@ -166,15 +166,19 @@ public class Board extends JPanel implements Runnable, ActionListener {
             //coin += collidedMoney.getValue();
             //score += 1;
         }
+
+        if (colorGame && !changed) {
+            changed = true;
+            colorGame();
+        }
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        
-        
+
         background.create(g);
-        grass_ground.create(g);//creare sempre prima il ground
+        ground.create(g);//creare sempre prima il ground
         moneys.create(g);
         if (HomePage.demo) {
             arrows.create(g);
@@ -185,11 +189,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         TRex.create(g);
 
         g.setFont(new Font("Courier New", Font.BOLD, 25));
-        g.drawString("MT: " + Integer.toString((int) distanceForScore), (int) (UserInterface.width*0.4), (int) (UserInterface.height*0.2));
+        g.drawString("MT: " + Integer.toString((int) distanceForScore), getWidth() / 4 - 180, 100);
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
-        g.drawString("BONES: " + Integer.toString(coin), (int) (UserInterface.width*0.5), (int) (UserInterface.height*0.2));
-        if(HomePage.demo && !gameOver)
-            g.drawString("Press ESC to stop demo mode", (int) (UserInterface.width*0.35), (int) (UserInterface.height*0.9));
+        g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
 
         if (collidedObstacle != null) {
 
@@ -221,6 +223,68 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 if (TRex.getPower() == TRex.pepperPower) {
                     g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
 
+//                    if (this.TRex.multiplier == true) {
+//
+//                        g.drawImage(score20Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+//
+//                    } else {
+//
+//                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+//
+//                    }
+                }
+            }
+
+            //esplosione CACTUS
+            if (collidedObstacleString.equals("Cactus")) {
+                //collidedObstacle.getClass().getSimpleName()
+                System.out.println(collidedObstacle.getClass().getSimpleName());
+                collidedObstacle.collisionAction();
+
+                if (TRex.getPower() == TRex.pepperPower) {
+                    g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
+
+//                    if (this.TRex.multiplier == true) {
+//                        g.drawImage(score10Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+//
+//                    } else {
+//                        g.drawImage(score5Col, collidedObstacle.getX() - 18, collidedObstacle.getY() - 20, null);
+//
+//                    }
+                }
+            }
+
+        }
+
+        if (collidedObstacle != null) {
+
+            //esplosione BIRD
+            if (collidedObstacleString.equals("Bird")) {
+
+                /*
+                if (birdCounter == BIRD1) {
+                    if (animation1 < 5) {
+                        g.drawImage(bird1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation1++;
+                    } else {
+                        birdCounter = BIRD2;
+                        g.drawImage(bird2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation1 = 0;
+                    }
+                } else {
+                    if (animation2 < 5) {
+                        g.drawImage(bird2, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation2++;
+                    } else {
+                        birdCounter = BIRD1;
+                        g.drawImage(bird1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
+                        animation2 = 0;
+                    }
+                }*/
+                collidedObstacle.collisionAction();
+
+                if (TRex.getPower() == TRex.pepperPower) {
+                    g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
 
                 }
             }
@@ -234,13 +298,13 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 if (TRex.getPower() == TRex.pepperPower) {
                     g.drawImage(explosionImage, collidedObstacle.getX() - 40, collidedObstacle.getY() - 24, null); //esplosione
 
-
                 }
             }
 
         }
-        if(!gameOver)
+        if (!gameOver) {
             HealthBar.instance().create(g);
+        }
         g.dispose();
 
     }
@@ -263,6 +327,62 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
     }
 
+    public void reset() {
+        Ground.movementSpeed0 = 8;
+        color = false;
+        colorGame = false;
+        changed = false;
+
+        TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
+        TRex.setMultiplier(
+                false);
+        score = 0;
+        distanceForScore = 0;
+        coin = 0;
+        distance = 0;
+
+        System.out.println(
+                "reset");
+        gameOver = false;
+
+        startGame();
+    }
+
+    public void colorGame() {
+        color = false;
+        gameOver = false;
+        TRex.setPower(TRex.getNoPower());
+        TRex.setMultiplier(false);
+        System.out.println("colorGame");
+
+        //TREX
+        Trex.setInstance(null);
+
+        background = new Background();
+        ground = new Ground();
+//        this.collidedObstacleString = null;
+//        this.collidedMoneyString = null;
+
+        //TREX
+        TRex = Trex.instance();
+        //OSTACOLI
+        
+        if (HomePage.demo) {
+            arrows = new Arrows();
+        }        
+        obstacles = new Obstacles(ground);
+        //MONETINE
+        moneys = new PowerUp();
+
+        //ATTENZIONE: questo deve essere fatto nella classe Partita
+        background.update();
+        ground.update();
+        moneys.update();
+        obstacles.update();
+
+        running = true;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //
@@ -280,7 +400,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
                 openScoreboard = true;
                 reset();
             }
-            if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard && !HomePage.demo) {
+            if (keyPressed == KeyEvent.VK_SPACE && gameOver && openScoreboard) {
                 String name = JOptionPane.showInputDialog("Enter your name:", "");
                 if (name != null) {
                     openScoreboard = false;
@@ -304,6 +424,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         }
 
         public void reset() {
+            color = false;
+            colorGame = false;
+            changed = false;
             HomePage.demo = false;
             HealthBar.instance().increase(100);
             Ground.movementSpeed0 = 8;
@@ -311,10 +434,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
             TRex.setMultiplier(false);
             score = 0;
             distanceForScore = 0;
+            distance = 0;
             coin = 0;
             System.out.println("reset");
             gameOver = false;
-            
+
             startGame();
         }
     }

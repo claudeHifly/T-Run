@@ -340,4 +340,8 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         this.multiplier = multiplier;
     }
 
+    public static void setInstance(Trex instance) {
+        Trex.instance = instance;
+    }
+
 }

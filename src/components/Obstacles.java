@@ -6,6 +6,8 @@
 package components;
 
 import general.Board;
+import static general.Board.color;
+import static general.Board.colorGame;
 import general.HomePage;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -23,8 +25,10 @@ public class Obstacles extends Items {
     private final int birdFrequency = 20;
     private final int canyonFrequency = 30;
     private final Ground ground;
+    private boolean tardis;
 
     public Obstacles(Ground ground) {
+        tardis = false;
         obArray = new ArrayList<>();
         this.ground = ground;
         Item ob;
@@ -78,9 +82,14 @@ public class Obstacles extends Items {
         int totalFrequency = 100;
         int extract = (int) (Math.random() * (totalFrequency - 1) + 1);
         int rd = randomDistance();
-//        if (HomePage.demo) {
-//            Board.arrows.addArrow(rd - 20, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-//        }
+        if (color){
+            if(tardis)
+                return new Empty(rd,(int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+            else{
+                tardis = true;
+                return new Portal(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+            }
+        }
         if (extract <= canyonFrequency) {
             int endCanyon = ground.addCanyon(rd);
             if (endCanyon == rd) {
