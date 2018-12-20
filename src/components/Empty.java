@@ -17,8 +17,8 @@ public class Empty extends Item {
 
     private final int distanceArrowCanyon = 55;
 
-    public Empty(int x, int y) {
-        super(x, y, Resources.instance().getEmpty());
+    public Empty(int x) {
+        super(x, -1, Resources.instance().getEmpty());
         if (HomePage.demo) {
             Board.arrows.addArrowUp(x - distanceArrowCanyon, (int) (Ground.yPosition));
             

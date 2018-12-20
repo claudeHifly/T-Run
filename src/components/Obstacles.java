@@ -84,7 +84,7 @@ public class Obstacles extends Items {
         int rd = randomDistance();
         if (color){
             if(tardis)
-                return new Empty(rd,(int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+                return new Empty(rd);
             else{
                 tardis = true;
                 return new Portal(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
@@ -92,11 +92,11 @@ public class Obstacles extends Items {
         }
         if (extract <= canyonFrequency) {
             int endCanyon = ground.addCanyon(rd);
-            if (endCanyon == rd) {
-                System.out.println("DOVRESTI METTERLO ALLA FINE");
-                return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-            }
-            return new Empty(endCanyon, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+//            if (endCanyon == rd) {
+//                System.out.println("DOVRESTI METTERLO ALLA FINE");
+//                return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
+//            }
+            return new Empty(endCanyon);
         } else {
             if (extract <= canyonFrequency + birdFrequency) {
                 return new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));

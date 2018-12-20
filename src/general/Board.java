@@ -11,7 +11,7 @@ import java.awt.*;
 import components.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import scoreboard.ScoreUserInterface;
+import scoreboard.*;
 import utility.Resources;
 
 /**
@@ -35,13 +35,16 @@ public class Board extends JPanel implements Runnable, ActionListener {
     private Item collidedArrow;
     private Item collidedObstacle;
     private Item collidedMoney;
-    private final BufferedImage explosionImage;
+    private BufferedImage explosionImage;
     private String collidedArrowString;
     private String collidedObstacleString;
     private String collidedMoneyString;
 
     public static int distance = 0;
     public static float distanceForScore;
+    
+    public int lowestScore;
+    private final int thresholdScore = 30;
 
     public static int score = 0;
     public static int coin = 0;
@@ -95,12 +98,19 @@ public class Board extends JPanel implements Runnable, ActionListener {
         background.update();
         ground.update();
         moneys.update();
-
+        
+        if((lowestScore = Scoreboard.getLowest()) < thresholdScore){
+            lowestScore = thresholdScore;
+        }
+        
+        
         if (HomePage.demo) {
             arrows.update();
         }
 
         obstacles.update();
+        
+        
 
         //bar = new HealthBar();
         animator = new Thread(this);
@@ -115,7 +125,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
         distance += 1;
         distanceForScore += 0.1;
 
-        if (distance == 10) {
+        if (score == lowestScore) {
             color = true;
         }
 
@@ -334,27 +344,27 @@ public class Board extends JPanel implements Runnable, ActionListener {
         color = false;
         colorGame = false;
         changed = false;
-
+        HomePage.demo = false;
+        HealthBar.instance().increase(100);
+        this.explosionImage = Resources.instance().getExplosion();
         TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
-        TRex.setMultiplier(
-                false);
+        TRex.setMultiplier(false);
         score = 0;
         distanceForScore = 0;
         coin = 0;
         distance = 0;
-
-        System.out.println(
-                "reset");
+        Trex.setInstance(null);
+        System.out.println("reset");
         gameOver = false;
-
+        
         startGame();
     }
 
     public void colorGame() {
         color = false;
         gameOver = false;
-        TRex.setPower(TRex.getNoPower());
-        TRex.setMultiplier(false);
+        //TRex.setPower(TRex.getNoPower());
+        //TRex.setMultiplier(false);
         System.out.println("colorGame");
 
         //TREX
@@ -368,10 +378,10 @@ public class Board extends JPanel implements Runnable, ActionListener {
         //TREX
         TRex = Trex.instance();
         //OSTACOLI
-        
+
         if (HomePage.demo) {
             arrows = new Arrows();
-        }        
+        }
         obstacles = new Obstacles(ground);
         //MONETINE
         moneys = new PowerUp();
@@ -382,6 +392,12 @@ public class Board extends JPanel implements Runnable, ActionListener {
         moneys.update();
         obstacles.update();
 
+        explosionImage = Resources.instance().getExplosion();
+
+        int count = HealthBar.instance().getCnt();
+        HealthBar.setInstance(null);
+        HealthBar.instance();
+        HealthBar.instance().setCnt(count);
         running = true;
     }
 
@@ -425,23 +441,23 @@ public class Board extends JPanel implements Runnable, ActionListener {
             TRex.keyReleased(e);
         }
 
-        /*public void reset() {
-            color = false;
-            colorGame = false;
-            changed = false;
-            HomePage.demo = false;
-            HealthBar.instance().increase(100);
-            Ground.movementSpeed0 = 8;
-            TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
-            TRex.setMultiplier(false);
-            score = 0;
-            distanceForScore = 0;
-            distance = 0;
-            coin = 0;
-            System.out.println("reset");
-            gameOver = false;
-
-            startGame();
-        }*/
+//        public void reset() {
+//            color = false;
+//            colorGame = false;
+//            changed = false;
+//            HomePage.demo = false;
+//            HealthBar.instance().increase(100);
+//            Ground.movementSpeed0 = 8;
+//            TRex.setPower(TRex.getNoPower());       //resetto il gioco, inizializzo a NoPower
+//            TRex.setMultiplier(false);
+//            score = 0;
+//            distanceForScore = 0;
+//            distance = 0;
+//            coin = 0;
+//            System.out.println("reset");
+//            gameOver = false;
+//
+//            startGame();
+//        }
     }
 }

@@ -161,10 +161,10 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         state.create(g);
 
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.red);
-        g2d.draw(collider);
-        g2d.setColor(Color.black);
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(Color.red);
+//        g2d.draw(collider);
+//        g2d.setColor(Color.black);
         if (instance.getState() != dead) {
             if (multiplier == true) {
 
