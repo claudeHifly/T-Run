@@ -6,7 +6,6 @@
 package trex;
 
 import components.Ground;
-import static components.Ground.movementSpeed;
 import general.HomePage;
 import general.UserInterface;
 import java.awt.Color;
@@ -17,7 +16,6 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import utility.*;
-import utility.Sound;
 
 /**
  *
@@ -25,101 +23,50 @@ import utility.Sound;
  */
 public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
-    
     private static Trex instance = null;
-    private TrexState running;
-    private TrexState jumping;
-    private TrexState dead;
-    private TrexState lowerHead;
-    private TrexState falling;
-
-    public TrexPower pepperPower;
-    public TrexPower noPower;
-
-    public boolean multiplier;
-
-    private TrexState state;
-    private TrexPower power;
-
-    private final BufferedImage mulBanner1;
-    private final BufferedImage mulBanner2;
-
-    float deltaT;
-
     public final static int groundLevel = (int) (UserInterface.height * 0.75);
     static final int maxHeight = (int) (UserInterface.height - UserInterface.height * 0.50);
-    private static int jumpFactor = (int) (movementSpeed * 1.3);
     public static int TRexOnGround;
     public final static int x = 50;
-
-    private float jumpStrenght, weight;
-    int y;
-    private int TRexPositionY;
-    float gravity;
-    float speedForJumping;
     static boolean topReached;
     private static int wTRex;
     private static int hTRex;
-    private boolean jumpDisabled;
     private static int wTRexLower;
     private static int hTRexLower;
+    private final TrexState running;
+    private final TrexState jumping;
+    private final TrexState dead;
+    private final TrexState lowerHead;
+    private final TrexState falling;
+    public TrexPower pepperPower;
+    public TrexPower noPower;
+    public boolean multiplier;
+    private TrexState state;
+    private TrexPower power;
+    private final BufferedImage mulBanner1;
+    private final BufferedImage mulBanner2;
+    float deltaT;
+    int y;
+    float gravity;
+    float speedForJumping;
+    private boolean jumpDisabled;
 
     //questi due contatori mi servono per rallentare l'animazione dei piedi
     //del TRex altrimenti cambierebbe sprite ogni 25ms
     int leftCounter;        //contatore per l'animazione del piede sinistro
     int rightCounter;       //contatore per l'animazione del piede destro
-
     int animation1;
     int animation2;
-
-    private int blinkCounter;       //contatore per il numero di blink;
-
     Area collider;
     int foot;
     int bannerCounter;
-
-    private int topTRex;
-    private int bottomTRex;
-
     final int LEFT_FOOT = 1;
     final int RIGHT_FOOT = 2;
     final int NO_FOOT = 3;
-
     final int LEFT_FOOT_LOWER = 4;
     final int RIGHT_FOOT_LOWER = 5;
-
     final int BANNER1 = 6;
     final int BANNER2 = 7;
-
-    //ImageOutline outline;
-    private Trex() {
-
-        deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
-        System.out.println("deltaT " + deltaT);
-
-        this.animation1 = 0;
-        this.animation2 = 0;
-
-        this.mulBanner1 = Resources.instance().getMulBanner1();
-        this.mulBanner2 = Resources.instance().getMulBanner2();
-        
-        
-
-        this.running = new Running(this);
-        this.jumping = new Jumping(this);
-        this.dead = new Dead(this);
-        this.lowerHead = new LowerHead(this);
-        this.falling = new Falling(this);
-
-        this.pepperPower = new PepperPower(this);
-        this.noPower = new NoPower(this);
-
-        this.multiplier = false;
-        this.state = running;
-        this.power = noPower;      //inizializzo, nessun powerUP
-        this.bannerCounter = BANNER1;
-        this.init();
-    }
 
     public static Trex instance() {
         if (instance == null) {
@@ -133,45 +80,65 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
     }
 
+    public static Trex getInstance() {
+        return instance;
+    }
+
+    public static int getTRexOnGround() {
+        return TRexOnGround;
+    }
+
+    public static void setTRexOnGround(int TRexOnGround) {
+        Trex.TRexOnGround = TRexOnGround;
+    }
+
+    public static void setInstance(Trex instance) {
+        Trex.instance = instance;
+    }
+
+    private Trex() {
+        deltaT = (float) ((float) 1.25 + (Ground.movementSpeed * 0.12));
+        this.animation1 = 0;
+        this.animation2 = 0;
+        this.mulBanner1 = Resources.instance().getMulBanner1();
+        this.mulBanner2 = Resources.instance().getMulBanner2();
+        this.running = new Running();
+        this.jumping = new Jumping();
+        this.dead = new Dead();
+        this.lowerHead = new LowerHead();
+        this.falling = new Falling();
+        this.pepperPower = new PepperPower();
+        this.noPower = new NoPower();
+        this.multiplier = false;
+        this.state = running;
+        this.power = noPower;      //inizializzo, nessun powerUP
+        this.bannerCounter = BANNER1;
+        this.init();
+    }
+
     private void init() {
-        //at = new AffineTransform();
-
         gravity = (float) 0.75;
-        jumpStrenght = 24;
-        speedForJumping = (float) (6 * 2.2);//ho lasciato 6 perchè dobbiamo trovare una soluzione per il salto 
-        //in base alla velocità del personaggio.
-
+        speedForJumping = (float) (6 * 2.2);
         topReached = false;
-
         wTRex = Resources.instance().getDinoStand().getWidth(null);
         hTRex = Resources.instance().getDinoStand().getHeight(null);
-
         wTRexLower = Resources.instance().getDinoBelowLeftUp().getWidth(null);
         hTRexLower = Resources.instance().getDinoBelowLeftUp().getHeight(null);
-
-        TRexOnGround = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
+        TRexOnGround = (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
         y = TRexOnGround;
-        foot = NO_FOOT;//inizializzo
-        //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
-        collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), this.x, this.y);
-//        outline = new ImageOutline(leftFootDino);
-//        collider = new Area(outline.getOutline(leftFootDino));
-//        at.translate(x, y);
-//        collider.transform(at);
+        foot = NO_FOOT;
+        collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), Trex.x, this.y);
     }
 
     @Override
     public void create(Graphics g) {
-
         state.create(g);
-
-//        Graphics2D g2d = (Graphics2D) g;
-//        g2d.setColor(Color.red);
-//        g2d.draw(collider);
-//        g2d.setColor(Color.black);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.black);
         if (instance.getState() != dead) {
             if (multiplier == true) {
-
                 if (bannerCounter == BANNER1) {
                     if (animation1 < 5) {
                         g.drawImage(mulBanner1, (int) (UserInterface.width * 0.42), (int) (UserInterface.height * 0.18), null);
@@ -239,54 +206,20 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         return noPower;
     }
 
-    public static int getTRexOnGround() {
-        return TRexOnGround;
-    }
-
-    public static void setTRexOnGround(int TRexOnGround) {
-        Trex.TRexOnGround = TRexOnGround;
-    }
-
     @Override
     public void keyPressed(KeyEvent e) {
-        
         int keyPressed = e.getKeyCode();
-        
         if (!HomePage.demo) {
-            
-
             if ((keyPressed == KeyEvent.VK_SPACE || keyPressed == KeyEvent.VK_UP) && this.state != (falling) && this.state != (lowerHead) && !(jumpDisabled) && this.state != dead) {
-                
                 this.state = jumping;
                 jumpDisabled = true;
-                //System.out.println("Space pressed");
             }
-
             if (keyPressed == KeyEvent.VK_DOWN && this.state != (jumping)) {
                 this.state = lowerHead;
             }
         } else {
             if (keyPressed == KeyEvent.VK_ESCAPE) {
-                //HomePage.demo = false;
-                
-//                HealthBar.setInstance(null);
-//                Ground.movementSpeed0 = 8;
-//                setPower(getNoPower());       //resetto il gioco, inizializzo a NoPower
-//                setMultiplier(false);
-//                Board.score = 0;
-//                Board.distanceForScore = 0;
-//                Board.coin = 0;
-//                System.out.println("reset");
-//                Board.gameOver = false;
-//                
-//                instance=null;
-//                //UserInterface.instance().setVisible(false);
-//                UserInterface.instance().dispose();
-//                //UserInterface.setInstance(null);
-//                
-//                new HomePage();
-                  setState(getDead());
-                
+                setState(getDead());
             }
         }
     }
@@ -295,17 +228,13 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     public void keyReleased(KeyEvent e) {
         if (!HomePage.demo) {
             int keyTyped = e.getKeyCode();
-
             if (keyTyped == KeyEvent.VK_DOWN && (state != jumping)) {
                 this.state = running;
             }
-
             if ((keyTyped == KeyEvent.VK_SPACE || keyTyped == KeyEvent.VK_UP)) {
-                
                 jumpDisabled = false;
             }
         }
-
     }
 
     public int getwTRex() {
@@ -313,7 +242,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     }
 
     public void setwTRex(int wTRex) {
-        this.wTRex = wTRex;
+        Trex.wTRex = wTRex;
     }
 
     public int gethTRex() {
@@ -321,7 +250,7 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     }
 
     public void sethTRex(int hTRex) {
-        this.hTRex = hTRex;
+        Trex.hTRex = hTRex;
     }
 
     public Area getCollider() {
@@ -335,9 +264,6 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     public void setMultiplier(boolean multiplier) {
         this.multiplier = multiplier;
     }
-
-    public static void setInstance(Trex instance) {
-        Trex.instance = instance;
-    }
-
+    
+    
 }

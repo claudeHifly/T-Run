@@ -5,14 +5,10 @@
  */
 package components;
 
-import general.Board;
 import static general.Board.color;
-import static general.Board.colorGame;
-import general.HomePage;
-import java.awt.Graphics;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import static general.UserInterface.width;
+import utility.Utility;
 
 /**
  *
@@ -33,37 +29,28 @@ public class Obstacles extends Items {
         obArray = new ArrayList<>();
         this.ground = ground;
         Item ob;
-        AffineTransform at;
         cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
             int rd = randomDistance();
-//            if (HomePage.demo) {
-//                Board.arrows.addArrow(rd - distanceArrowCactus, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-//            }
             ob = new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
-            at = new AffineTransform();
-            at.translate(ob.getX(), ob.getY());
-            ob.getCollider().transform(at);
+            Utility.instance().moveCollider(ob.getCollider(), ob.getX(), ob.getY());
             obArray.add(ob);
         }
     }
 
     @Override
     public void update() {
-        AffineTransform at;
         for (Item ob : obArray) {
             ob.setX(ob.getX() - Ground.movementSpeed);
-            at = new AffineTransform();
-            at.translate(-Ground.movementSpeed, 0);
-            ob.getCollider().transform(at);
+            Utility.instance().moveCollider(ob.getCollider(), -Ground.movementSpeed, 0);
+
         }
         Item firstOb = obArray.get(0);
         if ((firstOb.getX() < -firstOb.getImage().getWidth()) && (!obArray.isEmpty())) { //image is completely out of the screen: remove and move it to the end of the array
             obArray.remove(firstOb);
             Item ob = randomObstacle();
-            at = new AffineTransform();
-            at.translate(ob.getX(), ob.getY());
-            ob.getCollider().transform(at);
+            Utility.instance().moveCollider(ob.getCollider(), ob.getX(), ob.getY());
+
             obArray.add(ob);
         }
     }

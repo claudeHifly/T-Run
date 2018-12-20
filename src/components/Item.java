@@ -5,7 +5,7 @@
  */
 package components;
 
-import utility.ImageOutline;
+import utility.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,14 +25,12 @@ public abstract class Item {
     private int y;
     private Area collider;
 
-    //private ImageOutline outline;
     public Item(int x, int y, BufferedImage image) {
         TRex = Trex.instance();
         this.x = x;
         this.image = image;
         this.y = y - image.getHeight();
-        ImageOutline outline = new ImageOutline(image);
-        this.collider = new Area(outline.getOutline());
+        this.collider = Utility.instance().createCollider(image);
 
     }
 
@@ -65,11 +63,11 @@ public abstract class Item {
     public void create(Graphics g) {
         //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         g.drawImage(image, x, y, null);
-//        Graphics2D g2d = (Graphics2D) g;
-//
-//        g2d.setColor(Color.red);
-//        g2d.draw(collider);
-//        g2d.setColor(Color.BLACK);
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setColor(Color.red);
+        g2d.draw(collider);
+        g2d.setColor(Color.BLACK);
     }
 
     public Area getCollider() {

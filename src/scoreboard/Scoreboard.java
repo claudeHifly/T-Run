@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 
-
 /**
  *
  * @author G8
@@ -23,13 +22,12 @@ public class Scoreboard {
 
     private static TreeSet<Record> scoreboard = new TreeSet<>();
     private static File file;
-    private static String name = null;
+    private static final String name = null;
 
-    private static TreeSet<Record> readFromScoreFile() {
+    public static TreeSet<Record> readFromScoreFile() {
         file = new File("score.txt");
         Scanner sc;
         String[] data = new String[2];
-
         try {
             sc = new Scanner(file);
             while (sc.hasNextLine()) {
@@ -42,13 +40,11 @@ public class Scoreboard {
         return scoreboard;
     }
 
-    private static void saveOnScoreFile() {
+    public static void saveOnScoreFile() {
         PrintWriter writer = null;
-
         try {
             writer = new PrintWriter(file, "UTF-8");
             int size = scoreboard.size();
-
             if (size > 0) {
                 int i = 0;
                 Iterator it = scoreboard.iterator();
@@ -94,11 +90,22 @@ public class Scoreboard {
 
         saveOnScoreFile();
     }
-    
-    public static int getLowest(){
+
+    public static int getLowest() {
         try {
-            return scoreboard.last().score;
-        } catch(Exception e){
+            if (scoreboard.size() <= 10) {
+                return scoreboard.last().score;
+            } else {
+                int i = 0;
+                Iterator it = scoreboard.iterator();
+                while (it.hasNext() && i < 9) {
+                    Record tmp = (Record) it.next();
+                    i++;
+                }
+                return ((Record) it.next()).score;
+            }
+        } catch (Exception e) {
+            System.out.println("Scoreboard vuota");
             return 0;
         }
     }
@@ -108,7 +115,7 @@ public class Scoreboard {
         private String name;
         private int score;
 
-        public Record(String name, int score) {
+        Record(String name, int score) {
             this.name = name;
             this.score = score;
         }
@@ -124,5 +131,12 @@ public class Scoreboard {
             }
         }
     }
-    
+
+    public static TreeSet<Record> getScoreboard() {
+        return scoreboard;
+    }
+
+    private Scoreboard() {
+    }
+
 }

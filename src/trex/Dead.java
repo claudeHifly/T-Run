@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import utility.Resources;
+import trex.Trex;
 
 /**
  *
@@ -20,16 +21,15 @@ import utility.Resources;
  */
 public class Dead implements TrexState {
 
-    private final Trex trex;
     private final BufferedImage deadTRex;//immagine TRex morto
 
-    public Dead(Trex trex) {
-        this.trex = trex;
+    public Dead() {
         this.deadTRex = Resources.instance().getDinoBigEyes();
     }
 
     @Override
     public void create(Graphics g) {
+        Trex trex = Trex.getInstance();
        //trex.deltaT=0;
         Board.running = false;
         Board.gameOver = true;

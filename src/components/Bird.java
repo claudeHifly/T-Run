@@ -7,7 +7,9 @@ package components;
 
 import general.Board;
 import general.HomePage;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import utility.*;
@@ -24,15 +26,13 @@ public class Bird extends Item {
 
     int animation1;
     int animation2;
-    private final BufferedImage bird1;
     private final BufferedImage bird2;
 
     private final int distanceArrowBird = 40;
 
     public Bird(int x, int y) {
         super(x, y, Resources.instance().getBird1());
-        this.bird1 = Resources.instance().getBird1();
-        this.bird2 = Resources.instance().getBird2();
+        bird2 = Resources.instance().getBird2();
         this.birdCounter = BIRD1;
         if (HomePage.demo) {
             System.out.println("Differenza" + (Ground.yPosition - y));
@@ -76,23 +76,32 @@ public class Bird extends Item {
 
         if (birdCounter == BIRD1) {
             if (animation1 < 5) {
-                g.drawImage(bird1, getX(), getY(), null);
+                g.drawImage(getImage(), getX(), getY(), null);
+                setCollider(Utility.instance().createCollider(getImage(), getX(), getY()));
                 animation1++;
             } else {
                 birdCounter = BIRD2;
                 g.drawImage(bird2, getX(), getY(), null);
+                setCollider(Utility.instance().createCollider(bird2, getX(), getY()));
                 animation1 = 0;
             }
         } else {
             if (animation2 < 5) {
                 g.drawImage(bird2, getX(), getY(), null);
+                setCollider(Utility.instance().createCollider(bird2, getX(), getY()));
                 animation2++;
             } else {
                 birdCounter = BIRD1;
-                g.drawImage(bird1, getX(), getY(), null);
+                g.drawImage(getImage(), getX(), getY(), null);
+                setCollider(Utility.instance().createCollider(getImage(), getX(), getY()));
                 animation2 = 0;
             }
         }
+                Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setColor(Color.red);
+        g2d.draw(getCollider());
+        g2d.setColor(Color.BLACK);
 
     }
 

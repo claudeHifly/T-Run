@@ -13,14 +13,10 @@ import java.awt.Graphics;
  */
 public class NoPower implements TrexPower {
 
-    private final Trex trex;
-
-    public NoPower(Trex trex) {
-        this.trex = trex;
+    public NoPower() {
     }
 
     @Override
     public void create(Graphics g) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

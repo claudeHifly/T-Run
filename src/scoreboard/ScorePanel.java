@@ -19,7 +19,7 @@ import utility.Resources;
  */
 public class ScorePanel extends JPanel {
 
-    private BufferedImage scoreboardImage = Resources.instance().getScoreboardBackgroundImage();
+    private final BufferedImage scoreboardImage = Resources.instance().getScoreboardBackgroundImage();
 
     public ScorePanel() {
         this.init();

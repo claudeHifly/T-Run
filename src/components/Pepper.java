@@ -30,17 +30,13 @@ public class Pepper extends Item {
     }
 
     public void pepperCountdown() {
-        int normalFrequency = PowerUp.frequencyPepper;
-        PowerUp.frequencyPepper = 0;
         Timer pepperTimer = new java.util.Timer();
 
         pepperTimer.schedule(
                 new java.util.TimerTask() {
             @Override
             public void run() {
-                //System.out.println("Time Over -> No PepperPower");
-                TRex.setPower(TRex.getNoPower());       //resetto il powerUP
-                PowerUp.frequencyPepper = normalFrequency;       //ripristino la probabilità di spawn del peperoncino
+                TRex.setPower(TRex.getNoPower());       //resetto il powerUP      //ripristino la probabilità di spawn del peperoncino
                 pepperTimer.cancel();
 
             }

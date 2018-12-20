@@ -22,14 +22,11 @@ public class Multiplier extends Item {
     @Override
     public void collisionAction() {
         super.TRex.setMultiplier(true);
-        //Bones.probabilityMultiplier = 0;
         System.out.println("HO PRESO IL MOLTIPLICATIORE");
         mulCountdown();
     }
 
     public void mulCountdown() {
-        int normalFrequency = PowerUp.frequencyMultiplier;
-        PowerUp.frequencyPepper = 0;
 
         Timer mulTimer = new java.util.Timer();
 
@@ -37,11 +34,8 @@ public class Multiplier extends Item {
                 new java.util.TimerTask() {
             @Override
             public void run() {
-                //System.out.println("Time Over -> No PepperPower");
                 TRex.setMultiplier(false);              //resetto il moltiplicatore
-                PowerUp.frequencyMultiplier = normalFrequency;
                 mulTimer.cancel();
-
             }
         },
                 10000 //10 secondi di powerUP Pepper

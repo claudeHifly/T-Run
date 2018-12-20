@@ -15,13 +15,11 @@ import utility.*;
  */
 public class LowerHead implements TrexState {
 
-    private final Trex trex;
     private final BufferedImage lowerHeadDinoLeft;
     private final BufferedImage lowerHeadDinoRight;
     private final BufferedImage biggerAuraImage;
 
-    public LowerHead(Trex trex) {
-        this.trex = trex;
+    public LowerHead() {
         this.lowerHeadDinoLeft = Resources.instance().getDinoBelowLeftUp();
         this.lowerHeadDinoRight = Resources.instance().getDinoBelowRightUp();
         this.biggerAuraImage = Resources.instance().getBiggerAura();
@@ -29,70 +27,47 @@ public class LowerHead implements TrexState {
 
     @Override
     public void create(Graphics g) {
-
-        if (trex.foot == trex.NO_FOOT) {
-            trex.foot = trex.LEFT_FOOT_LOWER;
-            g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
-            if (trex.getPower() == trex.pepperPower) {
-                g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+        if (Trex.instance().foot == Trex.instance().NO_FOOT) {
+            Trex.instance().foot = Trex.instance().LEFT_FOOT_LOWER;
+            g.drawImage(this.lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y, null);
+            if (Trex.instance().getPower() == Trex.instance().pepperPower) {
+                g.drawImage(biggerAuraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
             }
-            trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//            trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
-//            trex.at = new AffineTransform();
-//            trex.at.translate(trex.x, trex.y);
-//            trex.collider.transform(trex.at);
-        } else if (trex.foot == trex.LEFT_FOOT_LOWER) {
+            Trex.instance().collider = Utility.instance().createCollider(lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y);
+        } else if (Trex.instance().foot == Trex.instance().LEFT_FOOT_LOWER) {
 
-            if (trex.leftCounter < 5) {
-                g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
-                if (trex.getPower() == trex.pepperPower) {
-                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+            if (Trex.instance().leftCounter < 5) {
+                g.drawImage(this.lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y, null);
+                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
+                    g.drawImage(biggerAuraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
                 }
-                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
-                trex.leftCounter++;
+                Trex.instance().collider = Utility.instance().createCollider(lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y);
+                Trex.instance().leftCounter++;
             } else {
-                trex.foot = trex.RIGHT_FOOT_LOWER;
-                g.drawImage(this.lowerHeadDinoRight, trex.x, trex.y, null);
-                if (trex.getPower() == trex.pepperPower) {
-                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                Trex.instance().foot = Trex.instance().RIGHT_FOOT_LOWER;
+                g.drawImage(this.lowerHeadDinoRight, Trex.instance().x, Trex.instance().y, null);
+                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
+                    g.drawImage(biggerAuraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
                 }
-                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
-                trex.leftCounter = 0;    //resetto il contatore e cambio stato
+                Trex.instance().collider = Utility.instance().createCollider(lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y);
+                Trex.instance().leftCounter = 0;    //resetto il contatore e cambio stato
             }
-
         } else {
-
-            if (trex.rightCounter < 5) {
-                g.drawImage(this.lowerHeadDinoRight, trex.x, trex.y, null);
-                if (trex.getPower() == trex.pepperPower) {
-                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+            if (Trex.instance().rightCounter < 5) {
+                g.drawImage(this.lowerHeadDinoRight, Trex.instance().x, Trex.instance().y, null);
+                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
+                    g.drawImage(biggerAuraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
                 }
-                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoRight));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
-                trex.rightCounter++;
+                Trex.instance().collider = Utility.instance().createCollider(lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y);
+                Trex.instance().rightCounter++;
             } else {
-                trex.foot = trex.LEFT_FOOT_LOWER;
-                g.drawImage(this.lowerHeadDinoLeft, trex.x, trex.y, null);
-                if (trex.getPower() == trex.pepperPower) {
-                    g.drawImage(biggerAuraImage, trex.x - 10, trex.y - 35, null);
+                Trex.instance().foot = Trex.instance().LEFT_FOOT_LOWER;
+                g.drawImage(this.lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y, null);
+                if (Trex.instance().getPower() == Trex.instance().pepperPower) {
+                    g.drawImage(biggerAuraImage, Trex.instance().x - 10, Trex.instance().y - 35, null);
                 }
-                trex.collider = Utility.instance().createCollider(lowerHeadDinoLeft, trex.x, trex.y);
-//                trex.collider = new Area(trex.outline.getOutline(trex.lowerHeadDinoLeft));
-//                trex.at = new AffineTransform();
-//                trex.at.translate(trex.x, trex.y);
-//                trex.collider.transform(trex.at);
-                trex.rightCounter = 0;   //resetto il contatore e cambio stato
+                Trex.instance().collider = Utility.instance().createCollider(lowerHeadDinoLeft, Trex.instance().x, Trex.instance().y);
+                Trex.instance().rightCounter = 0;   //resetto il contatore e cambio stato
             }
         }
     }

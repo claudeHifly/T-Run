@@ -24,7 +24,6 @@ public class ScoreUserInterface extends JFrame {
         this.add(new ScorePanel());//con questo metodo inserisco una Board al centro del contenitore JFrame
         this.setTitle("T-Run Scoreboard");//setto il titolo
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//setto l'operazione di default da eseguire quando chiudo la finestra
-
         this.setSize(width, height);
         this.setLocationRelativeTo(null);//in questo modo posiziono il JFrame al centro dello schermo
         this.setResizable(false);//dimensioni JFrame non modificabili
@@ -34,7 +33,6 @@ public class ScoreUserInterface extends JFrame {
         if (instance == null) {
             instance = new ScoreUserInterface();
         }
-
         ScoreUserInterface.playerName = playerName;
         instance.setVisible(true);
         return instance;

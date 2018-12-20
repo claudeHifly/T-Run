@@ -2,8 +2,9 @@ ANG,2116
 LS,1943
 ANG,1631
 ANG,1301
+cla,1112
+cla,852
 pig,843
 fff,500
-aaa,100
-hhh,89
-ANG,31
+ppp,179
+boh,133

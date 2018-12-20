@@ -6,9 +6,7 @@
 package utility;
 
 import general.Board;
-import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import general.HomePage;
 
 /**
  *
@@ -24,6 +22,7 @@ public class Resources { //singleton
     // IMMAGINI HOMESCREEN
     private final BufferedImage homepageBackgroundImage;
     private final BufferedImage homepageFootprintImage;
+
     // SCOREBOARD
     private final BufferedImage scoreboardBackgroundImage;
 
@@ -102,15 +101,6 @@ public class Resources { //singleton
     private final BufferedImage mulScoreCol;
     private final BufferedImage pepperCol;
 
-    // SCORE OSTACOLI BRUCIATI
-    private final BufferedImage score1Col;
-    private final BufferedImage score2Col;
-    private final BufferedImage score5Col;
-    private final BufferedImage score10Col;
-    private final BufferedImage score20Col;
-    private final BufferedImage score50Col;
-    private final BufferedImage score100Col;
-
     //PORTAL
     private final BufferedImage portal;
 
@@ -143,26 +133,32 @@ public class Resources { //singleton
         cactus4 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Cactus-4.png"));
         cactus5 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Cactus-5.png"));
         empty = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/empty.png"));
+
         // DINO
         dinoBelowLeftUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-below-left-up.png"));
         dinoBelowRightUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-below-right-up.png"));
-        dinoBigEyes = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-big-eyes.png"));;//immagine TRex stand colorato
-        dinoLeftUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-left-up.png"));//immagine TRex morto
+        dinoBigEyes = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-big-eyes.png"));
+        dinoLeftUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-left-up.png"));
         dinoRightUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-right-up.png"));
         dinoStand = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Dino-stand.png"));
+
         // GROUND
         ground1 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Ground-1.png"));
         ground2 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Ground-2.png"));
         ground3 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/Ground-3.png"));
         groundCanyon = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/GroundCanyon.png"));
+
         // BACKGROUND
         background = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/background.png"));
+
         // UCCELLO
         bird1 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/bird1.png"));
         bird2 = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/bird2.png"));
+
         // OSSA
         bone = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/bone.png"));
         boneSpecial = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/boneSpecial.png"));
+
         // POWER-UP
         explosion = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/explosion.png"));
         aura = Utility.instance().create(this.getClass().getClassLoader().getResource("image/bn/aura.png"));
@@ -179,26 +175,32 @@ public class Resources { //singleton
         cactus3Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Cactus-3.png"));
         cactus4Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Cactus-4.png"));
         cactus5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Cactus-5.png"));
+
         // DINO
         dinoBelowLeftUpCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-left-up.png"));
         dinoBelowRightUpCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-below-right-up.png"));
-        dinoBigEyesCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-big-eyes.png"));;//immagine TRex stand colorato
-        dinoLeftUpCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-left-up.png"));//immagine TRex morto
+        dinoBigEyesCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-big-eyes.png"));
+        dinoLeftUpCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-left-up.png"));
         dinoRightUpCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-right-up.png"));
         dinoStandCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Dino-stand.png"));
+
         // GROUND
         ground1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Ground-1.png"));
         ground2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Ground-2.png"));
         ground3Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/Ground-3.png"));
         groundCanyonCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/GroundCanyon.png"));
+
         // BACKGROUND
         backgroundCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/background.jpg"));
+
         // UCCELLO
         bird1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/bird1.png"));
         bird2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/bird2.png"));
+
         // OSSA
         boneCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/bone.png"));
         boneSpecialCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/boneSpecial.png"));
+
         // POWER-UP
         explosionCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/explosion.png"));
         auraCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/aura.png"));
@@ -215,15 +217,6 @@ public class Resources { //singleton
         healthBarCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/barraDellaVita.png"));
         healthBarRectangleCol = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/taccaVita.png"));
 
-        // SCORE OSTACOLI BRUCIATI
-        score1Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score1.png"));
-        score2Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score2.png"));
-        score5Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score5.png"));
-        score10Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score10.png"));
-        score20Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score20.png"));
-        score50Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score50.png"));
-        score100Col = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/score100.png"));
-
         // DEMO
         arrowDown = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowDOWN.png"));
         arrowUp = Utility.instance().create(this.getClass().getClassLoader().getResource("image/demo/arrowUP.png"));
@@ -231,8 +224,7 @@ public class Resources { //singleton
 
         // PORTAL
         portal = Utility.instance().create(this.getClass().getClassLoader().getResource("image/color/tardis-2.png"));
-        
-        
+
     }
 
     public static Resources instance() {
@@ -342,7 +334,6 @@ public class Resources { //singleton
 
     public BufferedImage generateGround() {
         pickedGround = (int) (Math.random() * 2 + 1);
-
         switch (pickedGround) {
             case 1:
                 return this.ground1;
@@ -356,7 +347,6 @@ public class Resources { //singleton
     }
 
     public BufferedImage getGround() {
-
         if (!Board.colorGame) {
             switch (pickedGround) {
                 case 1:
@@ -500,34 +490,6 @@ public class Resources { //singleton
         return empty;
     }
 
-    public BufferedImage getScore1Col() {
-        return score1Col;
-    }
-//
-//    public BufferedImage getScore2Col() {
-//        return score2Col;
-//    }
-//
-//    public BufferedImage getScore5Col() {
-//        return score5Col;
-//    }
-//
-//    public BufferedImage getScore10Col() {
-//        return score10Col;
-//    }
-//
-//    public BufferedImage getScore20Col() {
-//        return score20Col;
-//    }
-//
-//    public BufferedImage getScore50Col() {
-//        return score50Col;
-//    }
-//
-//    public BufferedImage getScore100Col() {
-//        return score100Col;
-//    }
-
     public BufferedImage getArrowDown() {
         return arrowDown;
     }
@@ -572,8 +534,4 @@ public class Resources { //singleton
         return arrowDown;
     }
 
-    
-    
-    
-    
 }

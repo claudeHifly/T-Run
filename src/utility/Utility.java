@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The Utility class provides two functionalities:
+ * - creating a BufferedImage, given the path of the image file
+ * - creating the collider, given the image and the coordinates
+ * This class 
  */
 package utility;
 
@@ -16,18 +17,17 @@ import javax.imageio.ImageIO;
  *
  * @author G8
  */
-public class Utility { //singleton
+public class Utility { //Singleton
 
     private static Utility instance = null;
-
-    private Utility() {
-    }
 
     public static Utility instance() {
         if (instance == null) {
             instance = new Utility();
         }
         return instance;
+    }
+    private Utility() {
     }
 
     public BufferedImage create(URL path) {
@@ -47,5 +47,17 @@ public class Utility { //singleton
         at.translate(x, y);
         collider.transform(at);
         return collider;
+    }
+
+    public Area createCollider(BufferedImage img) {
+        ImageOutline outline = new ImageOutline(img);
+        Area collider = new Area(outline.getOutline());
+        return collider;
+    }
+
+    public void moveCollider(Area collider, int x, int y) {
+        AffineTransform at = new AffineTransform();
+        at.translate(x, y);
+        collider.transform(at);
     }
 }

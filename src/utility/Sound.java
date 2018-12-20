@@ -6,11 +6,12 @@
 package utility;
 
 import java.io.File;
+import java.io.IOException;
 import javax.sound.sampled.*;
 
 /**
  *
- * @author Gennaro
+ * @author G8
  */
 public class Sound {
     
@@ -20,19 +21,17 @@ public class Sound {
    public Sound(String filename) {
 
       try {
-
          name = filename;
          File yourFile = new File(filename);
          AudioInputStream stream;
          AudioFormat format;
          DataLine.Info info;
-
          stream = AudioSystem.getAudioInputStream(yourFile);
          format = stream.getFormat();
          info = new DataLine.Info(Clip.class, format);
          clip = (Clip) AudioSystem.getLine(info);
          clip.open(stream);
-      } catch (Exception e) {
+      } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
          System.out.println("Error reading sound file: " + filename +".\n" + e.toString());
       }
    }
@@ -46,7 +45,6 @@ public class Sound {
          return;
       }
       clip.start();
-      //clip.loop(Clip.LOOP_CONTINUOUSLY);
    }
 
    public void stopSound() {

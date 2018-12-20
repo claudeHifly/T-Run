@@ -5,9 +5,8 @@
  */
 package components;
 
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
-import static general.UserInterface.width;
+import utility.Utility;
 
 /**
  *
@@ -23,12 +22,9 @@ public class Arrows extends Items {
 
     @Override
     public void update() {
-        AffineTransform at;
         for (Item ob : obArray) {
             ob.setX(ob.getX() - Ground.movementSpeed);
-            at = new AffineTransform();
-            at.translate(-Ground.movementSpeed, 0);
-            ob.getCollider().transform(at);
+            Utility.instance().moveCollider(ob.getCollider(), -Ground.movementSpeed, 0);
         }
         Item firstOb = obArray.get(0);
         if ((firstOb.getX() < -firstOb.getImage().getWidth()) && (!obArray.isEmpty())) { //image is completely out of the screen: remove and move it to the end of the array
@@ -38,25 +34,19 @@ public class Arrows extends Items {
 
     public void addArrowUp(int x, int y) {
         Item ob = new ArrowUp(x, y);
-        AffineTransform at = new AffineTransform();
-        at.translate(ob.getX(), ob.getY());
-        ob.getCollider().transform(at);
+        Utility.instance().moveCollider(ob.getCollider(), ob.getX(), ob.getY());
         obArray.add(ob);
     }
 
     public void addArrowDown(int x, int y) {
         Item ob = new ArrowDown(x, y);
-        AffineTransform at = new AffineTransform();
-        at.translate(ob.getX(), ob.getY());
-        ob.getCollider().transform(at);
+        Utility.instance().moveCollider(ob.getCollider(), ob.getX(), ob.getY());
         obArray.add(ob);
     }
 
     public void addArrowRight(int x, int y) {
         Item ob = new ArrowRight(x, y);
-        AffineTransform at = new AffineTransform();
-        at.translate(ob.getX(), ob.getY());
-        ob.getCollider().transform(at);
+        Utility.instance().moveCollider(ob.getCollider(), ob.getX(), ob.getY());
         obArray.add(ob);
     }
 

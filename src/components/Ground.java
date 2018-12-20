@@ -12,9 +12,7 @@ import general.UserInterface;
 import utility.*;
 import static general.Board.distance;
 import static general.UserInterface.width;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import utility.ImageOutline;
 
 /**
  *
@@ -33,17 +31,16 @@ public class Ground {
             this.x = x;
             this.image = Resources.instance().generateGround();
             this.y = yPosition;
-            ImageOutline outline = new ImageOutline(image);
-            this.collider = new Area(outline.getOutline());
+            this.collider = Utility.instance().createCollider(image);
             this.image = Resources.instance().getGround();
         }
 
         public void create(Graphics g) {
             g.drawImage(image, x, y, null);
-//            Graphics2D g2d = (Graphics2D) g;
-//            g2d.setColor(Color.red);
-//            g2d.draw(collider);
-//            g2d.setColor(Color.BLACK);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(Color.red);
+            g2d.draw(collider);
+            g2d.setColor(Color.BLACK);
         }
 
     }
@@ -59,14 +56,11 @@ public class Ground {
         grassGroundSet = new ArrayList<>();
         GroundImage ob;
         nextX = 0;
-        AffineTransform at;
         movementSpeed = movementSpeed0;
         groundOnScreen = (int) (width * 3 / Resources.instance().getGroundCanyon().getWidth());
         for (int i = 0; i < groundOnScreen; i++) {
             ob = new GroundImage(nextX);
-            at = new AffineTransform();
-            at.translate(ob.x, ob.y);
-            ob.collider.transform(at);
+            Utility.instance().moveCollider(ob.collider, ob.x, ob.y);
             grassGroundSet.add(ob);
             nextX += ob.image.getWidth();
         }
@@ -99,23 +93,18 @@ public class Ground {
     }
 
     public void update() {
-        AffineTransform at;
         movementSpeed = movementSpeed0 + distance / 500;
         GroundImage ob1;
         for (GroundImage ob : grassGroundSet) {
             ob.x -= movementSpeed;
-            at = new AffineTransform();
-            at.translate(-movementSpeed, 0);
-            ob.collider.transform(at);
+            Utility.instance().moveCollider(ob.collider, -movementSpeed, 0);
         }
         GroundImage firstGround = grassGroundSet.get(0);
         nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
         if (firstGround.x < -firstGround.image.getWidth()) {
             grassGroundSet.remove(firstGround);
             ob1 = new GroundImage(nextX);
-            at = new AffineTransform();
-            at.translate(ob1.x, ob1.y);
-            ob1.collider.transform(at);
+            Utility.instance().moveCollider(ob1.collider, ob1.x, ob1.y);
             grassGroundSet.add(ob1);
             nextX += ob1.image.getWidth();
         }
@@ -123,17 +112,14 @@ public class Ground {
     }
 
     public int addCanyon(int x) {
-        AffineTransform at;
         BufferedImage image = Resources.instance().getGroundCanyon();
         x -= image.getWidth() / 2;
-        Area collider = new Area((new ImageOutline(Resources.instance().generateGroundCanyon())).getOutline());
+        Area collider = Utility.instance().createCollider(Resources.instance().generateGroundCanyon());
         nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
         for (int i = 0; i < grassGroundSet.size(); i++) {
             if (grassGroundSet.get(i).x >= x) {
                 grassGroundSet.get(i).image = image;
-                at = new AffineTransform();
-                at.translate(grassGroundSet.get(i).x, grassGroundSet.get(i).y);
-                collider.transform(at);
+                Utility.instance().moveCollider(collider, grassGroundSet.get(i).x, grassGroundSet.get(i).y);
                 grassGroundSet.get(i).collider = collider;
                 return grassGroundSet.get(i).x + grassGroundSet.get(i).image.getWidth() / 2;
             }
