@@ -108,8 +108,8 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
         this.animation1 = 0;
         this.animation2 = 0;
 
-        this.mulBanner1 = Resources.instance().getMulBanner1Col();
-        this.mulBanner2 = Resources.instance().getMulBanner2Col();
+        this.mulBanner1 = Resources.instance().getMulBanner1();
+        this.mulBanner2 = Resources.instance().getMulBanner2();
 
         this.running = new Running(this);
         this.jumping = new Jumping(this);
@@ -149,17 +149,17 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
         topReached = false;
 
-        wTRex = Resources.instance().getDinoStandCol().getWidth(null);
-        hTRex = Resources.instance().getDinoStandCol().getHeight(null);
+        wTRex = Resources.instance().getDinoStand().getWidth(null);
+        hTRex = Resources.instance().getDinoStand().getHeight(null);
 
-        wTRexLower = Resources.instance().getDinoBelowLeftUpCol().getWidth(null);
-        hTRexLower = Resources.instance().getDinoBelowLeftUpCol().getHeight(null);
+        wTRexLower = Resources.instance().getDinoBelowLeftUp().getWidth(null);
+        hTRexLower = Resources.instance().getDinoBelowLeftUp().getHeight(null);
 
         TRexOnGround = (int) (Ground.yPosition) + (int) (Ground.yPosition * 0.025) - hTRex;
         y = TRexOnGround;
         foot = NO_FOOT;//inizializzo
         //collider = new Area(new Rectangle(X, y, image.getWidth(), image.getHeight()));
-        collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUpCol(), this.x, this.y);
+        collider = Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), this.x, this.y);
 //        outline = new ImageOutline(leftFootDino);
 //        collider = new Area(outline.getOutline(leftFootDino));
 //        at.translate(x, y);
@@ -338,6 +338,10 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
 
     public void setMultiplier(boolean multiplier) {
         this.multiplier = multiplier;
+    }
+
+    public static void setInstance(Trex instance) {
+        Trex.instance = instance;
     }
 
 }

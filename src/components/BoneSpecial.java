@@ -17,7 +17,7 @@ public class BoneSpecial extends Item {
     private final int value;
 
     public BoneSpecial(int x, int y) {
-        super(x, y, Resources.instance().getBoneSpecialCol());
+        super(x, y, Resources.instance().getBoneSpecial());
         this.value = 10;
     }
 

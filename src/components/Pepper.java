@@ -16,7 +16,7 @@ public class Pepper extends Item {
 
 
     public Pepper(int x, int y) {
-        super(x, y, Resources.instance().getPepperCol());
+        super(x, y, Resources.instance().getPepper());
     }
 
     @Override

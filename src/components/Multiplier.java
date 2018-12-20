@@ -15,7 +15,7 @@ import utility.Resources;
 public class Multiplier extends Item {
 
     public Multiplier(int x, int y) {
-        super(x, y, Resources.instance().getMulScoreCol());
+        super(x, y, Resources.instance().getMulScore());
 
     }
 
