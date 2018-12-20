@@ -31,11 +31,11 @@ public class Ground {
 
         public GroundImage(int x) {
             this.x = x;
-            this.image = Resources.instance().getGround();
+            this.image = Resources.instance().generateGround();
             this.y = yPosition;
             ImageOutline outline = new ImageOutline(image);
             this.collider = new Area(outline.getOutline());
-            this.image = Resources.instance().getGroundCol();
+            this.image = Resources.instance().getGround();
         }
 
         public void create(Graphics g) {
@@ -124,9 +124,9 @@ public class Ground {
 
     public int addCanyon(int x) {
         AffineTransform at;
-        BufferedImage image = Resources.instance().getGroundCanyonCol();
+        BufferedImage image = Resources.instance().getGroundCanyon();
         x -= image.getWidth() / 2;
-        Area collider = new Area((new ImageOutline(Resources.instance().getGroundCanyon())).getOutline());
+        Area collider = new Area((new ImageOutline(Resources.instance().generateGroundCanyon())).getOutline());
         nextX = grassGroundSet.get(grassGroundSet.size() - 1).x + grassGroundSet.get(grassGroundSet.size() - 1).image.getWidth();
         for (int i = 0; i < grassGroundSet.size(); i++) {
             if (grassGroundSet.get(i).x >= x) {

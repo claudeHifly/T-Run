@@ -36,7 +36,7 @@ public abstract class Item {
 
     }
 
-    public abstract void collisionAction(Item collidedItem);
+    public abstract void collisionAction();
 
     public BufferedImage getImage() {
         return image;

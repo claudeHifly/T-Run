@@ -27,8 +27,8 @@ public class Jumping implements TrexState {
     public Jumping(Trex trex) {
         this.trex = trex;
 
-        this.jumpingImage = Resources.instance().getDinoStandCol();
-        this.auraImage = Resources.instance().getAuraCol();
+        this.jumpingImage = Resources.instance().getDinoStand();
+        this.auraImage = Resources.instance().getAura();
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Jumping implements TrexState {
         }
 
         if ((Ground.movementSpeed > 20 && trex.y >= trex.TRexOnGround - 75 && trex.topReached == true)
-                || (Board.grass_ground.hasCollided(trex.getCollider()))) {
+                || (Board.ground.hasCollided(trex.getCollider()))) {
 
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);   //deve sempre essere fatto prima g.drawImage
             //altrimenti abbiamo dei frame in cui scatta
@@ -93,7 +93,7 @@ public class Jumping implements TrexState {
         }
 
         if ((Ground.movementSpeed <= 20 && trex.y >= trex.TRexOnGround - 25 && trex.topReached == true)
-                || (Board.grass_ground.hasCollided(trex.getCollider()))) {
+                || (Board.ground.hasCollided(trex.getCollider()))) {
 
             g.drawImage(this.jumpingImage, trex.x, trex.y, null);   //deve sempre essere fatto prima g.drawImage
             //altrimenti abbiamo dei frame in cui scatta

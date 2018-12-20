@@ -17,7 +17,7 @@ public class Bone extends Item {
     private final int value;
 
     public Bone(int x, int y) {
-        super(x, y, Resources.instance().getBoneCol());
+        super(x, y, Resources.instance().getBone());
         this.value = 1;
     }
 
@@ -26,7 +26,7 @@ public class Bone extends Item {
     }
 
     @Override
-    public void collisionAction(Item collidedItem) {
+    public void collisionAction() {
         if (super.TRex.multiplier == true) {
             Board.coin += 2 * value;
             //Board.score += 1;

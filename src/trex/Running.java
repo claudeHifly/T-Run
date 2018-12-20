@@ -25,9 +25,9 @@ public class Running implements TrexState, TrexPower {
     public Running(Trex trex) {
         this.trex = trex;
 
-        this.leftFoot = Resources.instance().getDinoLeftUpCol();
-        this.rightFoot = Resources.instance().getDinoRightUpCol();
-        this.auraImage = Resources.instance().getAuraCol();
+        this.leftFoot = Resources.instance().getDinoLeftUp();
+        this.rightFoot = Resources.instance().getDinoRightUp();
+        this.auraImage = Resources.instance().getAura();
     }
 
     @Override

@@ -26,15 +26,16 @@ public class HealthBar{ //Singleton
     private final Image scaledImage;
     private final Image scaledRectImage;
     
-    public static final int MAX = 2260;
+    public static int MAX = 0;
     private int cnt;
    
     private HealthBar() {
-        this.cnt = MAX;
         this.emptyBar = Resources.instance().getHealthBar();
         this.rectangle = Resources.instance().getHealthBarRectangle();
-        this.scaledImage = emptyBar.getScaledInstance((int) (width*0.8),(int) (height*0.09), 100);
-        this.scaledRectImage = rectangle.getScaledInstance(rectangle.getWidth(),(int) (height*0.073), 100);
+        this.scaledImage = emptyBar.getScaledInstance((int) (width*0.975),(int) (height*0.098), 100);
+        this.scaledRectImage = rectangle.getScaledInstance(rectangle.getWidth(),(int) (height*0.0735), 100);
+        MAX = scaledImage.getWidth(null)- (int) (scaledImage.getWidth(null)*0.069);
+        this.cnt = MAX;
     }
     
     public static HealthBar instance(){
@@ -44,21 +45,20 @@ public class HealthBar{ //Singleton
     }
     
     public void create(Graphics g){
-        
         for(int i = 0; i<this.cnt; i++)
-            g.drawImage(this.scaledRectImage, (int) (scaledImage.getWidth(null)*0.069+i*rectangle.getWidth(null)*0.5), (int) (scaledImage.getHeight(null)*0.15), null);
+            g.drawImage(this.scaledRectImage, (int) (scaledImage.getWidth(null)*0.07+i*rectangle.getWidth(null)), (int) (scaledImage.getHeight(null)*0.16), null);
     
-        g.drawImage(this.scaledImage, 5, 5, null);
+        g.drawImage(this.scaledImage, (int) (width*0.01), (int) (height*0.01), null);
     }
     
-    public void increase(int n){
-        this.cnt += n;
+    public void increase(double n){
+        this.cnt += n*MAX/100;
         if(this.cnt > MAX)
             this.cnt = MAX;
     }
     
-    public void decrease(int n){
-        this.cnt -= n;
+    public void decrease(double n){
+        this.cnt -= n*MAX/100;
         if(this.cnt <= 0){
             //this.cnt = MAX;
             //Board.running = false;

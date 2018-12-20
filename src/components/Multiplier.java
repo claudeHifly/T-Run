@@ -15,12 +15,12 @@ import utility.Resources;
 public class Multiplier extends Item {
 
     public Multiplier(int x, int y) {
-        super(x, y, Resources.instance().getMulScoreCol());
+        super(x, y, Resources.instance().getMulScore());
 
     }
 
     @Override
-    public void collisionAction(Item collidedItem) {
+    public void collisionAction() {
         super.TRex.setMultiplier(true);
         //Bones.probabilityMultiplier = 0;
         System.out.println("HO PRESO IL MOLTIPLICATIORE");

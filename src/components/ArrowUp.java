@@ -11,16 +11,15 @@ import utility.Resources;
  *
  * @author G8
  */
-public class Ham extends Item {
+public class ArrowUp extends Item {
 
-    public Ham(int x, int y) {
-        super(x, y, Resources.instance().getHam());
-
+    public ArrowUp(int x, int y) {
+        super(x, y, Resources.instance().getArrowUp());
     }
 
     @Override
     public void collisionAction() {
-            System.out.println("HO PRESO HAM");
-            HealthBar.instance().increase(20);
+        TRex.setState(TRex.getJumping());
     }
+
 }

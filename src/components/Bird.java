@@ -6,7 +6,9 @@
 package components;
 
 import general.Board;
+import general.HomePage;
 import java.awt.Graphics;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import utility.*;
 
@@ -25,15 +27,34 @@ public class Bird extends Item {
     private final BufferedImage bird1;
     private final BufferedImage bird2;
 
+    private final int distanceArrowBird = 40;
+
     public Bird(int x, int y) {
-        super(x, y, Resources.instance().getBird1Col());
-        this.bird1 = Resources.instance().getBird1Col();
-        this.bird2 = Resources.instance().getBird2Col();
+        super(x, y, Resources.instance().getBird1());
+        this.bird1 = Resources.instance().getBird1();
+        this.bird2 = Resources.instance().getBird2();
         this.birdCounter = BIRD1;
+        if (HomePage.demo) {
+            System.out.println("Differenza" + (Ground.yPosition - y));
+            double heightBelow = (Utility.instance().createCollider(Resources.instance().getDinoBelowLeftUp(), 0, 0)).getBounds2D().getHeight();
+            System.out.println("Altezza Seduto" + heightBelow);
+            System.out.println("Altezza In piedi" + Resources.instance().getDinoStand().getHeight());
+
+            if (Ground.yPosition - y > Resources.instance().getDinoStand().getHeight()) {
+                Board.arrows.addArrowRight(x - distanceArrowBird, Ground.yPosition);
+            } else if (Ground.yPosition - y > heightBelow) {
+                System.out.println("Sotto");
+                Board.arrows.addArrowDown(x - distanceArrowBird, Ground.yPosition);
+            } else {
+                System.out.println("Sopra");
+                Board.arrows.addArrowUp(x - distanceArrowBird, Ground.yPosition);
+            }
+
+        }
     }
 
     @Override
-    public void collisionAction(Item collidedItem) {
+    public void collisionAction() {
 
         if (super.TRex.getPower() == TRex.pepperPower) {
             System.out.println("BRUCIA UCCELLO");
@@ -44,7 +65,7 @@ public class Bird extends Item {
             }
         } else {
              if(!Board.gameOver)
-                HealthBar.instance().decrease(5);
+                HealthBar.instance().decrease(1);
         /*Board.running = false;
         Board.gameOver = true;
         super.TRex.setState(TRex.getDead()); */
