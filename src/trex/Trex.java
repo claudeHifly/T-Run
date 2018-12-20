@@ -7,12 +7,6 @@ package trex;
 
 import components.Ground;
 import static components.Ground.movementSpeed;
-import components.HealthBar;
-import general.Board;
-import static general.Board.coin;
-import static general.Board.distanceForScore;
-import static general.Board.gameOver;
-import static general.Board.score;
 import general.HomePage;
 import general.UserInterface;
 import java.awt.Color;
@@ -20,12 +14,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utility.*;
 
 /**

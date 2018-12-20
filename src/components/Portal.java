@@ -6,14 +6,11 @@
 package components;
 
 import general.Board;
-import general.UserInterface;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
 import utility.Resources;
 
 /**
  *
- * @author sivoc
+ * @author G8
  */
 public class Portal extends Item {
 

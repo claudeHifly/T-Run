@@ -189,9 +189,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         TRex.create(g);
 
         g.setFont(new Font("Courier New", Font.BOLD, 25));
-        g.drawString("MT: " + Integer.toString((int) distanceForScore), getWidth() / 4 - 180, 100);
+        g.drawString("MT: " + Integer.toString((int) distanceForScore), (int) (UserInterface.width*0.4), (int) (UserInterface.height*0.2));
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
-        g.drawString("BONES: " + Integer.toString(coin), getWidth() / 4 + 50, 100);
+        g.drawString("BONES: " + Integer.toString(coin), (int) (UserInterface.width*0.5), (int) (UserInterface.height*0.2));
 
         if (collidedObstacle != null) {
 
@@ -328,6 +328,8 @@ public class Board extends JPanel implements Runnable, ActionListener {
     }
 
     public void reset() {
+        HomePage.demo = false;
+        HealthBar.instance().increase(100);
         Ground.movementSpeed0 = 8;
         color = false;
         colorGame = false;
@@ -423,7 +425,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
             TRex.keyReleased(e);
         }
 
-        public void reset() {
+        /*public void reset() {
             color = false;
             colorGame = false;
             changed = false;
@@ -440,6 +442,6 @@ public class Board extends JPanel implements Runnable, ActionListener {
             gameOver = false;
 
             startGame();
-        }
+        }*/
     }
 }
