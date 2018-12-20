@@ -96,7 +96,7 @@ public class Obstacles extends Items {
 //                System.out.println("DOVRESTI METTERLO ALLA FINE");
 //                return new Cactus(rd, (int) (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
 //            }
-            return new Empty(endCanyon);
+            return new CanyonEmpty(endCanyon);
         } else {
             if (extract <= canyonFrequency + birdFrequency) {
                 return new Bird(rd, (int) (Ground.yPosition) - (int) (Ground.yPosition * randomBirdHeight()));

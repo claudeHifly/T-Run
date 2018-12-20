@@ -42,7 +42,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
     public static int distance = 0;
     public static float distanceForScore;
-    
+
     public int lowestScore;
     private final int thresholdScore = 30;
 
@@ -98,19 +98,16 @@ public class Board extends JPanel implements Runnable, ActionListener {
         background.update();
         ground.update();
         moneys.update();
-        
-        if((lowestScore = Scoreboard.getLowest()) < thresholdScore){
+
+        if ((lowestScore = Scoreboard.getLowest()) < thresholdScore) {
             lowestScore = thresholdScore;
         }
-        
-        
+
         if (HomePage.demo) {
             arrows.update();
         }
 
         obstacles.update();
-        
-        
 
         //bar = new HealthBar();
         animator = new Thread(this);
@@ -199,9 +196,9 @@ public class Board extends JPanel implements Runnable, ActionListener {
         TRex.create(g);
 
         g.setFont(new Font("Courier New", Font.BOLD, 25));
-        g.drawString("MT: " + Integer.toString((int) distanceForScore), (int) (UserInterface.width*0.4), (int) (UserInterface.height*0.2));
+        g.drawString("MT: " + Integer.toString((int) distanceForScore), (int) (UserInterface.width * 0.4), (int) (UserInterface.height * 0.2));
         //g.drawString("SCORE: " + Integer.toString(score), getWidth() - getWidth() / 4, 100);
-        g.drawString("BONES: " + Integer.toString(coin), (int) (UserInterface.width*0.5), (int) (UserInterface.height*0.2));
+        g.drawString("BONES: " + Integer.toString(coin), (int) (UserInterface.width * 0.5), (int) (UserInterface.height * 0.2));
 
         if (collidedObstacle != null) {
 
@@ -339,7 +336,7 @@ public class Board extends JPanel implements Runnable, ActionListener {
 
     public void reset() {
         HomePage.demo = false;
-        HealthBar.instance().increase(100);
+
         Ground.movementSpeed0 = 8;
         color = false;
         colorGame = false;
@@ -354,9 +351,11 @@ public class Board extends JPanel implements Runnable, ActionListener {
         coin = 0;
         distance = 0;
         Trex.setInstance(null);
+        HealthBar.setInstance(null);
+        HealthBar.instance().increase(100);
         System.out.println("reset");
         gameOver = false;
-        
+
         startGame();
     }
 
