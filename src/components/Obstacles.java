@@ -19,7 +19,7 @@ public class Obstacles extends Items {
     private final int cactusOnScreen;
     private final double yPercentageCactusOnGround = 0.025;
     private final double yPercentageBirdOnGround = 0.1;
-    private final int birdFrequency = 20;
+    private final int birdFrequency = 25;
     private final int canyonFrequency = 30;
     private final Ground ground;
     private boolean tardis;
@@ -29,7 +29,8 @@ public class Obstacles extends Items {
         obArray = new ArrayList<>();
         this.ground = ground;
         Item ob;
-        cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
+        //cactusOnScreen = (int) (ground.getGroundOnScreen() / 3 * 1.5);
+        cactusOnScreen = (int) (ground.getGroundOnScreen() / 1.5);
         for (int i = 0; i < cactusOnScreen; i++) {
             int rd = randomDistance();
             ob = new Cactus(rd, (Ground.yPosition) + (int) (Ground.yPosition * yPercentageCactusOnGround));
@@ -57,7 +58,7 @@ public class Obstacles extends Items {
         if (obArray.isEmpty()) {
             return width;
         }
-        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 300 + 300);
+        return obArray.get(obArray.size() - 1).getX() + (int) (Math.random() * 300 + 150);
     }
 
     private double randomBirdHeight() {

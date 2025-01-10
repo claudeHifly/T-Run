@@ -25,11 +25,12 @@ public class Multiplier extends Item {
     @Override
     public void collisionAction() {
         super.TRex.setMultiplier(true);
+        super.TRex.multiplier_cnt++;
         mulCountdown();
     }
 
     /**
-     * This method implements, by using a timer, the contdown associated with
+     * This method implements, by using a timer, the countdown associated with
      * the multiplier item. After 10s the multiplier effects is cancelled.
      */
     public void mulCountdown() {
@@ -38,7 +39,10 @@ public class Multiplier extends Item {
                 new java.util.TimerTask() {
             @Override
             public void run() {
-                TRex.setMultiplier(false);              //resetto il moltiplicatore
+                TRex.multiplier_cnt--;
+                if(TRex.multiplier_cnt == 0) {
+                    TRex.setMultiplier(false);              //resetto il moltiplicatore
+                }
                 mulTimer.cancel();
             }
         },

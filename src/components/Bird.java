@@ -62,7 +62,7 @@ public class Bird extends Item {
             }
         } else {
             if (!Board.gameOver) {
-                HealthBar.instance().decrease(1);
+                HealthBar.instance().decrease(2);
             }
         }
     }

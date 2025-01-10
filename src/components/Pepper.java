@@ -23,6 +23,7 @@ public class Pepper extends Item {
     @Override
     public void collisionAction() {
         super.TRex.setPower(TRex.getPepperPower());
+        super.TRex.pepperPower_cnt++;
         pepperCountdown();
 
     }
@@ -37,7 +38,10 @@ public class Pepper extends Item {
                 new java.util.TimerTask() {
             @Override
             public void run() {
-                TRex.setPower(TRex.getNoPower());       //resetto il powerUP      //ripristino la probabilità di spawn del peperoncino
+                TRex.pepperPower_cnt--;
+                if(TRex.pepperPower_cnt==0) {
+                    TRex.setPower(TRex.getNoPower());       //resetto il powerUP      //ripristino la probabilità di spawn del peperoncino
+                }
                 pepperTimer.cancel();
             }
         },

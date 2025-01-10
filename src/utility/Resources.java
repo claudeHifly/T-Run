@@ -6,6 +6,8 @@
 package utility;
 
 import general.Board;
+import general.HomePage;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -110,6 +112,11 @@ public class Resources { //singleton
     private final BufferedImage arrowRight;
     private final BufferedImage demoButton;
 
+    //HOMEPAGE
+    private final BufferedImage soundButton;
+    private final BufferedImage offSoundButton;
+    private final BufferedImage rankButton;
+
     //HEALTH BAR
     private final BufferedImage healthBar;
     private final BufferedImage healthBarRectangle;
@@ -122,7 +129,9 @@ public class Resources { //singleton
         homepageBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/sfondoHome.png"));
         homepageFootprintImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/FootprintStart.png"));
         demoButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/DemoButton.png"));
-
+        soundButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/musicIcon.png"));
+        offSoundButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/offmusicIcon.png"));
+        rankButton = Utility.instance().create(this.getClass().getClassLoader().getResource("image/HomePage/rankingIconBR.png"));
         // SCOREBOARD
         scoreboardBackgroundImage = Utility.instance().create(this.getClass().getClassLoader().getResource("image/scoreboard/scoreScreen1.jpg"));
 
@@ -522,6 +531,15 @@ public class Resources { //singleton
         return demoButton;
     }
 
+    public BufferedImage getSoundButton() {
+        return soundButton;
+    }
+    public BufferedImage getOffSoundButton() {
+        return offSoundButton;
+    }
+    public BufferedImage getRankButton() {
+        return rankButton;
+    }
     public BufferedImage getPortal() {
         return portal;
     }

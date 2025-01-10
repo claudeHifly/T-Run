@@ -4,7 +4,7 @@
  */
 package components;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import trex.Trex;
@@ -61,10 +61,10 @@ public abstract class Item {
         g.drawImage(image, x, y, null);
 
         //Uncommenting the rows below, you can see the the items collider during the gameplay
-//        Graphics2D g2d = (Graphics2D) g;
-//        g2d.setColor(Color.red);
-//        g2d.draw(collider);
-//        g2d.setColor(Color.BLACK);
+        //Graphics2D g2d = (Graphics2D) g;
+        //g2d.setColor(Color.red);
+        //g2d.draw(collider);
+        //g2d.setColor(Color.BLACK);
     }
 
     public Area getCollider() {

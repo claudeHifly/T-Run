@@ -72,7 +72,9 @@ public class Scoreboard {
      * scoreboard in the ScorePanel JPanel.
      */
     public static void loadScores(String name, int score, Graphics g) {
-        scoreboard.add(new Record(name, score));
+        if (score > 0) {
+            scoreboard.add(new Record(name, score));
+        }
         scoreboard = readFromScoreFile();
         int xPosFirstColumn = (int) (ScoreUserInterface.width * 0.20);
         int xPosSecondColumn = (int) (ScoreUserInterface.width * 0.65);

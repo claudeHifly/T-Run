@@ -16,15 +16,15 @@ import utility.Utility;
  */
 public class PowerUp extends Items {
 
-    private final int powerUpSeriesOnScreen = 10;
-    private final int maxPowerUpSeries = 6;
-    private final int minPowerUpSeries = 2;
+    private final int powerUpSeriesOnScreen = 8;
+    private final int maxPowerUpSeries = 5;
+    private final int minPowerUpSeries = 1;
     private final int distancePowerUp = 50;
     private final double yPercentagePowerUpOnGround = 0.15;
-    public static int frequencyBoneGold = 20;
-    public static int frequencyPepper = 10;
-    public static int frequencyHam = 10;
-    public static int frequencyMultiplier = 10;
+    public static int frequencyBoneGold = 10;
+    public static int frequencyPepper = 1;
+    public static int frequencyHam = 15;
+    public static int frequencyMultiplier = 1;
     public int numberSeries;
 
     public PowerUp() {

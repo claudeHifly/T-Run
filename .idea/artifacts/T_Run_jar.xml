@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="T-Run:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/T_Run_jar</output-path>
+    <root id="archive" name="T-Run.jar">
+      <element id="module-output" name="T-Run" />
+    </root>
+  </artifact>
+</component>

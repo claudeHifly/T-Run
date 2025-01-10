@@ -200,7 +200,16 @@ public class Board extends JPanel implements Runnable, ActionListener {
         HealthBar.setInstance(null);
         HealthBar.instance().increase(100);
         gameOver = false;
-        startGame();
+
+        //Questo blocco serve a tornare in Homepage alla fine del gioco
+        UserInterface.instance().setVisible(false);
+        UserInterface.instance().removeAll();
+        UserInterface.ResetInterface();
+        //HomePage.levelMusicSound.stopSound();
+        HomePage frame = HomePage.getHomePageInstance();
+        frame.setVisible(true);
+
+        //startGame();
     }
 
     /**

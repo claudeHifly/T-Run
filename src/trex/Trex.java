@@ -37,8 +37,10 @@ public class Trex extends KeyAdapter implements TrexState, TrexPower {
     private final TrexState lowerHead;
     private final TrexState falling;
     public TrexPower pepperPower;
+    public int pepperPower_cnt = 0;
     public TrexPower noPower;
     public boolean multiplier;
+    public int multiplier_cnt = 0;
     private TrexState state;
     private TrexPower power;
     private final BufferedImage mulBanner1;

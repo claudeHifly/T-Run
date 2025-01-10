@@ -33,6 +33,10 @@ public class UserInterface extends JFrame { //Singleton
         return instance;
     }
 
+    public static void ResetInterface(){
+        instance = null;
+    }
+
     public static void setInstance(UserInterface instance) {
         UserInterface.instance = instance;
     }

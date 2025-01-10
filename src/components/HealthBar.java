@@ -27,9 +27,12 @@ public class HealthBar {
     public static int MAX = 0;
     private int cnt;
 
+    private int HP = 2000;
+
     /**
-     * Constructor method. MAX defines the maximum health level. cnt is the
-     * current health level.
+     * Constructor method. MAX defines the maximum lenght of health bar
+     * HP is the health points of T-Rex
+     * cnt is the current health level.
      */
     private HealthBar() {
         this.emptyBar = Resources.instance().getHealthBar();
@@ -37,6 +40,9 @@ public class HealthBar {
         this.scaledImage = emptyBar.getScaledInstance((int) (width * 0.975), (int) (height * 0.098), 100);
         this.scaledRectImage = rectangle.getScaledInstance(rectangle.getWidth(), (int) (height * 0.0735), 100);
         MAX = scaledImage.getWidth(null) - (int) (scaledImage.getWidth(null) * 0.069);
+        if (this.HP > MAX) {
+            this.HP = MAX;
+        }
         this.cnt = MAX;
     }
 
@@ -58,7 +64,7 @@ public class HealthBar {
      * This method increases the health level by n%.
      */
     public void increase(double n) {
-        this.cnt += n * MAX / 100;
+        this.cnt += (n * MAX / 100) / (MAX / this.HP);
         if (this.cnt > MAX) {
             this.cnt = MAX;
         }
@@ -68,7 +74,7 @@ public class HealthBar {
      * This method decreases the health level by n%.
      */
     public void decrease(double n) {
-        this.cnt -= n * MAX / 100;
+        this.cnt -= (n * MAX / 100) * (MAX / this.HP);
         if (this.cnt <= 0) {
             Board.gameOver = true;
             Trex.instance().setState(Trex.instance().getDead());

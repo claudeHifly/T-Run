@@ -17,9 +17,10 @@ public class Sound {
 
     private Clip clip;
     private String name;
+    private boolean soundOn = true;
+    private static Sound instance = null;
 
-    public Sound(String filename) {
-
+    private Sound(String filename) {
         try {
             name = filename;
             File yourFile = new File(filename);
@@ -35,6 +36,12 @@ public class Sound {
             System.out.println("Error reading sound file: " + filename + ".\n" + e.toString());
         }
     }
+    public static Sound getSoundInstance(String filename){
+        if (instance == null){
+            instance = new Sound(filename);
+        }
+        return instance;
+    }
 
     public void playSound() {
 
@@ -44,7 +51,11 @@ public class Sound {
             }
             return;
         }
-        clip.start();
+        //clip.start();
+        if ((!clip.isActive()) && (soundOn == true)){
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            soundOn = true;
+        }
     }
 
     public void stopSound() {
@@ -55,6 +66,7 @@ public class Sound {
             return;
         }
         clip.stop();
+        soundOn = false;
     }
 
     public void playSoundOnce() {
@@ -66,6 +78,22 @@ public class Sound {
         }
         clip.start();
         clip.loop(0);
+        soundOn = true;
     }
 
+    public boolean switchSound() {
+        if (clip.isActive()) {
+            clip.stop();
+            soundOn = false;
+            return soundOn;
+        }
+        else {
+             clip.loop(Clip.LOOP_CONTINUOUSLY);
+             soundOn = true;
+             return soundOn;
+        }
+    }
+    public boolean isSoundOn(){
+        return soundOn;
+    }
 }

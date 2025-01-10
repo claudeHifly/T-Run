@@ -18,6 +18,6 @@ public class Ham extends Item {
 
     @Override
     public void collisionAction() {
-        HealthBar.instance().increase(20);
+        HealthBar.instance().increase(15);
     }
 }
